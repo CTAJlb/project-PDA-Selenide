@@ -1,0 +1,7 @@
+# ---- ДИРЕКТОРИИ ----
+# Игнорировать все файлы в каталоге target и test-output
+/target/
+/test-output/
+/.idea/
+/selenide-tests-example.iml
+/build/
