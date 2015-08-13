@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.page;
 /**
  * Страница авторизации - PDA
  */
-public class LoginPage {
+public class LoginPage extends Page {
 
     /*
     Логин
@@ -69,38 +69,5 @@ public class LoginPage {
         return page(InternalPage.class);
     }
 
-
-    /**
-     * Проверяем то, что мы разлогинены
-     */
-    public boolean isNotLoggedIn() {
-        return page(LoginPage.class).isPageLoaded();
-    }
-
-    /**
-     * Метод обращается к ensurePageLoaded и возвращает булевское значение,
-     * (false - не дождались загрузки стр.; true - дождались) ждет загрузки
-     * страницы
-     *
-     * @return
-     */
-    public boolean isPageLoaded() {
-        try {
-            ensurePageLoaded();
-            return true;
-        } catch (TimeoutException to) {
-            return false;
-        }
-    }
-
-    /**
-     * Метод - проверяет, где мы находимся здесь и сейчас, возвращает данную
-     * страницу И ждет загрузки страницы
-     *
-     * @return
-     */
-    public LoginPage ensurePageLoaded() {
-        return this;
-    }
 
 }

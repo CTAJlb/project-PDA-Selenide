@@ -12,19 +12,25 @@ import static com.codeborne.selenide.Selenide.page;
 /**
  * Внутреняя страница системы
  */
-public class InternalPage {
+public class InternalPage extends Page {
 
-    /**
-     * Все Меню системы
+    /*
+     * Ссылки на все пункты меню
      */
     @FindBy(xpath = "//a[@class='ui-link-inherit']")
     private ElementsCollection menuElements;
 
-    /**
+    /*
      * Выход из системы
      */
     @FindBy(xpath = "//a[contains(@href, '/logout/')]")
     private SelenideElement logout;
+
+    /*
+     * Создать задачу
+     */
+    @FindBy(xpath = "//a[contains(@href, '/edittask/newtask')]")
+    private SelenideElement createTask;
 
 
     /**
@@ -36,6 +42,19 @@ public class InternalPage {
         menuElements.shouldHaveSize(4); // проверяем, что отображается 4 меню
         return !menuElements.isEmpty();
     }
+
+
+    /**
+     * Переходим в форму создания Задачи
+     *
+     * @return
+     */
+    public NewTaskPage clickCreateTask() {
+        createTask.click();
+        $(By.xpath("//input[contains(@class,'button') and @name='next2']")).shouldHave(Condition.visible);
+        return page(NewTaskPage.class);
+    }
+
 
     /**
      * Выход из Системы

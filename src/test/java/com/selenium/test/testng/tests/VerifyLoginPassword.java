@@ -21,9 +21,10 @@ import static org.testng.Assert.assertTrue;
 
 
 @Listeners({ScreenShotOnFailListener.class})
+
 public class VerifyLoginPassword {
 
-    private static final String PAGE_URL = "http://pda.johnii/";
+    public static final String PAGE_URL = "http://pda.johni/";
 
     /**
      * проверка валидации авторизации - пароль проходит успешно
@@ -89,15 +90,6 @@ public class VerifyLoginPassword {
         loginPage.loginInSystem();
         assertTrue(loginPage.isNotLoggedIn());
     }
-
-
-/*
- SelenideElement searchString  = $("#masthead-search-term");
-        searchString.sendKeys(toSearch);
-        $("#masthead-search-term").shouldHave(value(toSearch));
-*/
-
-
 
 
 }
