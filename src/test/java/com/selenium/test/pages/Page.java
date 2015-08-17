@@ -19,8 +19,7 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public class Page {
 
-    protected WebDriver driver;
-
+    public static final String PAGE_URL = "http://pda.johni/";
 
     /**
      * Проверяем то, что мы разлогинены

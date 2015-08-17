@@ -18,13 +18,12 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.selenium.test.pages.InternalPage.signOut;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+import static com.selenium.test.pages.Page.*;
 
 
 @Listeners({ScreenShotOnFailListener.class})
 
 public class VerifyLoginPassword {
-
-    public static final String PAGE_URL = "http://pda.johni/";
 
     /**
      * проверка валидации авторизации - пароль проходит успешно
