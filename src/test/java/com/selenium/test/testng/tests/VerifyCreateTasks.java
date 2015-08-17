@@ -18,12 +18,12 @@ public class VerifyCreateTasks {
     @Test
     public void verifyCreateTask() {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        String admin = "admin";
+        String user = "admin";
         String nameTask = randomString(25);
 
         // Авторизация
-        loginPage.setInputLogin(admin);
-        loginPage.setInputPassword(admin);
+        loginPage.setInputLogin(user);
+        loginPage.setInputPassword(user);
 
         InternalPage resultsPage = loginPage.doMenu(); // Проверяем отображение п.м. системы
         assertTrue(resultsPage.hasResults()); // Проверяем отображение п.м. на внутренней странице
@@ -36,14 +36,15 @@ public class VerifyCreateTasks {
         newTask.setTasksDescription(randomString(50) + "\n" + randomString(25)
                 + "\n" + randomString(100)); // вводим Описание задачи
 
-        newTask.setTaskSupervisors(admin); // Контролеры задачи
-        newTask.setExecutiveManagers(admin); // Ответственные руководители задачи
-        newTask.setPerformers(admin); // Ответственные руководители задачи
+        newTask.setTaskSupervisors(user); // Контролеры задачи
+        newTask.setExecutiveManagers(user); // Ответственные руководители задачи
+        newTask.setPerformers(user); // Ответственные руководители задачи
 
         newTask.setDateEnd(tommorowDate()); // Дата окончани = Завтра;
 
         newTask.setPrivateTask(true); // Секретная задача
-        newTask.setReportRequired(true); // C докладом
+        newTask.setReportRequired(false); // C докладом
+        newTask.setImportantTask(true); // Важная задача
     }
 
 

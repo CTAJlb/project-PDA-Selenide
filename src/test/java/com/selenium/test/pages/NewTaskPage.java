@@ -58,10 +58,16 @@ public class NewTaskPage extends Page {
     private SelenideElement privateTask;
 
     /*
-     Секретная задача
+     C докладом
      */
     @FindBy(xpath = "//div[@class='ui-checkbox']//input[@id='withreport2']")
     private SelenideElement reportRequired;
+
+    /*
+     Важная задача
+     */
+    @FindBy(xpath = "//div[@class='ui-checkbox']//input[@id='taskhigh']")
+    private SelenideElement importantTask;
 
 
     /**
@@ -107,9 +113,9 @@ public class NewTaskPage extends Page {
     public NewTaskPage setAuthors(String author) {
         authors.clear();
         authors.setValue(author);
-        $(By.xpath("(//ul[contains(@aria-activedescendant,'ui-active-menuitem')])[1]//a[contains(text(),'" + author + "')]"))
+        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + author + "')]"))
                 .shouldBe(Condition.visible);
-        $(By.xpath("(//ul[contains(@aria-activedescendant,'ui-active-menuitem')])[1]//a[contains(text(),'" + author + "')]")).click();
+        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + author + "')]")).click();
         return this;
     }
 
@@ -122,9 +128,9 @@ public class NewTaskPage extends Page {
     public NewTaskPage setTaskSupervisors(String taskSuperv) {
         taskSupervisors.clear();
         taskSupervisors.setValue(taskSuperv);
-        $(By.xpath("(//ul[contains(@aria-activedescendant,'ui-active-menuitem')])[2]//a[contains(text(),'" + taskSuperv + "')]"))
+        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + taskSuperv + "')]"))
                 .shouldBe(Condition.visible);
-        $(By.xpath("(//ul[contains(@aria-activedescendant,'ui-active-menuitem')])[2]//a[contains(text(),'" + taskSuperv + "')]")).click();
+        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + taskSuperv + "')]")).click();
         return this;
     }
 
@@ -137,9 +143,9 @@ public class NewTaskPage extends Page {
     public NewTaskPage setExecutiveManagers(String exeManagers) {
         executiveManagers.clear();
         executiveManagers.setValue(exeManagers);
-        $(By.xpath("(//ul[contains(@aria-activedescendant,'ui-active-menuitem')])[3]//a[contains(text(),'" + exeManagers + "')]"))
+        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + exeManagers + "')]"))
                 .shouldBe(Condition.visible);
-        $(By.xpath("(//ul[contains(@aria-activedescendant,'ui-active-menuitem')])[3]//a[contains(text(),'" + exeManagers + "')]")).click();
+        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + exeManagers + "')]")).click();
         return this;
     }
 
@@ -152,9 +158,9 @@ public class NewTaskPage extends Page {
     public NewTaskPage setPerformers(String performer) {
         performers.clear();
         performers.setValue(performer);
-        $(By.xpath("(//ul[contains(@aria-activedescendant,'ui-active-menuitem')])[4]//a[contains(text(),'" + performer + "')]"))
+        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + performer + "')]"))
                 .shouldBe(Condition.visible);
-        $(By.xpath("(//ul[contains(@aria-activedescendant,'ui-active-menuitem')])[4]//a[contains(text(),'" + performer + "')]")).click();
+        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + performer + "')]")).click();
         return this;
     }
 
@@ -180,6 +186,19 @@ public class NewTaskPage extends Page {
     public NewTaskPage setReportRequired(boolean reportReq) {
         if (reportReq) {
             reportRequired.click();
+        }
+        return this;
+    }
+
+    /**
+     * Важная задача
+     *
+     * @param impTask
+     * @return
+     */
+    public NewTaskPage setImportantTask(boolean impTask) {
+        if (impTask) {
+            importantTask.click();
         }
         return this;
     }
