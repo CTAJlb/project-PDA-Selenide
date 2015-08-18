@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
 public class NewTaskPage extends Page {
 
@@ -68,6 +69,14 @@ public class NewTaskPage extends Page {
      */
     @FindBy(xpath = "//div[@class='ui-checkbox']//input[@id='taskhigh']")
     private SelenideElement importantTask;
+
+    /*
+     Просмотр
+     */
+    @FindBy(css= "input[name='next2']")
+    private SelenideElement view;
+
+
 
 
     /**
@@ -202,5 +211,16 @@ public class NewTaskPage extends Page {
         }
         return this;
     }
+
+    /**
+     * Просмотр (предсоздание задачи)
+     * @return
+     */
+    public EditTaskPage preview() {
+        view.click();
+        $(By.cssSelector("input[name='next3']")).waitUntil(Condition.appear, 4);
+        return page(EditTaskPage.class);
+    }
+
 
 }
