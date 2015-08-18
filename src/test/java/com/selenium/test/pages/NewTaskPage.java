@@ -73,10 +73,8 @@ public class NewTaskPage extends Page {
     /*
      Просмотр
      */
-    @FindBy(css= "input[name='next2']")
+    @FindBy(css = "input[name='next2']")
     private SelenideElement view;
-
-
 
 
     /**
@@ -214,9 +212,10 @@ public class NewTaskPage extends Page {
 
     /**
      * Просмотр (предсоздание задачи)
+     *
      * @return
      */
-    public EditTaskPage preview() {
+    public EditTaskPage goToPreview() {
         view.click();
         $(By.cssSelector("input[name='next3']")).waitUntil(Condition.appear, 4);
         return page(EditTaskPage.class);

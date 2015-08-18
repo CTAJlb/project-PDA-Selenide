@@ -4,11 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.selenium.test.pages.InternalPage;
 import com.selenium.test.pages.LoginPage;
 import com.selenium.test.testng.listeners.ScreenShotOnFailListener;
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -33,8 +29,8 @@ public class VerifyLoginPassword {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
         loginPage.setInputLogin("admin");
         loginPage.setInputPassword("admin");
-        InternalPage resultsPage = loginPage.doMenu(); // Проверяем отображение п.м. системы
-        assertTrue(resultsPage.hasResults());
+        InternalPage resultsPage = loginPage.goToInternalMenu(); // Проверяем отображение п.м. системы
+        assertTrue(resultsPage.hasMenu());
         signOut(); // Выход из системы
     }
 

@@ -1,15 +1,13 @@
 package com.selenium.test.testng.tests;
 
 
-import com.selenium.test.pages.EditTaskPage;
-import com.selenium.test.pages.InternalPage;
-import com.selenium.test.pages.LoginPage;
-import com.selenium.test.pages.NewTaskPage;
+import com.selenium.test.pages.*;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.selenium.test.pages.Page.*;
 import static org.testng.Assert.assertTrue;
+import static com.selenium.test.pages.InternalPage.signOut;
 
 public class VerifyCreateTasks {
 
@@ -34,10 +32,10 @@ public class VerifyCreateTasks {
         loginPage.setInputLogin(user);
         loginPage.setInputPassword(user);
 
-        InternalPage resultsPage = loginPage.doMenu(); // Проверяем отображение п.м. системы
-        assertTrue(resultsPage.hasResults()); // Проверяем отображение п.м. на внутренней странице
+        InternalPage internalMenu = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        assertTrue(internalMenu.hasMenu()); // Проверяем отображение п.м. на внутренней странице
 
-        NewTaskPage newTask = resultsPage.clickCreateTask(); // Инициализируем стр. формы создание задачи
+        NewTaskPage newTask = internalMenu.goToCreateTask(); // Инициализируем стр. формы создание задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - создание задачи
 
@@ -55,13 +53,22 @@ public class VerifyCreateTasks {
         newTask.setReportRequired(false); // C докладом
         newTask.setImportantTask(true); // Важная задача
 
-        EditTaskPage editTask = newTask.preview(); // Просмотр
+        EditTaskPage editTask = newTask.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
-        //----------------------------------------------------------------ФОРМА - preview создания задачи
+        //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
 
-        editTask.inputValidationFormTask(nameTask,taskDescription, dateEnd); // Проверяем отображение значений в форме preview создания задачи
+        editTask.inputValidationFormTask(nameTask, taskDescription, dateEnd); // Проверяем отображение значений в форме предпросмотра создания задачи
 
         editTask.createNewTask(); // Создать задачу
+
+        //----------------------------------------------------------------ФОРМА - Задачи
+
+        TaskPage task = editTask.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
+
+        task.verifyCreateTask(nameTask); // Проверяем отображение название созданной Задачи
+        assertTrue(task.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
+
+        signOut(); // Универсальный выход из системы
 
 
 

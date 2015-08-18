@@ -64,7 +64,7 @@ public class LoginPage extends Page {
      *
      * @return results page instance
      */
-    public InternalPage doMenu() {
+    public InternalPage goToInternalMenu() {
         loginButton.click();
         return page(InternalPage.class);
     }

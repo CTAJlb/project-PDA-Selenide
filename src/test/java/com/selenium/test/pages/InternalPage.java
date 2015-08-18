@@ -38,7 +38,7 @@ public class InternalPage extends Page {
      *
      * @return
      */
-    public boolean hasResults() {
+    public boolean hasMenu() {
         menuElements.shouldHaveSize(4); // проверяем, что отображается 4 пункта меню (Задачи; Создать задачу; Сегодня; Документы)
         return !menuElements.isEmpty();
     }
@@ -48,13 +48,11 @@ public class InternalPage extends Page {
      *
      * @return
      */
-    public NewTaskPage clickCreateTask() {
+    public NewTaskPage goToCreateTask() {
         createTask.click();
         $(By.xpath("//input[contains(@class,'button') and @name='next2']")).shouldHave(Condition.visible);
         return page(NewTaskPage.class);
     }
-
-
 
 
 

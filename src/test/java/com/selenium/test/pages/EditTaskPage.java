@@ -26,7 +26,7 @@ public class EditTaskPage extends Page {
 
 
     /**
-     * Проверка введенных данный в preview формы создания задачи
+     * Проверка введенных данный в предпросмотре формы создания задачи
      *
      * @param taskName        -  Название задачи
      * @param taskDescription -  Описание задачи
@@ -52,6 +52,15 @@ public class EditTaskPage extends Page {
         createTask.click();
         $(By.xpath("//a[contains(@href, '/task/')]")).waitUntil(Condition.appear, 4);
         return this;
+    }
+
+    /**
+     * Перейти к форме созданной задачи
+     * @return
+     */
+    public TaskPage goToTask(){
+        goToTask.click();
+        return page(TaskPage.class);
     }
 
 
