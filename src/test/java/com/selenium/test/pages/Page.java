@@ -1,7 +1,9 @@
 package com.selenium.test.pages;
 
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;

@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Screenshots.takeScreenShot;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static com.selenium.test.pages.InternalPage.signOut;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import static com.selenium.test.pages.Page.*;
@@ -21,27 +20,29 @@ import static com.selenium.test.pages.Page.*;
 
 public class VerifyLoginPassword {
 
+    String admin = "admin";
+    String fail = "fail";
+
+
     /**
      * проверка валидации авторизации - пароль проходит успешно
      */
     @Test(priority = 5)
     public void loginSuccess() {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.setInputLogin("admin");
-        loginPage.setInputPassword("admin");
-        InternalPage resultsPage = loginPage.goToInternalMenu(); // Проверяем отображение п.м. системы
-        assertTrue(resultsPage.hasMenu());
-        signOut(); // Выход из системы
+        loginPage.loginAs(admin, admin);
+        InternalPage internalPage = loginPage.goToInternalMenu(); // Проверяем отображение п.м. системы
+        assertTrue(internalPage.hasMenu());
+        internalPage.signOut(); // Выход из системы
     }
 
     /**
      * проверка невалидного пароля - авторизация не проходит
      */
     @Test(priority = 1)
-    public void passwordError() {
+    public void passwordFail() {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.setInputLogin("admin");
-        loginPage.setInputPassword("fail");
+        loginPage.loginAs(admin, fail);
         loginPage.loginInSystem();
         assertTrue(loginPage.isNotLoggedIn());
         $(By.cssSelector("#error")).shouldBe(Condition.exactText("Доступ запрещен"));
@@ -52,10 +53,9 @@ public class VerifyLoginPassword {
      * проверка невалидного логина - авторизация не проходит
      */
     @Test(priority = 2)
-    public void loginError() throws Exception {
+    public void loginFail() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.setInputLogin("fail");
-        loginPage.setInputPassword("admin");
+        loginPage.loginAs(fail, admin);
         loginPage.loginInSystem();
         assertTrue(loginPage.isNotLoggedIn());
         $(By.cssSelector("#error")).shouldBe(Condition.exactText("Доступ запрещен"));
@@ -65,10 +65,9 @@ public class VerifyLoginPassword {
      * проверка невалидного логина - авторизация не проходит
      */
     @Test(priority = 3)
-    public void passwordLoginFail() throws Exception {
+    public void passwordAndLoginFail() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.setInputLogin("fail");
-        loginPage.setInputPassword("fail");
+        loginPage.loginAs(fail, fail);
         loginPage.loginInSystem();
         assertTrue(loginPage.isNotLoggedIn());
         $(By.cssSelector("#error")).shouldBe(Condition.exactText("Доступ запрещен"));
@@ -78,10 +77,9 @@ public class VerifyLoginPassword {
      * проверка невалидного логина И пароля - авторизация не проходит
      */
     @Test(priority = 4)
-    public void passwordLoginNull() throws Exception {
+    public void passwordAndLoginNull() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.setInputLogin("");
-        loginPage.setInputPassword("");
+        loginPage.loginAs(null, null);
         loginPage.loginInSystem();
         assertTrue(loginPage.isNotLoggedIn());
     }

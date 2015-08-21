@@ -34,22 +34,16 @@ public class LoginPage extends Page {
     /**
      * вводим Логин пользователя
      *
-     * @param text text for input
+     * @param login text for input
+     * @param passw text for input
      */
-    public void setInputLogin(String text) {
+    public void loginAs(String login, String passw) {
         inputLogin.clear();
-        inputLogin.sendKeys(text);
+        inputLogin.sendKeys(login);
+        inputPassword.clear();
+        inputPassword.sendKeys(passw);
     }
 
-    /**
-     * вводим Пароль пользователя
-     *
-     * @param text text for input
-     */
-    public void setInputPassword(String text) {
-        inputPassword.clear();
-        inputPassword.sendKeys(text);
-    }
 
     /**
      * Клик по кнопке - Вход
