@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public class Page {
 
-    public static final String PAGE_URL = "http://pda.johni/";
+    public static final String PAGE_URL = "http://pda.motiw/";
 
     /**
      * Проверяем то, что мы разлогинены

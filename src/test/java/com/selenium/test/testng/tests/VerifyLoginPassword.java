@@ -5,13 +5,12 @@ import com.selenium.test.pages.InternalPage;
 import com.selenium.test.pages.LoginPage;
 import com.selenium.test.testng.listeners.ScreenShotOnFailListener;
 import org.openqa.selenium.By;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Screenshots.takeScreenShot;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import static com.selenium.test.pages.Page.*;
 
@@ -20,72 +19,70 @@ import static com.selenium.test.pages.Page.*;
 
 public class VerifyLoginPassword {
 
-    String admin = "admin";
-    String fail = "fail";
+    /**
+     * Инициализация входных данных для Логин и Пароль
+     *
+     */
+    @DataProvider(name = "firstFailAuthorization")
+    public Object[][] firstNotSuccessfulAuthorizationDataProvider() {
+        return new Object[][]{
+                {"fail", "admin"},
+                {"admin", "fail"},
+                {"admin", null},
+        };
+    }
+
+    @DataProvider(name = "secondFailAuthorization")
+    public Object[][] secondNotSuccessfulAuthorizationDataProvider() {
+        return new Object[][]{
+                {null, "admin"},
+                {null, null}
+        };
+    }
+
+    @DataProvider(name = "successAuthorization")
+    public Object[][] successAuthorizationDataProvider() {
+        return new Object[][]{
+                {"admin", "admin"}
+        };
+    }
 
 
     /**
-     * проверка валидации авторизации - пароль проходит успешно
+     * проверка валидации авторизации - авторизация проходит успешно
      */
-    @Test(priority = 5)
-    public void loginSuccess() {
+    @Test(dataProvider = "successAuthorization", priority = 3)
+    public void loginSuccess(String login, String pass) throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.loginAs(admin, admin);
+        loginPage.loginAs(login, pass);
         InternalPage internalPage = loginPage.goToInternalMenu(); // Проверяем отображение п.м. системы
         assertTrue(internalPage.hasMenu());
         internalPage.signOut(); // Выход из системы
     }
 
     /**
-     * проверка невалидного пароля - авторизация не проходит
-     */
-    @Test(priority = 1)
-    public void passwordFail() {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.loginAs(admin, fail);
-        loginPage.loginInSystem();
-        assertTrue(loginPage.isNotLoggedIn());
-        $(By.cssSelector("#error")).shouldBe(Condition.exactText("Доступ запрещен"));
-
-    }
-
-    /**
-     * проверка невалидного логина - авторизация не проходит
-     */
-    @Test(priority = 2)
-    public void loginFail() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.loginAs(fail, admin);
-        loginPage.loginInSystem();
-        assertTrue(loginPage.isNotLoggedIn());
-        $(By.cssSelector("#error")).shouldBe(Condition.exactText("Доступ запрещен"));
-    }
-
-    /**
-     * проверка невалидного логина - авторизация не проходит
-     */
-    @Test(priority = 3)
-    public void passwordAndLoginFail() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.loginAs(fail, fail);
-        loginPage.loginInSystem();
-        assertTrue(loginPage.isNotLoggedIn());
-        $(By.cssSelector("#error")).shouldBe(Condition.exactText("Доступ запрещен"));
-    }
-
-    /**
      * проверка невалидного логина И пароля - авторизация не проходит
      */
-    @Test(priority = 4)
-    public void passwordAndLoginNull() throws Exception {
+    @Test(dataProvider = "firstFailAuthorization", priority = 1)
+    public void firstFailAuthorization(String login, String pass) throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.loginAs(null, null);
+        loginPage.loginAs(login, pass);
+        loginPage.loginInSystem();
+        assertTrue(loginPage.isNotLoggedIn());
+        $(By.cssSelector("#error")).shouldBe(Condition.exactText("Доступ запрещен"));
+
+    }
+
+    /**
+     * 2-я проверка невалидного логина И пароля - авторизация не проходит
+     */
+    @Test(dataProvider = "secondFailAuthorization", priority = 2)
+    public void secondFailAuthorization(String login, String pass) throws Exception {
+        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        loginPage.loginAs(login, pass);
         loginPage.loginInSystem();
         assertTrue(loginPage.isNotLoggedIn());
     }
 
 
 }
-
-
-

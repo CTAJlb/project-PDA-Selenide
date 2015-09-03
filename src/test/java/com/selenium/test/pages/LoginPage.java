@@ -44,14 +44,12 @@ public class LoginPage extends Page {
         inputPassword.sendKeys(passw);
     }
 
-
     /**
      * Клик по кнопке - Вход
      */
     public void loginInSystem() {
         loginButton.click();
     }
-
 
     /**
      * Проверяем отображение меню на внутренней странице

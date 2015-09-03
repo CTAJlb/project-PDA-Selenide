@@ -21,7 +21,7 @@ public class VerifyCreateTasks {
 
 
     /**
-     * проверка - Создания задачи
+     * проверка - Создание задачи
      */
     @Test
     public void verifyCreateTask() {
@@ -67,12 +67,6 @@ public class VerifyCreateTasks {
         assertTrue(task.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
         internalPage.homeAndSignOut(); // Универсальный выход из системы
-
-
-
-
-
-
 
 
 
