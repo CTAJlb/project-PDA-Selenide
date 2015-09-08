@@ -4,6 +4,7 @@ package com.selenium.test.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.selenium.test.model.Task;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,18 +28,15 @@ public class EditTaskPage extends Page {
 
     /**
      * Проверка введенных данный в предпросмотре формы создания задачи
-     *
-     * @param taskName        -  Название задачи
-     * @param taskDescription -  Описание задачи
-     * @param dateEnd         - Окончание задачи
+     * @param task
      * @return
      */
-    public EditTaskPage inputValidationFormTask(String taskName, String taskDescription, String dateEnd) {
-        $(By.xpath("//form[@id='data_value']//li[2]//span[@style][text()='" + taskName + "']"))
+    public EditTaskPage inputValidationFormTask(Task task) {
+        $(By.xpath("//form[@id='data_value']//li[2]//span[@style][text()='" + task.getTaskName() + "']"))
                 .shouldBe(Condition.visible); // Название задачи
-        $(By.xpath("//form[@id='data_value']//li[3]//span[@style][text()='" + taskDescription + "']"))
+        $(By.xpath("//form[@id='data_value']//li[3]//span[@style][text()='" + task.getDescription() + "']"))
                 .shouldBe(Condition.visible); // Описание задачи
-        $(By.xpath("//form[@id='data_value']//li[9]//span[@style][contains(text(),'" + dateEnd + "')]"))
+        $(By.xpath("//form[@id='data_value']//li[9]//span[@style][contains(text(),'" + task.getEnd() + "')]"))
                 .shouldBe(Condition.visible); // Окончание задачи
         return this;
     }

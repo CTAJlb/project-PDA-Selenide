@@ -1,6 +1,7 @@
 package com.selenium.test.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.selenium.test.model.Employee;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
 
@@ -42,6 +43,35 @@ public class LoginPage extends Page {
         inputLogin.sendKeys(login);
         inputPassword.clear();
         inputPassword.sendKeys(passw);
+    }
+
+    /**
+     * Вводим Login пользователя
+     * @param text
+     * @return
+     */
+    public LoginPage setLoginField(String text) {
+        inputLogin.sendKeys(text);
+        return this;
+    }
+
+    /**
+     * Вводим пароль пользователя
+     * @param text
+     * @return
+     */
+    public LoginPage setPasswordField(String text) {
+        inputPassword.sendKeys(text);
+        return this;
+    }
+
+    /**
+     * Авторизация под указанным пользователем
+     * @param user
+     */
+    public void loginAsAdmin(Employee user) {
+        setLoginField(user.getLoginName());
+        setPasswordField(user.getPassword());
     }
 
     /**

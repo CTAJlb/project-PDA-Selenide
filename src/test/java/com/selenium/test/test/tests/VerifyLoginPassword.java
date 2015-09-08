@@ -1,9 +1,10 @@
-package com.selenium.test.testng.tests;
+package com.selenium.test.test.tests;
 
 import com.codeborne.selenide.Condition;
 import com.selenium.test.pages.InternalPage;
 import com.selenium.test.pages.LoginPage;
-import com.selenium.test.testng.listeners.ScreenShotOnFailListener;
+import com.selenium.test.test.data.GeneralData;
+import com.selenium.test.test.listeners.ScreenShotOnFailListener;
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -17,7 +18,7 @@ import static com.selenium.test.pages.Page.*;
 
 @Listeners({ScreenShotOnFailListener.class})
 
-public class VerifyLoginPassword {
+public class VerifyLoginPassword extends GeneralData {
 
     /**
      * Инициализация входных данных для Логин и Пароль
@@ -40,21 +41,14 @@ public class VerifyLoginPassword {
         };
     }
 
-    @DataProvider(name = "successAuthorization")
-    public Object[][] successAuthorizationDataProvider() {
-        return new Object[][]{
-                {"admin", "admin"}
-        };
-    }
-
 
     /**
      * проверка валидации авторизации - авторизация проходит успешно
      */
-    @Test(dataProvider = "successAuthorization", priority = 3)
-    public void loginSuccess(String login, String pass) throws Exception {
+    @Test(priority = 3)
+    public void loginSuccess() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
-        loginPage.loginAs(login, pass);
+        loginPage.loginAsAdmin(ADMIN);
         InternalPage internalPage = loginPage.goToInternalMenu(); // Проверяем отображение п.м. системы
         assertTrue(internalPage.hasMenu());
         internalPage.signOut(); // Выход из системы

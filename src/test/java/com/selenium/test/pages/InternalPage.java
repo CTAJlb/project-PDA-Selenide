@@ -29,14 +29,21 @@ public class InternalPage extends Page {
     private SelenideElement logout;
 
     /*
+     * Задачи/Задачи
+     */
+	@FindBy(xpath = "//a[@href='/tasksreports/']")
+	private SelenideElement menuTaskReports;
+
+
+    /*
      * Создать задачу
      */
     @FindBy(xpath = "//a[contains(@href, '/edittask/newtask')]")
     private SelenideElement createTask;
 
     /*
-    Домой
-    */
+     * Домой
+     */
     @FindBy(xpath = "//a/img[contains(@src,'home')]")
     private SelenideElement home;
 
@@ -45,7 +52,7 @@ public class InternalPage extends Page {
      *
      * @return
      */
-    public InternalPage goToHome() {
+    public Page goToHome() {
         home.click();
         return this;
     }
@@ -72,10 +79,21 @@ public class InternalPage extends Page {
     }
 
     /**
+     * Переходим в грид Задачи/Задачи
+     *
+     * @return
+     */
+    public TasksReportsPage goToTaskReports() {
+        menuTaskReports.click();
+        $(By.xpath("//div[@id='mainblock']/table[3]//tr")).shouldBe(Condition.present);
+        return page(TasksReportsPage.class);
+    }
+
+    /**
      * Вернуться домой и выйти из системы
      */
     public LoginPage homeAndSignOut() {
-        home.click();
+        goToHome();
         logout.waitUntil(Condition.appear, 4);
         logout.click();
         $("#center>form>div>img").shouldBe(Condition.visible);

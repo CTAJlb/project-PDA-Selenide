@@ -2,6 +2,8 @@ package com.selenium.test.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.selenium.test.model.Employee;
+import com.selenium.test.model.Task;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
@@ -32,25 +34,25 @@ public class NewTaskPage extends Page {
      Авторы
      */
     @FindBy(xpath = "//input[@id='ag']")
-    private SelenideElement authors;
+    private SelenideElement inputFieldAuthors;
 
     /*
      Контролеры задачи
      */
     @FindBy(xpath = "//input[@id='cg']")
-    private SelenideElement taskSupervisors;
+    private SelenideElement inputFieldTaskSupervisors;
 
     /*
      Ответственные руководители
      */
     @FindBy(xpath = "//input[@id='rg']")
-    private SelenideElement executiveManagers;
+    private SelenideElement inputFieldExecutiveManagers;
 
     /*
      Исполнители
      */
     @FindBy(xpath = "//input[@id='wg']")
-    private SelenideElement performers;
+    private SelenideElement inputFieldPerformers;
 
     /*
      Секретная задача
@@ -114,30 +116,39 @@ public class NewTaskPage extends Page {
     /**
      * Производим заполнение поля - Авторы задачи
      *
-     * @param author
+     * @param authors
      * @return
      */
-    public NewTaskPage setAuthors(String author) {
-        authors.clear();
-        authors.setValue(author);
-        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + author + "')]"))
-                .shouldBe(Condition.visible);
-        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + author + "')]")).click();
+    public NewTaskPage setAuthors(Employee authors[]) {
+        if (authors == null)
+            return this;
+        else
+            for (Employee author : authors) {
+                inputFieldAuthors.setValue(author.getLastName());
+                $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + author.getLastName() + "')]"))
+                        .shouldBe(Condition.visible);
+                $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + author.getLastName() + "')]")).click();
+            }
         return this;
     }
 
     /**
      * Производим заполнение поля - Контролеры задачи
      *
-     * @param taskSuperv
+     * @param taskSupervisors
      * @return
      */
-    public NewTaskPage setTaskSupervisors(String taskSuperv) {
-        taskSupervisors.clear();
-        taskSupervisors.setValue(taskSuperv);
-        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + taskSuperv + "')]"))
-                .shouldBe(Condition.visible);
-        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + taskSuperv + "')]")).click();
+    public NewTaskPage setTaskSupervisors(Employee taskSupervisors[]) {
+        if (taskSupervisors == null)
+            return this;
+        else
+            for (Employee taskSupervisor : taskSupervisors) {
+                inputFieldTaskSupervisors.clear();
+                inputFieldTaskSupervisors.setValue(taskSupervisor.getLastName());
+                $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + taskSupervisor.getLastName() + "')]"))
+                        .shouldBe(Condition.visible);
+                $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + taskSupervisor.getLastName() + "')]")).click();
+            }
         return this;
     }
 
@@ -147,27 +158,37 @@ public class NewTaskPage extends Page {
      * @param exeManagers
      * @return
      */
-    public NewTaskPage setExecutiveManagers(String exeManagers) {
-        executiveManagers.clear();
-        executiveManagers.setValue(exeManagers);
-        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + exeManagers + "')]"))
-                .shouldBe(Condition.visible);
-        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + exeManagers + "')]")).click();
+    public NewTaskPage setExecutiveManagers(Employee exeManagers[]) {
+        if (exeManagers == null) {
+            return this;
+        } else
+            for (Employee exeManager : exeManagers) {
+                inputFieldExecutiveManagers.clear();
+                inputFieldExecutiveManagers.setValue(exeManager.getLastName());
+                $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + exeManager.getLastName() + "')]"))
+                        .shouldBe(Condition.visible);
+                $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + exeManager.getLastName() + "')]")).click();
+            }
         return this;
     }
 
     /**
      * Производим заполнение поля - Исполнители
      *
-     * @param performer
+     * @param performers
      * @return
      */
-    public NewTaskPage setPerformers(String performer) {
-        performers.clear();
-        performers.setValue(performer);
-        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + performer + "')]"))
-                .shouldBe(Condition.visible);
-        $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + performer + "')]")).click();
+    public NewTaskPage setPerformers(Employee performers[]) {
+        if (performers == null) {
+            return this;
+        } else
+            for (Employee performer : performers) {
+                inputFieldPerformers.clear();
+                inputFieldPerformers.setValue(performer.getLastName());
+                $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + performer.getLastName() + "')]"))
+                        .shouldBe(Condition.visible);
+                $(By.xpath("//ul[contains(@style,' display: block')]//a[contains(text(),'" + performer.getLastName() + "')]")).click();
+            }
         return this;
     }
 
@@ -219,6 +240,23 @@ public class NewTaskPage extends Page {
         view.click();
         $(By.cssSelector("input[name='next3']")).waitUntil(Condition.appear, 4);
         return page(EditTaskPage.class);
+    }
+
+    /**
+     * Создание новой задачи
+     */
+    public void createTask(Task task) {
+        setTaskName(task.getTaskName()) // Название задачи
+                .setTasksDescription(task.getDescription()) // Описание задачи
+                .setTaskSupervisors(task.getTaskSupervisors()) // вводим - Контролеры задачи
+                .setExecutiveManagers(task.getExecutiveManagers()) // вводим - Ответственные руковдители
+                .setPerformers(task.getPerformers()) // вводим - Исполнители
+                .setDateEnd(task.getEnd()) // Дата окончания задачи
+                .setImportantTask(task.getIsImportant()) // признак - Важная задача
+                .setReportRequired(task.getIsWithReport()) // признак - С доклаом
+                .setPrivateTask(task.getIsSecret()); // признак - Секретная задача
+
+
     }
 
 

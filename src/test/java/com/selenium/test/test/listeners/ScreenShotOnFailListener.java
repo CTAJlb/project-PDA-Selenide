@@ -1,4 +1,4 @@
-package com.selenium.test.testng.listeners;
+package com.selenium.test.test.listeners;
 
 import com.selenium.test.utils.ScreenShotUtil;
 import org.testng.ITestContext;
