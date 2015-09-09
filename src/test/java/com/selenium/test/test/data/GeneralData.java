@@ -246,8 +246,8 @@ public class GeneralData {
      */
     public Task setRandomTask() {
         Task task = new Task()
-                .setTaskName(randomString(80))
-                .setDescription(randomString(500))
+                .setTaskName(randomString(15) + " " +randomString(30))
+                .setDescription(randomString(100) + "\n " +randomString(100) + "\n " +randomString(100))
                 .setEnd(tommorowDate())
                 .setIsImportant(randomBoolean())
                 .setIsSecret(randomBoolean())

@@ -1,9 +1,9 @@
 package com.selenium.test.pages;
 
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.selenium.test.model.Employee;
 import com.selenium.test.model.Task;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +11,9 @@ import org.openqa.selenium.support.FindBy;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
+/**
+ * Форма задачи (Лента действий)
+ */
 public class TaskPage extends Page {
 
     /*
@@ -27,10 +30,11 @@ public class TaskPage extends Page {
 
     /**
      * Проверяем отображение формы созданной задачи
+     *
      * @param task
      * @return
      */
-    public TaskPage verifyCreateTask(Task task) {
+    public TaskPage openShapeCreatedTask(Task task) {
         $(By.cssSelector("div.save_button")).shouldBe(Condition.present);
         $(By.xpath("//a[contains(text(),'" + task.getTaskName() + "')][ancestor::ul[@class='ui-listview']]")).shouldHave(Condition.visible);
         return this;
@@ -46,7 +50,18 @@ public class TaskPage extends Page {
         return !buttonMenu.isEmpty();
     }
 
-
+    /**
+     * Открываем форму редактирования задачи (Атрибуты задачи)
+     *
+     * @param task
+     * @return
+     */
+    public EditTaskPage openFormEditTask(Task task, Employee user) {
+        $(By.xpath("//a[contains(text(),'" + task.getTaskName() + "')][ancestor::ul[@class='ui-listview']]")).click();
+        save.waitUntil(Condition.visible, 4);
+        $(By.xpath("//span[@name='autor']/a[text()='" + user.getLastName() + "']")).shouldBe(Condition.visible);
+        return page(EditTaskPage.class);
+    }
 
 
 }

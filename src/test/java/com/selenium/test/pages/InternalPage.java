@@ -4,9 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.NoSuchElementException;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
@@ -31,8 +30,8 @@ public class InternalPage extends Page {
     /*
      * Задачи/Задачи
      */
-	@FindBy(xpath = "//a[@href='/tasksreports/']")
-	private SelenideElement menuTaskReports;
+    @FindBy(xpath = "//a[@href='/tasksreports/']")
+    private SelenideElement menuTaskReports;
 
 
     /*
@@ -114,5 +113,6 @@ public class InternalPage extends Page {
         $(By.cssSelector("input[name='logon']")).getCssValue("Вход");
         return page(LoginPage.class);
     }
+
 
 }

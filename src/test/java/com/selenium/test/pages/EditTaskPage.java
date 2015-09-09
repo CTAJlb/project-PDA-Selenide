@@ -1,6 +1,5 @@
 package com.selenium.test.pages;
 
-
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -11,23 +10,33 @@ import org.openqa.selenium.support.FindBy;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
-public class EditTaskPage extends Page {
+/**
+ * Форма задачи (Атрибуты задачи)
+ */
+public class EditTaskPage extends NewTaskPage {
 
     /*
-     * кнопка Создать
+     * кнопка Создать задачу
      */
     @FindBy(css = "input[name='next3']")
     private SelenideElement createTask;
 
     /*
-    Ссылка - Перейти к задаче
+     * Ссылка - Перейти к задаче
      */
     @FindBy(xpath = "//a[contains(@href, '/task/')]")
     private SelenideElement goToTask;
 
+    /*
+     * Сохранить
+     */
+    @FindBy(css = "div.save_button")
+    private SelenideElement save;
+
 
     /**
      * Проверка введенных данный в предпросмотре формы создания задачи
+     *
      * @param task
      * @return
      */
@@ -46,7 +55,7 @@ public class EditTaskPage extends Page {
      *
      * @return
      */
-    public EditTaskPage createNewTask() {
+    public EditTaskPage saveNewTask() {
         createTask.click();
         $(By.xpath("//a[contains(@href, '/task/')]")).waitUntil(Condition.appear, 4);
         return this;
@@ -54,11 +63,31 @@ public class EditTaskPage extends Page {
 
     /**
      * Перейти к форме созданной задачи
+     *
      * @return
      */
-    public TaskPage goToTask(){
+    public TaskPage goToTask() {
         goToTask.click();
         return page(TaskPage.class);
+    }
+
+    public EditTaskPage saveChangesToTask() {
+        save.click();
+        return this;
+    }
+
+    /**
+     * Создание новой задачи
+     */
+    public void editTask(Task editTask) {
+        setTaskName(editTask.getTaskName()) // Название задачи
+                .setTasksDescription(editTask.getDescription()) // Описание задачи
+                .setDateEnd(editTask.getEnd()) // Дата окончания задачи
+                .setImportantTask(editTask.getIsImportant()) // признак - Важная задача
+                .setPrivateTask(editTask.getIsSecret()); // признак - Секретная задача
+        saveChangesToTask();
+
+
     }
 
 

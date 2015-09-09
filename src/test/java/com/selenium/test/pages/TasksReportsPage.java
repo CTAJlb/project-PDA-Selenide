@@ -18,9 +18,19 @@ public class TasksReportsPage extends Page {
      * @param task
      * @return
      */
-    public TasksReportsPage checkDisplayTasksGrid(Task task) {
+    public TasksReportsPage checkDisplayTaskGrid(Task task) {
         $(By.xpath("//div[@id='mainblock']/table[3]//tr//span[text()='" + task.getTaskName() + "']"))
                 .shouldHave(Condition.exactText(task.getTaskName()));
+        return this;
+    }
+
+    /**
+     * Открываем задачу из грида
+     * @param task
+     * @return
+     */
+    public TasksReportsPage openTaskInGrid(Task task) {
+        $(By.xpath("//div[@id='mainblock']/table[3]//tr//span[text()='" + task.getTaskName() + "']/..")).click();
         return this;
     }
 

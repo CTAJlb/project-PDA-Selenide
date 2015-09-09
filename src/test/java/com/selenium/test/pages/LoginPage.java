@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.page;
 
-
 /**
  * Страница авторизации - PDA
  */

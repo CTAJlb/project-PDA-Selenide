@@ -49,7 +49,7 @@ public class Task {
     }
 
     /**
-     * Важная задача - true Обычная - false
+     * Важная задача
      *
      * @return
      */
@@ -63,7 +63,7 @@ public class Task {
     }
 
     /**
-     * C докладом - true Без доклада - false
+     * C докладом
      *
      * @return
      */
@@ -77,7 +77,7 @@ public class Task {
     }
 
     /**
-     * Секретная задача - true Нет - false
+     * Секретная задача
      *
      * @return
      */
