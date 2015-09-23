@@ -33,12 +33,19 @@ public class InternalPage extends Page {
     @FindBy(xpath = "//a[@href='/tasksreports/']")
     private SelenideElement menuTaskReports;
 
-
     /*
      * Создать задачу
      */
     @FindBy(xpath = "//a[contains(@href, '/edittask/newtask')]")
     private SelenideElement createTask;
+
+    /*
+     * Создать задачу
+     */
+    @FindBy(xpath = "//li[@class='help-but']/a")
+    private SelenideElement helpHtml;
+
+
 
     /*
      * Домой
@@ -67,7 +74,7 @@ public class InternalPage extends Page {
     }
 
     /**
-     * Переходим в форму создания Задачи
+     * Переходим в форму - Создать задачу
      *
      * @return
      */
@@ -75,6 +82,17 @@ public class InternalPage extends Page {
         createTask.click();
         $(By.xpath("//input[contains(@class,'button') and @name='next2']")).shouldHave(Condition.visible);
         return page(NewTaskPage.class);
+    }
+
+    /**
+     * Переходим в форму - Помощь
+     *
+     * @return
+     */
+    public HelpHtmlPage goToHelpHtml() {
+        helpHtml.click();
+        $(By.xpath("//div[@id='mainblock']/ul/li[1]/div[@class='save_button']")).shouldHave(Condition.visible);
+        return page(HelpHtmlPage.class);
     }
 
     /**

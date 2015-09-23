@@ -20,7 +20,7 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public class Page {
 
-    public static final String PAGE_URL = "http://pda.johnii/";
+    public static final String PAGE_URL = "http://pda.johni/";
 
 
     /**

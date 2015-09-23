@@ -5,19 +5,23 @@ import com.selenium.test.model.Employee;
 import com.selenium.test.model.Task;
 import com.selenium.test.pages.*;
 import com.selenium.test.test.data.GeneralData;
+import com.selenium.test.test.listeners.ScreenShotOnFailListener;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.selenium.test.pages.Page.*;
 import static org.testng.Assert.assertTrue;
 
-public class VerifyCreateTasks extends GeneralData {
+
+@Listeners({ScreenShotOnFailListener.class})
+public class CreateTasks extends GeneralData {
 
 
     /*
     Инициализируем модель - Задача #1
      */
-    Task newTask = setRandomTask()
+    Task newTask = getRandomTask()
             .setAuthors(new Employee[]{EMPLOYEE_ADMIN})
             .setTaskSupervisors(new Employee[]{EMPLOYEE_ADMIN})
             .setExecutiveManagers(new Employee[]{EMPLOYEE_ADMIN})
@@ -30,7 +34,7 @@ public class VerifyCreateTasks extends GeneralData {
     /*
     Инициализируем модель - Задача #2
      */
-    Task newTask2 = setRandomTask()
+    Task newTask2 = getRandomTask()
             .setAuthors(new Employee[]{EMPLOYEE_ADMIN})
             .setTaskSupervisors(new Employee[]{EMPLOYEE_ADMIN})
             .setExecutiveManagers(new Employee[]{EMPLOYEE_ADMIN})
@@ -43,7 +47,7 @@ public class VerifyCreateTasks extends GeneralData {
     /*
    Инициализируем модель - Задача #3 (атрибуты для редактирования)
     */
-    Task editTask = setRandomTask();
+    Task editTask = getRandomTask();
 
 
     /**

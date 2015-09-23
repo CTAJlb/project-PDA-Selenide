@@ -15,20 +15,26 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.testng.Assert.assertTrue;
 import static com.selenium.test.pages.Page.*;
 
-
+/**
+ * Автоматически делать скриншот, после каждого упавшего теста
+ * Чтобы делать скриншоты после зелёных тестов, нужно вызвать такую команду перед запуском тестов: java ScreenShooter.captureSuccessfulTests = true;
+ * Вы также можете сделать скриншот в любом месте теста одной строчкой - screenshot("my_file_name");
+ * При этом Selenide создаст два файла: my_file_name.png и my_file_name.html
+ *
+ */
 @Listeners({ScreenShotOnFailListener.class})
-
-public class VerifyLoginPassword extends GeneralData {
+public class AuthorizationCheck extends GeneralData {
 
     /**
      * Инициализация входных данных для Логин и Пароль
      *
      */
-    @DataProvider(name = "firstFailAuthorization")
+    @DataProvider(name = "failAuthorization")
     public Object[][] firstNotSuccessfulAuthorizationDataProvider() {
         return new Object[][]{
                 {"fail", "admin"},
                 {"admin", "fail"},
+                {"fail", "fail"},
                 {"admin", null},
         };
     }
@@ -57,8 +63,8 @@ public class VerifyLoginPassword extends GeneralData {
     /**
      * проверка невалидного логина И пароля - авторизация не проходит
      */
-    @Test(dataProvider = "firstFailAuthorization", priority = 1)
-    public void firstFailAuthorization(String login, String pass) throws Exception {
+    @Test(dataProvider = "failAuthorization", priority = 1)
+    public void failAuthorization(String login, String pass) throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
         loginPage.loginAs(login, pass);
         loginPage.loginInSystem();

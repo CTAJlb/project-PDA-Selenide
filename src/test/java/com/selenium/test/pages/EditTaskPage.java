@@ -71,6 +71,10 @@ public class EditTaskPage extends NewTaskPage {
         return page(TaskPage.class);
     }
 
+    /**
+     * Сохранить изменения по задаче
+     * @return
+     */
     public EditTaskPage saveChangesToTask() {
         save.click();
         return this;
