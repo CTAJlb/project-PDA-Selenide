@@ -28,6 +28,13 @@ public class TaskPage extends Page {
     @FindBy(css = "div.save_button")
     private SelenideElement save;
 
+    /*
+     Лента действий
+     */
+    @FindBy(css = "#text")
+    private SelenideElement action;
+
+
     /**
      * Проверяем отображение формы созданной задачи
      *
@@ -58,9 +65,25 @@ public class TaskPage extends Page {
      */
     public EditTaskPage openFormEditTask(Task task, Employee user) {
         $(By.xpath("//a[contains(text(),'" + task.getTaskName() + "')][ancestor::ul[@class='ui-listview']]")).click();
-        save.waitUntil(Condition.visible, 4);
+        save.shouldBe(Condition.visible);
         $(By.xpath("//span[@name='autor']/a[text()='" + user.getLastName() + "']")).shouldBe(Condition.visible);
         return page(EditTaskPage.class);
+    }
+
+
+    /**
+     * Добавляем текст в ленту действий
+     *
+     * @param textAction
+     * @return
+     */
+    public TaskPage saveActionsInTheTape(String textAction) {
+        for (int i = 0; i < 5; i++) {
+            action.setValue(textAction);
+            save.click();
+            $(By.xpath("//ul[@class='ui-listview']//div/span[text()='" + textAction + "']")).shouldBe(Condition.visible);
+        }
+        return this;
     }
 
 

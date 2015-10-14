@@ -40,10 +40,16 @@ public class InternalPage extends Page {
     private SelenideElement createTask;
 
     /*
-     * Создать задачу
+     * Помощь
      */
     @FindBy(xpath = "//li[@class='help-but']/a")
     private SelenideElement helpHtml;
+
+    /*
+     * Настройки
+     */
+    @FindBy(xpath = "//li[@class='option-but']/a")
+    private SelenideElement options;
 
 
 
@@ -101,6 +107,28 @@ public class InternalPage extends Page {
      * @return
      */
     public TasksReportsPage goToTaskReports() {
+        menuTaskReports.click();
+        $(By.xpath("//div[@id='mainblock']/table[3]//tr")).shouldBe(Condition.present);
+        return page(TasksReportsPage.class);
+    }
+
+    /**
+     * Переходим в грид Настройки
+     *
+     * @return
+     */
+    public OptionsPage goToOptions() {
+        options.click();
+        $(By.xpath("(//input[@type='submit'])[2]")).shouldBe(Condition.present);
+        return page(OptionsPage.class);
+    }
+
+    /**
+     * Переходим в грид Задачи/Задачи
+     *
+     * @return
+     */
+    public TasksReportsPage goToTaskOptions() {
         menuTaskReports.click();
         $(By.xpath("//div[@id='mainblock']/table[3]//tr")).shouldBe(Condition.present);
         return page(TasksReportsPage.class);

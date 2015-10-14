@@ -20,6 +20,8 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public class Page {
 
+    WebDriver driver;
+
     public static final String PAGE_URL = "http://pda.johni/";
 
 
@@ -55,7 +57,6 @@ public class Page {
     public Page ensurePageLoaded() {
         return this;
     }
-
 
     /**
      * Глобальная переменная - Сочетание клавиш Shift и Enter -
@@ -106,6 +107,40 @@ public class Page {
 
     }
 
+    //-----------------------------------------------Waiting--------------------------------------------
+
+    /**
+     * Подождать в течение определенного количества времени
+     *
+     * @param seconds
+     */
+    public void waitMillisecond(double seconds) {
+        try {
+            Thread.sleep((long) (seconds * 1000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        /**
+         * Пример, использования метода - waitTime(0.5 OR 1);
+         */
+    }
+
+    /**
+     * Подождать пока отобразится элемент на странице
+     *
+     * @param locator
+     * @param maxSeconds
+     * @return
+     */
+    public WebElement waitForPageUntilElementIsVisible(By locator,
+                                                       int maxSeconds) {
+        return (new WebDriverWait(driver, maxSeconds)).until(ExpectedConditions
+                .visibilityOfElementLocated(locator));
+        /**
+         * Пример использования метода
+         * - waitForPageUntilElementIsVisible(By.xpath("//*[@id='bAddRec-btnIconEl']"), 5000);
+         */
+    }
 
 
 }

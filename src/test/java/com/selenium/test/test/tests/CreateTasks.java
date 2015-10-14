@@ -45,7 +45,7 @@ public class CreateTasks extends GeneralData {
             .setIsImportant(true); // Важная задача
 
     /*
-   Инициализируем модель - Задача #3 (атрибуты для редактирования)
+   Инициализируем модель - Задача #3 (атрибуты и лента для редактирования)
     */
     Task editTask = getRandomTask();
 
@@ -142,9 +142,20 @@ public class CreateTasks extends GeneralData {
 
         taskForm.openFormEditTask(newTask2, EMPLOYEE_ADMIN); // открываем форму редактирования атрибутов задачи
 
-        editTaskPage.editTask(editTask); // редактируем задачу
+        editTaskPage.editAttributesOfTasks(editTask); // редактируем задачу
+
+        editTaskPage.checkTheAttributesAreSaved(editTask); // проверяем сохранение измнений в ленте действий
+
+        taskForm.saveActionsInTheTape(randomString(15)); // добавляем пользовательский текст в задачу и проверяем его сохранение
+
+
+        internalPage.homeAndSignOut(); // Выход из системы
+
+
 
     }
+
+
 
 
 }

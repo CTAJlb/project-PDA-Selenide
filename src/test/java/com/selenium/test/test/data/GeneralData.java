@@ -21,6 +21,7 @@ public class GeneralData {
     //---------------------------------------------------------------------------------------------------General methods--------------------------------------------------------
 
     // -------------------------------Automation Randomizing Data-----------------------------
+
     public static Random random = new Random();
 
     /**
@@ -242,13 +243,12 @@ public class GeneralData {
     }
 
     /**
-     * ====================================================================                                                       ===========================================
      * ====================================================================Метод создания полностью случайного объекта - "Задача"============================================
      */
     public Task getRandomTask() {
         Task task = new Task()
-                .setTaskName(randomString(15) + " " +randomString(30))
-                .setDescription(randomString(100) + "\n " +randomString(100) + "\n " +randomString(100))
+                .setTaskName(randomString(15) + " " + randomString(30))
+                .setDescription(randomString(100) + "\n " + randomString(100) + "\n " + randomString(100))
                 .setEnd(tommorowDate())
                 .setIsImportant(randomBoolean())
                 .setIsSecret(randomBoolean())

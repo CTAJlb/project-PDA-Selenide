@@ -68,16 +68,18 @@ public class LoginPage extends Page {
      * Авторизация под указанным пользователем
      * @param user
      */
-    public void loginAsAdmin(Employee user) {
+    public LoginPage loginAsAdmin(Employee user) {
         setLoginField(user.getLoginName());
         setPasswordField(user.getPassword());
+        return this;
     }
 
     /**
      * Клик по кнопке - Вход
      */
-    public void loginInSystem() {
+    public LoginPage loginInSystem() {
         loginButton.click();
+        return this;
     }
 
     /**

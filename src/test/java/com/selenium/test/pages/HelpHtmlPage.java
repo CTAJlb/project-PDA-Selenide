@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Страница - Помощь
@@ -92,6 +93,48 @@ public class HelpHtmlPage extends Page {
     @FindBy(xpath = "//*[@id='mainblock']//div[@class='doc-button2 doc-button-reject']")
     private SelenideElement elementReturnTheDocumentForRevision;
 
+    /*
+     * Элемент - Просмотр листа согласования
+     */
+    @FindBy(xpath = "//*[@id='mainblock']//div[@class='doc-button2 doc-button-signlist-for_help']")
+    private SelenideElement elementViewAgreeList;
+
+    /*
+     * Элемент - Отправить документ в архив
+     */
+    @FindBy(xpath = "//*[@id='mainblock']//div[@class='fc-button5']")
+    private SelenideElement elementSendTheDocumentToTheArchive;
+
+    /*
+     * Элемент - Переслать на исполнение
+     */
+    @FindBy(xpath = "//*[@id='mainblock']//div[@class='fc-button7']")
+    private SelenideElement elementSendToExecution;
+
+    /*
+     * Элемент - Создать задачу по исполнению документа
+     */
+    @FindBy(xpath = "//*[@id='mainblock']//div[@class='fc-button8']")
+    private SelenideElement elementCreateDocumentExecutionTask;
+
+    /*
+     * Элемент - Настройка фильтра поиска
+     */
+    @FindBy(xpath = "//*[@id='mainblock']//div[@class='doc-button button-search-filter']")
+    private SelenideElement elementSearchFilterSettings;
+
+    /*
+     * Элемент - Настройки
+     */
+    @FindBy(xpath = "//*[@id='mainblock']//div[@class='option-but']")
+    private SelenideElement elementOptions;
+
+    /*
+     * Элемент - Выход
+     */
+    @FindBy(xpath = "//*[@id='mainblock']//div[@class='exit-but']")
+    private SelenideElement elementExit;
+
 
 
     /**
@@ -121,8 +164,14 @@ public class HelpHtmlPage extends Page {
         $(elementReconcileWithNotice).shouldBe(Condition.visible);
         $(elementRefuseToConsider).shouldBe(Condition.visible);
         $(elementCreateResolution).shouldBe(Condition.visible);
-        $(elementCreateResolution).shouldBe(Condition.visible);
         $(elementReturnTheDocumentForRevision).shouldBe(Condition.visible);
+        $(elementViewAgreeList).shouldBe(Condition.visible);
+        $(elementSendTheDocumentToTheArchive).shouldBe(Condition.visible);
+        $(elementSendToExecution).shouldBe(Condition.visible);
+        $(elementCreateDocumentExecutionTask).shouldBe(Condition.visible);
+        $(elementSearchFilterSettings).shouldBe(Condition.visible);
+        $(elementOptions).shouldBe(Condition.visible);
+        $(elementExit).shouldBe(Condition.visible);
         return this;
     }
 

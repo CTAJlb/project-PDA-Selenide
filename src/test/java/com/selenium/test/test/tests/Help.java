@@ -20,7 +20,7 @@ public class Help extends GeneralData {
 
 
     /**
-     * проверка - Создание задачи
+     * проверка - Отображение элементов на странице
      */
     @Test(priority = 1)
     public void verifyElementsHelp() {
@@ -36,7 +36,6 @@ public class Help extends GeneralData {
         HelpHtmlPage helpPage = internalPage.goToHelpHtml();
 
         helpPage.checkPresenceElementsOfAid(); // Проверяем общее количество элементов помощи
-
 
         helpPage.visibleElementsHelp(); // Проверяем конкретные элементы помощи
 

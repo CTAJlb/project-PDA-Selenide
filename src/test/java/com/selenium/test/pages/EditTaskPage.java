@@ -1,7 +1,6 @@
 package com.selenium.test.pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.selenium.test.model.Task;
 import org.openqa.selenium.By;
@@ -33,6 +32,12 @@ public class EditTaskPage extends NewTaskPage {
     @FindBy(css = "div.save_button")
     private SelenideElement save;
 
+    /*
+     * Ссылка на задачу
+     */
+    @FindBy(xpath = "(//div[@class='menu-line']//a/li)[2]")
+    private SelenideElement linkTaskReturnMainForm;
+
 
     /**
      * Проверка введенных данный в предпросмотре формы создания задачи
@@ -62,7 +67,7 @@ public class EditTaskPage extends NewTaskPage {
     }
 
     /**
-     * Перейти к форме созданной задачи
+     * Перейти к форме задачи (Лента действий)
      *
      * @return
      */
@@ -73,6 +78,7 @@ public class EditTaskPage extends NewTaskPage {
 
     /**
      * Сохранить изменения по задаче
+     *
      * @return
      */
     public EditTaskPage saveChangesToTask() {
@@ -81,18 +87,30 @@ public class EditTaskPage extends NewTaskPage {
     }
 
     /**
-     * Создание новой задачи
+     * Редактирование созданной задачи
      */
-    public void editTask(Task editTask) {
+    public void editAttributesOfTasks(Task editTask) {
         setTaskName(editTask.getTaskName()) // Название задачи
                 .setTasksDescription(editTask.getDescription()) // Описание задачи
                 .setDateEnd(editTask.getEnd()) // Дата окончания задачи
                 .setImportantTask(editTask.getIsImportant()) // признак - Важная задача
                 .setPrivateTask(editTask.getIsSecret()); // признак - Секретная задача
         saveChangesToTask();
-
-
     }
+
+    /**
+     * Проверяем сохраненные изменения в ленте действий задачи
+     * @param editTask
+     * @return
+     */
+    public TaskPage checkTheAttributesAreSaved(Task editTask) {
+        linkTaskReturnMainForm.click();
+        $(By.xpath("//div[@id='mainblock']//ul[@class='ui-listview']//div//font[text()='" + editTask.getTaskName() + "']"))
+                .shouldHave(Condition.exactText(" " + editTask.getTaskName() + " "));
+        return page(TaskPage.class);
+    }
+
+
 
 
 }
