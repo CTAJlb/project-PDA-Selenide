@@ -23,7 +23,7 @@ public class Help extends GeneralData {
      * проверка - Отображение элементов на странице
      */
     @Test(priority = 1)
-    public void verifyElementsHelp() {
+    public void verifyElementsHelp() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
 
         // Авторизация

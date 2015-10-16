@@ -54,7 +54,7 @@ public class CreateTasks extends GeneralData {
      * проверка - Создание задачи
      */
     @Test(priority = 1)
-    public void verifyCreateTask() {
+    public void verifyCreateTask() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
 
         // Авторизация
@@ -101,7 +101,7 @@ public class CreateTasks extends GeneralData {
      * проверка - Редактирование задачи
      */
     @Test(priority = 2)
-    public void verifyEditTask() {
+    public void verifyEditTask() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
 
         // Авторизация

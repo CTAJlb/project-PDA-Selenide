@@ -38,7 +38,7 @@ public class Options extends GeneralData {
      * проверка - Аттачминг файлов в форме задачи
      */
     @Test(priority = 1)
-    public void verifyAttachFiles() {
+    public void verifyAttachFiles() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
 
         // Авторизация
@@ -75,6 +75,8 @@ public class Options extends GeneralData {
         TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
 
         taskForm.openShapeCreatedTask(newTask); // Открываем созданную задачу
+
+
 
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 

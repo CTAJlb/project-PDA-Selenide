@@ -78,10 +78,12 @@ public class TaskPage extends Page {
      * @return
      */
     public TaskPage saveActionsInTheTape(String textAction) {
-        for (int i = 0; i < 5; i++) {
+        int n = 5;
+        while (n > 0) {
             action.setValue(textAction);
             save.click();
             $(By.xpath("//ul[@class='ui-listview']//div/span[text()='" + textAction + "']")).shouldBe(Condition.visible);
+            n--;
         }
         return this;
     }
