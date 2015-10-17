@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
 
-public class GeneralData {
+public class TestBase {
 
 
     public static Employee ADMIN = new Employee().setLoginName("admin")

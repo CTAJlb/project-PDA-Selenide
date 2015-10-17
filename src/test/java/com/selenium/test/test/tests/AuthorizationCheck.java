@@ -3,7 +3,7 @@ package com.selenium.test.test.tests;
 import com.codeborne.selenide.Condition;
 import com.selenium.test.pages.InternalPage;
 import com.selenium.test.pages.LoginPage;
-import com.selenium.test.test.data.GeneralData;
+import com.selenium.test.test.data.TestBase;
 import com.selenium.test.test.listeners.ScreenShotOnFailListener;
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
@@ -23,7 +23,7 @@ import static com.selenium.test.pages.Page.*;
  *
  */
 @Listeners({ScreenShotOnFailListener.class})
-public class AuthorizationCheck extends GeneralData {
+public class AuthorizationCheck extends TestBase {
 
     /**
      * Инициализация входных данных для Логин и Пароль

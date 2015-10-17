@@ -20,9 +20,9 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public class Page {
 
-    WebDriver driver;
+    private static WebDriver driver;
 
-    public static final String PAGE_URL = "http://pda.johni/";
+    public static final String PAGE_URL = "http://pda.motiw/";
 
 
     /**

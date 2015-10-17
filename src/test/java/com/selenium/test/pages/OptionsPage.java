@@ -1,7 +1,12 @@
 package com.selenium.test.pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
+
+import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Страница - Настройки
@@ -36,10 +41,11 @@ public class OptionsPage extends Page {
 
     /**
      * Устанавливаем значение - Возможность присоединения файлов
+     *
      * @return
      */
-    public OptionsPage selAttachFiles(boolean attach){
-        if(attach) {
+    public OptionsPage selAttachFiles(boolean attach) {
+        if (attach) {
             attachFiles.click();
         }
         save.click();
@@ -48,8 +54,9 @@ public class OptionsPage extends Page {
     }
 
 
-
-
-
-
 }
+
+
+
+
+

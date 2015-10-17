@@ -52,6 +52,7 @@ public class EditTaskPage extends NewTaskPage {
                 .shouldBe(Condition.visible); // Описание задачи
         $(By.xpath("//form[@id='data_value']//li[9]//span[@style][contains(text(),'" + task.getEnd() + "')]"))
                 .shouldBe(Condition.visible); // Окончание задачи
+        saveNewTask();
         return this;
     }
 

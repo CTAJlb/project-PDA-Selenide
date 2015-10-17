@@ -13,7 +13,7 @@ public class TasksReportsPage extends Page {
 
 
     /**
-     * Проверяем отображение созданной задачи в гриде раздела
+     * Проверяем отображение созданной задачи в гриде раздела - Задачи
      *
      * @param task
      * @return
@@ -25,12 +25,27 @@ public class TasksReportsPage extends Page {
     }
 
     /**
-     * Открываем задачу из грида
+     * Открываем задачу в гриде задач
+     *
      * @param task
      * @return
      */
     public TasksReportsPage openTaskInGrid(Task task) {
         $(By.xpath("//div[@id='mainblock']/table[3]//tr//span[text()='" + task.getTaskName() + "']/..")).click();
+        $(By.xpath("//ul[@class='ui-listview']//a[contains(text(),'" + task.getTaskName() + "')]"))
+                .shouldHave(Condition.exactText("" + task.getTaskName() + ""));
+        return this;
+    }
+
+    /**
+     * Проверяем исчезновение задачи в гриде раздела - Задачи
+     *
+     * @param task
+     * @return
+     */
+    public TasksReportsPage checkDisappearTaskInGrid(Task task) {
+        $(By.xpath("//div[@id='mainblock']/table[3]//tr//span[text()='" + task.getTaskName() + "']"))
+                .shouldNotBe(Condition.visible);
         return this;
     }
 

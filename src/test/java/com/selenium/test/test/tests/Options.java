@@ -3,7 +3,7 @@ package com.selenium.test.test.tests;
 import com.selenium.test.model.Employee;
 import com.selenium.test.model.Task;
 import com.selenium.test.pages.*;
-import com.selenium.test.test.data.GeneralData;
+import com.selenium.test.test.data.TestBase;
 import com.selenium.test.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -16,7 +16,7 @@ import static org.testng.Assert.assertTrue;
  * Раздел - Настройки
  */
 @Listeners({ScreenShotOnFailListener.class})
-public class Options extends GeneralData {
+public class Options extends TestBase {
 
 
     /*
@@ -50,7 +50,6 @@ public class Options extends GeneralData {
 
         // Инициализируем стр. формы Настройки и переходим на нее
         OptionsPage optionsPage = internalPage.goToOptions();
-
         optionsPage.selAttachFiles(true); // устанавливаем признак - возможность прикрепления файлов
         internalPage.goToHome(); // уходим домой
 
@@ -68,19 +67,16 @@ public class Options extends GeneralData {
 
         editTaskPage.inputValidationFormTask(newTask); // Проверяем отображение значений в форме предпросмотра создания задачи
 
-        editTaskPage.saveNewTask(); // Создать задачу
-
         //----------------------------------------------------------------ФОРМА - Задачи
 
         TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
 
-        taskForm.openShapeCreatedTask(newTask); // Открываем созданную задачу
-
-
-
+        taskForm.openShapeCreatedTask(newTask); // Открываем форму созданной задачи
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
+        taskForm.addAttachFiles(randomString(15));
 
+        internalPage.homeAndSignOut(); // Выход из системы
 
     }
 
