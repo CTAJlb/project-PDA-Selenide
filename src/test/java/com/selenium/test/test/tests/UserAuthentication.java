@@ -23,7 +23,7 @@ import static com.selenium.test.pages.Page.*;
  *
  */
 @Listeners({ScreenShotOnFailListener.class})
-public class AuthorizationCheck extends TestBase {
+public class UserAuthentication extends TestBase {
 
     /**
      * Инициализация входных данных для Логин и Пароль

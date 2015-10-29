@@ -1,16 +1,10 @@
 package com.selenium.test.pages;
 
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Random;
 import java.util.Set;
 
 import static com.codeborne.selenide.Selenide.page;

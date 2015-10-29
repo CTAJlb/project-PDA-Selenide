@@ -37,7 +37,7 @@ public class Help extends TestBase {
 
         helpPage.checkPresenceElementsOfAid(); // Проверяем общее количество элементов помощи
 
-        helpPage.visibleElementsHelp(); // Проверяем конкретные элементы помощи
+        helpPage.visibleElementsTextHelp(); // Проверяем отображение текста в элементах помощи
 
         internalPage.homeAndSignOut(); // Выход из системы
 

@@ -1,14 +1,10 @@
 package com.selenium.test.pages;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.page;
-import static org.testng.Assert.assertTrue;
+import static com.codeborne.selenide.CollectionCondition.exactTexts;
 
 /**
  * Страница - Помощь
@@ -20,6 +16,12 @@ public class HelpHtmlPage extends Page {
      */
     @FindBy(xpath = "//div[@id='mainblock' and @class='mainblock withmenu']//li//div")
     private ElementsCollection helpElements;
+
+    /*
+     * Коллексия текста всех элементов поиска
+     */
+    @FindBy(xpath = "//li[ancestor::div[@id='mainblock']]//text")
+    private ElementsCollection elementsTextHelp;
 
     /*
      * Элемент - Сохранить
@@ -136,7 +138,6 @@ public class HelpHtmlPage extends Page {
     private SelenideElement elementExit;
 
 
-
     /**
      * Проверяем общее количество элементов помощи
      *
@@ -149,29 +150,18 @@ public class HelpHtmlPage extends Page {
 
 
     /**
-     * Проверяем отображения конкретного элемента помощи
+     * Проверяем отображение текста в элементах помощи
+     * exactTexts - проверяет - кол-во, порядок и отображение текста
+     *
      * @return
      */
-    public HelpHtmlPage visibleElementsHelp(){
-        $(elementSave).shouldBe(Condition.visible);
-        $(elementCompleteTask).shouldBe(Condition.visible);
-        $(elementSendTheTaskBackForRevision).shouldBe(Condition.visible);
-        $(elementExamine).shouldBe(Condition.visible);
-        $(elementStart).shouldBe(Condition.visible);
-        $(elementPause).shouldBe(Condition.visible);
-        $(elementStop).shouldBe(Condition.visible);
-        $(elementReviewDocument).shouldBe(Condition.visible);
-        $(elementReconcileWithNotice).shouldBe(Condition.visible);
-        $(elementRefuseToConsider).shouldBe(Condition.visible);
-        $(elementCreateResolution).shouldBe(Condition.visible);
-        $(elementReturnTheDocumentForRevision).shouldBe(Condition.visible);
-        $(elementViewAgreeList).shouldBe(Condition.visible);
-        $(elementSendTheDocumentToTheArchive).shouldBe(Condition.visible);
-        $(elementSendToExecution).shouldBe(Condition.visible);
-        $(elementCreateDocumentExecutionTask).shouldBe(Condition.visible);
-        $(elementSearchFilterSettings).shouldBe(Condition.visible);
-        $(elementOptions).shouldBe(Condition.visible);
-        $(elementExit).shouldBe(Condition.visible);
+    public HelpHtmlPage visibleElementsTextHelp() {
+        elementsTextHelp.shouldHave(exactTexts("- Сохранить", "- Завершить задачу", "- Вернуть задачу на доработку", "- Ознакомиться",
+                "- Приступить", "- Прерваться", "- Закончить", "- Согласовать документ", "- Согласовать с замечаниями", "- Отказаться согласовать",
+                "- Создать резолюцию", "- Вернуть документ на доработку",
+                "- Просмотр листа согласования", "- Отправить документ в архив",
+                "- Переслать на исполнение", "- Создать задачу по исполнению документа",
+                "- Настройка фильтра поиска", "- Настройки", "- Выход"));
         return this;
     }
 

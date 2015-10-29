@@ -1,14 +1,16 @@
 package com.selenium.test.pages;
 
-import com.codeborne.selenide.Condition;
+
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Condition.present;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.appears;
 
 /**
  * Внутреняя страница системы
@@ -86,7 +88,7 @@ public class InternalPage extends Page {
      */
     public NewTaskPage goToCreateTask() {
         createTask.click();
-        $(By.xpath("//input[contains(@class,'button') and @name='next2']")).shouldHave(Condition.visible);
+        $(By.xpath("//input[contains(@class,'button') and @name='next2']")).shouldHave(visible);
         return page(NewTaskPage.class);
     }
 
@@ -97,7 +99,7 @@ public class InternalPage extends Page {
      */
     public HelpHtmlPage goToHelpHtml() {
         helpHtml.click();
-        $(By.xpath("//div[@id='mainblock']/ul/li[1]/div[@class='save_button']")).shouldHave(Condition.visible);
+        $(By.xpath("//div[@id='mainblock']/ul/li[1]/div[@class='save_button']")).shouldHave(visible);
         return page(HelpHtmlPage.class);
     }
 
@@ -108,7 +110,7 @@ public class InternalPage extends Page {
      */
     public TasksReportsPage goToTaskReports() {
         menuTaskReports.click();
-        $(By.xpath("//div[@id='mainblock']/table[3]//tr")).shouldBe(Condition.present);
+        $(By.xpath("//div[@id='mainblock']/table[3]//tr")).shouldBe(present);
         return page(TasksReportsPage.class);
     }
 
@@ -119,7 +121,7 @@ public class InternalPage extends Page {
      */
     public OptionsPage goToOptions() {
         options.click();
-        $(By.xpath("(//input[@type='submit'])[2]")).shouldBe(Condition.present);
+        $(By.xpath("(//input[@type='submit'])[2]")).shouldBe(present);
         return page(OptionsPage.class);
     }
 
@@ -130,7 +132,7 @@ public class InternalPage extends Page {
      */
     public TasksReportsPage goToTaskOptions() {
         menuTaskReports.click();
-        $(By.xpath("//div[@id='mainblock']/table[3]//tr")).shouldBe(Condition.present);
+        $(By.xpath("//div[@id='mainblock']/table[3]//tr")).shouldBe(present);
         return page(TasksReportsPage.class);
     }
 
@@ -139,11 +141,11 @@ public class InternalPage extends Page {
      */
     public LoginPage homeAndSignOut() {
         goToHome();
-        logout.waitUntil(Condition.appear, 4);
+        logout.waitUntil(appears, 4);
         logout.click();
-        $("#center>form>div>img").shouldBe(Condition.visible);
-        $(By.cssSelector("#login")).shouldHave(Condition.appears);
-        $(By.cssSelector("#pass")).shouldHave(Condition.appears);
+        $("#center>form>div>img").shouldBe(visible);
+        $(By.cssSelector("#login")).shouldHave(appears);
+        $(By.cssSelector("#pass")).shouldHave(appears);
         $(By.cssSelector("input[name='logon']")).getCssValue("Вход");
         return page(LoginPage.class);
     }
@@ -153,9 +155,9 @@ public class InternalPage extends Page {
      */
     public LoginPage signOut() {
         logout.click();
-        $("#center>form>div>img").shouldBe(Condition.visible);
-        $(By.cssSelector("#login")).shouldHave(Condition.appears);
-        $(By.cssSelector("#pass")).shouldHave(Condition.appears);
+        $("#center>form>div>img").shouldBe(visible);
+        $(By.cssSelector("#login")).shouldHave(appears);
+        $(By.cssSelector("#pass")).shouldHave(appears);
         $(By.cssSelector("input[name='logon']")).getCssValue("Вход");
         return page(LoginPage.class);
     }
