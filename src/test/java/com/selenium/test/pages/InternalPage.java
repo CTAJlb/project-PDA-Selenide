@@ -53,6 +53,12 @@ public class InternalPage extends Page {
     @FindBy(xpath = "//li[@class='option-but']/a")
     private SelenideElement options;
 
+    /*
+     * Сегодня
+     */
+    @FindBy(xpath = "//a[contains(@href, '/today/')]")
+    private SelenideElement today;
+
 
 
     /*
@@ -123,6 +129,17 @@ public class InternalPage extends Page {
         options.click();
         $(By.xpath("(//input[@type='submit'])[2]")).shouldBe(present);
         return page(OptionsPage.class);
+    }
+
+    /**
+     * Переходим в грид Сегодня
+     *
+     * @return
+     */
+    public TodayPage goToToday() {
+        today.click();
+        $(By.xpath("//div[@id='headertop']//ul/a[2]/li")).shouldBe(present);
+        return page(TodayPage.class);
     }
 
     /**
