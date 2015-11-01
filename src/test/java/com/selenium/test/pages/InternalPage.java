@@ -11,6 +11,12 @@ import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Condition.appears;
+/*
+ * Импорт для использования методов самого Selenium, в т.ч. объект WebDriver.
+ * Дальше можно спокойно использовать метод getWebDriver(), который возвращает объект WebDriver.
+ * пример, getWebDriver().findElement(By.id("username"));
+ */
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 /**
  * Внутреняя страница системы

@@ -1,10 +1,13 @@
 package com.selenium.test.pages;
 
-import com.codeborne.selenide.Condition;
 import com.selenium.test.model.Task;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.exactText;
 
 /**
  * Грид - Задачи/Задачи
@@ -20,7 +23,7 @@ public class TasksReportsPage extends Page {
      */
     public TasksReportsPage checkDisplayTaskGrid(Task task) {
         $(By.xpath("//div[@id='mainblock']/table[3]//tr//span[text()='" + task.getTaskName() + "']"))
-                .shouldHave(Condition.exactText(task.getTaskName()));
+                .shouldHave(exactText(task.getTaskName()));
         return this;
     }
 
@@ -33,7 +36,7 @@ public class TasksReportsPage extends Page {
     public TasksReportsPage openTaskInGrid(Task task) {
         $(By.xpath("//div[@id='mainblock']/table[3]//tr//span[text()='" + task.getTaskName() + "']/..")).click();
         $(By.xpath("//ul[@class='ui-listview']//a[contains(text(),'" + task.getTaskName() + "')]"))
-                .shouldHave(Condition.exactText("" + task.getTaskName() + ""));
+                .shouldHave(exactText("" + task.getTaskName() + ""));
         return this;
     }
 
@@ -45,7 +48,7 @@ public class TasksReportsPage extends Page {
      */
     public TasksReportsPage checkDisappearTaskInGrid(Task task) {
         $(By.xpath("//div[@id='mainblock']/table[3]//tr//span[text()='" + task.getTaskName() + "']"))
-                .shouldNotBe(Condition.visible);
+                .shouldNotBe(visible);
         return this;
     }
 
