@@ -57,19 +57,19 @@ public class NewTaskPage extends Page {
     /*
      Секретная задача
      */
-    @FindBy(xpath = "//div[@class='ui-checkbox']//input[@id='secret']")
+    @FindBy(xpath = "//div[@class='ui-checkbox']//input[@id='secret']/..//span[2]")
     private SelenideElement privateTask;
 
     /*
      C докладом
      */
-    @FindBy(xpath = "//div[@class='ui-checkbox']//input[@id='withreport2']")
+    @FindBy(xpath = "//div[@class='ui-checkbox']//input[@id='withreport2']/..//span[2]")
     private SelenideElement reportRequired;
 
     /*
      Важная задача
      */
-    @FindBy(xpath = "//div[@class='ui-checkbox']//input[@id='taskhigh']")
+    @FindBy(xpath = "//div[@class='ui-checkbox']//input[@id='taskhigh']/..//span[2]")
     private SelenideElement importantTask;
 
     /*

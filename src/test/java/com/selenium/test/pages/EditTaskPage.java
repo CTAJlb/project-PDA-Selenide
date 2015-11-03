@@ -6,6 +6,8 @@ import com.selenium.test.model.Task;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
+import static com.codeborne.selenide.Condition.hasValue;
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
@@ -33,7 +35,7 @@ public class EditTaskPage extends NewTaskPage {
     private SelenideElement save;
 
     /*
-     * Ссылка на задачу
+     * Ссылка на задачу в форме редактирования задачи
      */
     @FindBy(xpath = "(//div[@class='menu-line']//a/li)[2]")
     private SelenideElement linkTaskReturnMainForm;
@@ -97,10 +99,27 @@ public class EditTaskPage extends NewTaskPage {
                 .setImportantTask(editTask.getIsImportant()) // признак - Важная задача
                 .setPrivateTask(editTask.getIsSecret()); // признак - Секретная задача
         saveChangesToTask();
+        waitMillisecond(2);
+        verifyAttributesOfTasks(editTask); // проверяем отображение новых значений в полях задачи
+        checkTheAttributesAreSaved(editTask); // проверяем отображение изменений (системное действие) в ленте действий
     }
 
     /**
+     * Проверяем отображение новых значений в полях задачи
+     * TODO - добавить проверки для др. полей задачи (Начало, Окончание); Удаление и пользователей из ролей и пр..;
+     */
+    public EditTaskPage verifyAttributesOfTasks(Task editTask) {
+        $(By.xpath("//input[@id='input_prj_t' and @name='task_name']"))
+                .waitUntil(hasValue(" " + editTask.getTaskName() + " "), 5000); // Название задачи
+        $(By.xpath("//textarea[@id='task_description']"))
+                .shouldHave(value(" " + editTask.getDescription() + " ")); // Описание задачи
+        return this;
+    }
+
+
+    /**
      * Проверяем сохраненные изменения в ленте действий задачи
+     *
      * @param editTask
      * @return
      */
@@ -110,8 +129,6 @@ public class EditTaskPage extends NewTaskPage {
                 .shouldHave(Condition.exactText(" " + editTask.getTaskName() + " "));
         return page(TaskPage.class);
     }
-
-
 
 
 }

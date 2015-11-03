@@ -150,7 +150,7 @@ public class CreateTasks extends TestBase {
         taskForm.openFormEditTask(task1, EMPLOYEE_ADMIN); // открываем форму редактирования атрибутов задачи
 
         editTaskPage.editAttributesOfTasks(editTask); // редактируем задачу
-        editTaskPage.checkTheAttributesAreSaved(editTask); // проверяем сохранение измнений в ленте действий
+
         taskForm.saveActionsInTheTape(randomString(15)); // добавляем пользовательский текст в задачу и проверяем его сохранение
 
         internalPage.homeAndSignOut(); // Выход из системы
