@@ -30,6 +30,10 @@ public class Documents extends TestBase {
 
         DocumentsPage documentsPage = internalPage.goToDocuments();
 
+
+        documentsPage.checkMapGridsDocuments();
+
+
         internalPage.homeAndSignOut(); // Выход из системы
 
     }
