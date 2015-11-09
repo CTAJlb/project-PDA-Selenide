@@ -102,6 +102,7 @@ public class TaskPage extends Page {
      * @return
      */
     public TaskPage saveActionsInTheTape(String textAction) {
+       $(By.xpath("(//div[@class='menu-line']//a/li)[2]")).click();
         int n = 5;
         while (n > 0) {
             action.setValue(textAction);

@@ -1,14 +1,16 @@
 package com.selenium.test.pages;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.selenium.test.model.Employee;
 import com.selenium.test.model.Task;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
-import static com.codeborne.selenide.Condition.hasValue;
-import static com.codeborne.selenide.Condition.value;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.page;
 
 /**
@@ -49,11 +51,11 @@ public class EditTaskPage extends NewTaskPage {
      */
     public EditTaskPage inputValidationFormTask(Task task) {
         $(By.xpath("//form[@id='data_value']//li[2]//span[@style][text()='" + task.getTaskName() + "']"))
-                .shouldBe(Condition.visible); // Название задачи
+                .shouldBe(visible); // Название задачи
         $(By.xpath("//form[@id='data_value']//li[3]//span[@style][text()='" + task.getDescription() + "']"))
-                .shouldBe(Condition.visible); // Описание задачи
+                .shouldBe(visible); // Описание задачи
         $(By.xpath("//form[@id='data_value']//li[9]//span[@style][contains(text(),'" + task.getEnd() + "')]"))
-                .shouldBe(Condition.visible); // Окончание задачи
+                .shouldBe(visible); // Окончание задачи
         saveNewTask();
         return this;
     }
@@ -90,25 +92,28 @@ public class EditTaskPage extends NewTaskPage {
     }
 
     /**
-     * Редактирование созданной задачи
+     * Редактирование атрибутов задачи
      */
-    public void editAttributesOfTasks(Task editTask) {
+    public EditTaskPage editAttributesOfTasks(Task editTask) {
         setTaskName(editTask.getTaskName()) // Название задачи
                 .setTasksDescription(editTask.getDescription()) // Описание задачи
                 .setDateEnd(editTask.getEnd()) // Дата окончания задачи
                 .setImportantTask(editTask.getIsImportant()) // признак - Важная задача
                 .setPrivateTask(editTask.getIsSecret()); // признак - Секретная задача
         saveChangesToTask();
-        waitMillisecond(2);
-        verifyAttributesOfTasks(editTask); // проверяем отображение новых значений в полях задачи
+        waitMillisecond(1.5);
         checkTheAttributesAreSaved(editTask); // проверяем отображение изменений (системное действие) в ленте действий
+        verifyAttributesOfTask(editTask); // проверяем отображение новых значений в полях задачи
+
+        return this;
     }
 
     /**
      * Проверяем отображение новых значений в полях задачи
-     * TODO - добавить проверки для др. полей задачи (Начало, Окончание); Удаление и пользователей из ролей и пр..;
+     *
      */
-    public EditTaskPage verifyAttributesOfTasks(Task editTask) {
+    public EditTaskPage verifyAttributesOfTask(Task editTask) {
+        goToTask.click();
         $(By.xpath("//input[@id='input_prj_t' and @name='task_name']"))
                 .waitUntil(hasValue(" " + editTask.getTaskName() + " "), 5000); // Название задачи
         $(By.xpath("//textarea[@id='task_description']"))
@@ -116,6 +121,29 @@ public class EditTaskPage extends NewTaskPage {
         return this;
     }
 
+    /**
+     * Редактирование РГ (рабочая группа) задачи
+     *
+     * @param employee
+     * @return
+     */
+    public EditTaskPage editWorkingGroupInTask(Employee employee) {
+        goToTask.click();
+        // Удаляем - Контролеры задачи
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'cg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'cg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]"))
+                .shouldNotBe(visible);
+        // Удаляем - Ответственные руководители
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'rg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'rg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]"))
+                .shouldNotBe(visible);
+        // Удаляем - Исполнители
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'wg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'wg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]"))
+                .shouldNotBe(visible);
+        checkWorkingGroupInTaskAreSaved(employee); // проверяем формирование системных действий об удалении пользователей в ленте действий задачи
+        return this;
+    }
 
     /**
      * Проверяем сохраненные изменения в ленте действий задачи
@@ -127,6 +155,19 @@ public class EditTaskPage extends NewTaskPage {
         linkTaskReturnMainForm.click();
         $(By.xpath("//div[@id='mainblock']//ul[@class='ui-listview']//div//font[text()='" + editTask.getTaskName() + "']"))
                 .shouldHave(Condition.exactText(" " + editTask.getTaskName() + " "));
+        return page(TaskPage.class);
+    }
+
+    /**
+     * Проверяем сохраненные изменения в ленте действий задачи
+     *
+     * @param employee
+     * @return
+     */
+    public TaskPage checkWorkingGroupInTaskAreSaved(Employee employee) {
+        linkTaskReturnMainForm.click();
+        $$(By.xpath("//span[contains(text(),'Из задачи удален') and contains(text(),'" + employee.getLastName() + "')]"))
+                .shouldHave(CollectionCondition.size(3));
         return page(TaskPage.class);
     }
 

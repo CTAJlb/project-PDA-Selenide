@@ -138,7 +138,7 @@ public class CreateTasks extends TestBase {
         taskForm.openShapeCreatedTask(task1); // Открываем созданную задачу
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
-        internalPage.goToHome();
+        internalPage.goToHome(); // Домашняя стр-ца
 
         TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
 
@@ -149,9 +149,12 @@ public class CreateTasks extends TestBase {
 
         taskForm.openFormEditTask(task1, EMPLOYEE_ADMIN); // открываем форму редактирования атрибутов задачи
 
-        editTaskPage.editAttributesOfTasks(editTask); // редактируем задачу
+        editTaskPage.editAttributesOfTasks(editTask); // редактируем атрибуты задачи
 
         taskForm.saveActionsInTheTape(randomString(15)); // добавляем пользовательский текст в задачу и проверяем его сохранение
+
+        editTaskPage.editWorkingGroupInTask(EMPLOYEE_ADMIN); // редактируем РГ задачи (удаляем пользователей)
+
 
         internalPage.homeAndSignOut(); // Выход из системы
 
