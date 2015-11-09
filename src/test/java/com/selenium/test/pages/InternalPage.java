@@ -1,12 +1,15 @@
 package com.selenium.test.pages;
 
 
+
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
+import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Condition.visible;
@@ -65,7 +68,11 @@ public class InternalPage extends Page {
     @FindBy(xpath = "//a[contains(@href, '/today/')]")
     private SelenideElement today;
 
-
+    /*
+     * Документы
+     */
+    @FindBy(xpath = "//a[contains(@href, '/documents/')]")
+    private SelenideElement documents;
 
     /*
      * Домой
@@ -146,6 +153,17 @@ public class InternalPage extends Page {
         today.click();
         $(By.xpath("//div[@id='headertop']//ul/a[2]/li")).shouldBe(present);
         return page(TodayPage.class);
+    }
+
+    /**
+     * Переходим в грид Документы
+     *
+     * @return
+     */
+    public DocumentsPage goToDocuments() {
+        documents.click();
+        $$(By.xpath("//div[@class='ui-navbar ui-navbar-noicons']//li")).shouldBe(size(3));
+        return page(DocumentsPage.class);
     }
 
     /**
