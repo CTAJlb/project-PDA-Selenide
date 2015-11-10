@@ -12,11 +12,11 @@ import static com.codeborne.selenide.Selenide.page;
 /**
  * Абстрактное представление класса страницы в пользовательском интерфейсе
  */
-public class Page {
+public abstract class Page {
 
     private static WebDriver driver;
 
-    public static final String PAGE_URL = "http://pda.motiw/";
+    public static final String PAGE_URL = "http://pda.johnii/";
 
 
     /**
@@ -31,7 +31,6 @@ public class Page {
      * (false - не дождались загрузки стр.; true - дождались) ждет загрузки
      * страницы
      *
-     * @return
      */
     public boolean isPageLoaded() {
         try {
@@ -46,7 +45,6 @@ public class Page {
      * Метод - проверяет, где мы находимся здесь и сейчас, возвращает данную
      * страницу И ждет загрузки страницы
      *
-     * @return
      */
     public Page ensurePageLoaded() {
         return this;
@@ -71,7 +69,6 @@ public class Page {
      * Метод появление новго окна
      *
      * @param locator
-     * @return
      */
     public ExpectedCondition<String> newWindowForm(final By locator) {
         return new ExpectedCondition<String>() {
@@ -124,7 +121,6 @@ public class Page {
      *
      * @param locator
      * @param maxSeconds
-     * @return
      */
     public WebElement waitForPageUntilElementIsVisible(By locator,
                                                        int maxSeconds) {

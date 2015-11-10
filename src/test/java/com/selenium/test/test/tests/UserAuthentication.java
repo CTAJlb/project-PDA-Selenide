@@ -35,15 +35,15 @@ public class UserAuthentication extends TestBase {
                 {"fail", "admin"},
                 {"admin", "fail"},
                 {"fail", "fail"},
-                {"admin", null},
+                {"admin", ""},
         };
     }
 
     @DataProvider(name = "secondFailAuthorization")
     public Object[][] secondNotSuccessfulAuthorizationDataProvider() {
         return new Object[][]{
-                {null, "admin"},
-                {null, null}
+                {"", "admin"},
+                {"", ""}
         };
     }
 

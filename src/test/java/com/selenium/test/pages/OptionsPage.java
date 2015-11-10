@@ -13,7 +13,6 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
  */
 public class OptionsPage extends Page {
 
-
     /*
      * Удалить
      */
@@ -42,7 +41,6 @@ public class OptionsPage extends Page {
     /**
      * Устанавливаем значение - Возможность присоединения файлов
      *
-     * @return
      */
     public OptionsPage selAttachFiles(boolean attach) {
         if (attach) {

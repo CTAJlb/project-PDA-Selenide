@@ -67,7 +67,7 @@ public class CreateTasks extends TestBase {
      * проверка - Создание задачи
      */
     @Test(priority = 1)
-    public void verifyCreateTask() throws Exception {
+    public void checkTaskCreation() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
 
         // Авторизация
@@ -109,7 +109,7 @@ public class CreateTasks extends TestBase {
      * проверка - Редактирование задачи
      */
     @Test(priority = 2)
-    public void verifyEditTask() throws Exception {
+    public void checkEditingTasks() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
 
         // Авторизация
@@ -165,7 +165,7 @@ public class CreateTasks extends TestBase {
      * проверка - Закрытие задачи (Отправка в архив)
      */
     @Test(priority = 3)
-    public void verifyCompleteTask() throws Exception {
+    public void checkTheCompletionOfTheTask() throws Exception {
         LoginPage loginPage = open(PAGE_URL, LoginPage.class);
 
         // Авторизация
