@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.selenium.test.pages.Page.PDA_PAGE_URL;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -38,6 +39,8 @@ public class Help extends TestBase {
         helpPage.checkPresenceElementsOfAid(); // Проверяем общее количество элементов помощи
 
         helpPage.visibleElementsTextHelp(); // Проверяем отображение текста в элементах помощи
+
+        assertEquals(19, helpPage.results().size()); // проверяем кол-во элементов на стр-це ппомочи
 
         internalPage.signOut(); // Выход из системы
 

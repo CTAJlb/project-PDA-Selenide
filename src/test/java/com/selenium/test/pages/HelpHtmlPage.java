@@ -2,9 +2,14 @@ package com.selenium.test.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Collection;
+
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 /**
  * Страница - Помощь
@@ -146,6 +151,10 @@ public class HelpHtmlPage extends Page {
     public boolean checkPresenceElementsOfAid() {
         helpElements.shouldHaveSize(19); // проверяем отображение 19 элементов помощи (Сохранить; Завершить задачу и пр.)
         return !helpElements.isEmpty();
+    }
+
+    public Collection<SelenideElement> results() {
+        return $$(By.xpath("//div[@id='mainblock' and @class='mainblock withmenu']//li//div"));
     }
 
 
