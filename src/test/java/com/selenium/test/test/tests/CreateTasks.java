@@ -68,7 +68,7 @@ public class CreateTasks extends TestBase {
      */
     @Test(priority = 1)
     public void checkTaskCreation() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
@@ -101,7 +101,7 @@ public class CreateTasks extends TestBase {
         TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
         tasksReportsPage.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
 
-        internalPage.homeAndSignOut(); // Выход из системы
+        internalPage.signOut(); // Выход из системы
 
     }
 
@@ -110,7 +110,7 @@ public class CreateTasks extends TestBase {
      */
     @Test(priority = 2)
     public void checkEditingTasks() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
@@ -148,16 +148,11 @@ public class CreateTasks extends TestBase {
         //----------------------------------------------------------------ФОРМА - Задачи - Атрибуты
 
         taskForm.openFormEditTask(task1, EMPLOYEE_ADMIN); // открываем форму редактирования атрибутов задачи
-
         editTaskPage.editAttributesOfTasks(editTask); // редактируем атрибуты задачи
-
         taskForm.saveActionsInTheTape(randomString(15)); // добавляем пользовательский текст в задачу и проверяем его сохранение
-
         editTaskPage.editWorkingGroupInTask(EMPLOYEE_ADMIN); // редактируем РГ задачи (удаляем пользователей)
 
-
-        internalPage.homeAndSignOut(); // Выход из системы
-
+        internalPage.signOut(); // Выход из системы
 
     }
 
@@ -166,7 +161,7 @@ public class CreateTasks extends TestBase {
      */
     @Test(priority = 3)
     public void checkTheCompletionOfTheTask() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
@@ -198,17 +193,14 @@ public class CreateTasks extends TestBase {
 
         TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
 
-        tasksReportsPage.checkDisplayTaskGrid(task2); // Проверяем отображение созданной задачи в гриде Задач
-        tasksReportsPage.openTaskInGrid(task2); // открываем форму в гриде задач
-        taskForm.closeTask(randomString(20)); // Закрываем задачу (отправляем в архив)
+        taskForm.closeTask(task2, randomString(20)); // Закрываем задачу (отправляем в архив)
 
-
-        internalPage.goToHome();
-        internalPage.goToTaskReports();
+        internalPage.goToHome(); // Возвращаемся домой (внутренняя страница)
+        internalPage.goToTaskReports(); // переходим в грид задач
 
         tasksReportsPage.checkDisappearTaskInGrid(task2);
 
-        internalPage.homeAndSignOut(); // Выход из системы
+        internalPage.signOut(); // Выход из системы
 
 
     }

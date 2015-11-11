@@ -17,9 +17,10 @@ import static org.testng.AssertJUnit.assertTrue;
 /**
  * Форма задачи (Лента действий)
  */
-public class TaskPage extends Page {
+public class TaskPage extends TasksReportsPage {
 
     public static final String FILE = "src/test/java/../resources/hello_world.txt";
+    public static final String FILE1 = "src/test/java/../resources/Договор аренды.doc";
     public static final String SUBMIT_BUTTON_ADD_FILE = "input[name='myfile1']";
 
     /*
@@ -62,7 +63,7 @@ public class TaskPage extends Page {
     /**
      * Проверяем отображение формы созданной задачи
      *
-     * @param task
+     * @param task return values of attributes of the task
      * @return
      */
     public TaskPage openShapeCreatedTask(Task task) {
@@ -84,7 +85,7 @@ public class TaskPage extends Page {
     /**
      * Открываем форму редактирования задачи (Атрибуты задачи)
      *
-     * @param task
+     * @param task return values of attributes of the task
      * @return
      */
     public EditTaskPage openFormEditTask(Task task, Employee user) {
@@ -98,11 +99,11 @@ public class TaskPage extends Page {
     /**
      * Добавляем текст в ленту действий
      *
-     * @param textAction
-     * @return
+     * @param textAction input text for feed action tasks
+     * @return TaskPage
      */
     public TaskPage saveActionsInTheTape(String textAction) {
-       $(By.xpath("(//div[@class='menu-line']//a/li)[2]")).click();
+        $(By.xpath("(//div[@class='menu-line']//a/li)[2]")).click();
         int n = 5;
         while (n > 0) {
             action.setValue(textAction);
@@ -116,25 +117,27 @@ public class TaskPage extends Page {
     /**
      * Закрываем задачу
      *
-     * @param textAction
-     * @return
+     * @param textAction input text for feed action tasks
+     * @param task return values of attributes of the task
+     * @return TaskPage
      */
-    public TaskPage closeTask(String textAction) {
-        action.setValue(textAction);
-        completeTask.click();
+    public TaskPage closeTask(Task task, String textAction) {
+        checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
+        openTaskInGrid(task); // открываем форму задачи в гриде Задач
+        action.setValue(textAction); // пишем действие
+        completeTask.click(); // Завершить выполнение
         $(By.xpath("//ul[@class='ui-listview']//div/span[text()='" + textAction + "']")).shouldBe(Condition.visible);
         return this;
     }
 
     /**
-     * Проверяем аттачминг файлов в задаче
+     * Аттачминг файлов в форме задачи
      *
-     * @param textAction
-     * @return
+     * @param textAction input text for feed action tasks
+     * @return TaskPage
      */
     public TaskPage addAttachFiles(String textAction) {
-        int i = 2;
-        while (i > 0) {
+        for (int i = 0; i < 2; i++) {
             addFile.click();
             File file = $(By.cssSelector(SUBMIT_BUTTON_ADD_FILE))
                     .uploadFile(new File(FILE));
@@ -144,7 +147,17 @@ public class TaskPage extends Page {
             $(By.xpath("//ul[@class='ui-listview']//div/span[text()='" + textAction + "']")).shouldBe(Condition.visible);
             assertTrue(file.exists());
             assertTrue(file.getPath().replace(File.separatorChar, '/').endsWith("src/test/resources/hello_world.txt"));
-            i--;
+        }
+        for (int a = 0; a < 2; a++) {
+            addFile.click();
+            File file1 = $(By.cssSelector(SUBMIT_BUTTON_ADD_FILE))
+                    .uploadFile(new File(FILE1));
+            action.setValue(textAction);
+            save.click();
+            $(By.xpath("//div[@class='message-file-container'][text()='Файлы:']")).shouldHave(Condition.visible);
+            $(By.xpath("//ul[@class='ui-listview']//div/span[text()='" + textAction + "']")).shouldBe(Condition.visible);
+            assertTrue(file1.exists());
+            assertTrue(file1.getPath().replace(File.separatorChar, '/').endsWith("src/test/resources/Договор аренды.doc"));
         }
         return this;
     }

@@ -16,7 +16,7 @@ public abstract class Page {
 
     private static WebDriver driver;
 
-    public static final String PAGE_URL = "http://pda.johnii/";
+    public static final String PDA_PAGE_URL = "http://pda.johni/";
 
 
     /**
@@ -68,7 +68,7 @@ public abstract class Page {
     /**
      * Метод появление новго окна
      *
-     * @param locator
+     * @param locator element that should contain the new page
      */
     public ExpectedCondition<String> newWindowForm(final By locator) {
         return new ExpectedCondition<String>() {
@@ -103,7 +103,7 @@ public abstract class Page {
     /**
      * Подождать в течение определенного количества времени
      *
-     * @param seconds
+     * @param seconds timeout in seconds for wait
      */
     public void waitMillisecond(double seconds) {
         try {
@@ -119,8 +119,8 @@ public abstract class Page {
     /**
      * Подождать пока отобразится элемент на странице
      *
-     * @param locator
-     * @param maxSeconds
+     * @param locator element on the page to wait
+     * @param maxSeconds timeout in seconds for wait
      */
     public WebElement waitForPageUntilElementIsVisible(By locator,
                                                        int maxSeconds) {

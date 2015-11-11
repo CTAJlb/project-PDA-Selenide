@@ -35,16 +35,16 @@ public class DocumentsPage extends Page {
 
     /**
      * Проверяем отображение гридов документа
-     * @return
-     * TODO - расширить проверку
+     *
+     * @return results instance page grid documents
+     * TODO - расширить проверку, после инициализации документа в Мотив
      */
-    public DocumentsPage checkMapGridsDocuments(){
+    public DocumentsPage checkMapGridsDocuments() {
         onReview.click();
         toExecution.click();
         controlled.click();
         return this;
     }
-
 
 
 }

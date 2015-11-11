@@ -9,7 +9,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.selenium.test.pages.Page.PAGE_URL;
+import static com.selenium.test.pages.Page.PDA_PAGE_URL;
 import static org.testng.Assert.assertTrue;
 
 @Listeners({ScreenShotOnFailListener.class})
@@ -20,7 +20,7 @@ public class Documents extends TestBase {
      */
     @Test(priority = 1)
     public void checkMapGridOfDocuments() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
@@ -30,11 +30,9 @@ public class Documents extends TestBase {
 
         DocumentsPage documentsPage = internalPage.goToDocuments();
 
-
         documentsPage.checkMapGridsDocuments();
 
-
-        internalPage.homeAndSignOut(); // Выход из системы
+        internalPage.signOut(); // Выход из системы
 
     }
 

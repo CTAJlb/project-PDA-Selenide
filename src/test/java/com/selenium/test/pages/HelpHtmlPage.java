@@ -141,7 +141,7 @@ public class HelpHtmlPage extends Page {
     /**
      * Проверяем общее количество элементов помощи
      *
-     * @return
+     * @return true or false display items per page
      */
     public boolean checkPresenceElementsOfAid() {
         helpElements.shouldHaveSize(19); // проверяем отображение 19 элементов помощи (Сохранить; Завершить задачу и пр.)
@@ -153,7 +153,7 @@ public class HelpHtmlPage extends Page {
      * Проверяем отображение текста в элементах помощи
      * exactTexts - проверяет - кол-во, порядок и отображение текста
      *
-     * @return
+     * @return page HelpHtml
      */
     public HelpHtmlPage visibleElementsTextHelp() {
         elementsTextHelp.shouldHave(exactTexts("- Сохранить", "- Завершить задачу", "- Вернуть задачу на доработку", "- Ознакомиться",

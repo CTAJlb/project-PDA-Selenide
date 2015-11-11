@@ -46,21 +46,21 @@ public class LoginPage extends Page {
 
     /**
      * Вводим Login пользователя
-     * @param text
+     * @param login input text login
      * @return
      */
-    public LoginPage setLoginField(String text) {
-        inputLogin.sendKeys(text);
+    public LoginPage setLoginField(String login) {
+        inputLogin.sendKeys(login);
         return this;
     }
 
     /**
      * Вводим пароль пользователя
-     * @param text
+     * @param password input text password
      * @return
      */
-    public LoginPage setPasswordField(String text) {
-        inputPassword.sendKeys(text);
+    public LoginPage setPasswordField(String password) {
+        inputPassword.sendKeys(password);
         return this;
     }
 
@@ -85,7 +85,7 @@ public class LoginPage extends Page {
     /**
      * Проверяем отображение меню на внутренней странице
      *
-     * @return results page instance
+     * @return results Internal page instance
      */
     public InternalPage goToInternalMenu() {
         loginButton.click();

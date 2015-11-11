@@ -9,7 +9,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.selenium.test.pages.Page.PAGE_URL;
+import static com.selenium.test.pages.Page.PDA_PAGE_URL;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -24,7 +24,7 @@ public class Help extends TestBase {
      */
     @Test(priority = 1)
     public void verifyElementsHelp() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
@@ -39,7 +39,7 @@ public class Help extends TestBase {
 
         helpPage.visibleElementsTextHelp(); // Проверяем отображение текста в элементах помощи
 
-        internalPage.homeAndSignOut(); // Выход из системы
+        internalPage.signOut(); // Выход из системы
 
     }
 

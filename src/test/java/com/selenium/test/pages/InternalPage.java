@@ -1,11 +1,13 @@
 package com.selenium.test.pages;
 
 
-
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -83,7 +85,7 @@ public class InternalPage extends Page {
     /**
      * Домой (возврат на основную стр-цу)
      *
-     * @return
+     * @return Page
      */
     public Page goToHome() {
         home.click();
@@ -93,7 +95,7 @@ public class InternalPage extends Page {
     /**
      * Проверяем отображение меню на внутренней странице
      *
-     * @return
+     * @return information about the number of the menu on the main page
      */
     public boolean hasMenu() {
         menuElements.shouldHaveSize(4); // проверяем, что отображается 4 пункта меню (Задачи; Создать задачу; Сегодня; Документы)
@@ -103,7 +105,7 @@ public class InternalPage extends Page {
     /**
      * Переходим в форму - Создать задачу
      *
-     * @return
+     * @return NewTaskPage results page instance
      */
     public NewTaskPage goToCreateTask() {
         createTask.click();
@@ -114,7 +116,7 @@ public class InternalPage extends Page {
     /**
      * Переходим в форму - Помощь
      *
-     * @return
+     * @return HelpHtmlPage results page instance
      */
     public HelpHtmlPage goToHelpHtml() {
         helpHtml.click();
@@ -125,7 +127,7 @@ public class InternalPage extends Page {
     /**
      * Переходим в грид Задачи/Задачи
      *
-     * @return
+     * @return TasksReportsPage results page instance
      */
     public TasksReportsPage goToTaskReports() {
         menuTaskReports.click();
@@ -136,7 +138,7 @@ public class InternalPage extends Page {
     /**
      * Переходим в грид Настройки
      *
-     * @return
+     * @return OptionsPage results page instance
      */
     public OptionsPage goToOptions() {
         options.click();
@@ -147,7 +149,7 @@ public class InternalPage extends Page {
     /**
      * Переходим в грид Сегодня
      *
-     * @return
+     * @return Today Page results page instance
      */
     public TodayPage goToToday() {
         today.click();
@@ -158,7 +160,7 @@ public class InternalPage extends Page {
     /**
      * Переходим в грид Документы
      *
-     * @return
+     * @return DocumentsPage
      */
     public DocumentsPage goToDocuments() {
         documents.click();
@@ -167,35 +169,20 @@ public class InternalPage extends Page {
     }
 
     /**
-     * Переходим в грид Задачи/Задачи
+     * Универсальный выход из системы (где бы ненаходился пользователь)
      *
-     * @return
-     */
-    public TasksReportsPage goToTaskOptions() {
-        menuTaskReports.click();
-        $(By.xpath("//div[@id='mainblock']/table[3]//tr")).shouldBe(present);
-        return page(TasksReportsPage.class);
-    }
-
-    /**
-     * Вернуться домой и выйти из системы
-     */
-    public LoginPage homeAndSignOut() {
-        goToHome();
-        logout.waitUntil(appears, 4);
-        logout.click();
-        $("#center>form>div>img").shouldBe(visible);
-        $(By.cssSelector("#login")).shouldHave(appears);
-        $(By.cssSelector("#pass")).shouldHave(appears);
-        $(By.cssSelector("input[name='logon']")).getCssValue("Вход");
-        return page(LoginPage.class);
-    }
-
-    /**
-     * Выход из Системы
+     * @return LoginPage
      */
     public LoginPage signOut() {
-        logout.click();
+        try {
+            (new WebDriverWait(getWebDriver(), 0, 50))
+                    .until(ExpectedConditions.presenceOfElementLocated(By
+                            .xpath("//a[contains(@href, '/logout/')]"))).click();
+        } catch (WebDriverException e) {
+            goToHome();
+            logout.waitUntil(appears, 4);
+            logout.click();
+        }
         $("#center>form>div>img").shouldBe(visible);
         $(By.cssSelector("#login")).shouldHave(appears);
         $(By.cssSelector("#pass")).shouldHave(appears);

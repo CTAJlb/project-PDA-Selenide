@@ -46,15 +46,15 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Проверка введенных данный в предпросмотре формы создания задачи
      *
-     * @param task
-     * @return
+     * @param task return values of attributes of the task
+     * @return EditTaskPage page
      */
     public EditTaskPage inputValidationFormTask(Task task) {
         $(By.xpath("//form[@id='data_value']//li[2]//span[@style][text()='" + task.getTaskName() + "']"))
                 .shouldBe(visible); // Название задачи
         $(By.xpath("//form[@id='data_value']//li[3]//span[@style][text()='" + task.getDescription() + "']"))
                 .shouldBe(visible); // Описание задачи
-        $(By.xpath("//form[@id='data_value']//li[9]//span[@style][contains(text(),'" + task.getEnd() + "')]"))
+        $(By.xpath("//form[@id='data_value']//li[9]//span[@style][contains(text(),'" + task.getDateEnd() + "')]"))
                 .shouldBe(visible); // Окончание задачи
         saveNewTask();
         return this;
@@ -63,7 +63,7 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Создать (нажатие кнопки - Создать)
      *
-     * @return
+     * @return EditTaskPage
      */
     public EditTaskPage saveNewTask() {
         createTask.click();
@@ -74,7 +74,7 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Перейти к форме задачи (Лента действий)
      *
-     * @return
+     * @return TaskPage
      */
     public TaskPage goToTask() {
         goToTask.click();
@@ -84,7 +84,7 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Сохранить изменения по задаче
      *
-     * @return
+     * @return EditTaskPage
      */
     public EditTaskPage saveChangesToTask() {
         save.click();
@@ -93,11 +93,13 @@ public class EditTaskPage extends NewTaskPage {
 
     /**
      * Редактирование атрибутов задачи
+     *
+     * @return EditTaskPage
      */
     public EditTaskPage editAttributesOfTasks(Task editTask) {
         setTaskName(editTask.getTaskName()) // Название задачи
                 .setTasksDescription(editTask.getDescription()) // Описание задачи
-                .setDateEnd(editTask.getEnd()) // Дата окончания задачи
+                .setDateEnd(editTask.getDateEnd()) // Дата окончания задачи
                 .setImportantTask(editTask.getIsImportant()) // признак - Важная задача
                 .setPrivateTask(editTask.getIsSecret()); // признак - Секретная задача
         saveChangesToTask();
@@ -111,6 +113,7 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Проверяем отображение новых значений в полях задачи
      *
+     * @return EditTaskPage
      */
     public EditTaskPage verifyAttributesOfTask(Task editTask) {
         goToTask.click();
@@ -124,8 +127,8 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Редактирование РГ (рабочая группа) задачи
      *
-     * @param employee
-     * @return
+     * @param employee return values user details
+     * @return EditTaskPage
      */
     public EditTaskPage editWorkingGroupInTask(Employee employee) {
         goToTask.click();
@@ -149,7 +152,7 @@ public class EditTaskPage extends NewTaskPage {
      * Проверяем сохраненные изменения в ленте действий задачи
      *
      * @param editTask
-     * @return
+     * @return TaskPage
      */
     public TaskPage checkTheAttributesAreSaved(Task editTask) {
         linkTaskReturnMainForm.click();
@@ -162,7 +165,7 @@ public class EditTaskPage extends NewTaskPage {
      * Проверяем сохраненные изменения в ленте действий задачи
      *
      * @param employee
-     * @return
+     * @return TaskPage
      */
     public TaskPage checkWorkingGroupInTaskAreSaved(Employee employee) {
         linkTaskReturnMainForm.click();

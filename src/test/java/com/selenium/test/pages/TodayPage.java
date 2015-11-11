@@ -14,7 +14,8 @@ public class TodayPage {
 
     /**
      * Проверяем отображения изменений в разделе Сегодня
-     * @param textAction
+     *
+     * @param textAction input text for feed action tasks
      * @return
      */
     public TodayPage verifyInformationDisplaySectionToday(String textAction) {

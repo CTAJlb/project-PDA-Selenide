@@ -9,14 +9,14 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.selenium.test.pages.Page.PAGE_URL;
+import static com.selenium.test.pages.Page.PDA_PAGE_URL;
 import static org.testng.Assert.assertTrue;
 
 /**
  * Раздел - Сегодня
  */
 @Listeners({ScreenShotOnFailListener.class})
-public class Today extends TestBase  {
+public class Today extends TestBase {
 
     /*
     Инициализируем модель - Задача #1
@@ -42,13 +42,12 @@ public class Today extends TestBase  {
     String textActions = randomString(15);
 
 
-
     /**
      * проверка - Отображение информации в разедел - Сегодня
      */
     @Test(priority = 1)
     public void verifyInfoToday() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
@@ -99,15 +98,9 @@ public class Today extends TestBase  {
         todayPage.verifyInformationDisplaySectionToday(textActions);
 
 
-
-        internalPage.homeAndSignOut(); // Выход из системы
+        internalPage.signOut(); // Выход из системы
 
     }
-
-
-
-
-
 
 
 }

@@ -11,9 +11,8 @@ public class Task {
     private boolean important;
     private boolean withReport;
     private boolean secret;
-    private boolean forReview;
     private String begin;
-    private String end;
+    private String dateEnd;
     private Employee[] authors;
     private Employee[] controllers;
     private Employee[] executiveManagers;
@@ -22,8 +21,6 @@ public class Task {
 
     /**
      * Название задачи
-     *
-     * @return
      */
     public String getTaskName() {
         return taskName;
@@ -36,8 +33,6 @@ public class Task {
 
     /**
      * Описание задачи
-     *
-     * @return
      */
     public String getDescription() {
         return description;
@@ -50,8 +45,6 @@ public class Task {
 
     /**
      * Важная задача
-     *
-     * @return
      */
     public boolean getIsImportant() {
         return important;
@@ -64,8 +57,6 @@ public class Task {
 
     /**
      * C докладом
-     *
-     * @return
      */
     public boolean getIsWithReport() {
         return withReport;
@@ -78,8 +69,6 @@ public class Task {
 
     /**
      * Секретная задача
-     *
-     * @return
      */
     public boolean getIsSecret() {
         return secret;
@@ -92,8 +81,6 @@ public class Task {
 
     /**
      * Начало
-     *
-     * @return
      */
     public String getBegin() {
         return begin;
@@ -106,22 +93,18 @@ public class Task {
 
     /**
      * Окончание
-     *
-     * @return
      */
-    public String getEnd() {
-        return end;
+    public String getDateEnd() {
+        return dateEnd;
     }
 
-    public Task setEnd(String end) {
-        this.end = end;
+    public Task setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
         return this;
     }
 
     /**
      * Авторы - массив объектов - типа сотрудник
-     *
-     * @return
      */
     public Employee[] getAuthors() {
         return authors;
@@ -134,8 +117,6 @@ public class Task {
 
     /**
      * Контролеры - массив объектов - типа сотрудник
-     *
-     * @return
      */
     public Employee[] getTaskSupervisors() {
         return controllers;
@@ -148,8 +129,6 @@ public class Task {
 
     /**
      * Ответственные руководители - массив объектов - типа сотрудник
-     *
-     * @return
      */
     public Employee[] getExecutiveManagers() {
         return executiveManagers;
@@ -162,8 +141,6 @@ public class Task {
 
     /**
      * Исполнители - массив объектов - типа сотрудник
-     *
-     * @return
      */
     public Employee[] getPerformers() {
         return performers;

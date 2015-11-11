@@ -9,7 +9,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.selenium.test.pages.Page.PAGE_URL;
+import static com.selenium.test.pages.Page.PDA_PAGE_URL;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -33,13 +33,12 @@ public class Options extends TestBase {
             .setIsImportant(true); // Важная задача
 
 
-
     /**
      * проверка - Аттачминг файлов в форме задачи
      */
     @Test(priority = 1)
-    public void verifyAttachFiles() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+    public void verifyAttachmentFileInTheTask() throws Exception {
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
@@ -74,9 +73,9 @@ public class Options extends TestBase {
         taskForm.openShapeCreatedTask(newTask); // Открываем форму созданной задачи
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
-        taskForm.addAttachFiles(randomString(15));
+        taskForm.addAttachFiles(randomString(15)); // Аттачим файлы
 
-        internalPage.homeAndSignOut(); // Выход из системы
+        internalPage.signOut(); // Выход из системы
 
     }
 

@@ -13,8 +13,7 @@ public class Employee {
 
 
     /**
-     *  Фамилия
-     * @return
+     * Фамилия
      */
     public String getLastName() {
         return lastname;
@@ -26,8 +25,7 @@ public class Employee {
     }
 
     /**
-     *  Имя
-     * @return
+     * Имя
      */
     public String getName() {
         return name;
@@ -39,8 +37,7 @@ public class Employee {
     }
 
     /**
-     *  Отчество
-     * @return
+     * Отчество
      */
     public String getPatronymic() {
         return patronymic;
@@ -52,8 +49,7 @@ public class Employee {
     }
 
     /**
-     *  Имя пользователя (login)
-     * @return
+     * Имя пользователя (login)
      */
     public String getLoginName() {
         return loginName;
@@ -65,8 +61,7 @@ public class Employee {
     }
 
     /**
-     *  Пароль
-     * @return
+     * Пароль
      */
     public String getPassword() {
         return password;

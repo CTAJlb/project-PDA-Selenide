@@ -82,8 +82,8 @@ public class NewTaskPage extends Page {
     /**
      * Название задачи
      *
-     * @param nameTasks
-     * @return
+     * @param nameTasks name task for input
+     * @return page NewTaskPag
      */
     public NewTaskPage setTaskName(String nameTasks) {
         tasksName.clear();
@@ -94,16 +94,19 @@ public class NewTaskPage extends Page {
     /**
      * Описание задачи
      *
-     * @return
+     * @param descriptionTasks description task for input
+     * @return page NewTaskPag
      */
-    public NewTaskPage setTasksDescription(String discriptionTasks) {
+    public NewTaskPage setTasksDescription(String descriptionTasks) {
         tasksDescription.clear();
-        tasksDescription.setValue(discriptionTasks);
+        tasksDescription.setValue(descriptionTasks);
         return this;
     }
 
     /**
      * Окончание задачи
+     *
+     *  @param end date end for task
      *
      * @return
      */
@@ -251,7 +254,7 @@ public class NewTaskPage extends Page {
                 .setTaskSupervisors(task.getTaskSupervisors()) // вводим - Контролеры задачи
                 .setExecutiveManagers(task.getExecutiveManagers()) // вводим - Ответственные руковдители
                 .setPerformers(task.getPerformers()) // вводим - Исполнители
-                .setDateEnd(task.getEnd()) // Дата окончания задачи
+                .setDateEnd(task.getDateEnd()) // Дата окончания задачи
                 .setImportantTask(task.getIsImportant()) // признак - Важная задача
                 .setReportRequired(task.getIsWithReport()) // признак - С доклаом
                 .setPrivateTask(task.getIsSecret()); // признак - Секретная задача

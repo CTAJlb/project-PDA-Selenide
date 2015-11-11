@@ -3,7 +3,11 @@ package com.selenium.test.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -40,16 +44,23 @@ public class OptionsPage extends Page {
 
     /**
      * Устанавливаем значение - Возможность присоединения файлов
+     * если true - идет проверка установлен ли признак, если нет - устанавливаем значение; Если признак стоит оставляем все без изменения
      *
      */
     public OptionsPage selAttachFiles(boolean attach) {
         if (attach) {
-            attachFiles.click();
+            try {
+                (new WebDriverWait(getWebDriver(), 0, 50))
+                        .until(ExpectedConditions.presenceOfElementLocated(By
+                                .xpath("//input[@id='secret2']/..//span[contains(@class,'ui-icon-checkbox-on')]")));
+            } catch (WebDriverException e) {
+                attachFiles.click();
+                save.click();
+                waitMillisecond(0.8);
+                getWebDriver().navigate().refresh();
+                $(By.xpath("//input[@id='secret2']/..//span[contains(@class,'ui-icon-checkbox-on')]")).shouldBe(Condition.visible);
+            }
         }
-        save.click();
-        waitMillisecond(0.8);
-        getWebDriver().navigate().refresh();
-        $(By.xpath("//input[@id='secret2']/..//span[contains(@class,'ui-icon-checkbox-on')]")).shouldBe(Condition.visible);
         return this;
     }
 

@@ -19,7 +19,7 @@ public class TasksReportsPage extends Page {
     /**
      * Проверяем отображение созданной задачи в гриде раздела - Задачи
      *
-     * @param task
+     * @param task return values of attributes of the task
      * @return
      */
     public TasksReportsPage checkDisplayTaskGrid(Task task) {
@@ -31,7 +31,7 @@ public class TasksReportsPage extends Page {
     /**
      * Открываем задачу в гриде задач
      *
-     * @param task
+     * @param task return values of attributes of the task
      * @return
      */
     public EditTaskPage openTaskInGrid(Task task) {
@@ -44,7 +44,7 @@ public class TasksReportsPage extends Page {
     /**
      * Проверяем исчезновение задачи в гриде раздела - Задачи
      *
-     * @param task
+     * @param task return values of attributes of the task
      * @return
      */
     public TasksReportsPage checkDisappearTaskInGrid(Task task) {

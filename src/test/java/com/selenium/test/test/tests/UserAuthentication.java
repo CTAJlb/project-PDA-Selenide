@@ -20,14 +20,12 @@ import static com.selenium.test.pages.Page.*;
  * Чтобы делать скриншоты после зелёных тестов, нужно вызвать такую команду перед запуском тестов: java ScreenShooter.captureSuccessfulTests = true;
  * Вы также можете сделать скриншот в любом месте теста одной строчкой - screenshot("my_file_name");
  * При этом Selenide создаст два файла: my_file_name.png и my_file_name.html
- *
  */
 @Listeners({ScreenShotOnFailListener.class})
 public class UserAuthentication extends TestBase {
 
     /**
      * Инициализация входных данных для Логин и Пароль
-     *
      */
     @DataProvider(name = "failAuthorization")
     public Object[][] firstNotSuccessfulAuthorizationDataProvider() {
@@ -53,7 +51,7 @@ public class UserAuthentication extends TestBase {
      */
     @Test(priority = 3)
     public void loginSuccess() throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
         loginPage.loginAsAdmin(ADMIN);
         InternalPage internalPage = loginPage.goToInternalMenu(); // Проверяем отображение п.м. системы
         assertTrue(internalPage.hasMenu());
@@ -65,7 +63,7 @@ public class UserAuthentication extends TestBase {
      */
     @Test(dataProvider = "failAuthorization", priority = 1)
     public void failAuthorization(String login, String pass) throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
         loginPage.loginAs(login, pass);
         loginPage.loginInSystem();
         assertTrue(loginPage.isNotLoggedIn());
@@ -78,7 +76,7 @@ public class UserAuthentication extends TestBase {
      */
     @Test(dataProvider = "secondFailAuthorization", priority = 2)
     public void secondFailAuthorization(String login, String pass) throws Exception {
-        LoginPage loginPage = open(PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
         loginPage.loginAs(login, pass);
         loginPage.loginInSystem();
         assertTrue(loginPage.isNotLoggedIn());
