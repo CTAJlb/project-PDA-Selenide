@@ -14,8 +14,6 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public abstract class Page {
 
-    private static WebDriver driver;
-
     public static final String PDA_PAGE_URL = "http://pda.johni/";
 
 
@@ -116,21 +114,6 @@ public abstract class Page {
          */
     }
 
-    /**
-     * Подождать пока отобразится элемент на странице
-     *
-     * @param locator element on the page to wait
-     * @param maxSeconds timeout in seconds for wait
-     */
-    public WebElement waitForPageUntilElementIsVisible(By locator,
-                                                       int maxSeconds) {
-        return (new WebDriverWait(driver, maxSeconds)).until(ExpectedConditions
-                .visibilityOfElementLocated(locator));
-        /**
-         * Пример использования метода
-         * - waitForPageUntilElementIsVisible(By.xpath("//*[@id='bAddRec-btnIconEl']"), 5000);
-         */
-    }
 
 
 }

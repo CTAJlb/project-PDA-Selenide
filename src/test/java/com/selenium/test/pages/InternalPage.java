@@ -1,8 +1,10 @@
 package com.selenium.test.pages;
 
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.selenium.test.model.Task;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.FindBy;
@@ -82,6 +84,13 @@ public class InternalPage extends Page {
     @FindBy(xpath = "//a/img[contains(@src,'home')]")
     private SelenideElement home;
 
+    /*
+     * Поле - Поиск
+     */
+    @FindBy(xpath = "//input[@name='search']")
+    private SelenideElement search;
+
+
     /**
      * Домой (возврат на основную стр-цу)
      *
@@ -125,7 +134,7 @@ public class InternalPage extends Page {
     }
 
     /**
-     * Переходим в грид Задачи/Задачи
+     * Переходим в грид - Задачи
      *
      * @return TasksReportsPage results page instance
      */
@@ -136,7 +145,7 @@ public class InternalPage extends Page {
     }
 
     /**
-     * Переходим в грид Настройки
+     * Переходим в грид - Настройки
      *
      * @return OptionsPage results page instance
      */
@@ -147,7 +156,7 @@ public class InternalPage extends Page {
     }
 
     /**
-     * Переходим в грид Сегодня
+     * Переходим в грид - Сегодня
      *
      * @return Today Page results page instance
      */
@@ -158,7 +167,7 @@ public class InternalPage extends Page {
     }
 
     /**
-     * Переходим в грид Документы
+     * Переходим в грид - Документы
      *
      * @return DocumentsPage
      */
@@ -167,6 +176,19 @@ public class InternalPage extends Page {
         $$(By.xpath("//div[@class='ui-navbar ui-navbar-noicons']//li")).shouldBe(size(3));
         return page(DocumentsPage.class);
     }
+
+    /**
+     * Переходим в грид - Поиск
+     *
+     * @return results instance page Search
+     */
+    public SearchPage goToSearch() {
+        search.pressEnter();
+        $(By.xpath("//div[@id='b_filter_dialog']/img")).shouldBe(present, visible);
+        $(By.xpath("//img[@class='menu_help_image']")).shouldBe(present, visible);
+        return page(SearchPage.class);
+    }
+
 
     /**
      * Универсальный выход из системы (где бы ненаходился пользователь)

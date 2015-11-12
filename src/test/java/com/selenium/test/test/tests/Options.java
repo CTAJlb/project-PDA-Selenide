@@ -22,15 +22,7 @@ public class Options extends TestBase {
     /*
     Инициализируем модель - Задача #1
      */
-    Task newTask = getRandomTask()
-            .setAuthors(new Employee[]{EMPLOYEE_ADMIN})
-            .setTaskSupervisors(new Employee[]{EMPLOYEE_ADMIN})
-            .setExecutiveManagers(new Employee[]{EMPLOYEE_ADMIN})
-            .setPerformers(new Employee[]{EMPLOYEE_ADMIN})
-
-            .setIsSecret(true) // Секретная задача
-            .setIsWithReport(false) // C докладом
-            .setIsImportant(true); // Важная задача
+    Task newTask = getRandomTask();
 
 
     /**
