@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public abstract class Page {
 
-    public static final String PDA_PAGE_URL = "http://pda.office.motiw.ru/login/";
+    public static final String PDA_PAGE_URL = "http://motiw.ru/";
 
 
     /**
