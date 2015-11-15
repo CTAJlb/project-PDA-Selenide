@@ -1,6 +1,5 @@
 package com.selenium.test.test.tests;
 
-import com.selenium.test.model.Employee;
 import com.selenium.test.model.Task;
 import com.selenium.test.pages.*;
 import com.selenium.test.test.data.TestBase;
@@ -32,7 +31,7 @@ public class Search extends TestBase {
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
         InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenu()); // Проверяем отображение п.м. на внутренней странице
+        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
 
        /*  TODO поиск задачи через SOLR

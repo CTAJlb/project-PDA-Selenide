@@ -1,6 +1,5 @@
 package com.selenium.test.test.tests;
 
-import com.selenium.test.model.Employee;
 import com.selenium.test.model.Task;
 import com.selenium.test.pages.*;
 import com.selenium.test.test.data.TestBase;
@@ -36,7 +35,7 @@ public class Options extends TestBase {
         loginPage.loginAsAdmin(ADMIN);
 
         InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenu()); // Проверяем отображение п.м. на внутренней странице
+        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
 
         // Инициализируем стр. формы Настройки и переходим на нее

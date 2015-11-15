@@ -74,7 +74,7 @@ public class CreateTasks extends TestBase {
         loginPage.loginAsAdmin(ADMIN);
 
         InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenu()); // Проверяем отображение п.м. на внутренней странице
+        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
         // Инициализируем стр. формы создание задачи и переходим на нее
         NewTaskPage newTaskPage = internalPage.goToCreateTask();
@@ -116,7 +116,7 @@ public class CreateTasks extends TestBase {
         loginPage.loginAsAdmin(ADMIN);
 
         InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenu()); // Проверяем отображение п.м. на внутренней странице
+        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
         // Инициализируем стр. формы создание задачи и переходим на нее
         NewTaskPage newTaskPage = internalPage.goToCreateTask();
@@ -167,7 +167,7 @@ public class CreateTasks extends TestBase {
         loginPage.loginAsAdmin(ADMIN);
 
         InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenu()); // Проверяем отображение п.м. на внутренней странице
+        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
         // Инициализируем стр. формы создание задачи и переходим на нее
         NewTaskPage newTaskPage = internalPage.goToCreateTask();

@@ -54,7 +54,7 @@ public class UserAuthentication extends TestBase {
         LoginPage loginPage = open(PDA_PAGE_URL, LoginPage.class);
         loginPage.loginAsAdmin(ADMIN);
         InternalPage internalPage = loginPage.goToInternalMenu(); // Проверяем отображение п.м. системы
-        assertTrue(internalPage.hasMenu());
+        assertTrue(internalPage.hasMenuUserComplete());
         internalPage.signOut(); // Выход из системы
     }
 

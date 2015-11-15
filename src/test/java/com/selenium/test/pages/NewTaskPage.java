@@ -78,6 +78,12 @@ public class NewTaskPage extends Page {
     @FindBy(css = "input[name='next2']")
     private SelenideElement view;
 
+    /*
+     Постановщик задачи
+     */
+    @FindBy(xpath = "//a [ancestor::span[@name='autor']]")
+    private SelenideElement directorOfTheTask;
+
 
     /**
      * Название задачи
@@ -102,6 +108,8 @@ public class NewTaskPage extends Page {
         tasksDescription.setValue(descriptionTasks);
         return this;
     }
+
+
 
     /**
      * Окончание задачи

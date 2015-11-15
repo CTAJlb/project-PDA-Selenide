@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Set;
 
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.page;
 
 /**
@@ -14,7 +15,7 @@ import static com.codeborne.selenide.Selenide.page;
  */
 public abstract class Page {
 
-    public static final String PDA_PAGE_URL = "http://pda.johni/";
+    public static final String PDA_PAGE_URL = "http://pda.office.motiw.ru/login/";
 
 
     /**
@@ -28,7 +29,6 @@ public abstract class Page {
      * Метод обращается к ensurePageLoaded и возвращает булевское значение,
      * (false - не дождались загрузки стр.; true - дождались) ждет загрузки
      * страницы
-     *
      */
     public boolean isPageLoaded() {
         try {
@@ -42,7 +42,6 @@ public abstract class Page {
     /**
      * Метод - проверяет, где мы находимся здесь и сейчас, возвращает данную
      * страницу И ждет загрузки страницы
-     *
      */
     public Page ensurePageLoaded() {
         return this;
@@ -56,10 +55,21 @@ public abstract class Page {
     public static String NewWindowOpen = Keys.chord(Keys.SHIFT, Keys.ENTER);
 
     /**
+     * Открыть url в новом окне
+     *
+     * @param url - url страницы
+     *            Пример - WebElement link = driver.findElement(By.tagName("a"));
+     *            openInNewWindow(link.getAttribute("href"));
+     */
+    public void openInNewWindow(String url) {
+        executeJavaScript("window.open(arguments[0])", url);
+    }
+
+    /**
      * The code below will open the link in new Tab
      */
-    public static String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
-    // пример - driver.findElement(By.linkText("urlLink")).sendKeys(selectLinkOpeninNewTab);
+    public static String selectLinkOpenInNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
+    // пример - driver.findElement(By.linkText("urlLink")).sendKeys(selectLinkOpenInNewTab);
 
     //------------------------------------------------------------------------------------------------------------WINDOWS---------------------------------------------------
 
@@ -113,7 +123,6 @@ public abstract class Page {
          * Пример, использования метода - waitTime(0.5 OR 1);
          */
     }
-
 
 
 }
