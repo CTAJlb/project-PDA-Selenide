@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression Tests PDA Motiw" verbose="5" data-provider-thread-count="1">
+	<listeners>
+		<listener class-name="ru.st.selenium.test.data.RetryListener"/>
+		<listener class-name="ru.st.selenium.test.data.TestListener"/>
+	</listeners>
+
+	<test name="Test1">
+		<parameter name="path" value="/"/>
+		<classes>
+		    <class name="ru.st.selenium.test.testclass.UserAuthentication"/>
+		    <class name="ru.st.selenium.test.testclass.CreateTasks"/>
+		    <class name="ru.st.selenium.test.testclass.Documents"/>
+		    <class name="ru.st.selenium.test.testclass.Search"/>
+		    <class name="ru.st.selenium.test.testclass.Options"/>
+		    <class name="ru.st.selenium.test.testclass.Today"/>
+		    <class name="ru.st.selenium.test.testclass.Help"/>
+		</classes>
+	</test>
+</suite>
