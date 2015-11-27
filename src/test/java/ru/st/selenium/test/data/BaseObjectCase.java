@@ -5,6 +5,9 @@ import org.testng.annotations.DataProvider;
 import ru.st.selenium.model.Employee;
 import ru.st.selenium.model.Task;
 
+/**
+ * данные для работы с объектами Мотив
+ */
 public abstract class BaseObjectCase extends TestBase {
 
     //----------------------------------------------------------------Авторизация
@@ -62,7 +65,6 @@ public abstract class BaseObjectCase extends TestBase {
                         .setIsSecret(true) // Секретная задача
                         .setIsWithReport(false) // C докладом
                         .setIsImportant(true)}, // Важная задача
-                {getRandomObjectTask()},
 
         };
     }

@@ -25,7 +25,7 @@ public class Search extends BaseObjectCase {
     /**
      * проверка - Посик в системе - SOLR
      */
-    @Test(dataProvider = "objectDataTask", priority = 1, retryAnalyzer = Retry.class)
+    @Test(priority = 1, retryAnalyzer = Retry.class)
     public void verifySearch() throws Exception {
         LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
 
