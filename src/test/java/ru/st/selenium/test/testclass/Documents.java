@@ -1,11 +1,10 @@
 package ru.st.selenium.test.testclass;
 
-import com.codeborne.selenide.Selenide;
 import ru.st.selenium.pages.DocumentsPage;
 import ru.st.selenium.pages.InternalPage;
 import ru.st.selenium.pages.LoginPage;
+import ru.st.selenium.test.data.BaseObjectCase;
 import ru.st.selenium.test.data.Retry;
-import ru.st.selenium.test.data.TestBase;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -18,14 +17,14 @@ import static org.testng.Assert.assertTrue;
  * Раздел - Документы
  */
 @Listeners({ScreenShotOnFailListener.class})
-public class Documents extends TestBase {
+public class Documents extends BaseObjectCase {
 
     /**
      * проверка - Отображение грида документа
      */
     @Test(priority = 1, retryAnalyzer = Retry.class)
     public void checkMapGridOfDocuments() throws Exception {
-        LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
+        LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);

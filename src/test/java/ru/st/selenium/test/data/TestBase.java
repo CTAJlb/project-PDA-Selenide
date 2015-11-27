@@ -2,14 +2,12 @@ package ru.st.selenium.test.data;
 
 
 import ru.st.selenium.model.Employee;
-import ru.st.selenium.model.Task;
-
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
 
-public class TestBase {
+public abstract class TestBase {
 
 
     public static Employee ADMIN = new Employee().setLoginName("admin")
@@ -242,18 +240,6 @@ public class TestBase {
         return sdf.format(cal.getTime());
     }
 
-    /**
-     * ====================================================================Метод создания полностью случайного объекта - "Задача"============================================
-     */
-    public Task getRandomTask() {
-        Task task = new Task()
-                .setTaskName(randomString(15) + " " + randomString(30))
-                .setDescription(randomString(100) + "\n " + randomString(100) + "\n " + randomString(100))
-                .setDateEnd(tommorowDate())
-                .setIsImportant(randomBoolean())
-                .setIsSecret(randomBoolean())
-                .setIsWithReport(randomBoolean());
-        return task;
-    }
+
 
 }

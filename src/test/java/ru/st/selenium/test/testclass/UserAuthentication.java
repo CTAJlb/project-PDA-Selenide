@@ -4,11 +4,10 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import ru.st.selenium.pages.InternalPage;
 import ru.st.selenium.pages.LoginPage;
+import ru.st.selenium.test.data.BaseObjectCase;
 import ru.st.selenium.test.data.Retry;
-import ru.st.selenium.test.data.TestBase;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.openqa.selenium.By;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.st.selenium.pages.Page;
@@ -26,34 +25,12 @@ import static org.testng.Assert.assertTrue;
 /**
  * Раздел - Стр. авторизации
  */
-public class UserAuthentication extends TestBase {
-
-    /**
-     * Инициализация входных данных для Логин и Пароль
-     */
-    @DataProvider(name = "verifyFailAuthorization")
-    public Object[][] firstNotSuccessfulAuthorizationDataProvider() {
-        return new Object[][]{
-                {"fail", "admin"},
-                {"admin", "fail"},
-                {"fail", "fail"},
-                {"admin", ""},
-        };
-    }
-
-    @DataProvider(name = "secondVerifyFailAuthorization")
-    public Object[][] secondNotSuccessfulAuthorizationDataProvider() {
-        return new Object[][]{
-                {"", "admin"},
-                {"", ""}
-        };
-    }
-
+public class UserAuthentication extends BaseObjectCase {
 
     /**
      * проверка валидации авторизации - авторизация проходит успешно
     */
-    @Test(priority = 3)
+    @Test(priority = 3, retryAnalyzer = Retry.class)
     public void verifyLoginSuccess() throws Exception {
         LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
         loginPage.loginAsAdmin(ADMIN);
@@ -65,7 +42,7 @@ public class UserAuthentication extends TestBase {
     /**
      * проверка невалидного логина И пароля - авторизация не проходит
      */
-    @Test(dataProvider = "verifyFailAuthorization", priority = 1)
+    @Test(priority = 1, dataProvider = "verifyFailAuthorization", retryAnalyzer = Retry.class)
     public void verifyFailAuthorization(String login, String pass) throws Exception {
         LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
         loginPage.loginAs(login, pass);
@@ -78,7 +55,7 @@ public class UserAuthentication extends TestBase {
     /**
      * 2-я проверка невалидного логина И пароля - авторизация не проходит
      */
-    @Test(dataProvider = "secondVerifyFailAuthorization", priority = 2, retryAnalyzer = Retry.class)
+    @Test(priority = 2, dataProvider = "secondVerifyFailAuthorization", retryAnalyzer = Retry.class)
     public void secondVerifyFailAuthorization(String login, String pass) throws Exception {
         LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
         loginPage.loginAs(login, pass);

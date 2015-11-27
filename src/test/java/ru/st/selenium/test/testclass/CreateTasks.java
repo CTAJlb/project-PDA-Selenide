@@ -2,12 +2,11 @@ package ru.st.selenium.test.testclass;
 
 
 import com.codeborne.selenide.Selenide;
-import org.testng.annotations.Parameters;
-import ru.st.selenium.model.Employee;
+
 import ru.st.selenium.model.Task;
 import ru.st.selenium.pages.*;
+import ru.st.selenium.test.data.BaseObjectCase;
 import ru.st.selenium.test.data.Retry;
-import ru.st.selenium.test.data.TestBase;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -19,60 +18,18 @@ import static org.testng.Assert.assertTrue;
  * Раздел - Создать задачу
  */
 @Listeners({ScreenShotOnFailListener.class})
-public class CreateTasks extends TestBase {
+public class CreateTasks extends BaseObjectCase {
 
 
-    /*
-    Инициализируем модель - Задача #1
-     */
-    Task task = getRandomTask()
-            .setAuthors(new Employee[]{EMPLOYEE_ADMIN})
-            .setTaskSupervisors(new Employee[]{EMPLOYEE_ADMIN})
-            .setExecutiveManagers(new Employee[]{EMPLOYEE_ADMIN})
-            .setPerformers(new Employee[]{EMPLOYEE_ADMIN})
-
-            .setIsSecret(true) // Секретная задача
-            .setIsWithReport(false) // C докладом
-            .setIsImportant(true); // Важная задача
-
-    /*
-    Инициализируем модель - Задача #2
-     */
-    Task task1 = getRandomTask()
-            .setAuthors(new Employee[]{EMPLOYEE_ADMIN})
-            .setTaskSupervisors(new Employee[]{EMPLOYEE_ADMIN})
-            .setExecutiveManagers(new Employee[]{EMPLOYEE_ADMIN})
-            .setPerformers(new Employee[]{EMPLOYEE_ADMIN})
-
-            .setIsSecret(true) // Секретная задача
-            .setIsWithReport(false) // C докладом
-            .setIsImportant(true); // Важная задача
-
-    /*
-    Инициализируем модель - Задача #3
-     */
-    Task task2 = getRandomTask()
-            .setAuthors(new Employee[]{EMPLOYEE_ADMIN})
-            .setTaskSupervisors(new Employee[]{EMPLOYEE_ADMIN})
-            .setExecutiveManagers(new Employee[]{EMPLOYEE_ADMIN})
-            .setPerformers(new Employee[]{EMPLOYEE_ADMIN})
-
-            .setIsSecret(true) // Секретная задача
-            .setIsWithReport(false) // C докладом
-            .setIsImportant(true); // Важная задача
-
-    /*
-   Инициализируем модель - Задача #3 (атрибуты и лента для редактирования)
-    */
-    Task editTask = getRandomTask();
+    Task editTask = getRandomObjectTask();
 
 
     /**
      * проверка - Создание задачи
      */
-    @Test(priority = 1)
-    public void checkTaskCreation() throws Exception {
-        LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
+    @Test(priority = 1, dataProvider = "objectDataTask", retryAnalyzer = Retry.class)
+    public void checkTaskCreation(Task task) throws Exception {
+        LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
@@ -113,8 +70,8 @@ public class CreateTasks extends TestBase {
     /**
      * проверка - Редактирование задачи
      */
-    @Test(priority = 2, retryAnalyzer = Retry.class)
-    public void checkEditingTasks() throws Exception {
+    @Test(priority = 2, dataProvider = "objectDataTask", retryAnalyzer = Retry.class)
+    public void checkEditingTasks(Task task) throws Exception {
         LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
@@ -128,31 +85,31 @@ public class CreateTasks extends TestBase {
 
         //----------------------------------------------------------------ФОРМА - создания Задачи
 
-        newTaskPage.createTask(task1);
+        newTaskPage.createTask(task);
 
         EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
 
-        editTaskPage.inputValidationFormTask(task1); // Проверяем отображение значений в форме предпросмотра создания задачи
+        editTaskPage.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
 
         //----------------------------------------------------------------ФОРМА - Задачи
 
         TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
 
-        taskForm.openShapeCreatedTask(task1); // Открываем созданную задачу
+        taskForm.openShapeCreatedTask(task); // Открываем созданную задачу
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
         internalPage.goToHome(); // Домашняя стр-ца
 
         TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
 
-        tasksReportsPage.checkDisplayTaskGrid(task1); // Проверяем отображение созданной задачи в гриде Задач
-        tasksReportsPage.openTaskInGrid(task1); // открываем форму в гриде задач
+        tasksReportsPage.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
+        tasksReportsPage.openTaskInGrid(task); // открываем форму в гриде задач
 
         //----------------------------------------------------------------ФОРМА - Задачи - Атрибуты
 
-        taskForm.openFormEditTask(task1, EMPLOYEE_ADMIN); // открываем форму редактирования атрибутов задачи
+        taskForm.openFormEditTask(task, EMPLOYEE_ADMIN); // открываем форму редактирования атрибутов задачи
         editTaskPage.editAttributesOfTasks(editTask); // редактируем атрибуты задачи
         taskForm.saveActionsInTheTape(randomString(15)); // добавляем пользовательский текст в задачу и проверяем его сохранение
         editTaskPage.editWorkingGroupInTask(EMPLOYEE_ADMIN); // редактируем РГ задачи (удаляем пользователей)
@@ -165,51 +122,51 @@ public class CreateTasks extends TestBase {
     /**
      * проверка - Закрытие задачи (Отправка в архив)
      */
-    @Test(priority = 3)
-    public void checkTheCompletionOfTheTask() throws Exception {
-        LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
+     @Test(priority = 3, dataProvider = "objectDataTask", retryAnalyzer = Retry.class)
+     public void verifyCompletionOfTheTask(Task task) throws Exception {
+     LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
 
-        // Авторизация
-        loginPage.loginAsAdmin(ADMIN);
+     // Авторизация
+     loginPage.loginAsAdmin(ADMIN);
 
-        InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
+     InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+     assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
-        // Инициализируем стр. формы создание задачи и переходим на нее
-        NewTaskPage newTaskPage = internalPage.goToCreateTask();
+     // Инициализируем стр. формы создание задачи и переходим на нее
+     NewTaskPage newTaskPage = internalPage.goToCreateTask();
 
-        //----------------------------------------------------------------ФОРМА - создания Задачи
+     //----------------------------------------------------------------ФОРМА - создания Задачи
 
-        newTaskPage.createTask(task2);
+     newTaskPage.createTask(task);
 
-        EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
+     EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
-        //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
+     //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
 
-        editTaskPage.inputValidationFormTask(task2); // Проверяем отображение значений в форме предпросмотра создания задачи
+     editTaskPage.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
 
-        //----------------------------------------------------------------ФОРМА - Задачи
+     //----------------------------------------------------------------ФОРМА - Задачи
 
-        TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
+     TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
 
-        taskForm.openShapeCreatedTask(task2); // Открываем форму созданной задачу
-        assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
+     taskForm.openShapeCreatedTask(task); // Открываем форму созданной задачу
+     assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
-        internalPage.goToHome();
+     internalPage.goToHome();
 
-        TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
+     TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
 
-        taskForm.closeTask(task2, randomString(20)); // Закрываем задачу (отправляем в архив)
+     taskForm.closeTask(task, randomString(15)); // Закрываем задачу (отправляем в архив)
 
-        internalPage.goToHome(); // Возвращаемся домой (внутренняя страница)
-        internalPage.goToTaskReports(); // переходим в грид задач
+     internalPage.goToHome(); // Возвращаемся домой (внутренняя страница)
+     internalPage.goToTaskReports(); // переходим в грид задач
 
-        tasksReportsPage.checkDisappearTaskInGrid(task2);
+     tasksReportsPage.checkDisappearTaskInGrid(task);
 
-        internalPage.signOut(); // Выход из системы
+     internalPage.signOut(); // Выход из системы
 
 
-    }
+     }
 
 
 }

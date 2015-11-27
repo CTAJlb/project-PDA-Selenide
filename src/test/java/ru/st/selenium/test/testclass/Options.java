@@ -1,8 +1,8 @@
 package ru.st.selenium.test.testclass;
 
-import com.codeborne.selenide.Selenide;
 import ru.st.selenium.model.Task;
-import ru.st.selenium.test.data.TestBase;
+import ru.st.selenium.test.data.BaseObjectCase;
+import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -15,21 +15,16 @@ import static org.testng.Assert.assertTrue;
  * Раздел - Настройки
  */
 @Listeners({ScreenShotOnFailListener.class})
-public class Options extends TestBase {
+public class Options extends BaseObjectCase {
 
-
-    /*
-    Инициализируем модель - Задача #1
-     */
-    Task newTask = getRandomTask();
 
 
     /**
      * проверка - Аттачминг файлов в форме задачи
      */
-    @Test(priority = 1)
-    public void verifyAttachmentFileInTheTask() throws Exception {
-        LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
+    @Test(dataProvider = "objectDataTask", priority = 1, retryAnalyzer = Retry.class)
+    public void verifyAttachmentFileInTheTask(Task task) throws Exception {
+        LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
@@ -49,19 +44,19 @@ public class Options extends TestBase {
 
         //----------------------------------------------------------------ФОРМА - создания Задачи
 
-        newTaskPage.createTask(newTask);
+        newTaskPage.createTask(task);
 
         EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
 
-        editTaskPage.inputValidationFormTask(newTask); // Проверяем отображение значений в форме предпросмотра создания задачи
+        editTaskPage.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
 
         //----------------------------------------------------------------ФОРМА - Задачи
 
         TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
 
-        taskForm.openShapeCreatedTask(newTask); // Открываем форму созданной задачи
+        taskForm.openShapeCreatedTask(task); // Открываем форму созданной задачи
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
         taskForm.addAttachFiles(randomString(15)); // Аттачим файлы
@@ -69,6 +64,7 @@ public class Options extends TestBase {
         internalPage.signOut(); // Выход из системы
 
     }
+
 
 }
 
