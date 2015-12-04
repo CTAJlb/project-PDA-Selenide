@@ -2,6 +2,7 @@ package ru.st.selenium.test.testclass;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.pages.InternalPage;
 import ru.st.selenium.pages.LoginPage;
 import ru.st.selenium.test.data.BaseObjectCase;
@@ -21,7 +22,7 @@ import static org.testng.Assert.assertTrue;
  * Вы также можете сделать скриншот в любом месте теста одной строчкой - screenshot("my_file_name");
  * При этом Selenide создаст два файла: my_file_name.png и my_file_name.html
  */
-@Listeners({ScreenShotOnFailListener.class})
+@Listeners({ScreenShotOnFailListener.class, TextReport.class})
 /**
  * Раздел - Стр. авторизации
  */

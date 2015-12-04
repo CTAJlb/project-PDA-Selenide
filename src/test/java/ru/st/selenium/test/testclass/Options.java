@@ -1,5 +1,6 @@
 package ru.st.selenium.test.testclass;
 
+import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.model.Task;
 import ru.st.selenium.test.data.BaseObjectCase;
 import ru.st.selenium.test.data.Retry;
@@ -14,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Раздел - Настройки
  */
-@Listeners({ScreenShotOnFailListener.class})
+@Listeners({ScreenShotOnFailListener.class, TextReport.class})
 public class Options extends BaseObjectCase {
 
 

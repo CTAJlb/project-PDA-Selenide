@@ -3,6 +3,7 @@ package ru.st.selenium.test.testclass;
 
 import com.codeborne.selenide.Selenide;
 
+import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.model.Task;
 import ru.st.selenium.pages.*;
 import ru.st.selenium.test.data.BaseObjectCase;
@@ -17,7 +18,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Раздел - Создать задачу
  */
-@Listeners({ScreenShotOnFailListener.class})
+@Listeners({ScreenShotOnFailListener.class, TextReport.class})
 public class CreateTasks extends BaseObjectCase {
 
 
