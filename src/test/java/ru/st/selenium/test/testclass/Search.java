@@ -64,6 +64,7 @@ public class Search extends BaseObjectCase {
         searchPage.searchTask(task); // Производим поиск задачи по - Названию */
 
         SearchPage searchPage = internalPage.goToSearch(); // Переходим в раздел Поиска
+        //TODO Добавить выбор фильтрации - КОНТАКТЫ
         searchPage.searchContact(EMPLOYEE_ADMIN); // проверяем поиск Контакта пользователя по Фамилии
 
 

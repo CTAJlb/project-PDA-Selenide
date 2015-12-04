@@ -16,7 +16,7 @@ public class ScreenShotUtil {
      */
     public static void takeScreenShot() {
 //        You could to something like this and save file as you want :
-        File screenShotFile = Screenshots.getScreenShotAsFile();
+        File screenShotFile = Screenshots.takeScreenShotAsFile();
         System.out.println("ScreenShot method called");
 
     }

@@ -1,6 +1,6 @@
 package ru.st.selenium.test.testclass;
 
-import com.codeborne.selenide.Selenide;
+
 import ru.st.selenium.pages.HelpHtmlPage;
 import ru.st.selenium.pages.InternalPage;
 import ru.st.selenium.pages.LoginPage;
@@ -18,6 +18,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Раздел - Помощь
  */
+
 @Listeners({ScreenShotOnFailListener.class})
 public class Help extends BaseObjectCase {
 
