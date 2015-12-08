@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.$;
 
-/**
+/*
  * Страница - Документы
  */
 public class DocumentsPage extends Page {

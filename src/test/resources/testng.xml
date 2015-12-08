@@ -10,13 +10,13 @@
 	<test name="Test1">
 		<parameter name="path" value="/"/>
 		<classes>
-		    <class name="ru.st.selenium.test.testclass.UserAuthentication"/>
-		    <class name="ru.st.selenium.test.testclass.CreateTasks"/>
-		    <class name="ru.st.selenium.test.testclass.Documents"/>
-		    <class name="ru.st.selenium.test.testclass.Search"/>
-		    <class name="ru.st.selenium.test.testclass.Options"/>
-		    <class name="ru.st.selenium.test.testclass.Today"/>
-		    <class name="ru.st.selenium.test.testclass.Help"/>
+		    <class name="ru.st.selenium.test.testclass.UserAuthenticationTest"/>
+		    <class name="ru.st.selenium.test.testclass.CreateTasksTest"/>
+		    <class name="ru.st.selenium.test.testclass.DocumentsTest"/>
+		    <class name="ru.st.selenium.test.testclass.SearchTest"/>
+		    <class name="ru.st.selenium.test.testclass.OptionsTest"/>
+		    <class name="ru.st.selenium.test.testclass.TodayTest"/>
+		    <class name="ru.st.selenium.test.testclass.HelpTest"/>
 		</classes>
 	</test>
 </suite>

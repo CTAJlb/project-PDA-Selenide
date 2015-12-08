@@ -18,7 +18,8 @@ import static org.testng.Assert.assertTrue;
  * Раздел - Документы
  */
 @Listeners({ScreenShotOnFailListener.class, TextReport.class})
-public class Documents extends BaseObjectCase {
+public class DocumentsTest extends BaseObjectCase {
+
 
     /**
      * проверка - Отображение грида документа

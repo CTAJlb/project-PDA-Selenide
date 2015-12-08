@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.page;
 
-/**
+/*
  * Форма задачи (Атрибуты задачи)
  */
 public class EditTaskPage extends NewTaskPage {

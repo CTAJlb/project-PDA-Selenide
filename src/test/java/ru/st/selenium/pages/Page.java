@@ -2,16 +2,19 @@ package ru.st.selenium.pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.testng.annotations.BeforeMethod;
 
 import java.util.Set;
 
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
 /**
  * Абстрактное представление класса страницы в пользовательском интерфейсе
  */
 public abstract class Page {
+
 
     public static final String PDA_PAGE_URL = "http://pda.motiw/";
 

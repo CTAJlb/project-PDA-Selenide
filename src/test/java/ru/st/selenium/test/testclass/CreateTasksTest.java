@@ -19,7 +19,7 @@ import static org.testng.Assert.assertTrue;
  * Раздел - Создать задачу
  */
 @Listeners({ScreenShotOnFailListener.class, TextReport.class})
-public class CreateTasks extends BaseObjectCase {
+public class CreateTasksTest extends BaseObjectCase {
 
 
     Task editTask = getRandomObjectTask();

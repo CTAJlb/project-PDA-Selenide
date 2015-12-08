@@ -26,7 +26,8 @@ import static org.testng.Assert.assertTrue;
 /**
  * Раздел - Стр. авторизации
  */
-public class UserAuthentication extends BaseObjectCase {
+public class UserAuthenticationTest extends BaseObjectCase {
+
 
     /**
      * проверка валидации авторизации - авторизация проходит успешно
@@ -45,7 +46,7 @@ public class UserAuthentication extends BaseObjectCase {
      */
     @Test(priority = 1, dataProvider = "verifyFailAuthorization", retryAnalyzer = Retry.class)
     public void verifyFailAuthorization(String login, String pass) throws Exception {
-        LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
+       LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
         loginPage.loginAs(login, pass);
         loginPage.loginInSystem();
         assertTrue(loginPage.isNotLoggedIn());

@@ -8,8 +8,8 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.page;
 
-/**
- * Грид - Задачи/Задачи
+/*
+ * Страница грид - Задачи/Задачи
  */
 public class TasksReportsPage extends Page {
 

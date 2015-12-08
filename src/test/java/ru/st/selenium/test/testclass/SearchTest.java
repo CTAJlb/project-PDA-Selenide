@@ -1,57 +1,47 @@
 package ru.st.selenium.test.testclass;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.testng.TextReport;
-import ru.st.selenium.model.Employee;
 import ru.st.selenium.model.Task;
 import ru.st.selenium.test.data.BaseObjectCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ru.st.selenium.pages.*;
+import ru.st.selenium.pages.InternalPage;
+import ru.st.selenium.pages.LoginPage;
+import ru.st.selenium.pages.Page;
+import ru.st.selenium.pages.SearchPage;
 
-
+import static com.codeborne.selenide.Selenide.open;
 import static org.testng.Assert.assertTrue;
 
 /**
- * Раздел - Сегодня
+ * раздел - Поиск
  */
 @Listeners({ScreenShotOnFailListener.class, TextReport.class})
-public class Today extends BaseObjectCase {
+public class SearchTest extends BaseObjectCase {
 
-
-    /*
-     Инициализируем модель - Задача #2 (атрибуты и лента для редактирования)
-    */
-    Task editTask = getRandomObjectTask();
-
-    /*
-     Инициализируем текст для Ленты действий задачи
-     */
-    String textActions = randomString(15);
 
 
     /**
-     * проверка - Отображение информации в разедел - Сегодня
+     * проверка - Посик в системе - SOLR
      */
-    @Test(dataProvider = "objectDataTask", priority = 1, retryAnalyzer = Retry.class)
-    public void verifyInfoToday(Task task) throws Exception {
-        LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
+    @Test(priority = 1, retryAnalyzer = Retry.class)
+    public void verifySearch() throws Exception {
+        LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
 
         // Авторизация
         loginPage.loginAsAdmin(ADMIN);
-
         InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
         assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
-        // Инициализируем стр. формы создание задачи и переходим на нее
-        NewTaskPage newTaskPage = internalPage.goToCreateTask();
+
+       /*  TODO поиск задачи через SOLR
+       NewTaskPage newTaskPage = internalPage.goToCreateTask();  // Инициализируем стр. формы создание задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - создания Задачи
 
-        newTaskPage.createTask(task);
-
+       newTaskPage.createTask(task);
         EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
@@ -61,31 +51,22 @@ public class Today extends BaseObjectCase {
         //----------------------------------------------------------------ФОРМА - Задачи
 
         TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
-
         taskForm.openShapeCreatedTask(task); // Открываем созданную задачу
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
-
         internalPage.goToHome();
-
         TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
-
         tasksReportsPage.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
-        tasksReportsPage.openTaskInGrid(task); // открываем форму в гриде задач
-
-        //----------------------------------------------------------------ФОРМА - Задачи - Атрибуты
-
-        taskForm.openFormEditTask(task, EMPLOYEE_ADMIN); // открываем форму редактирования атрибутов задачи
-
-        editTaskPage.editAttributesOfTasks(editTask); // редактируем задачу
-
-        taskForm.saveActionsInTheTape(textActions); // добавляем пользовательский текст в задачу и проверяем его сохранение
 
         internalPage.goToHome();
 
-        TodayPage todayPage = internalPage.goToToday(); // Переходим на стр.
+        //----------------------------------------------------------------ГРИД - ПОИСК
 
+        SearchPage searchPage = internalPage.goToSearch(); // Переходим в раздел Поиска
+        searchPage.searchTask(task); // Производим поиск задачи по - Названию */
 
-        todayPage.verifyInformationDisplaySectionToday(textActions);
+        SearchPage searchPage = internalPage.goToSearch(); // Переходим в раздел Поиска
+        //TODO Добавить выбор фильтрации - КОНТАКТЫ
+        searchPage.searchContact(EMPLOYEE_ADMIN); // проверяем поиск Контакта пользователя по Фамилии
 
 
         internalPage.signOut(); // Выход из системы
@@ -94,3 +75,5 @@ public class Today extends BaseObjectCase {
 
 
 }
+
+

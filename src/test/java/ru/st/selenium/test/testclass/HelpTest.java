@@ -19,9 +19,8 @@ import static org.testng.Assert.assertTrue;
 /**
  * Раздел - Помощь
  */
-
 @Listeners({ScreenShotOnFailListener.class, TextReport.class})
-public class Help extends BaseObjectCase {
+public class HelpTest extends BaseObjectCase {
 
 
     /**

@@ -14,8 +14,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static org.testng.AssertJUnit.assertTrue;
 
-/**
- * Форма задачи (Лента действий)
+/*
+ * Страница - Форма задачи (Лента действий)
  */
 public class TaskPage extends TasksReportsPage {
 

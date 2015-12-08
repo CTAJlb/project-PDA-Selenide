@@ -105,7 +105,7 @@ public class InternalPage extends Page {
      * @return information about the number of the menu on the main page
      */
     public boolean hasMenuUserComplete() {
-        menuElements.shouldHaveSize(4); // проверяем, что отображается 4 пункта меню (Задачи; Создать задачу; Сегодня; Документы)
+        menuElements.shouldHaveSize(4);
         return !menuElements.isEmpty();
     }
 

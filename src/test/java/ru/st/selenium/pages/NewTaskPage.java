@@ -10,6 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
+/*
+ Страница - Создать задачу
+ */
 public class NewTaskPage extends Page {
 
     /*
@@ -84,7 +87,6 @@ public class NewTaskPage extends Page {
     @FindBy(xpath = "//a [ancestor::span[@name='autor']]")
     private SelenideElement directorOfTheTask;
 
-
     /**
      * Название задачи
      *
@@ -108,8 +110,6 @@ public class NewTaskPage extends Page {
         tasksDescription.setValue(descriptionTasks);
         return this;
     }
-
-
 
     /**
      * Окончание задачи
