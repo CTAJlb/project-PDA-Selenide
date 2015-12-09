@@ -1,7 +1,7 @@
 package ru.st.selenium.test.data;
 
 
-import ru.st.selenium.model.Employee;
+import ru.st.selenium.modelpda.Employee;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

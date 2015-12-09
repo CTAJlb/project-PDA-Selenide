@@ -1,16 +1,15 @@
 package ru.st.selenium.test.testclass;
 
 import com.codeborne.selenide.testng.TextReport;
-import ru.st.selenium.model.Task;
 import ru.st.selenium.test.data.BaseObjectCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ru.st.selenium.pages.InternalPage;
-import ru.st.selenium.pages.LoginPage;
-import ru.st.selenium.pages.Page;
-import ru.st.selenium.pages.SearchPage;
+import ru.st.selenium.pagespda.InternalPage;
+import ru.st.selenium.pagespda.LoginPage;
+import ru.st.selenium.pagespda.Page;
+import ru.st.selenium.pagespda.SearchPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.testng.Assert.assertTrue;

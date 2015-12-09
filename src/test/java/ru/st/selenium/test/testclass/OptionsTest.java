@@ -1,13 +1,13 @@
 package ru.st.selenium.test.testclass;
 
 import com.codeborne.selenide.testng.TextReport;
-import ru.st.selenium.model.Task;
+import ru.st.selenium.modelpda.Task;
 import ru.st.selenium.test.data.BaseObjectCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ru.st.selenium.pages.*;
+import ru.st.selenium.pagespda.*;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.hamcrest.MatcherAssert.assertThat;

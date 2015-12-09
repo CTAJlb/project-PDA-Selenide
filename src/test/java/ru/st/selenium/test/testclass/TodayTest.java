@@ -2,14 +2,13 @@ package ru.st.selenium.test.testclass;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.testng.TextReport;
-import ru.st.selenium.model.Employee;
-import ru.st.selenium.model.Task;
+import ru.st.selenium.modelpda.Task;
 import ru.st.selenium.test.data.BaseObjectCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ru.st.selenium.pages.*;
+import ru.st.selenium.pagespda.*;
 
 
 import static org.testng.Assert.assertTrue;

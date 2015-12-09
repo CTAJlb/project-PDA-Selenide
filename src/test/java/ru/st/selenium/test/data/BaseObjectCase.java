@@ -1,8 +1,11 @@
 package ru.st.selenium.test.data;
 
 import org.testng.annotations.DataProvider;
-import ru.st.selenium.model.Employee;
-import ru.st.selenium.model.Task;
+import ru.st.selenium.modelpda.Employee;
+import ru.st.selenium.modelpda.Task;
+import ru.st.selenium.modelweb.AccessRights;
+import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditor;
+import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
 
 
 /**
@@ -33,7 +36,7 @@ public abstract class BaseObjectCase extends TestBase {
         };
     }
 
-    //--------------------------------------------------------------------Задача
+    //--------------------------------------------------------------------Создать задачу
 
     /**
      * Метод создания полностью случайного объекта - "Задача"
@@ -51,7 +54,7 @@ public abstract class BaseObjectCase extends TestBase {
 
     /**
      * @DataProvider ответственнен за предоставление тестовых данных для методов, использующих его
-     *
+     * <p>
      * Инициализируем модель - Задача
      */
     @DataProvider
@@ -67,6 +70,35 @@ public abstract class BaseObjectCase extends TestBase {
                         .setIsImportant(true)}, // Важная задача
 
         };
+    }
+
+    //---Администрирование/Администрирование ДО----------------------------------------------------------
+    //-----Редактор словарей----------------------------------------------------------
+
+    /**
+     * Метод создания полностью случайного объекта - "Редактор словарей"
+     */
+    public DictionaryEditor getRandomDictionaryEditor() {
+        DictionaryEditor dictionEditor = new DictionaryEditor()
+                .setDictionaryEditorName(randomString(15)) // Название Словаря
+                .setAccessDiction(randomEnum(AccessRights.class))// Уровень доступа
+                .setDictionaryEditorFields(new DictionaryEditorField[]{
+
+                        new DictionaryEditorField()
+                                .setNameDictionItem(randomString(15)) // Название элемента словаря
+                                .setDescriptionDictionItem(randomString(80) + "\n" + randomString(15)), // Описание элемента словаря
+
+                        new DictionaryEditorField()
+                                .setNameDictionItem(randomString(15)) // Название элемента словаря
+                                .setDescriptionDictionItem(randomString(15) + "\n" + randomString(50)), // Описание элемента словаря
+
+                        new DictionaryEditorField()
+                                .setNameDictionItem(randomString(15)) // Название элемента словаря
+                                .setDescriptionDictionItem(randomString(30) + "\n" + randomString(15)), // Описание элемента словаря
+
+                });
+
+        return dictionEditor;
     }
 
 
