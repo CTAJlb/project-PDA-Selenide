@@ -1,23 +1,24 @@
-/**
- * калсс, в к-м описываются все элементы указанные на странице редактирования Регистрационной карточки документа (РКД)
- */
 package ru.st.selenium.pagesweb.DocflowAdministration;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import ru.st.selenium.model.AccessRights;
-import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.CreationOfLinkedDocuments;
-import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.EditionOwnDocuments;
-import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.SettingsFinalVersion;
-import ru.st.selenium.model.OpenFilesForEdit;
-import ru.st.selenium.model.ShiftDirection;
-import ru.st.selenium.pages.PageManager;
+import ru.st.selenium.modelweb.AccessRights;
+import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.CreationOfLinkedDocuments;
+import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.EditionOwnDocuments;
+import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.SettingsFinalVersion;
+import ru.st.selenium.modelweb.OpenFilesForEdit;
+import ru.st.selenium.modelweb.ShiftDirection;
 
+
+import static com.codeborne.selenide.Selenide.$;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
-
+/**
+ * Калсс, в к-м описываются все элементы указанные на странице редактирования Регистрационной карточки документа (РКД)
+ */
 public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
 
 
@@ -28,9 +29,8 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * Ожидание маски - при открытии формы редактирования
      */
     public DocRegisterCardsEditPage waitForTaskMaskDRC() {
-        waitSeconds(0.3);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-                .xpath("//div[contains(@id,'ext-element') and contains(@class,'mask')]")));
+        waitMillisecond(0.3);
+       $(By.xpath("//div[contains(@id,'ext-element') and contains(@class,'mask')]")).shouldBe(Condition.disappear);
         return this;
     }
 
@@ -40,43 +40,43 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * Вкладка - Общее
      */
     @FindBy(xpath = "(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[1]//span")
-    private WebElement generalTab;
+    private SelenideElement generalTab;
 
     /**
      * Вкладка - Права
      */
     @FindBy(xpath = "(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[2]//span")
-    private WebElement rightsTab;
+    private SelenideElement rightsTab;
 
     /**
      * Вкладка - Маршруты согласования
      */
     @FindBy(xpath = "(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[3]//span")
-    private WebElement connectedRoutesTab;
+    private SelenideElement connectedRoutesTab;
 
     /**
      * Вкладка - Обработчики
      */
     @FindBy(xpath = "(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[5]//span")
-    private WebElement handlersTab;
+    private SelenideElement handlersTab;
 
     /**
      * Вкладка - Задачи
      */
     @FindBy(xpath = "(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[6]//span")
-    private WebElement tasksTab;
+    private SelenideElement tasksTab;
 
     /**
      * Вкладка - Резолюции
      */
     @FindBy(xpath = "(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[7]//span")
-    private WebElement resolutionsTab;
+    private SelenideElement resolutionsTab;
 
     /**
      * Вкладка - Настройки почтовых уведомлений
      */
     @FindBy(xpath = "(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[8]//span")
-    private WebElement mailNotifyTemplatesSettingsTab;
+    private SelenideElement mailNotifyTemplatesSettingsTab;
 
 
     //----------------------------------------------------------------------------Вкладка - ОБЩЕЕ--------------------------------------------------------------------------------
@@ -85,49 +85,49 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * Название регистрационной карточки документа
      */
     @FindBy(xpath = "//div[contains(@id,'textfield') and @data-ref='bodyEl']//input")
-    private WebElement setNameDocRegCards;
+    private SelenideElement setNameDocRegCards;
 
     /**
      * Статусы документа: На рассмотрении
      */
     @FindBy(xpath = "(//table[@id][ancestor::fieldset[contains(@id,'fieldset')]]//td[3]/div)[1]")
-    private WebElement clickDocumentStatesOnReview;
+    private SelenideElement clickDocumentStatesOnReview;
 
     /**
      * Статусы документа: Рассмотрен
      */
     @FindBy(xpath = "(//table[@id][ancestor::fieldset[contains(@id,'fieldset')]]//td[3]/div)[2]")
-    private WebElement clickDocumentStatesReviewed;
+    private SelenideElement clickDocumentStatesReviewed;
 
     /**
      * Статусы документа: На подписании
      */
     @FindBy(xpath = "(//table[@id][ancestor::fieldset[contains(@id,'fieldset')]]//td[3]/div)[3]")
-    private WebElement clickDocumentStatesOnApproval;
+    private SelenideElement clickDocumentStatesOnApproval;
 
     /**
      * Статусы документа: На исполнении
      */
     @FindBy(xpath = "(//table[@id][ancestor::fieldset[contains(@id,'fieldset')]]//td[3]/div)[4]")
-    private WebElement clickDocumentStatesOnExecution;
+    private SelenideElement clickDocumentStatesOnExecution;
 
     /**
      * Статусы документа: В архив
      */
     @FindBy(xpath = "(//table[@id][ancestor::fieldset[contains(@id,'fieldset')]]//td[3]/div)[5]")
-    private WebElement clickDocumentStatesInArchive;
+    private SelenideElement clickDocumentStatesInArchive;
 
     /**
      * Статусы документа
      */
     @FindBy(xpath = "//input[contains(@id,'textfield') and contains(@name,'status_text')][ancestor::fieldset[contains(@id,'fieldset')]]")
-    private WebElement setValueDocumentStates;
+    private SelenideElement setValueDocumentStates;
 
     /**
      * Шаблон отображения
      */
     @FindBy(xpath = "(//input[contains(@id,'textfield')][ancestor::div[contains(@id,'container')]])[1]")
-    private WebElement setDisplayNameTemplate;
+    private SelenideElement setDisplayNameTemplate;
 
     /**
      * Направление смещения даты при попадании на нерабочее время:
@@ -136,7 +136,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "//div[contains(@id,'radiogroup')]//td[count(div)=3]/div[1]//input")
-    private WebElement clickDateDoesNotMove;
+    private SelenideElement clickDateDoesNotMove;
 
 
     /**
@@ -146,7 +146,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "//div[contains(@id,'radiogroup')]//td[count(div)=3]/div[2]//input")
-    private WebElement clickDateMovesForward;
+    private SelenideElement clickDateMovesForward;
 
     /**
      * Направление смещения даты при попадании на нерабочее время
@@ -155,7 +155,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "//div[contains(@id,'radiogroup')]//td[count(div)=3]/div[3]//input")
-    private WebElement clickDateMovesBack;
+    private SelenideElement clickDateMovesBack;
 
     /**
      * Возврат на доработку с начала текущей схемы
@@ -163,7 +163,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//fieldset//input[contains(@id,'checkbox') and contains(@role,'checkbox')])[1]")
-    private WebElement clickAtFirstRevisionScheme;
+    private SelenideElement clickAtFirstRevisionScheme;
 
     /**
      * Возврат на доработку в ту же точку рассмотрения
@@ -171,7 +171,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//fieldset//input[contains(@id,'checkbox') and contains(@role,'checkbox')])[2]")
-    private WebElement clickForCompletionInTighterPoint;
+    private SelenideElement clickForCompletionInTighterPoint;
 
     /**
      * Возврат на доработку с новой схемой
@@ -179,7 +179,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//fieldset//input[contains(@id,'checkbox') and contains(@role,'checkbox')])[3]")
-    private WebElement clickOnCompletionTheNewScheme;
+    private SelenideElement clickOnCompletionTheNewScheme;
 
 
     /**
@@ -188,7 +188,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//input[contains(@id,'combo') and (@placeholder)])[1]")
-    private WebElement clickOpenFilesForedit;
+    private SelenideElement clickOpenFilesForedit;
 
     /**
      * Автоматическое вычисление полей-нумераторов
@@ -196,7 +196,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//input[contains(@id,'combo') and (@placeholder)])[2]")
-    private WebElement clickAutoСalculationNumeratorFields;
+    private SelenideElement clickAutoСalculationNumeratorFields;
 
 
     /**
@@ -205,7 +205,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//a[contains(@id,'button')][ancestor::div[contains(@id,'toolbar') and contains(@class,'x-toolbar x-docked x-toolbar-default')]]//span[string-length(text())>=3])[1]")
-    private WebElement clickSaveAllChangesInDocument;
+    private SelenideElement clickSaveAllChangesInDocument;
 
     //----------------------------------------------------------------------------Вкладка - ПРАВА--------------------------------------------------------------------------------
 
@@ -215,7 +215,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "((//fieldset//table[contains(@id,'radiogroup')])[2]//div[contains(@id,'radio')]/..//input)[1]")
-    private WebElement clickPersonal;
+    private SelenideElement clickPersonal;
 
     /**
      * Отображение - Общедоступная
@@ -223,7 +223,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "((//fieldset//table[contains(@id,'radiogroup')])[2]//div[contains(@id,'radio')]/..//input)[2]")
-    private WebElement clickAccessAvailableToAll;
+    private SelenideElement clickAccessAvailableToAll;
 
     /**
      * Отображение - Только для чтения
@@ -231,7 +231,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "((//fieldset//table[contains(@id,'radiogroup')])[2]//div[contains(@id,'radio')]/..//input)[3]")
-    private WebElement clickReadOnly;
+    private SelenideElement clickReadOnly;
 
 
     /**
@@ -241,7 +241,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//fieldset)[6]//div[count(div)=3]/div[1]//input")
-    private WebElement authorFinalVersionFiles;
+    private SelenideElement authorFinalVersionFiles;
 
     /**
      * Изменение признака "Окончательная версия"
@@ -250,7 +250,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//fieldset)[6]//div[count(div)=3]/div[2]//input")
-    private WebElement userWithEditRightFinalVersionFiles;
+    private SelenideElement userWithEditRightFinalVersionFiles;
 
     /**
      * Изменение признака "Окончательная версия"
@@ -259,7 +259,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//fieldset)[6]//div[count(div)=3]/div[3]//input")
-    private WebElement docTypeControllerFinalVersionFiles;
+    private SelenideElement docTypeControllerFinalVersionFiles;
 
     /**
      * Редактирование своих документов
@@ -268,7 +268,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//fieldset)[7]//div[count(div)=3]/div[1]//input")
-    private WebElement selEditionOwnDocumentsOnReview;
+    private SelenideElement selEditionOwnDocumentsOnReview;
 
     /**
      * Редактирование своих документов
@@ -277,7 +277,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//fieldset)[7]//div[count(div)=3]/div[2]//input")
-    private WebElement selEditionOwnDocumentsOnExecution;
+    private SelenideElement selEditionOwnDocumentsOnExecution;
 
     /**
      * Редактирование своих документов
@@ -286,7 +286,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//fieldset)[7]//div[count(div)=3]/div[3]//input")
-    private WebElement selEditionOwnDocumentsInArchive;
+    private SelenideElement selEditionOwnDocumentsInArchive;
 
     /**
      * Доступ к разделам документа при просмотре/редактировании
@@ -295,7 +295,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//table[contains(@id,'checkboxgroup')])[2]//div[1]//input")
-    private WebElement clickBoxAccessToSectionsDocumentRoute;
+    private SelenideElement clickBoxAccessToSectionsDocumentRoute;
 
     /**
      * Доступ к разделам документа при просмотре/редактировании
@@ -304,7 +304,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//table[contains(@id,'checkboxgroup')])[2]//div[2]//input")
-    private WebElement clickBoxAccessToSectionsDocumentFiles;
+    private SelenideElement clickBoxAccessToSectionsDocumentFiles;
 
     /**
      * Доступ к разделам документа при просмотре/редактировании
@@ -313,7 +313,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//table[contains(@id,'checkboxgroup')])[2]//div[3]//input")
-    private WebElement clickBoxAccessToSectionsDocumentResolution;
+    private SelenideElement clickBoxAccessToSectionsDocumentResolution;
 
     /**
      * Доступ к разделам документа при просмотре/редактировании
@@ -322,7 +322,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//table[contains(@id,'checkboxgroup')])[2]//div[4]//input")
-    private WebElement clickBoxAccessToSectionsDocumentLog;
+    private SelenideElement clickBoxAccessToSectionsDocumentLog;
 
     /**
      * Создание связанных документов
@@ -330,7 +330,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "(//div[count(fieldset)=4]/div)[5]//input")
-    private WebElement clickCreationOfLinkedDocuments;
+    private SelenideElement clickCreationOfLinkedDocuments;
 
 
     //----------------------------------------------------------------------------Вкладка - МАРШРУТЫ СОГЛАСОВАНИЯ--------------------------------------------------------------------------------
@@ -341,7 +341,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "//div[contains(@id,'checkbox')]//input[not(ancestor::fieldset)]")
-    private WebElement clickCheckBoxUseAllPossibleRoutes;
+    private SelenideElement clickCheckBoxUseAllPossibleRoutes;
 
 
     //----------------------------------------------------------------------------Вкладка - ЗАДАЧИ-----------------------------------------------------------------------
@@ -352,35 +352,35 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @FindBy
      */
     @FindBy(xpath = "//textarea[contains(@id,'textarea')]")
-    private WebElement setCopyingFieldsWhenCreatingTask;
+    private SelenideElement setCopyingFieldsWhenCreatingTask;
 
     /**
      * Поля документа, содержащие...
      * Авторов задач
      */
     @FindBy(xpath = "(//fieldset)[10]/div/div/descendant::input[1]")
-    private WebElement setAuthorsObjectives;
+    private SelenideElement setAuthorsObjectives;
 
     /**
      * Поля документа, содержащие...
      * Контролеров задач
      */
     @FindBy(xpath = "(//fieldset)[10]/div/div/descendant::input[2]")
-    private WebElement setControllersOfTasks;
+    private SelenideElement setControllersOfTasks;
 
     /**
      * Поля документа, содержащие...
      * Ответственных руководителей задач
      */
     @FindBy(xpath = "(//fieldset)[10]/div/div/descendant::input[3]")
-    private WebElement setDecisionMakersOfTasks;
+    private SelenideElement setDecisionMakersOfTasks;
 
     /**
      * Поля документа, содержащие...
      * Исполнителей задач
      */
     @FindBy(xpath = "(//fieldset)[10]/div/div/descendant::input[4]")
-    private WebElement setExecutorsOfTasks;
+    private SelenideElement setExecutorsOfTasks;
 
 
     //----------------------------------------------------------------------------Вкладка - ОБЩЕЕ (методы)-----------------------------------------------------------
@@ -391,9 +391,8 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      * @return DocRegisterCardsEditPage
      */
     public DocRegisterCardsEditPage clickGeneralTab() {
-        waitSeconds(0.7);
-        wait.until(ExpectedConditions.elementToBeClickable(By
-                .xpath("(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[1]//span")));
+        waitMillisecond(0.7);
+        $(By.xpath("(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[1]//span")).shouldHave(Condition.present);
         waitForTaskMaskDRC();
         generalTab.click();
         return this;
@@ -585,9 +584,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      */
     public DocRegisterCardsEditPage clickRightsTab() {
         rightsTab.click();
-        waitForPageUntilElementIsVisible(
-                By.xpath("((//fieldset//table[contains(@id,'radiogroup')])[2]//div[contains(@id,'radio')]/..//input)[2]"),
-                5000);
+        $(By.xpath("((//fieldset//table[contains(@id,'radiogroup')])[2]//div[contains(@id,'radio')]/..//input)[2]")).shouldBe(Condition.visible);
         return this;
     }
 
@@ -804,9 +801,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      */
     public DocRegisterCardsEditPage clickConnectedRoutesTab() {
         connectedRoutesTab.click();
-        waitForPageUntilElementIsVisible(
-                By.xpath("//div[contains(@id,'selectionform')]//div[contains(@id,'gridview')]//table"),
-                5000);
+        $(By.xpath("//div[contains(@id,'selectionform')]//div[contains(@id,'gridview')]//table")).shouldBe(Condition.visible);
         return this;
     }
 
@@ -832,9 +827,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      */
     public DocRegisterCardsEditPage clickTasksTab() {
         tasksTab.click();
-        waitForPageUntilElementIsVisible(
-                By.xpath("//span[string-length(text())>=10]/../../div//textarea"),
-                5000);
+       $(By.xpath("//span[string-length(text())>=10]/../../div//textarea")).shouldBe(Condition.visible);
         return this;
     }
 
@@ -918,17 +911,5 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
         return this;
     }
 
-
-    /**
-     * Ожидание появления элемента(\ов) в форме редактирования - Регистрационные
-     * карточки документов -Вкладка Общее -Текст на вкладке - Общее
-     */
-    public DocRegisterCardsEditPage appearanceOfElementsInFormOfEditingCards() {
-        wait.until(presenceOfElementLocated(By
-                .xpath("(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[1]//span")));
-        wait.until(presenceOfElementLocated(By
-                .xpath("//span[string-length(span[text()])>=2]")));
-        return this;
-    }
 
 }

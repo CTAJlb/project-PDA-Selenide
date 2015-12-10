@@ -1,7 +1,7 @@
 package ru.st.selenium.modelweb.FieldsObject;
 
 
-import ru.st.selenium.modelweb.Directories.Directory;
+import ru.st.selenium.modelweb.Directories.Directories;
 import ru.st.selenium.modelweb.Directories.DirectoryField;
 
 /**
@@ -11,7 +11,7 @@ public class TypeListFieldsMultiDirectory extends ParentFieldsObject {
 
     private String nameDirectory;
     private String nameDirectoryField;
-    private Directory directory;
+    private Directories directories;
     private DirectoryField field;
     private DirectoryField linkedWithField;
     private String displayNameTemplate;
@@ -50,12 +50,12 @@ public class TypeListFieldsMultiDirectory extends ParentFieldsObject {
      *
      * @return
      */
-    public Directory getDirectory() {
-        return directory;
+    public Directories getDirectories() {
+        return directories;
     }
 
-    public TypeListFieldsMultiDirectory setDirectory(Directory directory) {
-        this.directory = directory;
+    public TypeListFieldsMultiDirectory setDirectories(Directories directories) {
+        this.directories = directories;
         return this;
     }
 

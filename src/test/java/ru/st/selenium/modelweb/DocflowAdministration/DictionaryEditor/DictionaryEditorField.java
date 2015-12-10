@@ -12,7 +12,7 @@ public class DictionaryEditorField {
     /**
      * Название Элемента словаря
      */
-    public String getNameDictionItem() {
+    public String getDictionaryElement() {
         return nameDictionItem;
     }
 
@@ -25,7 +25,7 @@ public class DictionaryEditorField {
     /**
      * Описание Элемента словаря
      */
-    public String getDescriptionDictionItem() {
+    public String getDescriptionElement() {
         return descriptionDictionItem;
     }
 

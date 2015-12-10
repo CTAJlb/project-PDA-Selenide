@@ -3,11 +3,14 @@
  */
 package ru.st.selenium.pagesweb.DocflowAdministration;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ru.st.selenium.pages.PageManager;
+import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.DocRegisterCardsField;
+import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.*;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
@@ -20,55 +23,55 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
      * Вкладка - Поля
      */
     @FindBy(xpath = "(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[4]//span")
-    private WebElement fieldsTab;
+    private SelenideElement fieldsTab;
 
     /**
      * Добавить поле
      */
     @FindBy(xpath = "//div[count(a)=5]/a[1]//span")
-    private WebElement addFieldDoc;
+    private SelenideElement addFieldDoc;
 
     /**
      * Редактировать поле
      */
     @FindBy(xpath = "//div[count(a)=5]/a[2]//span")
-    private WebElement editFieldDoc;
+    private SelenideElement editFieldDoc;
 
     /**
      * Удалить поле
      */
     @FindBy(xpath = "//div[count(a)=5]/a[3]//span")
-    private WebElement delFieldDoc;
+    private SelenideElement delFieldDoc;
 
     /**
      * Переместить поле вврех
      */
     @FindBy(xpath = "//div[count(a)=5]/a[4]//span")
-    private WebElement moveFieldUp;
+    private SelenideElement moveFieldUp;
 
     /**
      * Переместить поле вниз
      */
     @FindBy(xpath = "//div[count(a)=5]/a[5]//span")
-    private WebElement moveFieldDown;
+    private SelenideElement moveFieldDown;
 
     /**
      * Сохранить как - изменения по документу
      */
     @FindBy(xpath = "(//a[contains(@id,'button')][ancestor::div[contains(@id,'toolbar') and contains(@class,'x-toolbar x-docked x-toolbar-default')]]//span[string-length(text())>=3])[2]")
-    private WebElement clickSaveAsAllChangesInDocument;
+    private SelenideElement clickSaveAsAllChangesInDocument;
 
     /**
      * Удалить документ
      */
     @FindBy(xpath = "(//a[contains(@id,'button')][ancestor::div[contains(@id,'toolbar') and contains(@class,'x-toolbar x-docked x-toolbar-default')]]//span[string-length(text())>=3])[3]")
-    private WebElement clickDelDocument;
+    private SelenideElement clickDelDocument;
 
     /**
      * Вернуться без сохранения
      */
     @FindBy(xpath = "(//a[contains(@id,'button')][ancestor::div[contains(@id,'toolbar') and contains(@class,'x-toolbar x-docked x-toolbar-default')]]//span[string-length(text())>=3])[4]")
-    private WebElement clickBackAndDiscardChanges;
+    private SelenideElement clickBackAndDiscardChanges;
 
     //----------------------------------------------------------------------------Настройки в форме редактирования полей-------------------------------------------------
 
@@ -76,127 +79,127 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
      * Название поля
      */
     @FindBy(xpath = "//input[@name='fieldname']")
-    private WebElement nameFieldDoc;
+    private SelenideElement nameFieldDoc;
 
     /**
      * Идентификатор поля
      */
     @FindBy(xpath = "//input[@name='fieldid']")
-    private WebElement idFieldDoc;
+    private SelenideElement idFieldDoc;
 
     /**
      * выбор поля - Тип поля
      */
     @FindBy(xpath = "//input[@name='fieldtype']")
-    private WebElement clickFieldTypeField;
+    private SelenideElement clickFieldTypeField;
 
     /**
      * Формат типа поля - Числа
      */
     @FindBy(xpath = "//input[@name='id_format']")
-    private WebElement formatFieldNumber;
+    private SelenideElement formatFieldNumber;
 
     /**
      * Изменяемое при редактировании
      */
     @FindBy(xpath = "//input[@name='isedited']")
-    private WebElement editableField;
+    private SelenideElement editableField;
 
     /**
      * Обязательное поле
      */
     @FindBy(xpath = "//input[@name='isnecessary']")
-    private WebElement selObligatoryField;
+    private SelenideElement selObligatoryField;
 
     /**
      * Уникальное поле
      */
     @FindBy(xpath = "//input[@name='isunique']")
-    private WebElement uniqueField;
+    private SelenideElement uniqueField;
 
     /**
      * Скрывать при создании
      */
     @FindBy(xpath = "//input[@name='ishideincreate']")
-    private WebElement hideForCreation;
+    private SelenideElement hideForCreation;
 
     /**
      * Скрывать в таблицах
      */
     @FindBy(xpath = "//input[@name='ishideintable']")
-    private WebElement hideInTables;
+    private SelenideElement hideInTables;
 
     /**
      * Скрывать при поиске
      */
     @FindBy(xpath = "//input[@name='ishideinsearch']")
-    private WebElement hideForSearch;
+    private SelenideElement hideForSearch;
 
     /**
      * Скрывать в карточке
      */
     @FindBy(xpath = "//input[@name='ishideincard']")
-    private WebElement hideInCards;
+    private SelenideElement hideInCards;
 
     /**
      * Использовать при создании связанного документа
      */
     @FindBy(xpath = "//input[@name='isuseforlinkeddoc']")
-    private WebElement usedToCreateTheLinkedDocumentField;
+    private SelenideElement usedToCreateTheLinkedDocumentField;
 
     /**
      * Значение по умолчанию (для полей типа - Дата и Сотрудник)
      */
     @FindBy(xpath = "//input[@name='default_value']")
-    private WebElement defValueField;
+    private SelenideElement defValueField;
 
     /**
      * Изменяемое при создании (поля типа - Дата; Сотрудник; Нумератор)
      */
     @FindBy(xpath = "//input[@name='isedited_increate']")
-    private WebElement editionAvailableWhileCreationField;
+    private SelenideElement editionAvailableWhileCreationField;
 
     /**
      * Контролер документа
      */
     @FindBy(xpath = "//input[@name='emp_is_controller']")
-    private WebElement clickDocumentSuperviserField;
+    private SelenideElement clickDocumentSuperviserField;
 
     /**
      * Для сведения
      */
     @FindBy(xpath = "//input[@name='emp_for_information']")
-    private WebElement forInformationField;
+    private SelenideElement forInformationField;
 
     /**
      * Шаблон отображения
      */
     @FindBy(xpath = "//input[@name='document_template']")
-    private WebElement displayNameTemplateField;
+    private SelenideElement displayNameTemplateField;
 
     /**
      * Выбор записей справочника
      */
     @FindBy(xpath = "//input[@name='selectmode']")
-    private WebElement directoryEntriesSelectionField;
+    private SelenideElement directoryEntriesSelectionField;
 
     /**
      * Шаблон справочника
      */
     @FindBy(xpath = "//input[@name='dictionary_template']")
-    private WebElement directoryTemplate;
+    private SelenideElement directoryTemplate;
 
     /**
      * Выбор только из справочника
      */
     @FindBy(xpath = "//input[@name='select_only_dictionary']")
-    private WebElement selOnlyFromDictionary;
+    private SelenideElement selOnlyFromDictionary;
 
     /**
      * Длина поля
      */
     @FindBy(xpath = "//input[@name='fieldlength']")
-    private WebElement fieldLength;
+    private SelenideElement fieldLength;
 
 
     //----------------------------------------------------------------------------Типы полей (аннотации)------------------------------------------------------------------
@@ -205,115 +208,115 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
      * Число
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[1]")
-    private WebElement selTypeFieldNumber;
+    private SelenideElement selTypeFieldNumber;
 
     /**
      * Дата
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[2]")
-    private WebElement selTypeFieldDate;
+    private SelenideElement selTypeFieldDate;
 
     /**
      * Строка
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[3]")
-    private WebElement selTypeFieldString;
+    private SelenideElement selTypeFieldString;
 
     /**
      * Выбор поля - Справочник для поля типа Строка/Текст/Справочник
      */
     @FindBy(xpath = "//input[@name='id_meta_dictionary']")
-    private WebElement selTypeFieldStringOrTextDirectory;
+    private SelenideElement selTypeFieldStringOrTextDirectory;
 
     /**
      * Текст
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[4]")
-    private WebElement selTypeFieldText;
+    private SelenideElement selTypeFieldText;
 
     /**
      * Словарь
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[5]")
-    private WebElement selTypeFieldDictionary;
+    private SelenideElement selTypeFieldDictionary;
 
     /**
      * Выбор поля Словарь для выбора значения
      */
     @FindBy(xpath = "//span[contains(@id,'button')]/span[string-length(text())>=5]/../../../..//div/input[@name='id_cataloguetype']")
-    private WebElement clickFieldDictionary;
+    private SelenideElement clickFieldDictionary;
 
     /**
      * Подразделение
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[6]")
-    private WebElement selTypeFieldDepartment;
+    private SelenideElement selTypeFieldDepartment;
 
     /**
      * Сотрудник
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[7]")
-    private WebElement selTypeFieldEmployee;
+    private SelenideElement selTypeFieldEmployee;
 
     /**
      * Документ
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[8]")
-    private WebElement selTypeFieldDocument;
+    private SelenideElement selTypeFieldDocument;
 
     /**
      * Вкладка - Поиск - в форме редактирования поля типа "Документ"
      */
     @FindBy(xpath = "//div[contains(@id,'tabbar')]//div[count(a)=2]/a[2]//span")
-    private WebElement tabSearch;
+    private SelenideElement tabSearch;
 
     /**
      * Вкладка - Поля - в форме редактирования поля типа "Документ"
      */
     @FindBy(xpath = "//div[contains(@id,'tabbar')]//div[count(a)=2]/a[1]//span")
-    private WebElement tabFields;
+    private SelenideElement tabFields;
 
     /**
      * Искать похожие документы
      */
     @FindBy(name = "search_documents")
-    private WebElement searchSimiliarDocuments;
+    private SelenideElement searchSimiliarDocuments;
 
     /**
      * Правила поиска
      */
     @FindBy(xpath = "//textarea[@name='search_template']")
-    private WebElement searchRulesTemplate;
+    private SelenideElement searchRulesTemplate;
 
     /**
      * Нумератор
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[9]")
-    private WebElement selTypeFieldNumerator;
+    private SelenideElement selTypeFieldNumerator;
 
     /**
      * Шаблон нумератора
      */
     @FindBy(xpath = "//input[@name='numerator_template']")
-    private WebElement numeratorTemplate;
+    private SelenideElement numeratorTemplate;
 
     /**
      * Справочник
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[10]")
-    private WebElement selTypeFieldDirectory;
+    private SelenideElement selTypeFieldDirectory;
 
     /**
      * Сохранить поле
      */
     @FindBy(xpath = "(//span[string-length(*[text()])>=3]/ancestor::div[contains(@id,'toolbar')]//a)[5]//span")
-    private WebElement clickButtonSaveField;
+    private SelenideElement clickButtonSaveField;
 
     /**
      * Отменить сохранения поля
      */
     @FindBy(xpath = "(//span[string-length(*[text()])>=3]/ancestor::div[contains(@id,'toolbar')]//a)[6]//span")
-    private WebElement clickButtonCancelField;
+    private SelenideElement clickButtonCancelField;
 
 
     //----------------------------------------------------------------------------Вкладка - ПОЛЯ (методы)--------------------------------------------------------------------------------
@@ -616,7 +619,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
             return this;
         } else {
             clickFieldDictionary.click();
-            driver.findElement(By.xpath("//*[text()='" + dictionaryEditorName + "']")).click();
+            $(By.xpath("//*[text()='" + dictionaryEditorName + "']")).click();
         }
         return this;
     }
@@ -808,7 +811,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
             return this;
         } else {
             selTypeFieldStringOrTextDirectory.click();
-            driver.findElement(By.xpath("//*[text()='" + directoryName + "']")).click();
+            $(By.xpath("//*[text()='" + directoryName + "']")).click();
         }
         return this;
     }
@@ -854,9 +857,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
      * @return TypesOfTablesEditPage
      */
     public DocRegisterCardsEditFieldsPage verifyFieldInGrid(String fieldName) {
-        waitForPageUntilElementIsVisible(
-                By.xpath("//table[contains(@id,'treeview')]//td[1]/div[text()='" + fieldName + "']"),
-                5000);
+        $(By.xpath("//table[contains(@id,'treeview')]//td[1]/div[text()='" + fieldName + "']")).shouldBe(Condition.visible);
         return this;
     }
 
@@ -870,7 +871,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
         if (fieldsDocs == null) {
             return null;
         } else
-            appearanceOfItemsInTheEditFormFieldTab(); // Ожидание элементов на вкладке "Поля"
+           // TODO Что имелось ввиду!!! appearanceOfItemsInTheEditFormFieldTab(); // Ожидание элементов на вкладке "Поля"
         outer:
         for (DocRegisterCardsField fieldDoc : fieldsDocs) {
             clickAddFieldDoc(); // Добавить поле
@@ -899,7 +900,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
                 if ((fieldString.getSelectOnlyFromDictionary() || !fieldString.getSelectOnlyFromDictionary()) && !fieldDoc.getUniqueField()) {
                     selOnlyFromDictionary(fieldString.getSelectOnlyFromDictionary()); // Выбор только из спр-ка
                     chooseTypeFieldStringTextOrDirectory(); // Выбор поля Справочник
-                    driver.findElement(By.xpath("//*[text()='" + fieldString.getDirectoryName() + "']")).click();
+                    $(By.xpath("//*[text()='" + fieldString.getDirectoryName() + "']")).click();
                     selDirectoryTemplate(fieldString.getDirectoryTemplate()); // Шаблон спр-ка
                     fieldLength(fieldString.getFieldLength()); // Длина поля
                 } else if (fieldDoc.getUniqueField()) {
@@ -912,7 +913,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
                 if (fieldText.getSelectOnlyFromDictionary()) {
                     selOnlyFromDictionary(fieldText.getSelectOnlyFromDictionary()); // Выбор только из спр-ка
                     chooseTypeFieldStringTextOrDirectory(); // Выбор поля Справочник
-                    driver.findElement(By.xpath("//*[text()='" + fieldText.getDirectoryName() + "']")).click();
+                    $(By.xpath("//*[text()='" + fieldText.getDirectoryName() + "']")).click();
                     selDirectoryTemplate(fieldText.getDirectoryTemplate());
                 } else if (!fieldText.getSelectOnlyFromDictionary()) {
 
@@ -966,7 +967,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
                 FieldTypeDirectoryDoc fieldDirectory = (FieldTypeDirectoryDoc) fieldDoc.getFieldTypeDoc();
                 if (fieldDirectory.getDirectoryEntriesSelection()) { // Выбор записей спр-ка == Одна запись
                     chooseTypeFieldStringTextOrDirectory(); // Выбор поля Справочник
-                    driver.findElement(By.xpath("//*[text()='" + fieldDirectory.getNameDirectoryDoc() + "']")).click();
+                    $(By.xpath("//*[text()='" + fieldDirectory.getNameDirectoryDoc() + "']")).click();
                     selMultipleRecords(fieldDirectory.getDirectoryEntriesSelection());
                     selDirectoryTemplate(fieldDirectory.getDirectoryTemplate()); // Шаблон спр-ка
                 } else if (!fieldDirectory.getDirectoryEntriesSelection()) { // Выбор записей справочника == Несколько записей
@@ -998,16 +999,6 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
         return this;
     }
 
-    /**
-     * Ожидание появления элемента(\ов) в форме редактирования на вкладке Поля
-     * кнопки - Добавить; Редактировать
-     */
-    public DocRegisterCardsEditFieldsPage appearanceOfItemsInTheEditFormFieldTab() {
-        wait.until(presenceOfElementLocated(By
-                .xpath("(//div[count(a)=5]/a[1]//span)")));
-        wait.until(presenceOfElementLocated(By
-                .xpath("(//div[count(a)=5]/a[2]//span)")));
-        return this;
-    }
+
 
 }

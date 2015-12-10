@@ -64,7 +64,7 @@ public class OptionsTest extends BaseObjectCase {
 
         taskForm.addAttachFiles(randomString(15)); // Аттачим файлы
 
-        internalPage.signOut(); // Выход из системы
+        internalPage.logout(); // Выход из системы
 
     }
 

@@ -68,7 +68,7 @@ public class SearchTest extends BaseObjectCase {
         searchPage.searchContact(EMPLOYEE_ADMIN); // проверяем поиск Контакта пользователя по Фамилии
 
 
-        internalPage.signOut(); // Выход из системы
+        internalPage.logout(); // Выход из системы
 
     }
 

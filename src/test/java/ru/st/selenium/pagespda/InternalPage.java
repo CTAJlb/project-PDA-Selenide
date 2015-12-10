@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.st.selenium.logicinterface.BaseOperation;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -16,6 +17,7 @@ import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Condition.appears;
+
 /*
  * Импорт для использования методов самого Selenium, в т.ч. объект WebDriver.
  * Дальше можно спокойно использовать метод getWebDriver(), который возвращает объект WebDriver.
@@ -26,7 +28,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 /**
  * Внутреняя страница системы
  */
-public class InternalPage extends Page {
+public class InternalPage extends Page implements BaseOperation {
 
     /*
      * Ссылки на все пункты меню
@@ -103,6 +105,7 @@ public class InternalPage extends Page {
      *
      * @return information about the number of the menu on the main page
      */
+    @Override
     public boolean hasMenuUserComplete() {
         menuElements.shouldHaveSize(4);
         return !menuElements.isEmpty();
@@ -186,13 +189,13 @@ public class InternalPage extends Page {
         return page(SearchPage.class);
     }
 
-
     /**
      * Универсальный выход из системы (где бы ненаходился пользователь)
      *
      * @return LoginPage
      */
-    public LoginPage signOut() {
+    @Override
+    public void logout() {
         try {
             (new WebDriverWait(getWebDriver(), 0, 50))
                     .until(ExpectedConditions.presenceOfElementLocated(By
@@ -206,8 +209,5 @@ public class InternalPage extends Page {
         $(By.cssSelector("#login")).shouldHave(appears);
         $(By.cssSelector("#pass")).shouldHave(appears);
         $(By.cssSelector("input[name='logon']")).getCssValue("Вход");
-        return page(LoginPage.class);
     }
-
-
 }

@@ -86,7 +86,7 @@ public class TodayTest extends BaseObjectCase {
         todayPage.verifyInformationDisplaySectionToday(textActions);
 
 
-        internalPage.signOut(); // Выход из системы
+        internalPage.logout(); // Выход из системы
 
     }
 

@@ -5,7 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
 import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.DocRegisterCards;
@@ -19,7 +18,6 @@ import ru.st.selenium.pagespda.Page;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 
 public class NewDocumentPage extends Page {
@@ -373,7 +371,7 @@ public class NewDocumentPage extends Page {
      */
     public NewDocumentPage waitForProjectMask() {
         waitMillisecond(0.3);
-        $(By.xpath("//*[contains (@class, 'x-mask x-mask-fixed')]")).shouldBe(Condition.visible);
+        $(By.xpath("//*[contains (@class, 'x-mask x-mask-fixed')]")).shouldBe(Condition.disappear);
         return this;
     }
 
@@ -381,9 +379,8 @@ public class NewDocumentPage extends Page {
      * Ожидание исчезновения маски из DOM в форме создания документа
      */
     public NewDocumentPage waitForFormNewDocumentMask() {
-        waitSeconds(0.3);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-                .xpath("//div[contains(@class,'ext-el-mask-msg x-mask-loading') or @class='ext-el-mask' and not(@style='display: none;')]")));
+        waitMillisecond(0.3);
+        $(By.xpath("//div[contains(@class,'ext-el-mask-msg x-mask-loading') or @class='ext-el-mask' and not(@style='display: none;')]")).shouldBe(Condition.disappear);
         return this;
     }
 
@@ -414,9 +411,9 @@ public class NewDocumentPage extends Page {
             getWebDriver().findElement(By.xpath("//table//tr/td[1]/div[contains(text(),'" + nameField + "')]/../../td[2]/div")).click();
             inputField.click();
             $(By.xpath("//div[contains(@class,'x-combo-list')]//*[contains(text(),'" + valueDictionary
-                                    .getNameDictionItem() + "')][ancestor::div[contains(@style,'visibility: visible')]]")).shouldBe(Condition.present);
+                                    .getDictionaryElement() + "')][ancestor::div[contains(@style,'visibility: visible')]]")).shouldBe(Condition.present);
             $(By.xpath("//div[contains(@class,'x-combo-list')]//*[contains(text(),'" + valueDictionary
-                    .getNameDictionItem() + "')][ancestor::div[contains(@style,'visibility: visible')]]")).click();
+                    .getDictionaryElement() + "')][ancestor::div[contains(@style,'visibility: visible')]]")).click();
         }
         return this;
     }
@@ -456,7 +453,7 @@ public class NewDocumentPage extends Page {
             for (Department departments : department) {
                 $(By.xpath("//table//tr/td[1]/div[contains(text(),'" + nameField + "')]/../../td[2]/div/../../td[3]//img")).click();
                 String parentWindowHandler = getWebDriver().getWindowHandle(); // Store your parent window
-                getWebDriver().switchTo().window(new WebDriverWait(driver, 10).until(newWindowForm(By.cssSelector("#searchField"))));
+                getWebDriver().switchTo().window(new WebDriverWait(getWebDriver(), 10).until(newWindowForm(By.cssSelector("#searchField"))));
                 $(searchFieldDepartment).shouldBe(Condition.present);
                 searchFieldDepartment.click();
                 searchFieldDepartment.clear();
@@ -617,7 +614,7 @@ public class NewDocumentPage extends Page {
     public NewDocumentPage clickSaveAndCreateNewDocument() {
         gotoTopFrame();
         gotoFrameFormNewDocument();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='saveAndNewButton']//button")));
+        $(By.xpath("//div[@id='saveAndNewButton']//button")).shouldBe(Condition.present);
         saveAndCreateNewDocument.click();
         return this;
     }
@@ -628,8 +625,7 @@ public class NewDocumentPage extends Page {
      * @return
      */
     public NewDocumentPage assertVerifyCreateDoc() {
-        waitForPageUntilElementIsVisible(By
-                .xpath("//a[@class='error_message' and @style='text-decoration:none']"), 5000);
+        $(By.xpath("//a[@class='error_message' and @style='text-decoration:none']")).shouldBe(Condition.visible);
         return this;
     }
 

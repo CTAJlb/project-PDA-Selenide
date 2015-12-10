@@ -7,6 +7,4 @@ package ru.st.selenium.modelweb;
 public enum AccessRights {
     PERSONAL, AVAILABLETOALL, READONLY
 
-
-
 }

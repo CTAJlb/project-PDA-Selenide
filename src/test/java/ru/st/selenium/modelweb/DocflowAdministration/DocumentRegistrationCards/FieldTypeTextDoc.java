@@ -1,7 +1,7 @@
 package ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards;
 
 
-import ru.st.selenium.modelweb.Directories.Directory;
+import ru.st.selenium.modelweb.Directories.Directories;
 
 /**
  * Модель объекта системы - Тип поля документа "Текст"
@@ -9,7 +9,7 @@ import ru.st.selenium.modelweb.Directories.Directory;
 public class FieldTypeTextDoc extends ParentFieldTypeDoc {
 
     private String nameDirectory;
-    private Directory directory;
+    private Directories directories;
     private String directoryTemplate;
     private boolean selectOnlyFromDictionary;
 
@@ -33,12 +33,12 @@ public class FieldTypeTextDoc extends ParentFieldTypeDoc {
      *
      * @return FieldTypeTextDoc
      */
-    public Directory getDirectoryForFieldText() {
-        return directory;
+    public Directories getDirectoryForFieldText() {
+        return directories;
     }
 
-    public FieldTypeTextDoc setDirectoryForFieldText(Directory directory) {
-        this.directory = directory;
+    public FieldTypeTextDoc setDirectoryForFieldText(Directories directories) {
+        this.directories = directories;
         return this;
     }
 

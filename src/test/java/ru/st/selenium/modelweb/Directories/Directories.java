@@ -3,7 +3,7 @@ package ru.st.selenium.modelweb.Directories;
 /**
  *  Модель объекта системы - Справочники (Администрирование/Справочники)
  */
-public class Directory {
+public class Directories {
 
     private String directoryName;
     private boolean shareRecords;
@@ -20,7 +20,7 @@ public class Directory {
         return directoryName;
     }
 
-    public Directory setDirectoryName(String nameDirectoryName) {
+    public Directories setDirectoryName(String nameDirectoryName) {
         this.directoryName = nameDirectoryName;
         return this;
     }
@@ -32,7 +32,7 @@ public class Directory {
         return shareRecords;
     }
 
-    public Directory setShareRecords(boolean shareRecords) {
+    public Directories setShareRecords(boolean shareRecords) {
         this.shareRecords = shareRecords;
         return this;
     }
@@ -44,7 +44,7 @@ public class Directory {
         return setAccessToRecords;
     }
 
-    public Directory setSetAccessToRecords(boolean setAccessToRecords) {
+    public Directories setSetAccessToRecords(boolean setAccessToRecords) {
         this.setAccessToRecords = setAccessToRecords;
         return this;
     }
@@ -56,7 +56,7 @@ public class Directory {
         return isMappingDevice;
     }
 
-    public Directory setMappingDevice(boolean isMappingDevice) {
+    public Directories setMappingDevice(boolean isMappingDevice) {
         this.isMappingDevice = isMappingDevice;
         return this;
     }
@@ -68,7 +68,7 @@ public class Directory {
         return searchSettings;
     }
 
-    public Directory setSearchSettings(boolean searchSettings) {
+    public Directories setSearchSettings(boolean searchSettings) {
         this.searchSettings = searchSettings;
         return this;
     }
@@ -80,7 +80,7 @@ public class Directory {
         return directoryFields;
     }
 
-    public Directory setDirectoryFields(DirectoryField[] directoryFields) {
+    public Directories setDirectoryFields(DirectoryField[] directoryFields) {
         this.directoryFields = directoryFields;
         return this;
     }

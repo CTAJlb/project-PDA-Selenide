@@ -1,7 +1,7 @@
 package ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards;
 
 
-import ru.st.selenium.modelweb.Directories.Directory;
+import ru.st.selenium.modelweb.Directories.Directories;
 
 /**
  * Модель объекта системы - Тип поля документа "Справочник"
@@ -9,7 +9,7 @@ import ru.st.selenium.modelweb.Directories.Directory;
 public class FieldTypeDirectoryDoc extends ParentFieldTypeDoc {
 
     private String nameDirectory;
-    private Directory directory;
+    private Directories directories;
     private String directoryTemplate;
     private boolean directoryEntriesSelection;
 
@@ -33,12 +33,12 @@ public class FieldTypeDirectoryDoc extends ParentFieldTypeDoc {
      *
      * @return
      */
-    public Directory getDirectoryDoc() {
-        return directory;
+    public Directories getDirectoryDoc() {
+        return directories;
     }
 
-    public FieldTypeDirectoryDoc setDirectoryDoc(Directory directory) {
-        this.directory = directory;
+    public FieldTypeDirectoryDoc setDirectoryDoc(Directories directories) {
+        this.directories = directories;
         return this;
     }
 

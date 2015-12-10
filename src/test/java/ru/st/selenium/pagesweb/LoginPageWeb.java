@@ -62,7 +62,6 @@ public class LoginPageWeb extends Page {
     public LoginPageWeb loginAsAdmin(Employee user) {
         setLoginField(user.getLoginName());
         setPasswordField(user.getPassword());
-        submitButton.click();
         return this;
     }
 

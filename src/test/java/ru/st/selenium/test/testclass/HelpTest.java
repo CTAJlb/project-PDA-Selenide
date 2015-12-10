@@ -45,7 +45,7 @@ public class HelpTest extends BaseObjectCase {
 
         assertEquals(19, helpPage.results().size()); // проверяем кол-во элементов на стр-це ппомочи
 
-        internalPage.signOut(); // Выход из системы
+        internalPage.logout(); // Выход из системы
 
     }
 

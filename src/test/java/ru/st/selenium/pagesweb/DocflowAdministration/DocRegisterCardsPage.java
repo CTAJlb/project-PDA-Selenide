@@ -1,5 +1,7 @@
 package ru.st.selenium.pagesweb.DocflowAdministration;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -8,6 +10,8 @@ import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.pagespda.Page;
 
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 /**
@@ -20,7 +24,7 @@ public class DocRegisterCardsPage extends Page {
 	 * Пользователяская API для эмуляции сложных пользовательских действий
 	 * (эмуляция клавиатуры и мыши)
 	 */
-	Actions action = new Actions(driver);
+	Actions action = new Actions(getWebDriver());
 
 	/**
 	 * Метод имитирующий нажатие клавиши - Enter
@@ -59,31 +63,31 @@ public class DocRegisterCardsPage extends Page {
 	 * Добавить Регистрационную карточку документа
 	 */
 	@FindBy(xpath = "//div[count(a)=3]/a[1]//span")
-	private WebElement clickAddOnRegCards;
+	private SelenideElement clickAddOnRegCards;
 
 	/**
 	 * Редактировать Регистрационную карточку документа
 	 */
 	@FindBy(xpath = "//div[count(a)=3]/a[2]//span")
-	private WebElement clickEditOnRegCards;
+	private SelenideElement clickEditOnRegCards;
 
 	/**
 	 * Удалить Регистрационную карточку документа
 	 */
 	@FindBy(xpath = "//div[count(a)=3]/a[3]//span")
-	private WebElement clickDelOnRegCards;
+	private SelenideElement clickDelOnRegCards;
 
 	/**
 	 * iФрейм
 	 */
 	@FindBy(id = "flow")
-	private WebElement Frem;
+	private SelenideElement Frem;
 
 	/**
 	 * Уходим во фрейм - Регистрационные карточки документов
 	 */
 	public DocRegisterCardsPage gotoFremRegisterCardsPage() {
-		driver.switchTo().frame(Frem);
+		getWebDriver().switchTo().frame(Frem);
 		return this;
 	}
 
@@ -93,7 +97,7 @@ public class DocRegisterCardsPage extends Page {
 	 * @return TaskTypeListObjectPage
 	 */
 	public DocRegisterCardsPage gotoTopFrem() {
-		driver.switchTo().defaultContent();
+		getWebDriver().switchTo().defaultContent();
 		return this;
 	}
 
@@ -112,23 +116,11 @@ public class DocRegisterCardsPage extends Page {
 	 */
 	public DocRegisterCardsPage verifyDocRegisterCards(
 			String ObjectDocRegisterCards) {
-		waitForPageUntilElementIsVisible(
-				By.xpath("//div[@class='x-grid-item-container']//span[contains(text(),'"
-						+ ObjectDocRegisterCards + "')]"), 5000);
+		$(By.xpath("//div[@class='x-grid-item-container']//span[contains(text(),'"
+						+ ObjectDocRegisterCards + "')]")).shouldBe(Condition.visible);
 		return this;
 	}
 
-	/**
-	 * Ожидание появления элемента(\ов) в гриде - Регистрационные карточки
-	 * документов: Кнопка Добавить РКД И отображение элемента - Регистрационная
-	 * карточка документа
-	 */
-	public DocRegisterCardsPage ensurePageLoaded() {
-		super.ensurePageLoaded();
-		wait.until(presenceOfElementLocated(By
-				.xpath("//div[count(a)=3]/a[1]//span")));
-		wait.until(presenceOfElementLocated(By.xpath("//div[count(*)=3]/span")));
-		return this;
-	}
+
 
 }

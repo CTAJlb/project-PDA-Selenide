@@ -1,14 +1,14 @@
 package ru.st.selenium.modelweb.FieldsObject;
 
 
-import ru.st.selenium.modelweb.Directories.Directory;
+import ru.st.selenium.modelweb.Directories.Directories;
 
 /**
  * Модель объекта системы - Тип поля "Вложенный справочник"
  */
 public class TypeListFieldsEnclosedDirectory extends ParentFieldsObject {
 
-    private Directory directory;
+    private Directories directories;
     private String nameDirectory;
 
     /**
@@ -30,12 +30,12 @@ public class TypeListFieldsEnclosedDirectory extends ParentFieldsObject {
      *
      * @return
      */
-    public Directory getDirectory() {
-        return directory;
+    public Directories getDirectories() {
+        return directories;
     }
 
-    public TypeListFieldsEnclosedDirectory setDirectory(Directory directory) {
-        this.directory = directory;
+    public TypeListFieldsEnclosedDirectory setDirectories(Directories directories) {
+        this.directories = directories;
         return this;
     }
 

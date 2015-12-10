@@ -10,7 +10,7 @@
 	<test name="Test1">
 		<parameter name="path" value="/"/>
 		<classes>
-		    <class name="ru.st.selenium.test.testclass.UserAuthenticationTest"/>
+		    <class name="ru.st.selenium.test.testclass.UsersAuthenticationTest"/>
 		    <class name="ru.st.selenium.test.testclass.CreateTasksTest"/>
 		    <class name="ru.st.selenium.test.testclass.DocumentsTest"/>
 		    <class name="ru.st.selenium.test.testclass.SearchTest"/>

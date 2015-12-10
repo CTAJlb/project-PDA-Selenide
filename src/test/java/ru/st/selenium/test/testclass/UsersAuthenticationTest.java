@@ -26,7 +26,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Раздел - Стр. авторизации
  */
-public class UserAuthenticationTest extends BaseObjectCase {
+public class UsersAuthenticationTest extends BaseObjectCase {
 
 
     /**
@@ -38,7 +38,7 @@ public class UserAuthenticationTest extends BaseObjectCase {
         loginPage.loginAsAdmin(ADMIN);
         InternalPage internalPage = loginPage.goToInternalMenu(); // Проверяем отображение п.м. системы
         assertTrue(internalPage.hasMenuUserComplete());
-        internalPage.signOut(); // Выход из системы
+        internalPage.logout(); // Выход из системы
     }
 
     /**

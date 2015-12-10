@@ -1,14 +1,11 @@
 package ru.st.selenium.test.testclass;
 
 import com.codeborne.selenide.testng.TextReport;
-import org.junit.Assert;
 import ru.st.selenium.modelweb.AccessRights;
-import ru.st.selenium.modelweb.Directories.Directory;
+import ru.st.selenium.modelweb.Directories.Directories;
 import ru.st.selenium.modelweb.Directories.DirectoryField;
 import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditor;
-import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.DocRegisterCardsField;
 import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.*;
-import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.ObligatoryFieldDocument;
 import ru.st.selenium.modelweb.FieldsObject.*;
 import ru.st.selenium.modelweb.OpenFilesForEdit;
 import ru.st.selenium.modelweb.ShiftDirection;
@@ -16,6 +13,9 @@ import ru.st.selenium.pagespda.DocumentsPage;
 import ru.st.selenium.pagespda.InternalPage;
 import ru.st.selenium.pagespda.LoginPage;
 import ru.st.selenium.pagespda.Page;
+import ru.st.selenium.pagesweb.Administration.DirectoriesEditFormPage;
+import ru.st.selenium.pagesweb.Administration.TaskTypeListObjectPage;
+import ru.st.selenium.pagesweb.DocflowAdministration.DictionaryEditorPage;
 import ru.st.selenium.pagesweb.Internal.InternalPageWeb;
 import ru.st.selenium.pagesweb.LoginPageWeb;
 import ru.st.selenium.test.data.BaseObjectCase;
@@ -25,6 +25,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -59,7 +60,7 @@ public class DocumentsTest extends BaseObjectCase {
             .setFieldType(new TypeListFieldsInt());
 
     // Инициализируем объект - Справочник
-    Directory directory = new Directory()
+    Directories directories = new Directories()
 
             // Вкладка - Настройки
             .setDirectoryName("S_Справочник" + randomString(10)) // Название справочника
@@ -257,7 +258,7 @@ public class DocumentsTest extends BaseObjectCase {
             .setFieldNameDoc("Множественный справочник " + randomString(5))
             .setFieldIDDoc("DIRMULTI" + randomID(5)) // Идентификатор поля
             .setFieldTypeDoc(new FieldTypeDirectoryDoc()
-                    .setDirectoryDoc(directory) // Задаем проинициализированный спр-к
+                    .setDirectoryDoc(directories) // Задаем проинициализированный спр-к
                     .setDirectoryTemplate("{Код дела}, " + "{Наименование раздела} " + randomString(15))
                     .setDirectoryEntriesSelection(false)) // Выбор записей спр-ка; true == Одна запись; false == Несколько записей
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
@@ -334,28 +335,31 @@ public class DocumentsTest extends BaseObjectCase {
 
         loginPageWeb.loginAsAdmin(ADMIN);
 
-        InternalPageWeb internalPage = loginPageWeb.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
+        InternalPageWeb internalPageWeb = loginPageWeb.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        assertThat("Check that the displayed menu item 8 (Logo; Tasks; Documents; Messages; Calendar; Library; Tools; Details)",
+                internalPageWeb.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
-        /*
-        // Авторизация
-        app.getUsersHelper().loginAs(ADMIN);
-        Assert.assertTrue(app.getUsersHelper().isLoggedIn());
+
         // Переход в раздел Администрирование/Справочники
-        app.getDirectoryHelper().beforeAdd();
-        app.getDirectoryHelper().addDirectory(directory);
-        // Выход из системы
-        app.getUsersHelper().logout();
+        TaskTypeListObjectPage directoriesPageWeb = internalPageWeb.gotoDirectories();
 
-        // Авторизация в Систему
-        app.getUsersHelper().loginAs(ADMIN);
-        Assert.assertTrue(app.getUsersHelper().isLoggedIn());
+        directoriesPageWeb.addDirectories(directories);
+
+        // переходим в форму редактирования Справочника
+        DirectoriesEditFormPage directoriesEditPage = internalPageWeb.gotoDirectoriesEditPage();
+
+        directoriesEditPage.addFieldDirectories(directories);
+
+        internalPageWeb.logout(); // Выход из системы
+
+        loginPageWeb.loginAsAdmin(ADMIN);
+        loginPageWeb.goToInternalMenu();
         // Переход в раздел Администрирование ДО/Редактор словарей
-        app.getDictionaryEditorHelper().beforeAdd();
-        app.getDictionaryEditorHelper().addDictionaryEditor(dictionaryEditor);
-        app.getUsersHelper().logout();
+        DictionaryEditorPage dictionaryEditorPage = internalPageWeb.goToDictionaryEditor();
+        dictionaryEditorPage.addDictionaryEditor(dictionaryEditor);
 
-        // Авторизация в Систему
+/*
+        // TODO Добить создание РКД
         app.getUsersHelper().loginAs(ADMIN);
         Assert.assertTrue(app.getUsersHelper().isLoggedIn());
 
@@ -370,6 +374,8 @@ public class DocumentsTest extends BaseObjectCase {
 
         // Проверка - пользователь разлогинен
         Assert.assertTrue(app.getUsersHelper().isNotLoggedIn()); */
+
+//        internalPageWeb.logout(); // Выход из системы
     }
 
     /**
@@ -389,7 +395,7 @@ public class DocumentsTest extends BaseObjectCase {
 
         documentsPage.checkMapGridsDocuments();
 
-        internalPage.signOut(); // Выход из системы
+        internalPage.logout(); // Выход из системы
 
     }
 

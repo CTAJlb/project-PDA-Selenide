@@ -1,6 +1,5 @@
 package ru.st.selenium.test.testclass;
 
-
 import com.codeborne.selenide.Selenide;
 
 import com.codeborne.selenide.testng.TextReport;
@@ -63,7 +62,7 @@ public class CreateTasksTest extends BaseObjectCase {
         TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
         tasksReportsPage.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
 
-        internalPage.signOut(); // Выход из системы
+        internalPage.logout(); // Выход из системы
 
     }
 
@@ -115,7 +114,7 @@ public class CreateTasksTest extends BaseObjectCase {
         taskForm.saveActionsInTheTape(randomString(15)); // добавляем пользовательский текст в задачу и проверяем его сохранение
         editTaskPage.editWorkingGroupInTask(EMPLOYEE_ADMIN); // редактируем РГ задачи (удаляем пользователей)
 
-        internalPage.signOut(); // Выход из системы
+        internalPage.logout(); // Выход из системы
 
     }
 
@@ -164,7 +163,7 @@ public class CreateTasksTest extends BaseObjectCase {
 
      tasksReportsPage.checkDisappearTaskInGrid(task);
 
-     internalPage.signOut(); // Выход из системы
+     internalPage.logout(); // Выход из системы
 
 
      }
