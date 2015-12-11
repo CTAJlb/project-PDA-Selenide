@@ -34,7 +34,6 @@ public class DocumentsPage extends Page {
      * Проверяем отображение гридов документа
      *
      * @return results instance page grid documents
-     * TODO - расширить проверку, после инициализации документа в Мотив
      */
     public DocumentsPage checkMapGridsDocuments() {
         onReview.click();

@@ -267,7 +267,7 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      * @return DirectoriesEditFormPage
      */
     public DirectoriesEditFormPage clickSettingsTab() {
-        settingsTab.click();
+        $(settingsTab).shouldBe(Condition.present).click();
         return this;
     }
 
@@ -786,17 +786,16 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
     public void addFieldDirectories(Directories directories) {
         clickFieldsTab(); // Выбираем вкладку Поля
         waitingElementsTabField() // Ожидаем появления элементов на вкладке "Поля"
-                .addAllFieldsDirectory(directories.getDirectoryFields()) // Добавление всех типов полей
-
+                .addAllFieldsDirectory(directories.getDirectoryFields()) // Добавление типов полей
                 .clickSettingsTab() // выбор вкладки Настройки
                 .selShareRecords(directories.getShareRecords()) // Общедоступность записей
                 .selRecordAccessSetting(directories.getSetAccessToRecords()) // Настройка доступа к записям
                 .selMappingDevice(directories.getMappingDevice()) // Способ отображения
                 .selSearchSettings(directories.getSearchSettings()) // Настройка поиска
-
                 .clickSaveObject() // Сохранить объект
+                .verifyCreateObject(directories.getDirectoryName()); // Проверяем отображение сохраненного объекта в гриде
 
-                .verifyCreateObject(directories.getDirectoryName());
+                gotoTopFrem(); // Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPageWeb)
     }
 
     @Override

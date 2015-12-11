@@ -2,21 +2,21 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression Tests PDA Motiw" verbose="5" data-provider-thread-count="1">
 	<listeners>
-		<listener class-name="ru.st.selenium.test.data.RetryListener"/>
-		<listener class-name="ru.st.selenium.test.data.TestListener"/>
+		<listener class-name="ru.st.selenium.test.listeners.RetryListener"/>
+		<listener class-name="ru.st.selenium.test.listeners.TestListener"/>
 		<listener class-name="com.codeborne.selenide.testng.TextReport" />
 	</listeners>
 
 	<test name="Test1">
 		<parameter name="path" value="/"/>
 		<classes>
-		    <class name="ru.st.selenium.test.testclass.UsersAuthenticationTest"/>
-		    <class name="ru.st.selenium.test.testclass.CreateTasksTest"/>
-		    <class name="ru.st.selenium.test.testclass.DocumentsTest"/>
-		    <class name="ru.st.selenium.test.testclass.SearchTest"/>
-		    <class name="ru.st.selenium.test.testclass.OptionsTest"/>
-		    <class name="ru.st.selenium.test.testclass.TodayTest"/>
-		    <class name="ru.st.selenium.test.testclass.HelpTest"/>
+		    <class name="ru.st.selenium.test.testPda.UsersAuthenticationTest"/>
+		    <class name="ru.st.selenium.test.testPda.CreateTasksTest"/>
+		    <class name="ru.st.selenium.test.testPda.DocumentsTest"/>
+		    <class name="ru.st.selenium.test.testPda.SearchTest"/>
+		    <class name="ru.st.selenium.test.testPda.OptionsTest"/>
+		    <class name="ru.st.selenium.test.testPda.TodayTest"/>
+		    <class name="ru.st.selenium.test.testPda.HelpTest"/>
 		</classes>
 	</test>
 </suite>

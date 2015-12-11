@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.visible;
 /*
  * Страница - Сегодня
  */
-public class TodayPage {
+public class TodayPage extends Page {
 
 
     /**

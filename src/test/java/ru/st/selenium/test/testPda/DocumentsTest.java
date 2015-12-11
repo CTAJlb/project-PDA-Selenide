@@ -1,4 +1,4 @@
-package ru.st.selenium.test.testclass;
+package ru.st.selenium.test.testPda;
 
 import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.modelweb.AccessRights;
@@ -16,6 +16,8 @@ import ru.st.selenium.pagespda.Page;
 import ru.st.selenium.pagesweb.Administration.DirectoriesEditFormPage;
 import ru.st.selenium.pagesweb.Administration.TaskTypeListObjectPage;
 import ru.st.selenium.pagesweb.DocflowAdministration.DictionaryEditorPage;
+import ru.st.selenium.pagesweb.DocflowAdministration.FormDocRegisterCardsEditPageWeb;
+import ru.st.selenium.pagesweb.DocflowAdministration.GridDocRegisterCardsPageWeb;
 import ru.st.selenium.pagesweb.Internal.InternalPageWeb;
 import ru.st.selenium.pagesweb.LoginPageWeb;
 import ru.st.selenium.test.data.BaseObjectCase;
@@ -344,39 +346,34 @@ public class DocumentsTest extends BaseObjectCase {
         // Переход в раздел Администрирование/Справочники
         TaskTypeListObjectPage directoriesPageWeb = internalPageWeb.gotoDirectories();
 
+        // добавляем объект - Справочник
         directoriesPageWeb.addDirectories(directories);
 
         // переходим в форму редактирования Справочника
         DirectoriesEditFormPage directoriesEditPage = internalPageWeb.gotoDirectoriesEditPage();
 
+        // Добавляем настройки И поля спр-ка
         directoriesEditPage.addFieldDirectories(directories);
 
-        internalPageWeb.logout(); // Выход из системы
-
-        loginPageWeb.loginAsAdmin(ADMIN);
-        loginPageWeb.goToInternalMenu();
-        // Переход в раздел Администрирование ДО/Редактор словарей
+        // Переход в раздел - Администрирование ДО/Редактор словарей
         DictionaryEditorPage dictionaryEditorPage = internalPageWeb.goToDictionaryEditor();
         dictionaryEditorPage.addDictionaryEditor(dictionaryEditor);
 
-/*
-        // TODO Добить создание РКД
-        app.getUsersHelper().loginAs(ADMIN);
-        Assert.assertTrue(app.getUsersHelper().isLoggedIn());
 
         // Переход в раздел Администрирование ДО/Регистрационные карточки документов
-        app.getDocRegisterCardsHelper().beforeAdd();
+        GridDocRegisterCardsPageWeb gridDocRegisterCardsPageWeb = internalPageWeb.goToGridDocRegisterCards();
 
         // Добавление РКД с проинициализированными объектами
-        app.getDocRegisterCardsHelper().addDocRegisterCards(registerCards);
+        FormDocRegisterCardsEditPageWeb formDocRegisterCardsEditPageWeb = gridDocRegisterCardsPageWeb.addDocRegisterCards();
 
-        // Выход из системы
-        app.getUsersHelper().logout();
+        // Добавление настроек РКД
+        formDocRegisterCardsEditPageWeb.addSettingsDocRegisterCards(registerCards);
+        // Добавление полей РКД
+        formDocRegisterCardsEditPageWeb.addFieldsDocRegisterCards(registerCards);
+        // Сохранение настроек РКД
+        formDocRegisterCardsEditPageWeb.saveAllChangesInDoc(registerCards);
 
-        // Проверка - пользователь разлогинен
-        Assert.assertTrue(app.getUsersHelper().isNotLoggedIn()); */
-
-//        internalPageWeb.logout(); // Выход из системы
+        internalPageWeb.logout(); // Выход из системы
     }
 
     /**

@@ -67,7 +67,7 @@ public class LoginPageWeb extends Page {
 
 
     /**
-     * Проверяем отображение меню на внутренней странице
+     * Осуществляем вход в систему - клик - Вход (на стр. авторизации)
      *
      * @return results internal page instance
      */

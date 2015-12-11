@@ -1,4 +1,4 @@
-package ru.st.selenium.test.testclass;
+package ru.st.selenium.test.testPda;
 
 import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.modelpda.Task;

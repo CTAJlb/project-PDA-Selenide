@@ -1,8 +1,5 @@
 package ru.st.selenium.pagesweb.DocflowAdministration;
 
-/**
- * Страница - Администрирование ДО/Редактор словарей
- */
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -18,6 +15,9 @@ import ru.st.selenium.pagespda.Page;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
+/**
+ * Страница - Администрирование ДО/Редактор словарей
+ */
 public class DictionaryEditorPage extends Page implements DictionaryEditorLogic {
 
 
@@ -29,7 +29,6 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
 
     /**
      * Список объектов - Словарь
-     * TODO - переписать!!!
      */
     @FindBy(xpath = "//table[contains(@id,'treeview')]")
     private ElementsCollection tableGridTreeView;
@@ -164,25 +163,6 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
     @FindBy(xpath = "//div[count(a)=3 and contains(@id,'toolbar')]/a[3]//preceding-sibling::span")
     private SelenideElement backWithoutSaving;
 
-
-    /**
-     * Уходим во фрейм - Администрирование ДО/Редактор словарей
-     *
-     * @return CreateDepartmentPage
-     */
-    public DictionaryEditorPage gotoFremDictionaryEditorPage() {
-        getWebDriver().switchTo().frame(Frem);
-        return this;
-    }
-
-    /**
-     * Уходим из фрейм в ТОР
-     */
-    public DictionaryEditorPage gotoTopFrem() {
-        getWebDriver().switchTo().defaultContent();
-        return this;
-    }
-
     /**
      * Клик Добавить объект - Редактор словарей
      */
@@ -249,15 +229,6 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
     }
 
     /**
-     * Вводим Описание элемента - Словаря
-     */
-    public DictionaryEditorPage setDescriptionDicItem(String descriptionDicItem) {
-        descriptionDictionaryEditorItem.clear();
-        descriptionDictionaryEditorItem.setValue(descriptionDicItem);
-        return this;
-    }
-
-    /**
      * Сохранить элемент словаря
      *
      * @return DictionaryEditorPage
@@ -313,6 +284,8 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
                 .addDictionItemFields(directoriesEditor.getDictionaryEditorFields()) // Добавляем элементы словаря
                 .saveDictionaryEditor() // Сохранить все изменения
                 .verifyDictionaryEditor(directoriesEditor.getDictionaryEditorName()); // Проверяем создание Словаря
+
+        gotoTopFrem(); // Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPageWeb)
     }
 
     @Override

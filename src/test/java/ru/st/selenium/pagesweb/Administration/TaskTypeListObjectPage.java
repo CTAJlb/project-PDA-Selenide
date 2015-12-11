@@ -89,16 +89,6 @@ public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
 
 
     /**
-     * Уходим из фрейм в ТОР
-     *
-     * @return TaskTypeListObjectPage
-     */
-    public TaskTypeListObjectPage gotoTopFrem() {
-        getWebDriver().switchTo().defaultContent();
-        return this;
-    }
-
-    /**
      * Кнопка: Добавить объект - в гриде - Типы Таблиц/Типы задач/Справочники
      */
     public TaskTypeListObjectPage addTaskTypesObject() {

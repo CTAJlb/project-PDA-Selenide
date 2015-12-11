@@ -11,14 +11,16 @@ import ru.st.selenium.pagespda.Page;
 import ru.st.selenium.pagesweb.Administration.DirectoriesEditFormPage;
 import ru.st.selenium.pagesweb.Administration.TaskTypeListObjectPage;
 import ru.st.selenium.pagesweb.DocflowAdministration.DictionaryEditorPage;
-import ru.st.selenium.pagesweb.DocflowAdministration.DocRegisterCardsPage;
+import ru.st.selenium.pagesweb.DocflowAdministration.GridDocRegisterCardsPageWeb;
 import ru.st.selenium.pagesweb.Documents.NewDocumentPage;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-
+/**
+ * Внутренняя страница системы (ОМ - Основное меню)
+ */
 public class InternalPageWeb extends Page implements BaseOperation {
 
     /*
@@ -167,7 +169,7 @@ public class InternalPageWeb extends Page implements BaseOperation {
     private void subMenuClicker(SelenideElement firstclick, SelenideElement secondclick, SelenideElement thirdclick) {
         firstclick.click();
         actions.moveToElement(secondclick).perform();
-        $(thirdclick).shouldBe(Condition.present);
+        $(thirdclick).shouldBe(Condition.visible);
         actions.moveToElement(thirdclick).perform();
         thirdclick.click();
     }
@@ -187,10 +189,10 @@ public class InternalPageWeb extends Page implements BaseOperation {
     /**
      * Переход в меню - Администрирование ДО/Регистрационные карточки документов
      */
-    public DocRegisterCardsPage goToDocRegisterCards() {
+    public GridDocRegisterCardsPageWeb goToGridDocRegisterCards() {
         subMenuClicker(instrMenu, docAdministrationMenu, registerCardsMenu);
         goToFremFlow();
-        return page(DocRegisterCardsPage.class);
+        return page(GridDocRegisterCardsPageWeb.class);
 
     }
 

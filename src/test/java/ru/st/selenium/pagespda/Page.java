@@ -7,6 +7,7 @@ import java.util.Set;
 
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 /**
  * Абстрактное представление класса страницы в пользовательском интерфейсе
@@ -16,6 +17,13 @@ public abstract class Page {
     public static final String PDA_PAGE_URL = "http://pda.johni/";
     public static final String WEB_PAGE_URL = "http://johni/";
 
+    /**
+     * Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPageWeb)
+     */
+    public Page gotoTopFrem() {
+        getWebDriver().switchTo().defaultContent();
+        return this;
+    }
 
     /**
      * Проверяем то, что мы разлогинены
