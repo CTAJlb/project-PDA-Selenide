@@ -65,7 +65,7 @@ public class DocumentsTest extends BaseObjectCase {
     Directories directories = new Directories()
 
             // Вкладка - Настройки
-            .setDirectoryName("S_Справочник" + randomString(10)) // Название справочника
+            .setDirectoryName("S_Справочник " + randomString(10)) // Название справочника
             .setShareRecords(true) // Общедоступность записей
             .setSetAccessToRecords(true) // Настройка доступа к записям
             .setMappingDevice(true) // Способ отображения - Линейный ли? true - да; false - иерархический
@@ -261,7 +261,8 @@ public class DocumentsTest extends BaseObjectCase {
             .setFieldIDDoc("DIRMULTI" + randomID(5)) // Идентификатор поля
             .setFieldTypeDoc(new FieldTypeDirectoryDoc()
                     .setDirectoryDoc(directories) // Задаем проинициализированный спр-к
-                    .setDirectoryTemplate("{Код дела}, " + "{Наименование раздела} " + randomString(15))
+                    .setDirectoryTemplate("{" + fieldStringIsListChoiceDirectory.getFieldName() + "}" + ";"
+                            + "{" + fieldTextDirectory.getFieldName() + "}" + ";" + "{" + fieldIntDirectory.getFieldName() + "}" + "; " + randomString(15))
                     .setDirectoryEntriesSelection(false)) // Выбор записей спр-ка; true == Одна запись; false == Несколько записей
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
@@ -366,10 +367,12 @@ public class DocumentsTest extends BaseObjectCase {
         // Добавление РКД с проинициализированными объектами
         FormDocRegisterCardsEditPageWeb formDocRegisterCardsEditPageWeb = gridDocRegisterCardsPageWeb.addDocRegisterCards();
 
-        // Добавление настроек РКД
-        formDocRegisterCardsEditPageWeb.addSettingsDocRegisterCards(registerCards);
         // Добавление полей РКД
         formDocRegisterCardsEditPageWeb.addFieldsDocRegisterCards(registerCards);
+
+        // Добавление настроек РКД
+        formDocRegisterCardsEditPageWeb.addSettingsDocRegisterCards(registerCards);
+
         // Сохранение настроек РКД
         formDocRegisterCardsEditPageWeb.saveAllChangesInDoc(registerCards);
 

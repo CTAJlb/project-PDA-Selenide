@@ -295,7 +295,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      *
      * @FindBy
      */
-    @FindBy(xpath = "(//table[contains(@id,'checkboxgroup')])[2]//div[1]//input")
+    @FindBy(xpath = "((//fieldset)[8]//table//span[contains(@id,'checkbox')])[1]")
     private SelenideElement clickBoxAccessToSectionsDocumentRoute;
 
     /**
@@ -304,7 +304,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      *
      * @FindBy
      */
-    @FindBy(xpath = "(//table[contains(@id,'checkboxgroup')])[2]//div[2]//input")
+    @FindBy(xpath = "((//fieldset)[8]//table//span[contains(@id,'checkbox')])[2]")
     private SelenideElement clickBoxAccessToSectionsDocumentFiles;
 
     /**
@@ -313,7 +313,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      *
      * @FindBy
      */
-    @FindBy(xpath = "(//table[contains(@id,'checkboxgroup')])[2]//div[3]//input")
+    @FindBy(xpath = "((//fieldset)[8]//table//span[contains(@id,'checkbox')])[3]")
     private SelenideElement clickBoxAccessToSectionsDocumentResolution;
 
     /**
@@ -322,7 +322,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      *
      * @FindBy
      */
-    @FindBy(xpath = "(//table[contains(@id,'checkboxgroup')])[2]//div[4]//input")
+    @FindBy(xpath = "((//fieldset)[8]//table//span[contains(@id,'checkbox')])[4]")
     private SelenideElement clickBoxAccessToSectionsDocumentLog;
 
     /**
@@ -535,37 +535,37 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Число
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[1]")
-    private SelenideElement selTypeFieldNumber;
+    private SelenideElement typeFieldNumber;
 
     /**
      * Дата
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[2]")
-    private SelenideElement selTypeFieldDate;
+    private SelenideElement typeFieldDate;
 
     /**
      * Строка
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[3]")
-    private SelenideElement selTypeFieldString;
+    private SelenideElement typeFieldString;
 
     /**
      * Выбор поля - Справочник для поля типа Строка/Текст/Справочник
      */
     @FindBy(xpath = "//input[@name='id_meta_dictionary']")
-    private SelenideElement selTypeFieldStringOrTextDirectory;
+    private SelenideElement typeFieldStringOrTextDirectory;
 
     /**
      * Текст
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[4]")
-    private SelenideElement selTypeFieldText;
+    private SelenideElement typeFieldText;
 
     /**
      * Словарь
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[5]")
-    private SelenideElement selTypeFieldDictionary;
+    private SelenideElement typeFieldDictionary;
 
     /**
      * Выбор поля Словарь для выбора значения
@@ -577,19 +577,19 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Подразделение
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[6]")
-    private SelenideElement selTypeFieldDepartment;
+    private SelenideElement typeFieldDepartment;
 
     /**
      * Сотрудник
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[7]")
-    private SelenideElement selTypeFieldEmployee;
+    private SelenideElement typeFieldEmployee;
 
     /**
      * Документ
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[8]")
-    private SelenideElement selTypeFieldDocument;
+    private SelenideElement typeFieldDocument;
 
     /**
      * Вкладка - Поиск - в форме редактирования поля типа "Документ"
@@ -619,7 +619,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Нумератор
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[9]")
-    private SelenideElement selTypeFieldNumerator;
+    private SelenideElement typeFieldNumerator;
 
     /**
      * Шаблон нумератора
@@ -631,7 +631,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Справочник
      */
     @FindBy(xpath = "(//ancestor::ul[contains(@id,'boundlist')])[1]/li[10]")
-    private SelenideElement selTypeFieldDirectory;
+    private SelenideElement typeFieldDirectories;
 
     /**
      * Сохранить поле
@@ -1180,7 +1180,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      *
      * @return FormDocRegisterCardsEditPageWeb
      */
-    public FormDocRegisterCardsEditPageWeb clickFieldTypeFieldDoc() {
+    public FormDocRegisterCardsEditPageWeb fetchTypeField() {
         clickFieldTypeField.click();
         return this;
     }
@@ -1349,7 +1349,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selectFieldTypeNumber() {
-        selTypeFieldNumber.click();
+        typeFieldNumber.click();
         return this;
     }
 
@@ -1359,7 +1359,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selectFieldTypeDate() {
-        selTypeFieldDate.click();
+        typeFieldDate.click();
         return this;
     }
 
@@ -1369,7 +1369,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selectFieldTypeString() {
-        selTypeFieldString.click();
+        typeFieldString.click();
         return this;
     }
 
@@ -1379,7 +1379,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb chooseTypeFieldStringTextOrDirectory() {
-        selTypeFieldStringOrTextDirectory.click();
+        typeFieldStringOrTextDirectory.click();
         return this;
     }
 
@@ -1402,7 +1402,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selectFieldTypeText() {
-        selTypeFieldText.click();
+        typeFieldText.click();
         return this;
     }
 
@@ -1412,7 +1412,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selectFieldTypeDictionary() {
-        selTypeFieldDictionary.click();
+        typeFieldDictionary.click();
         return this;
     }
 
@@ -1438,7 +1438,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selectFieldTypeDepartment() {
-        selTypeFieldDepartment.click();
+        typeFieldDepartment.click();
         return this;
     }
 
@@ -1448,7 +1448,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selectFieldTypeEmployee() {
-        selTypeFieldEmployee.click();
+        typeFieldEmployee.click();
         return this;
     }
 
@@ -1512,7 +1512,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selFieldTypeDocument() {
-        selTypeFieldDocument.click();
+        typeFieldDocument.click();
         return this;
     }
 
@@ -1569,7 +1569,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selFieldTypeNumerator() {
-        selTypeFieldNumerator.click();
+        typeFieldNumerator.click();
         return this;
     }
 
@@ -1594,7 +1594,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb selFieldTypeDirectory() {
-        selTypeFieldDirectory.click();
+        typeFieldDirectories.click();
         return this;
     }
 
@@ -1604,7 +1604,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @return FormDocRegisterCardsEditPageWeb
      */
     public FormDocRegisterCardsEditPageWeb clickFieldDirectory() {
-        selTypeFieldStringOrTextDirectory.click();
+        typeFieldStringOrTextDirectory.click();
         return this;
     }
 
@@ -1618,7 +1618,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
         if (directoryName == null) {
             return this;
         } else {
-            selTypeFieldStringOrTextDirectory.click();
+            typeFieldStringOrTextDirectory.click();
             $(By.xpath("//*[text()='" + directoryName + "']")).click();
         }
         return this;
@@ -1653,7 +1653,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Проверяем отображение в гриде полей
      */
     public FormDocRegisterCardsEditPageWeb verifyFieldInGrid(String fieldName) {
-        $(By.xpath("//table[contains(@id,'treeview')]//td[1]/div[text()]")).shouldBe(Condition.text("" + fieldName + ""));
+        $(By.xpath("//table[contains(@id,'treeview')]//td[1]//div[contains(text(),'" + fieldName + "')]")).shouldBe(Condition.exactText("" + fieldName + ""));
         return this;
     }
 
@@ -1672,7 +1672,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
                         clickAddFieldDoc(); // Добавить поле
                         setFieldNameDoc(fieldDoc.getFieldNameDoc()); // Заполняем Название поля документа из массива
                         setFieldIDDoc(fieldDoc.getFieldIDDoc()); // Заполняем Идентификатор поля из массива
-                        clickFieldTypeFieldDoc(); // Выбор поля - Тип поля
+                        fetchTypeField(); // Выбор поля - Тип поля
 
                         // 1. ЧИСЛО
                         if (fieldDoc.getFieldTypeDoc() instanceof FieldTypeNumberDoc) {
