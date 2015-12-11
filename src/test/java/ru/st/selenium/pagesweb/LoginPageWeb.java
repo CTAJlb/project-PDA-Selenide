@@ -39,7 +39,7 @@ public class LoginPageWeb extends Page {
      */
     public LoginPageWeb setLoginField(String text) {
         loginField.clear();
-        loginField.sendKeys(text);
+        loginField.setValue(text);
         return this;
     }
 
@@ -51,7 +51,7 @@ public class LoginPageWeb extends Page {
      */
     public LoginPageWeb setPasswordField(String text) {
         passwordField.clear();
-        passwordField.sendKeys(text);
+        passwordField.setValue(text);
         return this;
     }
 

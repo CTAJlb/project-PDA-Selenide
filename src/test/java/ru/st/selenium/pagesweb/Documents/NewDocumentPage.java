@@ -335,7 +335,7 @@ public class NewDocumentPage extends Page {
             waitForFormNewDocumentMask();
             fieldRegistrationDate.click();
             inputField.clear();
-            inputField.sendKeys(dateRegistration);
+            inputField.setValue(dateRegistration);
         }
         return this;
     }
@@ -351,13 +351,13 @@ public class NewDocumentPage extends Page {
             getWebDriver().switchTo().frame(projectFrame);
             $(projectField).shouldBe(Condition.present);
             projectField.click();
-            editorFieldProject.sendKeys(project.getNameProject());
+            editorFieldProject.setValue(project.getNameProject());
             projectDescription.click();
-            editorTextProject.sendKeys(project.getDescription());
+            editorTextProject.setValue(project.getDescription());
             projectClient.click();
-            editorFieldProject.sendKeys(project.getСlient());
+            editorFieldProject.setValue(project.getСlient());
             projectEnd.click();
-            editorFieldProject.sendKeys(project.getEndDate());
+            editorFieldProject.setValue(project.getEndDate());
             projectSave.click();
             waitForProjectMask();
             getWebDriver().switchTo().defaultContent();
@@ -393,7 +393,7 @@ public class NewDocumentPage extends Page {
         } else {
             $(By.xpath("//table//tr/td[1]/div[contains(text(),'" + nameField + "')]/../../td[2]/div/../../td[3]//img")).click();
             getWebDriver().switchTo().frame(descriptionFrame);
-            ckeBody.sendKeys(text);
+            ckeBody.setValue(text);
             getWebDriver().switchTo().defaultContent();
             getWebDriver().switchTo().frame(frameFlow);
             buttonSaveDescription.click();
@@ -434,10 +434,10 @@ public class NewDocumentPage extends Page {
                 $(By.xpath
                         ("//input[contains(@id,'ext-comp')][ancestor::div[contains(@style,'visibility: visible')]]")).shouldBe(Condition.visible);
                 inputField.clear();
-                inputField.sendKeys(valueLine);
+                inputField.setValue(valueLine);
             } catch (Exception e) {
                 input2Field.clear();
-                input2Field.sendKeys(valueLine);
+                input2Field.setValue(valueLine);
             }
         }
         return this;
@@ -457,8 +457,8 @@ public class NewDocumentPage extends Page {
                 $(searchFieldDepartment).shouldBe(Condition.present);
                 searchFieldDepartment.click();
                 searchFieldDepartment.clear();
-                searchFieldDepartment.sendKeys(departments.getDepName());
-                searchFieldDepartment.sendKeys(Keys.RETURN);
+                searchFieldDepartment.setValue(departments.getDepName());
+                searchFieldDepartment.pressEnter();
                 selectedCheckBox.click();
                 buttonSave.click();
                 getWebDriver().switchTo().window(parentWindowHandler);  // Switch back to parent window
@@ -477,7 +477,7 @@ public class NewDocumentPage extends Page {
         } else {
             for (Employee employees : employee) {
                 $(By.xpath("//table//tr/td[1]/div[contains(text(),'" + nameStr + "')]/../../td[2]/div")).click();
-                input3Field.sendKeys(employees.getLastName());
+                input3Field.setValue(employees.getLastName());
                 $(By.xpath("//div[contains(@class,'x-combo-list')]//*[contains(text(),'" + employees
                                         .getLastName() + "')][ancestor::div[contains(@style,'visibility: visible')]]")).shouldBe(Condition.present);
                 $(By.xpath("//div[contains(@class,'x-combo-list')]//*[contains(text(),'" + employees
@@ -502,8 +502,8 @@ public class NewDocumentPage extends Page {
                 wait.until(ExpectedConditions.elementToBeClickable(searchEmployee));
                 searchEmployee.click();
                 searchEmployee.clear();
-                searchEmployee.sendKeys(employees.getLastName());
-                searchFieldDepartment.sendKeys(Keys.RETURN);
+                searchEmployee.setValue(employees.getLastName());
+                searchFieldDepartment.setValue(Keys.RETURN);
                 selectedCheckBox.click();
                 buttonSave.click();
                 driver.switchTo().window(parentWindowHandler);  // Switch back to parent window

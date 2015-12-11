@@ -4,11 +4,9 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.BaseOperation;
-import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditor;
 import ru.st.selenium.pagespda.Page;
 import ru.st.selenium.pagesweb.Administration.DirectoriesEditFormPage;
 import ru.st.selenium.pagesweb.Administration.TaskTypeListObjectPage;
@@ -122,17 +120,24 @@ public class InternalPageWeb extends Page implements BaseOperation {
     @FindBy(css = "#btn_logout")
     private SelenideElement Logout;
 
-    /**
-     * iФрейм
+    /*
+     * Фрейм
      */
     @FindBy(id = "flow")
     private SelenideElement fremFlow;
 
-    /**
-     * Уходим во фрейм - Типы таблиц; -Типы задач; -Справочники
+    /*
+     * Уходим во фрейм объекта
      */
     public void goToFremFlow() {
         getWebDriver().switchTo().frame(fremFlow);
+    }
+
+    /*
+     * Уходим в ТОP фрейм
+     */
+    public void goToTopFrem(){
+        getWebDriver().switchTo().defaultContent();
     }
 
     /**
@@ -231,7 +236,7 @@ public class InternalPageWeb extends Page implements BaseOperation {
      */
     @Override
     public void logout() {
-        getWebDriver().switchTo().defaultContent(); // Уходим в ТОP фрейм
+        goToTopFrem();
         $(Logout).shouldBe(Condition.visible).click();
         $(By.cssSelector("#login")).shouldBe(Condition.visible);
         $(By.cssSelector("#pass")).shouldBe(Condition.visible);

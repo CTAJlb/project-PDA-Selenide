@@ -115,8 +115,7 @@ public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
      * @return TaskTypeListObjectPage
      */
     public TaskTypeListObjectPage valueNameObject(String text) {
-        nameObject.sendKeys(text);
-        clickOkAndAddFieldTypesTable.click();
+        $(nameObject).shouldBe(Condition.visible).setValue(text);
         return this;
     }
 
@@ -151,6 +150,7 @@ public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
         ensurePageLoaded();
         addTaskTypesObject(); // Добавить объект (кнопка - Добавить)
         valueNameObject(directories.getDirectoryName()); // Название Спр-ка
+        clickOkAndAddFieldTypesTable.click(); //
     }
 
     @Override

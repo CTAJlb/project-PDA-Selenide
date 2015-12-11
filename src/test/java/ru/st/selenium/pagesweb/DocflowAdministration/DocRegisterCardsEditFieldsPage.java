@@ -349,7 +349,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
      */
     public DocRegisterCardsEditFieldsPage setFieldNameDoc(String fieldName) {
         nameFieldDoc.clear();
-        nameFieldDoc.sendKeys(fieldName);
+        nameFieldDoc.setValue(fieldName);
         return this;
     }
 
@@ -364,7 +364,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
             return this;
         } else {
             idFieldDoc.clear();
-            idFieldDoc.sendKeys(identifierField);
+            idFieldDoc.setValue(identifierField);
         }
         return this;
     }
@@ -403,7 +403,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
             return this;
         } else {
             directoryTemplate.clear();
-            directoryTemplate.sendKeys(dirTemplate);
+            directoryTemplate.setValue(dirTemplate);
         }
         return this;
     }
@@ -419,7 +419,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
             return this;
         } else {
             fieldLength.clear();
-            fieldLength.sendKeys(lengthField);
+            fieldLength.setValue(lengthField);
         }
         return this;
     }
@@ -693,7 +693,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
             return this;
         } else {
             displayNameTemplateField.clear();
-            displayNameTemplateField.sendKeys(disNameTemplateField);
+            displayNameTemplateField.setValue(disNameTemplateField);
         }
         return this;
     }
@@ -750,7 +750,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
             return this;
         } else {
             searchRulesTemplate.clear();
-            searchRulesTemplate.sendKeys(searchRules);
+            searchRulesTemplate.setValue(searchRules);
         }
         return this;
     }
@@ -775,7 +775,7 @@ public class DocRegisterCardsEditFieldsPage extends DocRegisterCardsEditPage {
             return this;
         } else {
             numeratorTemplate.clear();
-            numeratorTemplate.sendKeys(numeratorTemplateField);
+            numeratorTemplate.setValue(numeratorTemplateField);
         }
         return this;
     }

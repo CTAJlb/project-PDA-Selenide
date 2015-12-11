@@ -1,9 +1,9 @@
-/**
- * Администрирование ДО/Редактор словарей
- */
 package ru.st.selenium.pagesweb.DocflowAdministration;
 
-import com.codeborne.selenide.CollectionCondition;
+/**
+ * Страница - Администрирование ДО/Редактор словарей
+ */
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -16,7 +16,6 @@ import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.Dictionary
 import ru.st.selenium.pagespda.Page;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class DictionaryEditorPage extends Page implements DictionaryEditorLogic {
@@ -148,9 +147,9 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
     private SelenideElement cancelDictionaryEditorItem;
 
     /**
-     * Сохранить все изменения
+     * Сохранить изменения по объекту Словарь
      */
-    @FindBy(xpath = "//span[@id='bSave-btnIconEl']")
+    @FindBy(xpath = "(//span[contains(@id,'bSave-')]/span[last()])[2]")
     private SelenideElement saveChanges;
 
     /**
@@ -198,7 +197,7 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
      */
     public DictionaryEditorPage setNameDictionaryEditor(String nameDictionText) {
         nameDictionaryEditor.clear();
-        nameDictionaryEditor.sendKeys(nameDictionText);
+        nameDictionaryEditor.setValue(nameDictionText);
         return this;
     }
 
@@ -226,9 +225,10 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
     }
 
     /**
-     * Вводим название Элемента словаря - Словаря
+     * Вводим название и описание Элемента словаря - Словаря
      */
     public DictionaryEditorPage addDictionItemFields(DictionaryEditorField[] dictionItem) {
+        int countElement = 1;
         if (dictionItem == null) {
             return this;
         } else
@@ -236,11 +236,14 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
                     for (DictionaryEditorField aDictionItem : dictionItem) {
                         addDictionaryEditorItem(); // Доавть элемент словаря
                         nameDictionaryEditorItem.clear();
-                        nameDictionaryEditorItem.sendKeys(aDictionItem.getDictionaryElement()); // Название элемента словаря
+                        nameDictionaryEditorItem.setValue(aDictionItem.getDictionaryElement()); // Название элемента словаря
                         descriptionDictionaryEditorItem.clear();
-                        descriptionDictionaryEditorItem.sendKeys(aDictionItem.getDescriptionElement()); // Описание элемента словаря
+                        descriptionDictionaryEditorItem.setValue(aDictionItem.getDescriptionElement()); // Описание элемента словаря
                         saveDictionaryEditorItem();
-                        verifyDictionaryEditorItem(aDictionItem.getDictionaryElement(), aDictionItem.getDescriptionElement()); // Проверям отображение элемента словаря в гриде Словаря
+                        // Проверям отображение элемента словаря в гриде Словаря
+                        $(By.xpath("(//div[contains(@id,'dict_words-body')]//td[1]/div)[" + countElement + "]")).shouldBe(Condition.exactText("" + aDictionItem.getDictionaryElement() + ""));
+                        $(By.xpath("(//div[contains(@id,'dict_words-body')]//td[2]/div)[" + countElement + "]")).shouldBe(Condition.exactText("" + aDictionItem.getDescriptionElement() + ""));
+                        countElement++;
                     }
         return this;
     }
@@ -250,7 +253,7 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
      */
     public DictionaryEditorPage setDescriptionDicItem(String descriptionDicItem) {
         descriptionDictionaryEditorItem.clear();
-        descriptionDictionaryEditorItem.sendKeys(descriptionDicItem);
+        descriptionDictionaryEditorItem.setValue(descriptionDicItem);
         return this;
     }
 
@@ -263,18 +266,6 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
         saveDictionaryEditorItem.click();
         return this;
     }
-
-    /**
-     * Проверяем, что добавленный элемент словаря сохранился и отображается в гриде добавления элементов словаря
-     *
-     * @return DictionaryEditorPage
-     */
-    public DictionaryEditorPage verifyDictionaryEditorItem(String dictionaryElement, String descriptionElement) {
-        $$(By.xpath("//div[contains(@id,'dict_words-body')]//td[1]/div")).shouldBe(CollectionCondition.exactTexts("" + dictionaryElement + ""));
-        $$(By.xpath("//div[contains(@id,'dict_words-body')]//td[2]/div")).shouldBe(CollectionCondition.exactTexts("" + descriptionElement + ""));
-        return this;
-    }
-
 
     /**
      * Сохранить все изменения
@@ -293,13 +284,13 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
      * @return DictionaryEditorPage
      */
     public DictionaryEditorPage verifyDictionaryEditor(String dictionaryEditor) {
-       $(By.xpath("//table//span[contains(@class,'x-tree-node-text') and contains(text(),'" + dictionaryEditor + "')]")).shouldBe(Condition.visible);
+        $(By.xpath("//table//span[contains(@class,'x-tree-node-text') and contains(text(),'" + dictionaryEditor + "')]")).shouldBe(Condition.visible);
         return this;
     }
 
     /**
      * Проверяем и ожидаем, что на странице имеется соответствующий элемент: -
-     * Кнопк - Добавить и Редактировать в гриде - Редактор словарей
+     * Кнопки - Добавить и Редактировать в гриде - Редактор словарей
      */
     public DictionaryEditorPage ensurePageLoaded() {
         $(By.xpath("(//a//preceding-sibling::span)[1]")).shouldBe(Condition.present);
@@ -309,7 +300,8 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
 
 
     /**
-     * Добавить
+     * Добавить Словарь
+     *
      * @param directoriesEditor
      */
     @Override

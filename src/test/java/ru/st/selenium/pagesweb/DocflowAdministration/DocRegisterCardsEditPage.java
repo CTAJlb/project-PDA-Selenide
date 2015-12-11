@@ -403,7 +403,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
      */
     public DocRegisterCardsEditPage setNameDocRegisterCards(String text) {
         setNameDocRegCards.clear();
-        setNameDocRegCards.sendKeys(text);
+        setNameDocRegCards.setValue(text);
         return this;
     }
 
@@ -416,7 +416,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
         } else {
             clickDocumentStatesOnReview.click();
             setValueDocumentStates.clear();
-            setValueDocumentStates.sendKeys(statesOnReview);
+            setValueDocumentStates.setValue(statesOnReview);
         }
         return this;
     }
@@ -430,7 +430,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
         } else {
             clickDocumentStatesReviewed.click();
             setValueDocumentStates.clear();
-            setValueDocumentStates.sendKeys(statesReviewed);
+            setValueDocumentStates.setValue(statesReviewed);
         }
         return this;
     }
@@ -444,7 +444,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
         } else {
             clickDocumentStatesOnApproval.click();
             setValueDocumentStates.clear();
-            setValueDocumentStates.sendKeys(statesOnApproval);
+            setValueDocumentStates.setValue(statesOnApproval);
         }
         return this;
     }
@@ -458,7 +458,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
         } else {
             clickDocumentStatesOnExecution.click();
             setValueDocumentStates.clear();
-            setValueDocumentStates.sendKeys(statesOnExecution);
+            setValueDocumentStates.setValue(statesOnExecution);
         }
         return this;
     }
@@ -472,7 +472,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
         } else {
             clickDocumentStatesInArchive.click();
             setValueDocumentStates.clear();
-            setValueDocumentStates.sendKeys(statesInArchive);
+            setValueDocumentStates.setValue(statesInArchive);
         }
         return this;
     }
@@ -485,7 +485,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
             return this;
         } else {
             setDisplayNameTemplate.clear();
-            setDisplayNameTemplate.sendKeys(nameTemplate);
+            setDisplayNameTemplate.setValue(nameTemplate);
         }
         return this;
     }
@@ -839,7 +839,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
             return this;
         } else {
             setCopyingFieldsWhenCreatingTask.clear();
-            setCopyingFieldsWhenCreatingTask.sendKeys(сopyingFieldsWhenCreatingTask);
+            setCopyingFieldsWhenCreatingTask.setValue(сopyingFieldsWhenCreatingTask);
         }
         return this;
     }
@@ -853,7 +853,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
             return this;
         } else {
             setAuthorsObjectives.clear();
-            setAuthorsObjectives.sendKeys(authorsObjectives);
+            setAuthorsObjectives.setValue(authorsObjectives);
         }
         return this;
     }
@@ -867,7 +867,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
             return this;
         } else {
             setControllersOfTasks.clear();
-            setControllersOfTasks.sendKeys(controllersOfTasks);
+            setControllersOfTasks.setValue(controllersOfTasks);
         }
         return this;
     }
@@ -881,7 +881,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
             return this;
         } else {
             setDecisionMakersOfTasks.clear();
-            setDecisionMakersOfTasks.sendKeys(decisionMakersOfTasks);
+            setDecisionMakersOfTasks.setValue(decisionMakersOfTasks);
         }
         return this;
     }
@@ -895,7 +895,7 @@ public class DocRegisterCardsEditPage extends DocRegisterCardsPage {
             return this;
         } else {
             setExecutorsOfTasks.clear();
-            setExecutorsOfTasks.sendKeys(executorsOfTasks);
+            setExecutorsOfTasks.setValue(executorsOfTasks);
         }
         return this;
     }

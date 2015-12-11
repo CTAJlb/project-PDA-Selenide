@@ -328,7 +328,8 @@ public class DocumentsTest extends BaseObjectCase {
 
 
     // Создание РКД с проинициализированными объектами
-    @Test
+    // TODO retryAnalyzer = Retry.class - добавить параметр в аннотацию тест
+    @Test(priority = 1)
     public void createRegCardDocumentAllFields() throws Exception {
 
         LoginPageWeb loginPageWeb = open(Page.WEB_PAGE_URL, LoginPageWeb.class);

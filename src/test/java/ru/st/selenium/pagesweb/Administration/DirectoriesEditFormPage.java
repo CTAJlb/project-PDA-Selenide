@@ -362,7 +362,7 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      */
     public DirectoriesEditFormPage adNameField(String text) {
         nameField.clear();
-        nameField.sendKeys(text);
+        nameField.setValue(text);
         return this;
     }
 
@@ -374,7 +374,7 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      */
     public DirectoriesEditFormPage adFieldID(String identifier) {
         nameIdentifier.clear();
-        nameIdentifier.sendKeys(identifier);
+        nameIdentifier.setValue(identifier);
         return this;
     }
 
@@ -427,7 +427,7 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      */
     public DirectoriesEditFormPage selListVal(String listVal) {
         fieldListVal.click();
-        fieldListVal.sendKeys(listVal);
+        fieldListVal.setValue(listVal);
         return this;
     }
 
