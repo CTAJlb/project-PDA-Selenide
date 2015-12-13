@@ -1,6 +1,6 @@
 package ru.st.selenium.logicinterface;
 
-import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.DocRegisterCards;
+import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.DocRegisterCards;
 
 /**
  * Форма редактирования РКД

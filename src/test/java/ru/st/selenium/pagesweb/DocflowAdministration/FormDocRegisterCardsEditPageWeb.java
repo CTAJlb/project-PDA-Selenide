@@ -5,10 +5,10 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.FormDocRegisterCardsEditLogic;
-import ru.st.selenium.modelweb.AccessRights;
-import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.*;
-import ru.st.selenium.modelweb.OpenFilesForEdit;
-import ru.st.selenium.modelweb.ShiftDirection;
+import ru.st.selenium.model.AccessRights;
+import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.*;
+import ru.st.selenium.model.OpenFilesForEdit;
+import ru.st.selenium.model.ShiftDirection;
 
 
 import static com.codeborne.selenide.Condition.*;

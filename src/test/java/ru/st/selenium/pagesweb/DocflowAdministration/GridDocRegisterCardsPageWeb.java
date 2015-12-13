@@ -1,13 +1,12 @@
 package ru.st.selenium.pagesweb.DocflowAdministration;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.DocRegisterCardsLogic;
-import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.DocRegisterCards;
+import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.DocRegisterCards;
 import ru.st.selenium.pagespda.Page;
 
 

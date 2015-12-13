@@ -1,6 +1,6 @@
 package ru.st.selenium.logicinterface;
 
-import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditor;
+import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditor;
 
 /**
  * Редактор словарей

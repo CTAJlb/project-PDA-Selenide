@@ -3,10 +3,10 @@ package ru.st.selenium.pagespda;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import ru.st.selenium.modelpda.Employee;
-import ru.st.selenium.modelpda.Task;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+import ru.st.selenium.model.Task.Task;
+import ru.st.selenium.model.Users.Employee;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;

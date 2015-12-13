@@ -7,7 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.DirectoriesLogic;
-import ru.st.selenium.modelweb.Directories.Directories;
+import ru.st.selenium.model.Directories.Directories;
 import ru.st.selenium.pagespda.Page;
 
 import static com.codeborne.selenide.Selenide.$;

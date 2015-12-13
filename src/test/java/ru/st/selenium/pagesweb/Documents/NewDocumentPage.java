@@ -3,16 +3,15 @@ package ru.st.selenium.pagesweb.Documents;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
-import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.DocRegisterCards;
-import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.DocRegisterCardsField;
-import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.*;
-import ru.st.selenium.modelweb.Task.Project;
-import ru.st.selenium.modelweb.Users.Department;
-import ru.st.selenium.modelweb.Users.Employee;
+import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
+import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.DocRegisterCards;
+import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.DocRegisterCardsField;
+import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.*;
+import ru.st.selenium.model.Task.Project;
+import ru.st.selenium.model.Users.Department;
+import ru.st.selenium.model.Users.Employee;
 import ru.st.selenium.pagespda.Page;
 
 

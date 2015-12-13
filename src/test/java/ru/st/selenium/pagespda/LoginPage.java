@@ -1,8 +1,8 @@
 package ru.st.selenium.pagespda;
 
 import com.codeborne.selenide.SelenideElement;
-import ru.st.selenium.modelpda.Employee;
 import org.openqa.selenium.support.FindBy;
+import ru.st.selenium.model.Users.Employee;
 
 import static com.codeborne.selenide.Selenide.page;
 

@@ -2,7 +2,7 @@ package ru.st.selenium.test.testPda;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.testng.TextReport;
-import ru.st.selenium.modelpda.Task;
+import ru.st.selenium.model.Task.Task;
 import ru.st.selenium.test.data.BaseObjectCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;

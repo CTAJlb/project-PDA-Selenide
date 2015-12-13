@@ -7,13 +7,12 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.DictionaryEditorLogic;
-import ru.st.selenium.modelweb.AccessRights;
-import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditor;
-import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
+import ru.st.selenium.model.AccessRights;
+import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditor;
+import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
 import ru.st.selenium.pagespda.Page;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 /**
  * Страница - Администрирование ДО/Редактор словарей

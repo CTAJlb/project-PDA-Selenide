@@ -2,7 +2,7 @@ package ru.st.selenium.pagesweb;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
-import ru.st.selenium.modelpda.Employee;
+import ru.st.selenium.model.Users.Employee;
 import ru.st.selenium.pagespda.Page;
 import ru.st.selenium.pagesweb.Internal.InternalPageWeb;
 

@@ -2,10 +2,10 @@ package ru.st.selenium.pagespda;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import ru.st.selenium.modelpda.Employee;
-import ru.st.selenium.modelpda.Task;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+import ru.st.selenium.model.Task.Task;
+import ru.st.selenium.model.Users.Employee;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
@@ -259,9 +259,9 @@ public class NewTaskPage extends Page {
     public void createTask(Task task) {
         setTaskName(task.getTaskName()) // Название задачи
                 .setTasksDescription(task.getDescription()) // Описание задачи
-                .setTaskSupervisors(task.getTaskSupervisors()) // вводим - Контролеры задачи
+                .setTaskSupervisors(task.getControllers()) // вводим - Контролеры задачи
                 .setExecutiveManagers(task.getExecutiveManagers()) // вводим - Ответственные руковдители
-                .setPerformers(task.getPerformers()) // вводим - Исполнители
+                .setPerformers(task.getWorkers()) // вводим - Исполнители
                 .setDateEnd(task.getDateEnd()) // Дата окончания задачи
                 .setImportantTask(task.getIsImportant()) // признак - Важная задача
                 .setReportRequired(task.getIsWithReport()) // признак - С доклаом

@@ -1,14 +1,14 @@
 package ru.st.selenium.test.testPda;
 
 import com.codeborne.selenide.testng.TextReport;
-import ru.st.selenium.modelweb.AccessRights;
-import ru.st.selenium.modelweb.Directories.Directories;
-import ru.st.selenium.modelweb.Directories.DirectoryField;
-import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditor;
-import ru.st.selenium.modelweb.DocflowAdministration.DocumentRegistrationCards.*;
-import ru.st.selenium.modelweb.FieldsObject.*;
-import ru.st.selenium.modelweb.OpenFilesForEdit;
-import ru.st.selenium.modelweb.ShiftDirection;
+import ru.st.selenium.model.AccessRights;
+import ru.st.selenium.model.Directories.Directories;
+import ru.st.selenium.model.Directories.DirectoryField;
+import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditor;
+import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.*;
+import ru.st.selenium.model.FieldsObject.*;
+import ru.st.selenium.model.OpenFilesForEdit;
+import ru.st.selenium.model.ShiftDirection;
 import ru.st.selenium.pagespda.DocumentsPage;
 import ru.st.selenium.pagespda.InternalPage;
 import ru.st.selenium.pagespda.LoginPage;

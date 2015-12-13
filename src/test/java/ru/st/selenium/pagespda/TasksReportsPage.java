@@ -1,7 +1,7 @@
 package ru.st.selenium.pagespda;
 
-import ru.st.selenium.modelpda.Task;
 import org.openqa.selenium.By;
+import ru.st.selenium.model.Task.Task;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Condition.visible;

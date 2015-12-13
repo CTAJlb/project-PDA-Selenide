@@ -5,10 +5,10 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.DirectoriesEditFormLogic;
-import ru.st.selenium.modelweb.Directories.Directories;
-import ru.st.selenium.modelweb.Directories.DirectoryField;
-import ru.st.selenium.modelweb.FieldsObject.*;
-import ru.st.selenium.modelweb.OpenFilesForEdit;
+import ru.st.selenium.model.Directories.Directories;
+import ru.st.selenium.model.Directories.DirectoryField;
+import ru.st.selenium.model.FieldsObject.*;
+import ru.st.selenium.model.OpenFilesForEdit;
 
 import static com.codeborne.selenide.Selenide.$;
 

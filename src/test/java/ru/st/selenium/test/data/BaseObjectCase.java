@@ -1,11 +1,11 @@
 package ru.st.selenium.test.data;
 
 import org.testng.annotations.DataProvider;
-import ru.st.selenium.modelpda.Employee;
-import ru.st.selenium.modelpda.Task;
-import ru.st.selenium.modelweb.AccessRights;
-import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditor;
-import ru.st.selenium.modelweb.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
+import ru.st.selenium.model.AccessRights;
+import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditor;
+import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
+import ru.st.selenium.model.Task.Task;
+import ru.st.selenium.model.Users.Employee;
 
 
 /**
@@ -62,9 +62,9 @@ public abstract class BaseObjectCase extends TestBase {
         return new Object[][]{
 
                 {getRandomObjectTask().setAuthors(new Employee[]{EMPLOYEE_ADMIN})
-                        .setTaskSupervisors(new Employee[]{EMPLOYEE_ADMIN})
+                        .setControllers(new Employee[]{EMPLOYEE_ADMIN})
                         .setExecutiveManagers(new Employee[]{EMPLOYEE_ADMIN})
-                        .setPerformers(new Employee[]{EMPLOYEE_ADMIN})
+                        .setWorkers(new Employee[]{EMPLOYEE_ADMIN})
                         .setIsSecret(true) // Секретная задача
                         .setIsWithReport(false) // C докладом
                         .setIsImportant(true)}, // Важная задача
