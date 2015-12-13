@@ -135,12 +135,6 @@ public class InternalPageWeb extends Page implements BaseOperation {
         getWebDriver().switchTo().frame(fremFlow);
     }
 
-    /*
-     * Уходим в ТОP фрейм
-     */
-    public void goToTopFrem(){
-        getWebDriver().switchTo().defaultContent();
-    }
 
     /**
      * Пользователяская API для эмуляции сложных пользовательских действий
@@ -238,7 +232,7 @@ public class InternalPageWeb extends Page implements BaseOperation {
      */
     @Override
     public void logout() {
-        goToTopFrem();
+        gotoTopFrem();
         $(Logout).shouldBe(Condition.visible).click();
         $(By.cssSelector("#login")).shouldBe(Condition.visible);
         $(By.cssSelector("#pass")).shouldBe(Condition.visible);

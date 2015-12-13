@@ -11,6 +11,8 @@ import ru.st.selenium.model.FieldsObject.*;
 import ru.st.selenium.model.OpenFilesForEdit;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.confirm;
+import static com.codeborne.selenide.Selenide.dismiss;
 
 /**
  * Страница - форма редактирования объекта - Справочники
@@ -146,12 +148,6 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      */
     @FindBy(css = "#dialog_form_listval-inputEl")
     private SelenideElement fieldListVal;
-
-    /**
-     * Клик alert "Ok"
-     */
-    @FindBy(xpath = "//*[@id='button-1005-btnIconEl']")
-    private SelenideElement clicAlertOk;
 
     /**
      * Сохранить поле
@@ -448,7 +444,7 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      */
     public DirectoriesEditFormPage clickSaveObject() {
         saveObject.click();
-        clickAlertOk();
+        checkingMessagesSaveObjectAndClickOk(CHECKING_MESSAGES_SAVE_OBJECT, "Изменения сохранены");
         return this;
     }
 
@@ -645,18 +641,6 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      */
     public DirectoriesEditFormPage selectTypeFieldEnclosedDirectory() {
         typeFieldEnclosedDirectory.click();
-        return this;
-    }
-
-    /**
-     * Ожидание появления alert об успешном сохранении - Изменения сохранены;
-     * Клик alert
-     *
-     * @return DirectoriesEditFormPage
-     */
-    public DirectoriesEditFormPage clickAlertOk() {
-        $(By.xpath("//td[contains(@id,'messagebox')]/div[text()='Изменения сохранены']")).shouldBe(Condition.visible);
-        clicAlertOk.click();
         return this;
     }
 

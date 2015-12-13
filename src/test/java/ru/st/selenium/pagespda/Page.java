@@ -1,10 +1,13 @@
 package ru.st.selenium.pagespda;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.Set;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -17,6 +20,9 @@ public abstract class Page {
     public static final String PDA_PAGE_URL = "http://pda.motiw/";
     public static final String WEB_PAGE_URL = "http://motiw/";
 
+    public static final String CHECKING_MESSAGES_SAVE_OBJECT = "//*[contains(@id,'messagebox-') and (@data-errorqtip)]";
+    public static final String CLICK_OK_MESSAGES = "//*[@id='button-1005-btnIconEl']";
+
     /**
      * Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPageWeb)
      */
@@ -24,6 +30,17 @@ public abstract class Page {
         getWebDriver().switchTo().defaultContent();
         return this;
     }
+
+    /**
+     * Проверяем отображения текста в диалоге - Изменения сохранены
+     * @param locator
+     * @param message
+     */
+    public static void checkingMessagesSaveObjectAndClickOk(String locator, String message) {
+        $(By.xpath(locator)).shouldBe(Condition.exactText(message));
+        $(By.xpath(CLICK_OK_MESSAGES)).click();
+    }
+
 
     /**
      * Проверяем то, что мы разлогинены

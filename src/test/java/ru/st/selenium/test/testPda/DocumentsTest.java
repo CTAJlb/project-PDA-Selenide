@@ -382,7 +382,7 @@ public class DocumentsTest extends BaseObjectCase {
     /**
      * проверка - Отображение грида документа
      */
-    @Test(priority = 1, retryAnalyzer = Retry.class)
+    @Test(priority = 2, retryAnalyzer = Retry.class)
     public void checkMapGridOfDocuments() throws Exception {
         LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
 
