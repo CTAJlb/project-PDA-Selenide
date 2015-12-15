@@ -40,7 +40,7 @@ public class DocumentsTest extends ModuleDocflowAdministrationObjectTestCase {
      *
      * TODO 1. retryAnalyzer = Retry.class - добавить параметр в аннотацию тест; 2.Создание Документа и проверка созданного документа в гриде PDA
      */
-    @Test(priority = 1, dataProvider = "objectDataDocument", retryAnalyzer = Retry.class)
+    @Test(priority = 1, dataProvider = "objectDataDocument")
     public void createRegCardDocumentAllFields(Directories directories, DictionaryEditor dictionaryEditor, DocRegisterCards registerCards) throws Exception {
 
         LoginPageWeb loginPageWeb = open(Page.WEB_PAGE_URL, LoginPageWeb.class);

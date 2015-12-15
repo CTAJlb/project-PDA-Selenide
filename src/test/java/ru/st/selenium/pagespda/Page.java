@@ -21,7 +21,7 @@ public abstract class Page {
     public static final String WEB_PAGE_URL = "http://motiw/";
 
     /*
-     * static XPATH
+     * static XPATH base element
      */
     public static final String CHECKING_MESSAGES_SAVE_OBJECT = "//div[count(div)=3]/div[2]//div[contains(@id,'messagebox') and (@data-errorqtip)]";
     public static final String CLICK_OK_MESSAGES = "//div[count(div)=3]/div[3]//div[count(a)=4]/a[1]//span[position()=2]";

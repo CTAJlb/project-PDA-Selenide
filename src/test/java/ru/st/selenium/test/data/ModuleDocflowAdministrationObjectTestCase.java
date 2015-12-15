@@ -95,6 +95,13 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
                 true /*true - поиск записей через SOLR; false - поиск записей через БД*/,
                 new DirectoryField[]{fieldStringIsListChoiceDirectory, fieldTextDirectory, fieldIntDirectory});
 
+
+        /*
+         ----------------------------------------------------------------------------------------------------Инициализация объекта - Словарь
+         */
+        DictionaryEditor dictionaryEditor = getRandomDictionaryEditor();
+
+
         /*
          ---------------------------------------------------------------------------------------------------------Инициализация полей объекта - Документ
          */
@@ -184,8 +191,8 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
         DocRegisterCardsField fieldDictionary = new DocRegisterCardsField()
                 .setFieldNameDoc("Словарь " + randomString(5))
                 .setFieldIDDoc("DICTIONARY" + randomID(5)) // Идентификатор поля
-                //    .setFieldTypeDoc(new FieldTypeDictionaryDoc()
-                //           .setDictionaryEditor(dictionaryEditor)) // Выбор проинициализированный объект - Словарь
+                    .setFieldTypeDoc(new FieldTypeDictionaryDoc()
+                           .setDictionaryEditor(dictionaryEditor)) // Выбор проинициализированный объект - Словарь
                 .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
         /**
@@ -352,7 +359,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
                         //--------------------------------------------------------------------Инициализация объекта - СПРАВОЧНИКИ
                         directories,
                         //--------------------------------------------------------------------Инициализация объекта - СЛОВАРЬ
-                        getRandomDictionaryEditor(),
+                        dictionaryEditor,
                         //--------------------------------------------------------------------Инициализация объекта - РКД
                         registerCards
                 }
