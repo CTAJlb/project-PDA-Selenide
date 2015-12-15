@@ -3,15 +3,12 @@ package ru.st.selenium.pagesweb.Administration;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.DirectoriesLogic;
 import ru.st.selenium.model.Directories.Directories;
 import ru.st.selenium.pagespda.Page;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 /**
  * Основной грид разделов - Типы Таблиц/Типы задач/Справочники, раздела Администрирование
@@ -47,45 +44,6 @@ public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
      */
     @FindBy(xpath = "//div[contains (@class, 'bottom')]//a[3]//span[contains (@class, 'icon')]")
     private SelenideElement clickDelTypesObject;
-
-    /**
-     * Пользователяская API для эмуляции сложных пользовательских действий
-     * (эмуляция клавиатуры и мыши)
-     */
-    Actions action = new Actions(getWebDriver());
-
-    /**
-     * Метод имитирующий нажатие клавиши - Enter
-     */
-    public void pressEnter() {
-        action = action.sendKeys(Keys.chord(Keys.ENTER));
-        action.build().perform();
-    }
-
-    /**
-     * Метод клавиатурного выбора настроек, смещение на ОДНУ позицию вниз,
-     * например, Скрывать...; Изменяемое при редактировании и etc., полей значение полей, выбирает значение == Да
-     */
-    public void selectingSecondAdjustmentPosition() {
-        action = action.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ENTER));
-        action.build().perform();
-    }
-
-    /**
-     * Метод клавиатурного выбора настроек, смещение на ДВЕ позиции вниз,
-     */
-    public void selectingThirdAdjustmentPosition() {
-        action = action.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER));
-        action.build().perform();
-    }
-
-    /**
-     * Метод клавиатурного выбора настроек, смещение на ТРИ позиции вниз,
-     */
-    public void selectingFourthlyAdjustmentPosition() {
-        action = action.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER));
-        action.build().perform();
-    }
 
 
     /**
@@ -139,7 +97,7 @@ public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
     public void addDirectories(Directories directories) {
         ensurePageLoaded();
         addTaskTypesObject(); // Добавить объект (кнопка - Добавить)
-        valueNameObject(directories.getDirectoryName()); // Название Спр-ка
+        valueNameObject(directories.getNameDirectoryName()); // Название Спр-ка
         clickOkAndAddFieldTypesTable.click(); //
     }
 

@@ -21,45 +21,6 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 public class GridDocRegisterCardsPageWeb extends Page implements DocRegisterCardsLogic {
 
 
-    /**
-     * Пользователяская API для эмуляции сложных пользовательских действий
-     * (эмуляция клавиатуры и мыши)
-     */
-    Actions action = new Actions(getWebDriver());
-
-    /**
-     * Метод имитирующий нажатие клавиши - Enter
-     */
-    public void pressEnter() {
-        action = action.sendKeys(Keys.chord(Keys.ENTER));
-        action.build().perform();
-    }
-
-    /**
-     * Метод клавиатурного выбора настроек, смещение на ОДНУ позицию вниз,
-     * например, Скрывать...; Изменяемое при редактировании и etc., полей значение полей, выбирает значение == Да
-     */
-    public void selectingSecondAdjustmentPosition() {
-        action = action.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ENTER));
-        action.build().perform();
-    }
-
-    /**
-     * Метод клавиатурного выбора настроек, смещение на ДВЕ позиции вниз,
-     */
-    public void selectingThirdAdjustmentPosition() {
-        action = action.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER));
-        action.build().perform();
-    }
-
-    /**
-     * Метод клавиатурного выбора настроек, смещение на ТРИ позиции вниз,
-     */
-    public void selectingFourthlyAdjustmentPosition() {
-        action = action.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER));
-        action.build().perform();
-    }
-
     /*
      * Добавить Регистрационную карточку документа
      */

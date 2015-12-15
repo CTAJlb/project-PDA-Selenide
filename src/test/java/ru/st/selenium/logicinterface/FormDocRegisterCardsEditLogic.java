@@ -12,6 +12,8 @@ public interface FormDocRegisterCardsEditLogic {
 
     void addFieldsDocRegisterCards (DocRegisterCards registerCards);
 
+
+
 }
 
 

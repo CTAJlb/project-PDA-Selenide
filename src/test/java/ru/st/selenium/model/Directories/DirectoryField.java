@@ -50,7 +50,7 @@ public class DirectoryField {
         return field;
     }
 
-    public DirectoryField setFieldType(ParentFieldsObject field) {
+    public DirectoryField setTaskTypeField(ParentFieldsObject field) {
         this.field = field;
         return this;
     }

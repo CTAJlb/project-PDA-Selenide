@@ -1,8 +1,8 @@
 package ru.st.selenium.pagespda;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.Set;
@@ -20,8 +20,11 @@ public abstract class Page {
     public static final String PDA_PAGE_URL = "http://pda.motiw/";
     public static final String WEB_PAGE_URL = "http://motiw/";
 
-    public static final String CHECKING_MESSAGES_SAVE_OBJECT = "//*[contains(@id,'messagebox-') and (@data-errorqtip)]";
-    public static final String CLICK_OK_MESSAGES = "//*[@id='button-1005-btnIconEl']";
+    /*
+     * static XPATH
+     */
+    public static final String CHECKING_MESSAGES_SAVE_OBJECT = "//div[count(div)=3]/div[2]//div[contains(@id,'messagebox') and (@data-errorqtip)]";
+    public static final String CLICK_OK_MESSAGES = "//div[count(div)=3]/div[3]//div[count(a)=4]/a[1]//span[position()=2]";
 
     /**
      * Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPageWeb)
@@ -39,6 +42,45 @@ public abstract class Page {
     public static void checkingMessagesSaveObjectAndClickOk(String locator, String message) {
         $(By.xpath(locator)).shouldBe(Condition.exactText(message));
         $(By.xpath(CLICK_OK_MESSAGES)).click();
+    }
+
+    /**
+     * Пользователяская API для эмуляции сложных пользовательских действий
+     * (эмуляция клавиатуры и мыши)
+     */
+    Actions action = new Actions(getWebDriver());
+
+    /**
+     * Метод имитирующий нажатие клавиши - Enter
+     */
+    public void pressEnter() {
+        action = action.sendKeys(Keys.chord(Keys.ENTER));
+        action.build().perform();
+    }
+
+    /**
+     * Метод клавиатурного выбора настроек, смещение на ОДНУ позицию вниз,
+     * например, Скрывать...; Изменяемое при редактировании и etc., полей значение полей, выбирает значение == Да
+     */
+    public void selectingSecondAdjustmentPosition() {
+        action = action.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ENTER));
+        action.build().perform();
+    }
+
+    /**
+     * Метод клавиатурного выбора настроек, смещение на ДВЕ позиции вниз,
+     */
+    public void selectingThirdAdjustmentPosition() {
+        action = action.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER));
+        action.build().perform();
+    }
+
+    /**
+     * Метод клавиатурного выбора настроек, смещение на ТРИ позиции вниз,
+     */
+    public void selectingFourthlyAdjustmentPosition() {
+        action = action.sendKeys(Keys.chord(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER));
+        action.build().perform();
     }
 
 

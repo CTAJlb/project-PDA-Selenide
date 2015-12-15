@@ -1,27 +1,47 @@
 package ru.st.selenium.model.Directories;
 
 /**
- *  Модель объекта системы - Справочники (Администрирование/Справочники)
+ * Модель объекта системы - Справочники (Администрирование/Справочники)
  */
 public class Directories {
 
-    private String directoryName;
+    private String nameDirectoryName;
     private boolean shareRecords;
-    private boolean setAccessToRecords;
+    private boolean accessToRecords;
     private boolean isMappingDevice;
     private boolean searchSettings;
     private DirectoryField[] directoryFields;
 
-
     /**
-     *  Название - Справочники
+     * Конструктор класса - Справочники
+     * @param nameDirectoryName
+     * @param shareRecords
+     * @param accessToRecords
+     * @param isMappingDevice
+     * @param searchSettings
+     * @param directoryFields
      */
-    public String getDirectoryName() {
-        return directoryName;
+    public Directories(String nameDirectoryName, boolean shareRecords, boolean accessToRecords,
+                       boolean isMappingDevice, boolean searchSettings, DirectoryField[] directoryFields) {
+        this.nameDirectoryName = nameDirectoryName;
+        this.shareRecords = shareRecords;
+        this.accessToRecords = accessToRecords;
+        this.isMappingDevice = isMappingDevice;
+        this.searchSettings = searchSettings;
+        this.directoryFields = directoryFields;
     }
 
-    public Directories setDirectoryName(String nameDirectoryName) {
-        this.directoryName = nameDirectoryName;
+
+
+    /**
+     * Название - Справочники
+     */
+    public String getNameDirectoryName() {
+        return nameDirectoryName;
+    }
+
+    public Directories setNameDirectoryName(String nameDirectoryName) {
+        this.nameDirectoryName = nameDirectoryName;
         return this;
     }
 
@@ -40,12 +60,12 @@ public class Directories {
     /**
      * Настройка доступа к записям
      */
-    public boolean getSetAccessToRecords() {
-        return setAccessToRecords;
+    public boolean getAccessToRecords() {
+        return accessToRecords;
     }
 
-    public Directories setSetAccessToRecords(boolean setAccessToRecords) {
-        this.setAccessToRecords = setAccessToRecords;
+    public Directories setAccessToRecords(boolean accessToRecords) {
+        this.accessToRecords = accessToRecords;
         return this;
     }
 
@@ -74,7 +94,7 @@ public class Directories {
     }
 
     /**
-     *  Поля - массив объектов - типа поле справочника
+     * Поля - массив объектов - типа поле справочника
      */
     public DirectoryField[] getDirectoryFields() {
         return directoryFields;

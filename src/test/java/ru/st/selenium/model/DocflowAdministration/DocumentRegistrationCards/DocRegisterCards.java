@@ -62,6 +62,14 @@ public class DocRegisterCards {
     private DocRegisterCardsField[] docRegisterCardsFields;
 
     /**
+     * Конструктор класса - Регистрационные карточки документов
+     * @param docRegisterCardsName
+     */
+    public DocRegisterCards(String docRegisterCardsName) {
+        this.docRegisterCardsName = docRegisterCardsName;
+    }
+
+    /**
      * ------------------------------------------------------Вкладка - ОБЩЕЕ---------------------------------------------
      */
 

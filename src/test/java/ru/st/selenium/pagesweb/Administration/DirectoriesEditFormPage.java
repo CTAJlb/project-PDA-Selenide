@@ -773,11 +773,11 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
                 .addAllFieldsDirectory(directories.getDirectoryFields()) // Добавление типов полей
                 .clickSettingsTab() // выбор вкладки Настройки
                 .selShareRecords(directories.getShareRecords()) // Общедоступность записей
-                .selRecordAccessSetting(directories.getSetAccessToRecords()) // Настройка доступа к записям
+                .selRecordAccessSetting(directories.getAccessToRecords()) // Настройка доступа к записям
                 .selMappingDevice(directories.getMappingDevice()) // Способ отображения
                 .selSearchSettings(directories.getSearchSettings()) // Настройка поиска
                 .clickSaveObject() // Сохранить объект
-                .verifyCreateObject(directories.getDirectoryName()); // Проверяем отображение сохраненного объекта в гриде
+                .verifyCreateObject(directories.getNameDirectoryName()); // Проверяем отображение сохраненного объекта в гриде
 
                 gotoTopFrem(); // Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPageWeb)
     }

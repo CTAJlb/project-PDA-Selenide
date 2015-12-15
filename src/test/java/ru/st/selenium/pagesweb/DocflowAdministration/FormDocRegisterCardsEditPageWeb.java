@@ -1340,7 +1340,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     }
 
     /*
-     * =========================================================================================Выбор типов полей (методы)
+     * =========================================================================================Вкладка - ПОЛЯ - Выбор типов полей (методы)
      */
 
     /**
@@ -1648,15 +1648,6 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
         return this;
     }
 
-
-    /**
-     * Проверяем отображение в гриде полей
-     */
-    public FormDocRegisterCardsEditPageWeb verifyFieldInGrid(String fieldName) {
-        $(By.xpath("//table[contains(@id,'treeview')]//td[1]//div[contains(text(),'" + fieldName + "')]")).shouldBe(Condition.exactText("" + fieldName + ""));
-        return this;
-    }
-
     /**
      * Метод добавления всех типов полей документа
      *
@@ -1766,7 +1757,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
                                 selMultipleRecords(fieldDirectory.getDirectoryEntriesSelection());
                                 selDirectoryTemplate(fieldDirectory.getDirectoryTemplate()); // Шаблон спр-ка
                             } else if (!fieldDirectory.getDirectoryEntriesSelection()) { // Выбор записей справочника == Несколько записей
-                                chooseDirectory(fieldDirectory.getDirectoryDoc().getDirectoryName()); // Выбор проинициализированного спр-ка
+                                chooseDirectory(fieldDirectory.getDirectoryDoc().getNameDirectoryName()); // Выбор проинициализированного спр-ка
                                 selMultipleRecords(fieldDirectory.getDirectoryEntriesSelection()); // Выбор настройки мульти выбора записей справочника
                                 selDirectoryTemplate(fieldDirectory.getDirectoryTemplate()); // Шаблон спр-ка
 
@@ -1786,8 +1777,13 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
 
                         saveFieldDoc(); // Сохранить поле документа
 
-                        verifyFieldInGrid(fieldDoc.getFieldNameDoc()); // Проверяем отображение добавленного поля в гриде
+                        // Перемещение поля типа СТРОКА - вверх
+                        if (fieldDoc.getFieldTypeDoc() instanceof FieldTypeStringDoc) {
+                            for (int i = 0; i < 10; i++) moveFieldUp.click();
+                        }
 
+                        // Проверяем отображение добавленного поля в гриде
+                        $(By.xpath("//table[contains(@id,'treeview')]//td[1]/div[text()='" + fieldDoc.getFieldNameDoc() + "']")).shouldBe(Condition.exactText("" + fieldDoc.getFieldNameDoc() + ""));
 
                     }
 
@@ -1991,16 +1987,16 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
 
     /**
      * Сохранить изменения в РКД
+     *
      * @return
      */
-    public GridDocRegisterCardsPageWeb saveAllChangesInDoc(DocRegisterCards registerCards){
+    public GridDocRegisterCardsPageWeb saveAllChangesInDoc(DocRegisterCards registerCards) {
         clickSaveAllChangesInDoc(); // Сохранить все изменения РКД
         ensurePageLoaded();
         verifyDocRegisterCards(registerCards.getDocRegisterCardsName()); // Проверка - Создание и отображение РКД в гриде
         gotoTopFrem();
-       return page(GridDocRegisterCardsPageWeb.class);
+        return page(GridDocRegisterCardsPageWeb.class);
     }
-
 
 
     /**

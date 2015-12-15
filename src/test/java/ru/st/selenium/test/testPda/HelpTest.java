@@ -5,7 +5,7 @@ import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.pagespda.HelpHtmlPage;
 import ru.st.selenium.pagespda.InternalPage;
 import ru.st.selenium.pagespda.LoginPage;
-import ru.st.selenium.test.data.BaseObjectCase;
+import ru.st.selenium.test.data.BaseObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
@@ -20,7 +20,7 @@ import static org.testng.Assert.assertTrue;
  * Раздел - Помощь
  */
 @Listeners({ScreenShotOnFailListener.class, TextReport.class})
-public class HelpTest extends BaseObjectCase {
+public class HelpTest extends BaseObjectTestCase {
 
 
     /**

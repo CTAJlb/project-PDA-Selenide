@@ -3,7 +3,7 @@ package ru.st.selenium.test.testPda;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.model.Task.Task;
-import ru.st.selenium.test.data.BaseObjectCase;
+import ru.st.selenium.test.data.BaseObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
@@ -17,7 +17,7 @@ import static org.testng.Assert.assertTrue;
  * Раздел - Сегодня
  */
 @Listeners({ScreenShotOnFailListener.class, TextReport.class})
-public class TodayTest extends BaseObjectCase {
+public class TodayTest extends BaseObjectTestCase {
 
     /*
      Инициализируем модель - Задача #2 (атрибуты и лента для редактирования)

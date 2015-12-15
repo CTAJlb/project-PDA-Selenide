@@ -5,7 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.pagespda.InternalPage;
 import ru.st.selenium.pagespda.LoginPage;
-import ru.st.selenium.test.data.BaseObjectCase;
+import ru.st.selenium.test.data.BaseObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.openqa.selenium.By;
@@ -26,7 +26,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Раздел - Стр. авторизации
  */
-public class UsersAuthenticationTest extends BaseObjectCase {
+public class UsersAuthenticationTest extends BaseObjectTestCase {
 
 
     /**

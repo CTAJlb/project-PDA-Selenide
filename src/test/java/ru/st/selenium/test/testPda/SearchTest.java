@@ -1,7 +1,7 @@
 package ru.st.selenium.test.testPda;
 
 import com.codeborne.selenide.testng.TextReport;
-import ru.st.selenium.test.data.BaseObjectCase;
+import ru.st.selenium.test.data.BaseObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
@@ -18,7 +18,7 @@ import static org.testng.Assert.assertTrue;
  * раздел - Поиск
  */
 @Listeners({ScreenShotOnFailListener.class, TextReport.class})
-public class SearchTest extends BaseObjectCase {
+public class SearchTest extends BaseObjectTestCase {
 
 
 
