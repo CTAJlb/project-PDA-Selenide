@@ -91,7 +91,7 @@ public class TaskPage extends TasksReportsPage {
     public EditTaskPage openFormEditTask(Task task, Employee user) {
         $(By.xpath("//a[contains(text(),'" + task.getTaskName() + "')][ancestor::ul[@class='ui-listview']]")).click();
         save.shouldBe(Condition.visible);
-        $(By.xpath("//span[@name='autor']/a[text()='" + user.getLastName() + "']")).shouldBe(Condition.visible);
+        $(By.xpath("//span[@name='autor']//a[contains(text(),'" + user.getLastName() + "')]")).shouldBe(Condition.visible);
         return page(EditTaskPage.class);
     }
 

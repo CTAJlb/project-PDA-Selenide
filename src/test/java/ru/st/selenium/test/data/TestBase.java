@@ -70,7 +70,7 @@ public abstract class TestBase {
     /**
      * Метод генерирующий случайное строковое значение (Заглавные латинские буквы)
      */
-    public static String randomID(int length) {
+    public static String randomIdentifier(int length) {
         final String data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 
@@ -228,7 +228,7 @@ public abstract class TestBase {
     /**
      * Метод создания даты равной завтра
      */
-    public static String tommorowDate() {
+    public static String tomorrowDate() {
         cal.add(Calendar.DAY_OF_MONTH, 1);
         return sdf.format(cal.getTime());
     }

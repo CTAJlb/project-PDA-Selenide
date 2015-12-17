@@ -23,10 +23,12 @@ public class TasksTypes {
     private TasksTypesField[] tasksTypesFields;
 
 
+    public TasksTypes(String nameTaskType) {
+        this.nameTaskType = nameTaskType;
+    }
 
     /**
      * Название - Типы задач
-     *
      */
     public String getTaskTypeName() {
         return nameTaskType;

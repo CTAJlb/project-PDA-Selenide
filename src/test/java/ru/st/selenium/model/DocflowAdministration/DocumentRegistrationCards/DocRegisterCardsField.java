@@ -39,11 +39,11 @@ public class DocRegisterCardsField extends Document {
      *
      * @return DocRegisterCardsField
      */
-    public String getFieldIDDoc() {
+    public String getFieldIdentifierDoc() {
         return fieldIDDoc;
     }
 
-    public DocRegisterCardsField setFieldIDDoc(String fieldIDDoc) {
+    public DocRegisterCardsField setFieldIdentifierDoc(String fieldIDDoc) {
         this.fieldIDDoc = fieldIDDoc;
         return this;
     }

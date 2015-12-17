@@ -8,9 +8,23 @@ import ru.st.selenium.model.AccessRights;
  */
 public class DictionaryEditor {
 
+
     private String dictionaryEditorName;
     private AccessRights accessDiction;
     private DictionaryEditorField[] dictionaryEditorFields;
+
+
+    /**
+     * Конструктор - Словарь
+     * @param dictionaryEditorName
+     * @param accessDiction
+     * @param dictionaryEditorFields
+     */
+    public DictionaryEditor(String dictionaryEditorName, AccessRights accessDiction, DictionaryEditorField[] dictionaryEditorFields) {
+        this.dictionaryEditorName = dictionaryEditorName;
+        this.accessDiction = accessDiction;
+        this.dictionaryEditorFields = dictionaryEditorFields;
+    }
 
     /**
      * Название Словаря

@@ -133,16 +133,16 @@ public class EditTaskPage extends NewTaskPage {
     public EditTaskPage editWorkingGroupInTask(Employee employee) {
         goToTask.click();
         // Удаляем - Контролеры задачи
-        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'cg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
-        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'cg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]"))
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'cg_') and contains(@value,'" + employee.getLastName() + "')]/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'cg_') and contains(@value,'" + employee.getLastName() + "')]/../..//a[not(contains(@onclick,'window.open'))]//span[2]"))
                 .shouldNotBe(visible);
         // Удаляем - Ответственные руководители
-        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'rg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
-        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'rg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]"))
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'rg_') and contains(@value,'" + employee.getLastName() + "')]/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'rg_') and contains(@value,'" + employee.getLastName() + "')]/../..//a[not(contains(@onclick,'window.open'))]//span[2]"))
                 .shouldNotBe(visible);
         // Удаляем - Исполнители
-        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'wg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
-        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'wg_') and @value='" + employee.getLastName() + "']/../..//a[not(contains(@onclick,'window.open'))]//span[2]"))
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'wg_') and contains(@value,'" + employee.getLastName() + "')]/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
+        $(By.xpath("//input[@id='input_prj_t' and contains(@name,'wg_') and contains(@value,'" + employee.getLastName() + "')]/../..//a[not(contains(@onclick,'window.open'))]//span[2]"))
                 .shouldNotBe(visible);
         checkWorkingGroupInTaskAreSaved(employee); // проверяем формирование системных действий об удалении пользователей в ленте действий задачи
         return this;

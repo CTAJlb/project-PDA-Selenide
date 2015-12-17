@@ -26,10 +26,8 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
      * Метод создания полностью случайного объекта - "Редактор словарей"
      */
     public DictionaryEditor getRandomDictionaryEditor() {
-        DictionaryEditor dictionEditor = new DictionaryEditor()
-                .setDictionaryEditorName(randomString(15)) // Название Словаря
-                .setAccessDiction(randomEnum(AccessRights.class))// Уровень доступа
-                .setDictionaryEditorFields(new DictionaryEditorField[]{
+        DictionaryEditor dictionEditor = new DictionaryEditor("wD_Словарь " + randomString(15), /* Название словаря*/ randomEnum(AccessRights.class) /* Уровень доступа*/,
+                (new DictionaryEditorField[]{
 
                         new DictionaryEditorField()
                                 .setNameDictionItem(randomString(15)) // Название элемента словаря
@@ -43,7 +41,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
                                 .setNameDictionItem(randomString(15)) // Название элемента словаря
                                 .setDescriptionDictionItem(randomString(30) + "\n" + randomString(15)), // Описание элемента словаря
 
-                });
+                }));
 
         return dictionEditor;
     }
@@ -65,7 +63,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
           */
         DirectoryField fieldStringIsListChoiceDirectory = new DirectoryField()
                 .setFieldName("Строка (Выбор из списка == Да; Обяз.) " + randomString(10))
-                .setFieldID("STRING" + randomID(5))
+                .setFieldID("STRING" + randomIdentifier(5))
                 .setObligatory(true) // Обязательное поле
                 .setIsUniqueField(true) // Уникальное
                 .setTaskTypeField(new TypeListFieldsString()
@@ -76,15 +74,17 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
           */
         DirectoryField fieldTextDirectory = new DirectoryField()
                 .setFieldName("Текст " + randomString(10))
-                .setFieldID("TEXT" + randomID(5))
+                .setFieldID("TEXT" + randomIdentifier(5))
                 .setTaskTypeField(new TypeListFieldsText());
+
+        // Будешь плохо кодить, придет Java и съест твою память
 
         /*
          3. ЦЕЛОЕ
           */
         DirectoryField fieldIntDirectory = new DirectoryField()
                 .setFieldName("Целое " + randomString(10))
-                .setFieldID("INTEGER" + randomID(5))
+                .setFieldID("INTEGER" + randomIdentifier(5))
                 .setTaskTypeField(new TypeListFieldsInt());
 
         /*
@@ -94,7 +94,6 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
                 true /* Настройка доступа к записям*/, true /* Способ отображения - Линейный ли? true - да; false - иерархический*/,
                 true /*true - поиск записей через SOLR; false - поиск записей через БД*/,
                 new DirectoryField[]{fieldStringIsListChoiceDirectory, fieldTextDirectory, fieldIntDirectory});
-
 
         /*
          ----------------------------------------------------------------------------------------------------Инициализация объекта - Словарь
@@ -110,7 +109,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldNumber = new DocRegisterCardsField()
                 .setFieldNameDoc("Число " + randomString(5)) // Имя поля документа
-                .setFieldIDDoc("NUMBER" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("NUMBER" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeNumberDoc())
                 .setEditableField(true) // Обязательное при редактировании (true == Да; false == Нет)
                 .setObligatoryFieldDoc(ObligatoryFieldDocument.REQUIRED_WHEN_CREATION); // Обязательное поле == Обязательное при создании
@@ -120,7 +119,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldDate = new DocRegisterCardsField()
                 .setFieldNameDoc("Дата " + randomString(5)) // Имя поля документа
-                .setFieldIDDoc("DATE" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("DATE" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeDateDoc()
                         .setDefaultValue(true) // Значение по умолчанию (true == Текущая дата; false == Нет)
                         .setEditionAvailableWhileCreation(true)) // Изменяемое при создании
@@ -131,7 +130,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldString = new DocRegisterCardsField()
                 .setFieldNameDoc("Строка (Уникальное) " + randomString(5)) // Имя поля документа
-                .setFieldIDDoc("STRING" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("STRING" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeStringDoc()
                         .setFieldLength(randomInt(999))) // Длина поля
                 .setEditableField(true)
@@ -142,7 +141,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldStringOnlyYesDirectory = new DocRegisterCardsField()
                 .setFieldNameDoc("Строка (Выбор из спр-ка == Да) " + randomString(5)) // Имя поля документа
-                .setFieldIDDoc("STONLYESDIR" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("STONLYESDIR" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeStringDoc()
                         .setSelectOnlyFromDictionary(true) // Выбор только из справочника (true == Да; false == Нет)
                         .setDirectoryName("Номенклатура дел")
@@ -155,7 +154,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldStringOnlyNoDirectory = new DocRegisterCardsField()
                 .setFieldNameDoc("Строка (Выбор из спр-ка == Нет) " + randomString(5)) // Имя поля документа
-                .setFieldIDDoc("STONLNODIR" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("STONLNODIR" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeStringDoc()
                         .setSelectOnlyFromDictionary(false) // Выбор только из справочника (true == Да; false == Нет)
                         .setDirectoryName("Номенклатура дел")
@@ -168,7 +167,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldText = new DocRegisterCardsField()
                 .setFieldNameDoc("Текст " + randomString(5))
-                .setFieldIDDoc("TEXT" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("TEXT" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeTextDoc())
                 .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
@@ -177,7 +176,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldTextOnlyYesDirectory = new DocRegisterCardsField()
                 .setFieldNameDoc("Текст (Выбор из спр-ка == Да) " + randomString(5))
-                .setFieldIDDoc("TEXONLYYESDIR" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("TEXONLYYESDIR" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeTextDoc()
                         .setSelectOnlyFromDictionary(true)
                         .setDirectoryName("Номенклатура дел")
@@ -190,17 +189,17 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldDictionary = new DocRegisterCardsField()
                 .setFieldNameDoc("Словарь " + randomString(5))
-                .setFieldIDDoc("DICTIONARY" + randomID(5)) // Идентификатор поля
-                    .setFieldTypeDoc(new FieldTypeDictionaryDoc()
-                           .setDictionaryEditor(dictionaryEditor)) // Выбор проинициализированный объект - Словарь
+                .setFieldIdentifierDoc("DICTIONARY" + randomIdentifier(5)) // Идентификатор поля
+                .setFieldTypeDoc(new FieldTypeDictionaryDoc()
+                        .setDictionaryEditor(dictionaryEditor)) // Выбор проинициализированный объект - Словарь
                 .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-        /**
-         * 6. ПОДРАЗДЕЛЕНИЕ
+        /*
+          6. ПОДРАЗДЕЛЕНИЕ
          */
         DocRegisterCardsField fieldDepartment = new DocRegisterCardsField()
                 .setFieldNameDoc("Подразделение " + randomString(5))
-                .setFieldIDDoc("DEPARTMENT" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("DEPARTMENT" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeDepartmentDoc())
                 .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
@@ -209,7 +208,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldEmployee = new DocRegisterCardsField()
                 .setFieldNameDoc("Сотрудник " + randomString(5))
-                .setFieldIDDoc("EMPLOYEE" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("EMPLOYEE" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeEmployeeDoc())
                 .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
@@ -218,7 +217,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldEmployeeSuperviserAndDefaultValue = new DocRegisterCardsField()
                 .setFieldNameDoc("Сотрудник (Контролер типа; Текущий пользователь) " + randomString(5))
-                .setFieldIDDoc("EMPDEFAULTVALUY" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("EMPDEFAULTVALUY" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeEmployeeDoc()
                         .setDefaultValue(true) // Значение по умолчанию == Текущий пользователь
                         .setDocumentSuperviser(true)) // Контролер документа == Да
@@ -229,7 +228,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldEmployeeForInformation = new DocRegisterCardsField()
                 .setFieldNameDoc("Сотрудник (Для сведения) " + randomString(5))
-                .setFieldIDDoc("EMFORINFORMATION" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("EMFORINFORMATION" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeEmployeeDoc()
                         .setForInformation(true)) // Для сведения == Да
                 .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
@@ -239,9 +238,9 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldDocument = new DocRegisterCardsField()
                 .setFieldNameDoc("Документ " + randomString(5))
-                .setFieldIDDoc("DOCUMENT" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("DOCUMENT" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeDocumentDoc()
-                        .setDisplayNameTemplate("{" + randomID(10) + "}; " + "{" + randomID(10) + "}; " + randomString(10)))
+                        .setDisplayNameTemplate("{" + randomIdentifier(10) + "}; " + "{" + randomIdentifier(10) + "}; " + randomString(10)))
                 .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
         /*
@@ -249,9 +248,9 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldDocumentSearchRules = new DocRegisterCardsField()
                 .setFieldNameDoc("Документ (Правила поиска) " + randomString(5))
-                .setFieldIDDoc("DOCSEARCHRUL" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("DOCSEARCHRUL" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeDocumentDoc()
-                        .setDisplayNameTemplate("{" + randomID(10) + "}; " + "{" + randomID(10) + "}; " + randomString(10))
+                        .setDisplayNameTemplate("{" + randomIdentifier(10) + "}; " + "{" + randomIdentifier(10) + "}; " + randomString(10))
                         .setSearchSimiliarDocuments(true) // Искать похожие документы
                         .setSearchRules("DOCUMENT_STATE" + "=" + "0;")) // Правила поиска
                 .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
@@ -261,9 +260,10 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldNumerator = new DocRegisterCardsField()
                 .setFieldNameDoc("Нумератор " + randomString(5))
-                .setFieldIDDoc("NUMERATOR" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("NUMERATOR" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeNumeratorDoc()
-                        .setNumeratorTemplateDoc("{STRINGTLVSC}-{counter}-{counter(DEPARTMENT,%04d)}-[8]-{DD}.{YYYY} " + randomString(10))
+                        .setNumeratorTemplateDoc("{" + fieldString.getFieldIdentifierDoc() + "}-{counter}-{counter(" + fieldDepartment.getFieldIdentifierDoc() + ",%04d)}-[8]-{DD}.{YYYY} "
+                                + randomString(10))
                         .setEditionAvailableWhileCreation(true)) // Изменяемое при создании
                 .setObligatoryFieldDoc(ObligatoryFieldDocument.REQUIRED_WHEN_CREATION) // Обязательное поле == Обязательное при создании
                 .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
@@ -273,7 +273,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
          */
         DocRegisterCardsField fieldDirectory = new DocRegisterCardsField()
                 .setFieldNameDoc("Справочник " + randomString(5))
-                .setFieldIDDoc("DIRECTORY" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("DIRECTORY" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeDirectoryDoc()
                         .setNameDirectoryDoc("Номенклатура дел")
                         .setDirectoryTemplate("{Код дела}, " + "{Наименование раздела} " + randomString(15))
@@ -285,7 +285,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
      */
         DocRegisterCardsField fieldMultiDirectory = new DocRegisterCardsField()
                 .setFieldNameDoc("Множественный справочник " + randomString(5))
-                .setFieldIDDoc("DIRMULTI" + randomID(5)) // Идентификатор поля
+                .setFieldIdentifierDoc("DIRMULTI" + randomIdentifier(5)) // Идентификатор поля
                 .setFieldTypeDoc(new FieldTypeDirectoryDoc()
                         .setDirectoryDoc(directories) // Задаем проинициализированный спр-к
                         .setDirectoryTemplate("{" + fieldStringIsListChoiceDirectory.getFieldName() + "}" + ";"
@@ -303,7 +303,8 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
                 .setDocumentStatesOnExecution("На исполнении " + randomString(20)) // - На исполнении
                 .setDocumentStatesInArchive("В архиве " + randomString(20)) // - В архиве
 
-                .setDisplayNameTemplate("{NUMBER}, " + "{STRINGTLVSC} " + randomString(15)) // Шаблон отображения
+                .setDisplayNameTemplate("{" + fieldNumerator.getFieldIdentifierDoc() + "}, " + "{" + fieldString.getFieldIdentifierDoc() + "} "
+                        + randomString(15)) // Шаблон отображения
 
                 // Направление смещения при попадании на нерабочее время
                 .setDocRegisterCardsShiftDirection(ShiftDirection.DATE_MOVES_FORWARD) // Дата сдвигается назад
@@ -345,8 +346,10 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
                         fieldEmployeeSuperviserAndDefaultValue, fieldEmployeeForInformation, fieldDocument, fieldDocumentSearchRules, fieldNumerator, fieldDirectory})
 
                 // Копирование полей при создании задачи
+                // TODO доработать инициализацию
                 .setCopyingFieldsWhenCreatingATask("TINTEGER=DNUMBER" + ";" + " " + "TTEXT=DTEXT" + ";" + " " + "TDATA=DDATA" + ";" + " " + "DSTRING=TSTRING")
 
+                // TODO доработать инициализацию полей для трансляции пользователей
                 // Поля документа, содержащие...:
                 .setAuthorsObjectives("AVTOR") // авторов задач
                 .setControllersOfTasks("TASKSUPERVISORS") // контролеров задач

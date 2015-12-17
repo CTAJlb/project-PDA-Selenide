@@ -1,5 +1,6 @@
 package ru.st.selenium.pagesweb.Administration;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -10,9 +11,7 @@ import ru.st.selenium.model.Directories.DirectoryField;
 import ru.st.selenium.model.FieldsObject.*;
 import ru.st.selenium.model.OpenFilesForEdit;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.confirm;
-import static com.codeborne.selenide.Selenide.dismiss;
+import static com.codeborne.selenide.Selenide.*;
 
 /**
  * Страница - форма редактирования объекта - Справочники
@@ -768,6 +767,7 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      */
     @Override
     public void addFieldDirectories(Directories directories) {
+        $$(By.xpath("//div[count(a)=4]/a//text()//..")).shouldBe(CollectionCondition.size(4)); // проверка отображения вкладок в форме редактирования Спр-ка
         clickFieldsTab(); // Выбираем вкладку Поля
         waitingElementsTabField() // Ожидаем появления элементов на вкладке "Поля"
                 .addAllFieldsDirectory(directories.getDirectoryFields()) // Добавление типов полей

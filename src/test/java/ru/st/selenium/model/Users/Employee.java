@@ -31,7 +31,6 @@ public class Employee {
     private String email;
     private String company;
 
-
     /**
      * Подразделение пользователя
      *

@@ -64,7 +64,7 @@ public class SearchTest extends BaseObjectTestCase {
         searchPage.searchTask(task); // Производим поиск задачи по - Названию */
 
         SearchPage searchPage = internalPage.goToSearch(); // Переходим в раздел Поиска
-        //TODO Добавить выбор фильтрации - КОНТАКТЫ
+        //TODO Добавить выбор фильтрации - КОНТАКТЫ - НЕРАБОТАЕТ СЕЙЧАС!!!
         searchPage.searchContact(EMPLOYEE_ADMIN); // проверяем поиск Контакта пользователя по Фамилии
 
 

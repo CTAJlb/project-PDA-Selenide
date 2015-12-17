@@ -1662,7 +1662,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
                     for (DocRegisterCardsField fieldDoc : fieldsDocs) {
                         clickAddFieldDoc(); // Добавить поле
                         setFieldNameDoc(fieldDoc.getFieldNameDoc()); // Заполняем Название поля документа из массива
-                        setFieldIDDoc(fieldDoc.getFieldIDDoc()); // Заполняем Идентификатор поля из массива
+                        setFieldIDDoc(fieldDoc.getFieldIdentifierDoc()); // Заполняем Идентификатор поля из массива
                         fetchTypeField(); // Выбор поля - Тип поля
 
                         // 1. ЧИСЛО
@@ -1924,7 +1924,8 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
         // Открывать файлы для редактирования
         selOpenFilesForEditDoc(registerCards.getOpenFilesForEditDoc());
 
-        selAutoСalculationNumeratorFields(registerCards.getAutoСalculationNumeratorFields()); // Автоматическое вычисление полей-нумераторов
+        // Автоматическое вычисление полей-нумераторов
+        selAutoСalculationNumeratorFields(registerCards.getAutoСalculationNumeratorFields());
 
         /*
          * =====================================================================================================производим выбор вкладки - Права

@@ -40,7 +40,7 @@ public abstract class BaseObjectTestCase extends TestBase {
         Task task = new Task()
                 .setTaskName(randomString(15) + " " + randomString(30))
                 .setDescription(randomString(100) + "\n " + randomString(100) + "\n " + randomString(100))
-                .setDateEnd(tommorowDate())
+                .setDateEnd(tomorrowDate())
                 .setIsImportant(randomBoolean())
                 .setIsSecret(randomBoolean())
                 .setIsWithReport(randomBoolean());
@@ -56,7 +56,7 @@ public abstract class BaseObjectTestCase extends TestBase {
 
                 {new Task().setTaskName(randomString(15) + " " + randomString(30))
                         .setDescription(randomString(100) + "\n " + randomString(100) + "\n " + randomString(100))
-                        .setDateEnd(tommorowDate())
+                        .setDateEnd(tomorrowDate())
                         .setAuthors(new Employee[]{EMPLOYEE_ADMIN})
                         .setControllers(new Employee[]{EMPLOYEE_ADMIN})
                         .setExecutiveManagers(new Employee[]{EMPLOYEE_ADMIN})
