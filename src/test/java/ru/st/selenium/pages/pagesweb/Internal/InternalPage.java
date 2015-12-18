@@ -1,4 +1,4 @@
-package ru.st.selenium.pagesweb.Internal;
+package ru.st.selenium.pages.pagesweb.Internal;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -7,12 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.BaseOperation;
-import ru.st.selenium.pagespda.Page;
-import ru.st.selenium.pagesweb.Administration.DirectoriesEditFormPage;
-import ru.st.selenium.pagesweb.Administration.TaskTypeListObjectPage;
-import ru.st.selenium.pagesweb.DocflowAdministration.DictionaryEditorPage;
-import ru.st.selenium.pagesweb.DocflowAdministration.GridDocRegisterCardsPageWeb;
-import ru.st.selenium.pagesweb.Documents.NewDocumentPage;
+import ru.st.selenium.pages.Page;
+import ru.st.selenium.pages.pagesweb.Administration.DirectoriesEditFormPage;
+import ru.st.selenium.pages.pagesweb.Administration.TaskTypeListObjectPage;
+import ru.st.selenium.pages.pagesweb.DocflowAdministration.DictionaryEditorPage;
+import ru.st.selenium.pages.pagesweb.DocflowAdministration.GridDocRegisterCardsPage;
+import ru.st.selenium.pages.pagesweb.Documents.NewDocumentPage;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
@@ -21,7 +21,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 /**
  * Внутренняя страница системы (ОМ - Основное меню)
  */
-public class InternalPageWeb extends Page implements BaseOperation {
+public class InternalPage extends Page implements BaseOperation {
 
     /*
      * Ссылки на все пункты меню
@@ -183,10 +183,10 @@ public class InternalPageWeb extends Page implements BaseOperation {
     /**
      * Переход в меню - Администрирование ДО/Регистрационные карточки документов
      */
-    public GridDocRegisterCardsPageWeb goToGridDocRegisterCards() {
+    public GridDocRegisterCardsPage goToGridDocRegisterCards() {
         subMenuClicker(instrMenu, docAdministrationMenu, registerCardsMenu);
         goToFremFlow();
-        return page(GridDocRegisterCardsPageWeb.class);
+        return page(GridDocRegisterCardsPage.class);
 
     }
 

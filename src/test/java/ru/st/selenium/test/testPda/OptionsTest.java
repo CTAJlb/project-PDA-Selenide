@@ -2,12 +2,13 @@ package ru.st.selenium.test.testPda;
 
 import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.model.Task.Task;
+import ru.st.selenium.pages.Page;
 import ru.st.selenium.test.data.BaseObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ru.st.selenium.pagespda.*;
+import ru.st.selenium.pages.pagespda.*;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -26,45 +27,46 @@ public class OptionsTest extends BaseObjectTestCase {
      */
     @Test(dataProvider = "objectDataTask", priority = 1, retryAnalyzer = Retry.class)
     public void verifyAttachmentFileInTheTask(Task task) throws Exception {
-        LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
+        LoginPagePDA loginPagePDA = open(Page.PDA_PAGE_URL, LoginPagePDA.class);
 
         // Авторизация
-        loginPage.loginAsAdmin(ADMIN);
+        loginPagePDA.loginAsAdmin(ADMIN);
 
-        InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        InternalPagePDA internalPagePDA = loginPagePDA.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
         assertThat("Check that the displayed menu item 4 (Tasks; Create Task; Today; Document)",
-                internalPage.hasMenuUserComplete());
+                internalPagePDA.hasMenuUserComplete());
 
 
         // Инициализируем стр. формы Настройки и переходим на нее
-        OptionsPage optionsPage = internalPage.goToOptions();
-        optionsPage.selAttachFiles(true); // устанавливаем признак - возможность прикрепления файлов
-        internalPage.goToHome(); // уходим домой
+        OptionsPagePDA optionsPagePDA = internalPagePDA.goToOptions();
+        optionsPagePDA.selAttachFiles(true); // устанавливаем признак - возможность прикрепления файлов
+        internalPagePDA.goToHome(); // уходим домой
 
 
         // Инициализируем стр. формы создание задачи и переходим на нее
-        NewTaskPage newTaskPage = internalPage.goToCreateTask();
+        NewTaskPagePDA newTaskPagePDA = internalPagePDA.goToCreateTask();
 
         //----------------------------------------------------------------ФОРМА - создания Задачи
 
-        newTaskPage.createTask(task);
+        newTaskPagePDA.createTask(task);
 
-        EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
+        EditTaskPagePDA editTaskPagePDA = newTaskPagePDA.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
 
-        editTaskPage.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
+        editTaskPagePDA.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
 
         //----------------------------------------------------------------ФОРМА - Задачи
 
-        TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
+        TaskPagePDA taskForm = editTaskPagePDA.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
 
         taskForm.openShapeCreatedTask(task); // Открываем форму созданной задачи
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
         taskForm.addAttachFiles(randomString(15)); // Аттачим файлы
 
-        internalPage.logout(); // Выход из системы
+        internalPagePDA.logout(); // Выход из системы
+        assertTrue(loginPagePDA.isNotLoggedInPDA());
 
     }
 

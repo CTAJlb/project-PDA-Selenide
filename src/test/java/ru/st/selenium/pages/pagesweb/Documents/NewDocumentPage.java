@@ -1,4 +1,4 @@
-package ru.st.selenium.pagesweb.Documents;
+package ru.st.selenium.pages.pagesweb.Documents;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -12,7 +12,7 @@ import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.*;
 import ru.st.selenium.model.Task.Project;
 import ru.st.selenium.model.Users.Department;
 import ru.st.selenium.model.Users.Employee;
-import ru.st.selenium.pagespda.Page;
+import ru.st.selenium.pages.Page;
 
 
 import static com.codeborne.selenide.Selenide.$;

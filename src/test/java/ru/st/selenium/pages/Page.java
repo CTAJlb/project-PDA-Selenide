@@ -1,9 +1,13 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages;
 
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.st.selenium.pages.pagespda.LoginPagePDA;
+import ru.st.selenium.pages.pagesweb.LoginPage;
 
 import java.util.Set;
 
@@ -27,7 +31,7 @@ public abstract class Page {
     public static final String CLICK_OK_MESSAGES = "//div[count(div)=3]/div[3]//div[count(a)=4]/a[1]//span[position()=2]";
 
     /**
-     * Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPageWeb)
+     * Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPage)
      */
     public Page gotoTopFrem() {
         getWebDriver().switchTo().defaultContent();
@@ -36,6 +40,7 @@ public abstract class Page {
 
     /**
      * Проверяем отображения текста в диалоге - Изменения сохранены
+     *
      * @param locator
      * @param message
      */
@@ -83,14 +88,6 @@ public abstract class Page {
         action.build().perform();
     }
 
-
-    /**
-     * Проверяем то, что мы разлогинены
-     */
-    public boolean isNotLoggedIn() {
-        return page(LoginPage.class).isPageLoaded();
-    }
-
     /**
      * Метод обращается к ensurePageLoaded и возвращает булевское значение,
      * (false - не дождались загрузки стр.; true - дождались) ждет загрузки
@@ -127,17 +124,19 @@ public abstract class Page {
      *            Пример - WebElement link = driver.findElement(By.tagName("a"));
      *            openInNewWindow(link.getAttribute("href"));
      */
-    public void openInNewWindow(String url) {
+    public static void openInNewWindow(String url) {
         executeJavaScript("window.open(arguments[0])", url);
     }
 
     /**
      * The code below will open the link in new Tab
+     * <p>
+     * пример - driver.findElement(By.linkText("urlLink")).sendKeys(selectLinkOpenInNewTab);
      */
     public static String selectLinkOpenInNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
-    // пример - driver.findElement(By.linkText("urlLink")).sendKeys(selectLinkOpenInNewTab);
 
-    //------------------------------------------------------------------------------------------------------------WINDOWS---------------------------------------------------
+
+    //-----------------------------------------------------------------------------Переключение между - WINDOWS
 
     /**
      * Метод появление новго окна
@@ -188,6 +187,52 @@ public abstract class Page {
         /**
          * Пример, использования метода - waitTime(0.5 OR 1);
          */
+    }
+
+    /**
+     * Подождать пока отобразится элемент на странице
+     *
+     * @param locator
+     * @param maxSeconds
+     * @return
+     */
+    public WebElement waitForPageUntilElementIsVisible(By locator,
+                                                       int maxSeconds) {
+        return (new WebDriverWait(getWebDriver(), maxSeconds)).until(ExpectedConditions
+                .visibilityOfElementLocated(locator));
+        /**
+         * Пример использования метода
+         * - waitForPageUntilElementIsVisible(By.xpath("//*[@id='bAddRec-btnIconEl']"), 5000);
+         */
+    }
+
+    //----------------------------------------------------Проверки------------------------------------------------
+
+    /**
+     * Метод проверки наличия элемента на странице
+     *
+     * @param locator
+     * @return
+     */
+    public boolean isElementPresent(By locator) {
+        try {
+            waitMillisecond(0.5);
+            $(locator);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Метод проверки Видимости элемента
+     */
+    public boolean isElementVisible(By locator) {
+        boolean value = false;
+
+        if ($(locator).shouldBe(Condition.visible).isDisplayed())
+            value = true;
+        return value;
     }
 
 

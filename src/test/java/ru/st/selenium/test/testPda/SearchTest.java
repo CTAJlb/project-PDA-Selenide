@@ -1,17 +1,18 @@
 package ru.st.selenium.test.testPda;
 
 import com.codeborne.selenide.testng.TextReport;
+import ru.st.selenium.pages.pagespda.LoginPagePDA;
+import ru.st.selenium.pages.pagespda.SearchPagePDA;
 import ru.st.selenium.test.data.BaseObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ru.st.selenium.pagespda.InternalPage;
-import ru.st.selenium.pagespda.LoginPage;
-import ru.st.selenium.pagespda.Page;
-import ru.st.selenium.pagespda.SearchPage;
+import ru.st.selenium.pages.pagespda.InternalPagePDA;
+import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -27,21 +28,22 @@ public class SearchTest extends BaseObjectTestCase {
      */
     @Test(priority = 1, retryAnalyzer = Retry.class)
     public void verifySearch() throws Exception {
-        LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
+        LoginPagePDA loginPagePDA = open(Page.PDA_PAGE_URL, LoginPagePDA.class);
 
         // Авторизация
-        loginPage.loginAsAdmin(ADMIN);
-        InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
+        loginPagePDA.loginAsAdmin(ADMIN);
+        InternalPagePDA internalPagePDA = loginPagePDA.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        assertThat("Check that the displayed menu item 4 (Tasks; Create Task; Today; Document)",
+                internalPagePDA.hasMenuUserComplete());
 
 
        /*  TODO поиск задачи через SOLR
-       NewTaskPage newTaskPage = internalPage.goToCreateTask();  // Инициализируем стр. формы создание задачи и переходим на нее
+       NewTaskPagePDA newTaskPage = internalPagePDA.goToCreateTask();  // Инициализируем стр. формы создание задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - создания Задачи
 
        newTaskPage.createTask(task);
-        EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
+        EditTaskPagePDA editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
 
@@ -49,27 +51,27 @@ public class SearchTest extends BaseObjectTestCase {
 
         //----------------------------------------------------------------ФОРМА - Задачи
 
-        TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
+        TaskPagePDA taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
         taskForm.openShapeCreatedTask(task); // Открываем созданную задачу
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
-        internalPage.goToHome();
-        TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
+        internalPagePDA.goToHome();
+        TasksReportsPagePDA tasksReportsPage = internalPagePDA.goToTaskReports(); // переходим в грид - Задачи/Задачи
         tasksReportsPage.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
 
-        internalPage.goToHome();
+        internalPagePDA.goToHome();
 
         //----------------------------------------------------------------ГРИД - ПОИСК
 
-        SearchPage searchPage = internalPage.goToSearch(); // Переходим в раздел Поиска
-        searchPage.searchTask(task); // Производим поиск задачи по - Названию */
+        SearchPagePDA searchPagePDA = internalPagePDA.goToSearch(); // Переходим в раздел Поиска
+        searchPagePDA.searchTask(task); // Производим поиск задачи по - Названию */
 
-        SearchPage searchPage = internalPage.goToSearch(); // Переходим в раздел Поиска
+        SearchPagePDA searchPagePDA = internalPagePDA.goToSearch(); // Переходим в раздел Поиска
         //TODO Добавить выбор фильтрации - КОНТАКТЫ - НЕРАБОТАЕТ СЕЙЧАС!!!
-        searchPage.searchContact(EMPLOYEE_ADMIN); // проверяем поиск Контакта пользователя по Фамилии
+        searchPagePDA.searchContact(EMPLOYEE_ADMIN); // проверяем поиск Контакта пользователя по Фамилии
 
 
-        internalPage.logout(); // Выход из системы
-
+        internalPagePDA.logout(); // Выход из системы
+        assertTrue(loginPagePDA.isNotLoggedInPDA());
     }
 
 

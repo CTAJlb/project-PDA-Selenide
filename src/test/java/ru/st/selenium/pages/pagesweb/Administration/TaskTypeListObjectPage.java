@@ -1,4 +1,4 @@
-package ru.st.selenium.pagesweb.Administration;
+package ru.st.selenium.pages.pagesweb.Administration;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.DirectoriesLogic;
 import ru.st.selenium.model.Directories.Directories;
-import ru.st.selenium.pagespda.Page;
+import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Selenide.$;
 

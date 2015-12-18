@@ -1,4 +1,4 @@
-package ru.st.selenium.pagesweb.DocflowAdministration;
+package ru.st.selenium.pages.pagesweb.DocflowAdministration;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -18,7 +18,7 @@ import static com.codeborne.selenide.Selenide.page;
 /**
  * Калсс, в к-м описываются все элементы указанные на странице редактирования Регистрационной карточки документа (РКД)
  */
-public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb implements FormDocRegisterCardsEditLogic {
+public class FormDocRegisterCardsEditPage extends GridDocRegisterCardsPage implements FormDocRegisterCardsEditLogic {
 
 
     //-------------------------------------------------------------------------Дополнительные методы-----------------------------------------------------------------------------
@@ -27,7 +27,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Ожидание маски - при открытии формы редактирования
      */
-    public FormDocRegisterCardsEditPageWeb waitForTaskMaskDRC() {
+    public FormDocRegisterCardsEditPage waitForTaskMaskDRC() {
         $(By.xpath("//div[contains(@id,'ext-element') and contains(@class,'mask')]")).shouldBe(disappear);
         return this;
     }
@@ -694,9 +694,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Производим выбор вкладки - Общее
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickGeneralTab() {
+    public FormDocRegisterCardsEditPage clickGeneralTab() {
         waitMillisecond(0.7);
         $(By.xpath("(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[1]//span")).shouldHave(present);
         waitForTaskMaskDRC();
@@ -707,7 +707,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Название - Регистрационной карточки документа
      */
-    public FormDocRegisterCardsEditPageWeb setNameDocRegisterCards(String text) {
+    public FormDocRegisterCardsEditPage setNameDocRegisterCards(String text) {
         setNameDocRegCards.clear();
         setNameDocRegCards.setValue(text);
         return this;
@@ -716,7 +716,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Вводим статус документа: На рассмотрении
      */
-    public FormDocRegisterCardsEditPageWeb adValueDocumentStatesOnReview(String statesOnReview) {
+    public FormDocRegisterCardsEditPage adValueDocumentStatesOnReview(String statesOnReview) {
         if (statesOnReview == null) {
             return this;
         } else {
@@ -730,7 +730,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Вводим статус документа: Рассмотрен
      */
-    public FormDocRegisterCardsEditPageWeb adValueDocumentStatesReviewed(String statesReviewed) {
+    public FormDocRegisterCardsEditPage adValueDocumentStatesReviewed(String statesReviewed) {
         if (statesReviewed == null) {
             return this;
         } else {
@@ -744,7 +744,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Вводим статус документа: На подписании
      */
-    public FormDocRegisterCardsEditPageWeb adValueDocumentStatesOnApproval(String statesOnApproval) {
+    public FormDocRegisterCardsEditPage adValueDocumentStatesOnApproval(String statesOnApproval) {
         if (statesOnApproval == null) {
             return this;
         } else {
@@ -758,7 +758,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Вводим статус документа: На исполнении
      */
-    public FormDocRegisterCardsEditPageWeb adValueDocumentStatesOnExecution(String statesOnExecution) {
+    public FormDocRegisterCardsEditPage adValueDocumentStatesOnExecution(String statesOnExecution) {
         if (statesOnExecution == null) {
             return this;
         } else {
@@ -772,7 +772,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Вводим статус документа: В архив
      */
-    public FormDocRegisterCardsEditPageWeb adValueDocumentStatesInArchive(String statesInArchive) {
+    public FormDocRegisterCardsEditPage adValueDocumentStatesInArchive(String statesInArchive) {
         if (statesInArchive == null) {
             return this;
         } else {
@@ -786,7 +786,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Вводим - Шаблон отображения документа
      */
-    public FormDocRegisterCardsEditPageWeb addDisplayNameTemplate(String nameTemplate) {
+    public FormDocRegisterCardsEditPage addDisplayNameTemplate(String nameTemplate) {
         if (nameTemplate == null) {
             return this;
         } else {
@@ -799,7 +799,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Направление смещения даты при попадании на нерабочее время
      */
-    public FormDocRegisterCardsEditPageWeb selDirectionOfDisplacementOfTheDate(ShiftDirection shiftDirection) {
+    public FormDocRegisterCardsEditPage selDirectionOfDisplacementOfTheDate(ShiftDirection shiftDirection) {
         if (shiftDirection == null) {
             return this;
         } else if (shiftDirection == ShiftDirection.DATE_MOVES_BACK) {
@@ -815,9 +815,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Возврат на доработку с начала текущей схемы
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selAtFirstRevisionScheme(boolean atFirstRevisionScheme) {
+    public FormDocRegisterCardsEditPage selAtFirstRevisionScheme(boolean atFirstRevisionScheme) {
         if (atFirstRevisionScheme) {
             clickAtFirstRevisionScheme.click();
         }
@@ -827,9 +827,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Возврат на доработку в ту же точку рассмотрения
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selForCompletionInTighterPoint(boolean forCompletionInTighterPoint) {
+    public FormDocRegisterCardsEditPage selForCompletionInTighterPoint(boolean forCompletionInTighterPoint) {
         if (forCompletionInTighterPoint) {
             clickForCompletionInTighterPoint.click();
         }
@@ -839,9 +839,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Возврат на доработку с новой схемой
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selOnCompletionTheNewScheme(boolean onCompletionTheNewScheme) {
+    public FormDocRegisterCardsEditPage selOnCompletionTheNewScheme(boolean onCompletionTheNewScheme) {
         if (onCompletionTheNewScheme) {
             clickOnCompletionTheNewScheme.click();
         }
@@ -851,7 +851,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Метод выбора открытия файлов для редактирования
      */
-    public FormDocRegisterCardsEditPageWeb selOpenFilesForEditDoc(OpenFilesForEdit openFilesForEdit) {
+    public FormDocRegisterCardsEditPage selOpenFilesForEditDoc(OpenFilesForEdit openFilesForEdit) {
         if (openFilesForEdit == null) {
             return this;
         } else if (openFilesForEdit == OpenFilesForEdit.NO) {
@@ -867,7 +867,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Автоматическое вычисление полей-нумераторов
      */
-    public FormDocRegisterCardsEditPageWeb selAutoСalculationNumeratorFields(OpenFilesForEdit autoСalculationNumeratorFields) {
+    public FormDocRegisterCardsEditPage selAutoСalculationNumeratorFields(OpenFilesForEdit autoСalculationNumeratorFields) {
         if (autoСalculationNumeratorFields == null) {
             return this;
         } else if (autoСalculationNumeratorFields == OpenFilesForEdit.NO) {
@@ -886,9 +886,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Производим выбор вкладки - Права
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickRightsTab() {
+    public FormDocRegisterCardsEditPage clickRightsTab() {
         rightsTab.click();
         $(By.xpath("((//fieldset//table[contains(@id,'radiogroup')])[2]//div[contains(@id,'radio')]/..//input)[2]")).shouldBe(visible);
         return this;
@@ -897,7 +897,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Метод выбора уровня доступа к РКД (Регистрационная карточка документа)
      */
-    public FormDocRegisterCardsEditPageWeb setRadioButtAccess(AccessRights accessRights) {
+    public FormDocRegisterCardsEditPage setRadioButtAccess(AccessRights accessRights) {
         switch (accessRights) {
             case AVAILABLETOALL:
                 clickAccessAvailableToAll.click();
@@ -916,7 +916,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Изменение признака "Окончательная версия"
      * Автор документа:
      */
-    public FormDocRegisterCardsEditPageWeb setDocAuthorFinalVersionFiles(SettingsFinalVersion finalVersionChanging) {
+    public FormDocRegisterCardsEditPage setDocAuthorFinalVersionFiles(SettingsFinalVersion finalVersionChanging) {
         if (finalVersionChanging == null) {
             return this;
         } else if (finalVersionChanging == SettingsFinalVersion.NO) {
@@ -933,7 +933,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Изменение признака "Окончательная версия"
      * Пользователь с правами редактирования:
      */
-    public FormDocRegisterCardsEditPageWeb setUserWithEditRightFinalVersionFiles(SettingsFinalVersion finalVersionChanging) {
+    public FormDocRegisterCardsEditPage setUserWithEditRightFinalVersionFiles(SettingsFinalVersion finalVersionChanging) {
         if (finalVersionChanging == null) {
             return this;
         } else if (finalVersionChanging == SettingsFinalVersion.NO) {
@@ -950,7 +950,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Изменение признака "Окончательная версия"
      * Конролер типа документа:
      */
-    public FormDocRegisterCardsEditPageWeb setDocTypeControllerFinalVersionFiles(SettingsFinalVersion finalVersionChanging) {
+    public FormDocRegisterCardsEditPage setDocTypeControllerFinalVersionFiles(SettingsFinalVersion finalVersionChanging) {
         if (finalVersionChanging == null) {
             return this;
         } else if (finalVersionChanging == SettingsFinalVersion.NO) {
@@ -967,7 +967,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Редактирование своих документов
      * - На рассмотрении
      */
-    public FormDocRegisterCardsEditPageWeb setEditionOwnDocumentsOnReview(EditionOwnDocuments editionOwnDocumentsOnReview) {
+    public FormDocRegisterCardsEditPage setEditionOwnDocumentsOnReview(EditionOwnDocuments editionOwnDocumentsOnReview) {
         if (editionOwnDocumentsOnReview == null) {
             return this;
         } else if (editionOwnDocumentsOnReview == EditionOwnDocuments.NO) {
@@ -987,7 +987,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Редактирование своих документов
      * - На исполнении
      */
-    public FormDocRegisterCardsEditPageWeb setEditionOwnDocumentsOnExecution(EditionOwnDocuments editionOwnDocumentsOnExecution) {
+    public FormDocRegisterCardsEditPage setEditionOwnDocumentsOnExecution(EditionOwnDocuments editionOwnDocumentsOnExecution) {
         if (editionOwnDocumentsOnExecution == null) {
             return this;
         } else if (editionOwnDocumentsOnExecution == EditionOwnDocuments.NO) {
@@ -1007,7 +1007,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Редактирование своих документов
      * - В архиве
      */
-    public FormDocRegisterCardsEditPageWeb setEditionOwnDocumentsInArchive(EditionOwnDocuments editionOwnDocumentsInArchive) {
+    public FormDocRegisterCardsEditPage setEditionOwnDocumentsInArchive(EditionOwnDocuments editionOwnDocumentsInArchive) {
         if (editionOwnDocumentsInArchive == null) {
             return this;
         } else if (editionOwnDocumentsInArchive == EditionOwnDocuments.NO) {
@@ -1028,9 +1028,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Доступ к разделам документа при просмотре/редактировании
      * -Маршрут
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickCheckBoxAccessToSectionsDocumentRoute(boolean checkBoxAccessToSectionsDocumentRoute) {
+    public FormDocRegisterCardsEditPage clickCheckBoxAccessToSectionsDocumentRoute(boolean checkBoxAccessToSectionsDocumentRoute) {
         if (checkBoxAccessToSectionsDocumentRoute) {
             clickBoxAccessToSectionsDocumentRoute.click();
         }
@@ -1041,9 +1041,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Доступ к разделам документа при просмотре/редактировании
      * -Файлы
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickCheckBoxAccessToSectionsDocumentFiles(boolean checkBoxAccessToSectionsDocumentFiles) {
+    public FormDocRegisterCardsEditPage clickCheckBoxAccessToSectionsDocumentFiles(boolean checkBoxAccessToSectionsDocumentFiles) {
         if (checkBoxAccessToSectionsDocumentFiles) {
             clickBoxAccessToSectionsDocumentFiles.click();
         }
@@ -1054,9 +1054,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Доступ к разделам документа при просмотре/редактировании
      * -Резолюции
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickCheckBoxAccessToSectionsDocumentResolution(boolean checkBoxAccessToSectionsDocumentResolution) {
+    public FormDocRegisterCardsEditPage clickCheckBoxAccessToSectionsDocumentResolution(boolean checkBoxAccessToSectionsDocumentResolution) {
         if (checkBoxAccessToSectionsDocumentResolution) {
             clickBoxAccessToSectionsDocumentResolution.click();
         }
@@ -1067,9 +1067,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Доступ к разделам документа при просмотре/редактировании
      * -Журнал
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickCheckBoxAccessToSectionsDocumentLog(boolean checkBoxAccessToSectionsDocumentLog) {
+    public FormDocRegisterCardsEditPage clickCheckBoxAccessToSectionsDocumentLog(boolean checkBoxAccessToSectionsDocumentLog) {
         if (checkBoxAccessToSectionsDocumentLog) {
             clickBoxAccessToSectionsDocumentLog.click();
         }
@@ -1079,9 +1079,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Создание связанных документов
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb setCreationOfLinkedDocuments(CreationOfLinkedDocuments creationOfLinkedDocuments) {
+    public FormDocRegisterCardsEditPage setCreationOfLinkedDocuments(CreationOfLinkedDocuments creationOfLinkedDocuments) {
         if (creationOfLinkedDocuments == null) {
             return this;
         } else if (creationOfLinkedDocuments == CreationOfLinkedDocuments.NO) {
@@ -1105,9 +1105,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Производим выбор вкладки - МС
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickConnectedRoutesTab() {
+    public FormDocRegisterCardsEditPage clickConnectedRoutesTab() {
         connectedRoutesTab.click();
         $(By.xpath("//div[contains(@id,'selectionform')]//div[contains(@id,'gridview')]//table")).shouldBe(visible);
         return this;
@@ -1116,9 +1116,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Производим выбор настройки - Использовать все МС
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickCheckBoxUseAllPossibleRoutes(boolean checkBoxUseAllPossibleRoutes) {
+    public FormDocRegisterCardsEditPage clickCheckBoxUseAllPossibleRoutes(boolean checkBoxUseAllPossibleRoutes) {
         if (checkBoxUseAllPossibleRoutes) {
             clickCheckBoxUseAllPossibleRoutes.click();
         }
@@ -1130,9 +1130,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Производим выбор вкладки - ПОЛЯ
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb fieldsTab() {
+    public FormDocRegisterCardsEditPage fieldsTab() {
         fieldsTab.click();
         return this;
     }
@@ -1140,9 +1140,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Производим клик кнопки - Добавить поле
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickAddFieldDoc() {
+    public FormDocRegisterCardsEditPage clickAddFieldDoc() {
         addFieldDoc.click();
         return this;
     }
@@ -1151,9 +1151,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Название поля
      *
      * @param fieldName
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb setFieldNameDoc(String fieldName) {
+    public FormDocRegisterCardsEditPage setFieldNameDoc(String fieldName) {
         nameFieldDoc.clear();
         nameFieldDoc.setValue(fieldName);
         return this;
@@ -1163,9 +1163,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Идентификатор поля
      *
      * @param identifierField
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb setFieldIDDoc(String identifierField) {
+    public FormDocRegisterCardsEditPage setFieldIDDoc(String identifierField) {
         if (identifierField == null) {
             return this;
         } else {
@@ -1178,9 +1178,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля - Тип поля
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb fetchTypeField() {
+    public FormDocRegisterCardsEditPage fetchTypeField() {
         clickFieldTypeField.click();
         return this;
     }
@@ -1188,9 +1188,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Изменяемое при редактировании
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selEditableFieldDoc(boolean editableField) {
+    public FormDocRegisterCardsEditPage selEditableFieldDoc(boolean editableField) {
         if (editableField) {
             this.editableField.click();
             selectingSecondAdjustmentPosition();
@@ -1202,9 +1202,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Шаблон спр-ка
      *
      * @param dirTemplate
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selDirectoryTemplate(String dirTemplate) {
+    public FormDocRegisterCardsEditPage selDirectoryTemplate(String dirTemplate) {
         if (dirTemplate == null) {
             return this;
         } else {
@@ -1218,9 +1218,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Длина поля
      *
      * @param lengthField
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb fieldLength(String lengthField) {
+    public FormDocRegisterCardsEditPage fieldLength(String lengthField) {
         if (lengthField == null) {
             return this;
         } else {
@@ -1233,9 +1233,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор только из справочника
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selOnlyFromDictionary(boolean onlyFromDictionary) {
+    public FormDocRegisterCardsEditPage selOnlyFromDictionary(boolean onlyFromDictionary) {
         if (!onlyFromDictionary) {
             this.selOnlyFromDictionary.click();
             selectingSecondAdjustmentPosition();
@@ -1246,9 +1246,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Обязательное при создании
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selObligatoryFieldDoc(ObligatoryFieldDocument obligatoryFieldDocumentDoc) {
+    public FormDocRegisterCardsEditPage selObligatoryFieldDoc(ObligatoryFieldDocument obligatoryFieldDocumentDoc) {
         if (obligatoryFieldDocumentDoc == null) {
             return this;
         } else if (obligatoryFieldDocumentDoc == ObligatoryFieldDocument.REQUIRED_WHEN_CREATION) {
@@ -1264,9 +1264,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Уникальное поле
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selUniqueFieldDoc(boolean uniqueField) {
+    public FormDocRegisterCardsEditPage selUniqueFieldDoc(boolean uniqueField) {
         if (uniqueField) {
             this.uniqueField.click();
             selectingSecondAdjustmentPosition();
@@ -1277,9 +1277,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Скрывать при создании
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selHideForCreation(boolean hideForCreation) {
+    public FormDocRegisterCardsEditPage selHideForCreation(boolean hideForCreation) {
         if (hideForCreation) {
             this.hideForCreation.click();
             selectingSecondAdjustmentPosition();
@@ -1290,9 +1290,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Скрывать в таблицах
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selHideInTables(boolean hideInTables) {
+    public FormDocRegisterCardsEditPage selHideInTables(boolean hideInTables) {
         if (hideInTables) {
             this.hideInTables.click();
             selectingSecondAdjustmentPosition();
@@ -1303,9 +1303,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Скрывать при поиске
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selHideForSearch(boolean hideForSearch) {
+    public FormDocRegisterCardsEditPage selHideForSearch(boolean hideForSearch) {
         if (hideForSearch) {
             this.hideForSearch.click();
             selectingSecondAdjustmentPosition();
@@ -1316,9 +1316,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Скрывать в карточке
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selHideInCards(boolean hideInCards) {
+    public FormDocRegisterCardsEditPage selHideInCards(boolean hideInCards) {
         if (hideInCards) {
             this.hideInCards.click();
             selectingSecondAdjustmentPosition();
@@ -1329,9 +1329,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Использовать при создании связанного документа
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selUsedToCreateTheLinkedDocumentField(boolean usedToCreateTheLinkedDocumentField) {
+    public FormDocRegisterCardsEditPage selUsedToCreateTheLinkedDocumentField(boolean usedToCreateTheLinkedDocumentField) {
         if (usedToCreateTheLinkedDocumentField) {
             this.usedToCreateTheLinkedDocumentField.click();
             selectingSecondAdjustmentPosition();
@@ -1346,9 +1346,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Число
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selectFieldTypeNumber() {
+    public FormDocRegisterCardsEditPage selectFieldTypeNumber() {
         typeFieldNumber.click();
         return this;
     }
@@ -1356,9 +1356,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Дата
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selectFieldTypeDate() {
+    public FormDocRegisterCardsEditPage selectFieldTypeDate() {
         typeFieldDate.click();
         return this;
     }
@@ -1366,9 +1366,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Строка
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selectFieldTypeString() {
+    public FormDocRegisterCardsEditPage selectFieldTypeString() {
         typeFieldString.click();
         return this;
     }
@@ -1376,9 +1376,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор Справочника для полей типа Строка/Текст
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb chooseTypeFieldStringTextOrDirectory() {
+    public FormDocRegisterCardsEditPage chooseTypeFieldStringTextOrDirectory() {
         typeFieldStringOrTextDirectory.click();
         return this;
     }
@@ -1386,9 +1386,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Изменяемое при создании
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selEditionAvailableWhileCreationField(boolean editAvailableWhileCreationField) {
+    public FormDocRegisterCardsEditPage selEditionAvailableWhileCreationField(boolean editAvailableWhileCreationField) {
         if (!editAvailableWhileCreationField) {
             this.editionAvailableWhileCreationField.click();
             selectingSecondAdjustmentPosition();
@@ -1399,9 +1399,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Текст
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selectFieldTypeText() {
+    public FormDocRegisterCardsEditPage selectFieldTypeText() {
         typeFieldText.click();
         return this;
     }
@@ -1409,9 +1409,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Словарь
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selectFieldTypeDictionary() {
+    public FormDocRegisterCardsEditPage selectFieldTypeDictionary() {
         typeFieldDictionary.click();
         return this;
     }
@@ -1420,9 +1420,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Выбор поля Словарь - для выбора значения типа Словарь
      *
      * @param dictionaryEditorName
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb chooseFieldDictionary(String dictionaryEditorName) {
+    public FormDocRegisterCardsEditPage chooseFieldDictionary(String dictionaryEditorName) {
         if (dictionaryEditorName == null) {
             return this;
         } else {
@@ -1435,9 +1435,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Подразделение
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selectFieldTypeDepartment() {
+    public FormDocRegisterCardsEditPage selectFieldTypeDepartment() {
         typeFieldDepartment.click();
         return this;
     }
@@ -1445,9 +1445,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Сотрудник
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selectFieldTypeEmployee() {
+    public FormDocRegisterCardsEditPage selectFieldTypeEmployee() {
         typeFieldEmployee.click();
         return this;
     }
@@ -1455,9 +1455,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор значения - Контролер документа == Да
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selValueDocumentSuperviser(boolean valueDocumentSuperviser) {
+    public FormDocRegisterCardsEditPage selValueDocumentSuperviser(boolean valueDocumentSuperviser) {
         if (valueDocumentSuperviser) {
             this.clickDocumentSuperviserField.click();
             selectingSecondAdjustmentPosition();
@@ -1468,9 +1468,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор значения - Сотрудник - Значение по умолчанию == Текущий пользователь; Дата - Значение по умолчанию == Текущая дата;
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selDefaultValueField(boolean defValueField) {
+    public FormDocRegisterCardsEditPage selDefaultValueField(boolean defValueField) {
         if (defValueField) {
             this.defValueField.click();
             selectingSecondAdjustmentPosition();
@@ -1481,9 +1481,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор значения - Для сведения == Да
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selForInformationField(boolean forInformationField) {
+    public FormDocRegisterCardsEditPage selForInformationField(boolean forInformationField) {
         if (forInformationField) {
             this.forInformationField.click();
             selectingSecondAdjustmentPosition();
@@ -1494,9 +1494,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Шаблон отображения
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb setDisplayNameTemplateField(String disNameTemplateField) {
+    public FormDocRegisterCardsEditPage setDisplayNameTemplateField(String disNameTemplateField) {
         if (disNameTemplateField == null) {
             return this;
         } else {
@@ -1509,9 +1509,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Документ
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selFieldTypeDocument() {
+    public FormDocRegisterCardsEditPage selFieldTypeDocument() {
         typeFieldDocument.click();
         return this;
     }
@@ -1519,9 +1519,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор вкладки - Поиск (фильтрация документов)
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selTabSearch() {
+    public FormDocRegisterCardsEditPage selTabSearch() {
         tabSearch.click();
         return this;
     }
@@ -1529,9 +1529,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор вкладки - Поля (фильтрация документов)
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selTabFields() {
+    public FormDocRegisterCardsEditPage selTabFields() {
         tabFields.click();
         return this;
     }
@@ -1539,9 +1539,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор настройки - Искать похожие документы
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selSearchSimiliarDocuments(boolean searchSimiliarDoc) {
+    public FormDocRegisterCardsEditPage selSearchSimiliarDocuments(boolean searchSimiliarDoc) {
         if (searchSimiliarDoc)
             this.searchSimiliarDocuments.click();
         selectingSecondAdjustmentPosition();
@@ -1551,9 +1551,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Правила поиска (фильтрация документов)
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb enSearchRulesTemplate(String searchRules) {
+    public FormDocRegisterCardsEditPage enSearchRulesTemplate(String searchRules) {
         if (searchRules == null) {
             return this;
         } else {
@@ -1566,9 +1566,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Нумератор
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selFieldTypeNumerator() {
+    public FormDocRegisterCardsEditPage selFieldTypeNumerator() {
         typeFieldNumerator.click();
         return this;
     }
@@ -1576,9 +1576,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Шаблон нумератора
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb enNumeratorTemplateField(String numeratorTemplateField) {
+    public FormDocRegisterCardsEditPage enNumeratorTemplateField(String numeratorTemplateField) {
         if (numeratorTemplateField == null) {
             return this;
         } else {
@@ -1591,9 +1591,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля типа Справочник
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selFieldTypeDirectory() {
+    public FormDocRegisterCardsEditPage selFieldTypeDirectory() {
         typeFieldDirectories.click();
         return this;
     }
@@ -1601,9 +1601,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор поля Справочник - для выбора значения типа Справочник
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickFieldDirectory() {
+    public FormDocRegisterCardsEditPage clickFieldDirectory() {
         typeFieldStringOrTextDirectory.click();
         return this;
     }
@@ -1614,7 +1614,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * @param directoryName
      * @return TaskTypesEditPage
      */
-    public FormDocRegisterCardsEditPageWeb chooseDirectory(String directoryName) {
+    public FormDocRegisterCardsEditPage chooseDirectory(String directoryName) {
         if (directoryName == null) {
             return this;
         } else {
@@ -1627,9 +1627,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор настройки мульти выбора записей справочника
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb selMultipleRecords(boolean multipleRecords) {
+    public FormDocRegisterCardsEditPage selMultipleRecords(boolean multipleRecords) {
         if (!multipleRecords) {
             this.directoryEntriesSelectionField.click();
             selectingSecondAdjustmentPosition();
@@ -1641,9 +1641,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Сохранить поле
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb saveFieldDoc() {
+    public FormDocRegisterCardsEditPage saveFieldDoc() {
         clickButtonSaveField.click();
         return this;
     }
@@ -1652,9 +1652,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Метод добавления всех типов полей документа
      *
      * @param fieldsDocs
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb addAllFieldsDoc(DocRegisterCardsField[] fieldsDocs) {
+    public FormDocRegisterCardsEditPage addAllFieldsDoc(DocRegisterCardsField[] fieldsDocs) {
         if (fieldsDocs == null) {
             return null;
         } else
@@ -1798,9 +1798,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Выбор вкладки - Задачи
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickTasksTab() {
+    public FormDocRegisterCardsEditPage clickTasksTab() {
         tasksTab.click();
         $(By.xpath("//span[string-length(text())>=10]/../../div//textarea")).shouldBe(visible);
         return this;
@@ -1809,7 +1809,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Копирование полей при создании задачи
      */
-    public FormDocRegisterCardsEditPageWeb setCopyingFieldsWhenCreatingTask(String сopyingFieldsWhenCreatingTask) {
+    public FormDocRegisterCardsEditPage setCopyingFieldsWhenCreatingTask(String сopyingFieldsWhenCreatingTask) {
         if (сopyingFieldsWhenCreatingTask == null) {
             return this;
         } else {
@@ -1823,7 +1823,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Вводим значение в поле - Поля документа, содержащие...
      * Авторов задач
      */
-    public FormDocRegisterCardsEditPageWeb setAuthorsObjectives(String authorsObjectives) {
+    public FormDocRegisterCardsEditPage setAuthorsObjectives(String authorsObjectives) {
         if (authorsObjectives == null) {
             return this;
         } else {
@@ -1837,7 +1837,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Вводим значение в поле - Поля документа, содержащие...
      * Контролеров задач
      */
-    public FormDocRegisterCardsEditPageWeb setControllersOfTasks(String controllersOfTasks) {
+    public FormDocRegisterCardsEditPage setControllersOfTasks(String controllersOfTasks) {
         if (controllersOfTasks == null) {
             return this;
         } else {
@@ -1851,7 +1851,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Вводим значение в поле - Поля документа, содержащие...
      * Ответственных руководителей задач
      */
-    public FormDocRegisterCardsEditPageWeb setDecisionMakersOfTasks(String decisionMakersOfTasks) {
+    public FormDocRegisterCardsEditPage setDecisionMakersOfTasks(String decisionMakersOfTasks) {
         if (decisionMakersOfTasks == null) {
             return this;
         } else {
@@ -1865,7 +1865,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Вводим значение в поле - Поля документа, содержащие...
      * Исполнителей задач
      */
-    public FormDocRegisterCardsEditPageWeb setExecutorsOfTasks(String executorsOfTasks) {
+    public FormDocRegisterCardsEditPage setExecutorsOfTasks(String executorsOfTasks) {
         if (executorsOfTasks == null) {
             return this;
         } else {
@@ -1879,9 +1879,9 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
     /**
      * Сохранить изменения по документу
      *
-     * @return FormDocRegisterCardsEditPageWeb
+     * @return FormDocRegisterCardsEditPage
      */
-    public FormDocRegisterCardsEditPageWeb clickSaveAllChangesInDoc() {
+    public FormDocRegisterCardsEditPage clickSaveAllChangesInDoc() {
         clickSaveAllChangesInDocument.click();
         return this;
     }
@@ -1991,12 +1991,12 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      *
      * @return
      */
-    public GridDocRegisterCardsPageWeb saveAllChangesInDoc(DocRegisterCards registerCards) {
+    public GridDocRegisterCardsPage saveAllChangesInDoc(DocRegisterCards registerCards) {
         clickSaveAllChangesInDoc(); // Сохранить все изменения РКД
         ensurePageLoaded();
         verifyDocRegisterCards(registerCards.getDocRegisterCardsName()); // Проверка - Создание и отображение РКД в гриде
         gotoTopFrem();
-        return page(GridDocRegisterCardsPageWeb.class);
+        return page(GridDocRegisterCardsPage.class);
     }
 
 
@@ -2004,7 +2004,7 @@ public class FormDocRegisterCardsEditPageWeb extends GridDocRegisterCardsPageWeb
      * Ожидание появления элемента(\ов) в форме редактирования - Регистрационные
      * карточки документов -Вкладка Общее -Текст на вкладке - Общее
      */
-    public FormDocRegisterCardsEditPageWeb appearanceOfElementsInFormOfEditingCards() {
+    public FormDocRegisterCardsEditPage appearanceOfElementsInFormOfEditingCards() {
         $(By.xpath("(//div[contains(@id,'tabbar')]/following-sibling::*)[1]//a[1]//span")).shouldBe(visible);
         $(By.xpath("//span[string-length(span[text()])>=2]")).shouldBe(visible);
         return this;

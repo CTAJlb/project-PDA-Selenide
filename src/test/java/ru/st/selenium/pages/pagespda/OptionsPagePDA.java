@@ -1,4 +1,4 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages.pagespda;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
@@ -14,7 +15,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 /*
  * Страница - Настройки
  */
-public class OptionsPage extends Page {
+public class OptionsPagePDA extends Page {
 
     /*
      * Удалить
@@ -46,7 +47,7 @@ public class OptionsPage extends Page {
      * если true - идет проверка установлен ли признак, если нет - устанавливаем значение; Если признак стоит оставляем все без изменения
      *
      */
-    public OptionsPage selAttachFiles(boolean attach) {
+    public OptionsPagePDA selAttachFiles(boolean attach) {
         if (attach) {
             try {
                 (new WebDriverWait(getWebDriver(), 0, 50))

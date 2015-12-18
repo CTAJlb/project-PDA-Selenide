@@ -1,4 +1,4 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages.pagespda;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.model.Task.Task;
 import ru.st.selenium.model.Users.Employee;
+import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Condition.visible;
@@ -15,7 +16,7 @@ import static com.codeborne.selenide.Selenide.$;
 /*
  * Страница - Поиск
  */
-public class SearchPage extends Page {
+public class SearchPagePDA extends Page {
 
     /*
      * Поле - Поиск
@@ -55,7 +56,7 @@ public class SearchPage extends Page {
      *
      * @param taskName name task for search
      */
-    public SearchPage searchTask(Task taskName) {
+    public SearchPagePDA searchTask(Task taskName) {
         search.setValue("" + taskName.getTaskName() + "").pressEnter();
         $(By.xpath("//div[@id='task']//a[contains(text(),'" + taskName.getTaskName() + "')]")).shouldBe(Condition.visible);
 
@@ -69,7 +70,7 @@ public class SearchPage extends Page {
      *
      * @param surname user for search
      */
-    public SearchPage searchContact(Employee surname) {
+    public SearchPagePDA searchContact(Employee surname) {
         chooseFilterDialog();
         filterСontact.click();
         filterApply.click();

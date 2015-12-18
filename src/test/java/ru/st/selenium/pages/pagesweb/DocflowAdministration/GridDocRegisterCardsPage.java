@@ -1,13 +1,11 @@
-package ru.st.selenium.pagesweb.DocflowAdministration;
+package ru.st.selenium.pages.pagesweb.DocflowAdministration;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.DocRegisterCardsLogic;
 import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.DocRegisterCards;
-import ru.st.selenium.pagespda.Page;
+import ru.st.selenium.pages.Page;
 
 
 import static com.codeborne.selenide.Condition.*;
@@ -18,7 +16,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 /**
  * грид Регистрационных карточек - Администрирование ДО/Регистрационные карточки документов (.../user/tab/user/DocRegisterCards)
  */
-public class GridDocRegisterCardsPageWeb extends Page implements DocRegisterCardsLogic {
+public class GridDocRegisterCardsPage extends Page implements DocRegisterCardsLogic {
 
 
     /*
@@ -48,13 +46,13 @@ public class GridDocRegisterCardsPageWeb extends Page implements DocRegisterCard
     /**
      * Уходим во фрейм - Регистрационные карточки документов
      */
-    public GridDocRegisterCardsPageWeb gotoFremRegisterCardsPage() {
+    public GridDocRegisterCardsPage gotoFremRegisterCardsPage() {
         getWebDriver().switchTo().frame(Frem);
         return this;
     }
 
 
-    public GridDocRegisterCardsPageWeb addRegisterCards() {
+    public GridDocRegisterCardsPage addRegisterCards() {
 
         return this;
     }
@@ -62,9 +60,9 @@ public class GridDocRegisterCardsPageWeb extends Page implements DocRegisterCard
     /**
      * Ожидание созданного объекта в гриде DocRegisterCards
      *
-     * @return GridDocRegisterCardsPageWeb
+     * @return GridDocRegisterCardsPage
      */
-    public GridDocRegisterCardsPageWeb verifyDocRegisterCards(
+    public GridDocRegisterCardsPage verifyDocRegisterCards(
             String ObjectDocRegisterCards) {
         $(By.xpath("//div[@class='x-grid-item-container']//span[contains(text(),'"
                 + ObjectDocRegisterCards + "')]")).shouldBe(visible);
@@ -76,10 +74,10 @@ public class GridDocRegisterCardsPageWeb extends Page implements DocRegisterCard
      * Добавить объект - Регистрационная карточка документа
      */
     @Override
-    public FormDocRegisterCardsEditPageWeb addDocRegisterCards() {
+    public FormDocRegisterCardsEditPage addDocRegisterCards() {
         ensurePageLoaded();
         $(clickAddOnRegCards).shouldBe(present).click();
-        return page(FormDocRegisterCardsEditPageWeb.class);
+        return page(FormDocRegisterCardsEditPage.class);
     }
 
     /**
@@ -108,7 +106,7 @@ public class GridDocRegisterCardsPageWeb extends Page implements DocRegisterCard
      * документов: Кнопка Добавить РКД И отображение элемента - Регистрационная
      * карточка документа
      */
-    public GridDocRegisterCardsPageWeb ensurePageLoaded() {
+    public GridDocRegisterCardsPage ensurePageLoaded() {
         $(By.xpath("//div[count(a)=3]/a[1]//span")).shouldBe(visible);
         $(By.xpath("//div[count(*)=3]/span")).shouldBe(visible);
         return this;

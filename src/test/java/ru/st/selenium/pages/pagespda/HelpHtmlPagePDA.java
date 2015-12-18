@@ -1,9 +1,10 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages.pagespda;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+import ru.st.selenium.pages.Page;
 
 import java.util.Collection;
 
@@ -14,7 +15,7 @@ import static com.codeborne.selenide.Selenide.$$;
 /*
  * Страница - Помощь
  */
-public class HelpHtmlPage extends Page {
+public class HelpHtmlPagePDA extends Page {
 
     /*
      * Все элементы поиска
@@ -164,7 +165,7 @@ public class HelpHtmlPage extends Page {
      *
      * @return page HelpHtml
      */
-    public HelpHtmlPage visibleElementsTextHelp() {
+    public HelpHtmlPagePDA visibleElementsTextHelp() {
         elementsTextHelp.shouldHave(exactTexts("- Сохранить", "- Завершить задачу", "- Вернуть задачу на доработку", "- Ознакомиться",
                 "- Приступить", "- Прерваться", "- Закончить", "- Согласовать документ", "- Согласовать с замечаниями", "- Отказаться согласовать",
                 "- Создать резолюцию", "- Вернуть документ на доработку",

@@ -1,4 +1,4 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages.pagespda;
 
 
 import com.codeborne.selenide.ElementsCollection;
@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.st.selenium.logicinterface.BaseOperation;
+import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -28,7 +29,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 /**
  * Внутреняя страница системы
  */
-public class InternalPage extends Page implements BaseOperation {
+public class InternalPagePDA extends Page implements BaseOperation {
 
     /*
      * Ссылки на все пункты меню
@@ -114,45 +115,45 @@ public class InternalPage extends Page implements BaseOperation {
     /**
      * Переходим в форму - Создать задачу
      *
-     * @return NewTaskPage results page instance
+     * @return NewTaskPagePDA results page instance
      */
-    public NewTaskPage goToCreateTask() {
+    public NewTaskPagePDA goToCreateTask() {
         createTask.click();
         $(By.xpath("//input[contains(@class,'button') and @name='next2']")).shouldHave(visible);
-        return page(NewTaskPage.class);
+        return page(NewTaskPagePDA.class);
     }
 
     /**
      * Переходим в форму - Помощь
      *
-     * @return HelpHtmlPage results page instance
+     * @return HelpHtmlPagePDA results page instance
      */
-    public HelpHtmlPage goToHelpHtml() {
+    public HelpHtmlPagePDA goToHelpHtml() {
         helpHtml.click();
         $(By.xpath("//div[@id='mainblock']/ul/li[1]/div[@class='save_button']")).shouldHave(visible);
-        return page(HelpHtmlPage.class);
+        return page(HelpHtmlPagePDA.class);
     }
 
     /**
      * Переходим в грид - Задачи
      *
-     * @return TasksReportsPage results page instance
+     * @return TasksReportsPagePDA results page instance
      */
-    public TasksReportsPage goToTaskReports() {
+    public TasksReportsPagePDA goToTaskReports() {
         menuTaskReports.click();
         $(By.xpath("//div[@id='mainblock']/table[3]//tr")).shouldBe(present);
-        return page(TasksReportsPage.class);
+        return page(TasksReportsPagePDA.class);
     }
 
     /**
      * Переходим в грид - Настройки
      *
-     * @return OptionsPage results page instance
+     * @return OptionsPagePDA results page instance
      */
-    public OptionsPage goToOptions() {
+    public OptionsPagePDA goToOptions() {
         options.click();
         $(By.xpath("(//input[@type='submit'])[2]")).shouldBe(present);
-        return page(OptionsPage.class);
+        return page(OptionsPagePDA.class);
     }
 
     /**
@@ -160,21 +161,21 @@ public class InternalPage extends Page implements BaseOperation {
      *
      * @return Today results page instance
      */
-    public TodayPage goToToday() {
+    public TodayPagePDA goToToday() {
         today.click();
         $(By.xpath("//div[@id='headertop']//ul/a[2]/li")).shouldBe(present);
-        return page(TodayPage.class);
+        return page(TodayPagePDA.class);
     }
 
     /**
      * Переходим в грид - Документы
      *
-     * @return DocumentsPage
+     * @return DocumentsPagePDA
      */
-    public DocumentsPage goToDocuments() {
+    public DocumentsPagePDA goToDocuments() {
         documents.click();
         $$(By.xpath("//div[@class='ui-navbar ui-navbar-noicons']//li")).shouldBe(size(3));
-        return page(DocumentsPage.class);
+        return page(DocumentsPagePDA.class);
     }
 
     /**
@@ -182,17 +183,17 @@ public class InternalPage extends Page implements BaseOperation {
      *
      * @return results instance page Search
      */
-    public SearchPage goToSearch() {
+    public SearchPagePDA goToSearch() {
         search.pressEnter();
         $(By.xpath("//div[@id='b_filter_dialog']/img")).shouldBe(present, visible);
         $(By.xpath("//img[@class='menu_help_image']")).shouldBe(present, visible);
-        return page(SearchPage.class);
+        return page(SearchPagePDA.class);
     }
 
     /**
      * Универсальный выход из системы (где бы ненаходился пользователь)
      *
-     * @return LoginPage
+     * @return LoginPagePDA
      */
     @Override
     public void logout() {

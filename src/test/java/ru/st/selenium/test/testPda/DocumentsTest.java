@@ -4,17 +4,17 @@ import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.model.Directories.Directories;
 import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditor;
 import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.*;
-import ru.st.selenium.pagespda.DocumentsPage;
-import ru.st.selenium.pagespda.InternalPage;
-import ru.st.selenium.pagespda.LoginPage;
-import ru.st.selenium.pagespda.Page;
-import ru.st.selenium.pagesweb.Administration.DirectoriesEditFormPage;
-import ru.st.selenium.pagesweb.Administration.TaskTypeListObjectPage;
-import ru.st.selenium.pagesweb.DocflowAdministration.DictionaryEditorPage;
-import ru.st.selenium.pagesweb.DocflowAdministration.FormDocRegisterCardsEditPageWeb;
-import ru.st.selenium.pagesweb.DocflowAdministration.GridDocRegisterCardsPageWeb;
-import ru.st.selenium.pagesweb.Internal.InternalPageWeb;
-import ru.st.selenium.pagesweb.LoginPageWeb;
+import ru.st.selenium.pages.Page;
+import ru.st.selenium.pages.pagespda.DocumentsPagePDA;
+import ru.st.selenium.pages.pagespda.InternalPagePDA;
+import ru.st.selenium.pages.pagespda.LoginPagePDA;
+import ru.st.selenium.pages.pagesweb.Administration.DirectoriesEditFormPage;
+import ru.st.selenium.pages.pagesweb.Administration.TaskTypeListObjectPage;
+import ru.st.selenium.pages.pagesweb.DocflowAdministration.DictionaryEditorPage;
+import ru.st.selenium.pages.pagesweb.DocflowAdministration.FormDocRegisterCardsEditPage;
+import ru.st.selenium.pages.pagesweb.DocflowAdministration.GridDocRegisterCardsPage;
+import ru.st.selenium.pages.pagesweb.Internal.InternalPage;
+import ru.st.selenium.pages.pagesweb.LoginPage;
 import ru.st.selenium.test.data.ModuleDocflowAdministrationObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
@@ -33,58 +33,58 @@ public class DocumentsTest extends ModuleDocflowAdministrationObjectTestCase {
 
     /**
      * Проверка создания документа и отображение его в гриде
+     *
      * @param directories
      * @param dictionaryEditor
      * @param registerCards
-     * @throws Exception
-     *
-     * TODO 1. retryAnalyzer = Retry.class - добавить параметр в аннотацию тест; 2.Создание Документа и проверка созданного документа в гриде PDA
+     * @throws Exception TODO 1. retryAnalyzer = Retry.class - добавить параметр в аннотацию тест; 2.Создание Документа и проверка созданного документа в гриде PDA
      */
     @Test(priority = 1, dataProvider = "objectDataDocument")
     public void createRegCardDocumentAllFields(Directories directories, DictionaryEditor dictionaryEditor, DocRegisterCards registerCards) throws Exception {
 
-        LoginPageWeb loginPageWeb = open(Page.WEB_PAGE_URL, LoginPageWeb.class);
+        LoginPage loginPage = open(Page.WEB_PAGE_URL, LoginPage.class);
 
-        loginPageWeb.loginAsAdmin(ADMIN);
+        loginPage.loginAsAdmin(ADMIN);
 
-        InternalPageWeb internalPageWeb = loginPageWeb.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
         assertThat("Check that the displayed menu item 8 (Logo; Tasks; Documents; Messages; Calendar; Library; Tools; Details)",
-                internalPageWeb.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
+                internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
 
         // Переход в раздел Администрирование/Справочники
-        TaskTypeListObjectPage directoriesPageWeb = internalPageWeb.gotoDirectories();
+        TaskTypeListObjectPage directoriesPageWeb = internalPage.gotoDirectories();
 
         // добавляем объект - Справочник
         directoriesPageWeb.addDirectories(directories);
 
         // переходим в форму редактирования Справочника
-        DirectoriesEditFormPage directoriesEditPage = internalPageWeb.gotoDirectoriesEditPage();
+        DirectoriesEditFormPage directoriesEditPage = internalPage.gotoDirectoriesEditPage();
 
         // Добавляем настройки И поля спр-ка
         directoriesEditPage.addFieldDirectories(directories);
 
         // Переход в раздел - Администрирование ДО/Редактор словарей
-        DictionaryEditorPage dictionaryEditorPage = internalPageWeb.goToDictionaryEditor();
+        DictionaryEditorPage dictionaryEditorPage = internalPage.goToDictionaryEditor();
         dictionaryEditorPage.addDictionaryEditor(dictionaryEditor);
 
 
         // Переход в раздел Администрирование ДО/Регистрационные карточки документов
-        GridDocRegisterCardsPageWeb gridDocRegisterCardsPageWeb = internalPageWeb.goToGridDocRegisterCards();
+        GridDocRegisterCardsPage gridDocRegisterCardsPage = internalPage.goToGridDocRegisterCards();
 
         // Добавление РКД с проинициализированными объектами
-        FormDocRegisterCardsEditPageWeb formDocRegisterCardsEditPageWeb = gridDocRegisterCardsPageWeb.addDocRegisterCards();
+        FormDocRegisterCardsEditPage formDocRegisterCardsEditPage = gridDocRegisterCardsPage.addDocRegisterCards();
 
         // Добавление полей РКД
-        formDocRegisterCardsEditPageWeb.addFieldsDocRegisterCards(registerCards);
+        formDocRegisterCardsEditPage.addFieldsDocRegisterCards(registerCards);
 
         // Добавление настроек РКД
-        formDocRegisterCardsEditPageWeb.addSettingsDocRegisterCards(registerCards);
+        formDocRegisterCardsEditPage.addSettingsDocRegisterCards(registerCards);
 
         // Сохранение настроек РКД
-        formDocRegisterCardsEditPageWeb.saveAllChangesInDoc(registerCards);
+        formDocRegisterCardsEditPage.saveAllChangesInDoc(registerCards);
 
-        internalPageWeb.logout(); // Выход из системы
+        internalPage.logout(); // Выход из системы
+        assertTrue(loginPage.isNotLoggedIn());
     }
 
     /**
@@ -92,19 +92,22 @@ public class DocumentsTest extends ModuleDocflowAdministrationObjectTestCase {
      */
     @Test(priority = 2, retryAnalyzer = Retry.class)
     public void checkMapGridOfDocuments() throws Exception {
-        LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
+        LoginPagePDA loginPagePDA = open(Page.PDA_PAGE_URL, LoginPagePDA.class);
 
         // Авторизация
-        loginPage.loginAsAdmin(ADMIN);
+        loginPagePDA.loginAsAdmin(ADMIN);
 
-        InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
+        InternalPagePDA internalPagePDA = loginPagePDA.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        assertThat("Check that the displayed menu item 4 (Tasks; Create Task; Today; Document)",
+                internalPagePDA.hasMenuUserComplete());
 
-        DocumentsPage documentsPage = internalPage.goToDocuments();
+        DocumentsPagePDA documentsPagePDA = internalPagePDA.goToDocuments();
 
-        documentsPage.checkMapGridsDocuments();
+        documentsPagePDA.checkMapGridsDocuments();
 
-        internalPage.logout(); // Выход из системы
+        internalPagePDA.logout(); // Выход из системы
+        assertTrue(loginPagePDA.isNotLoggedInPDA());
+
 
     }
 

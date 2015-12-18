@@ -1,4 +1,4 @@
-package ru.st.selenium.pagesweb.DocflowAdministration;
+package ru.st.selenium.pages.pagesweb.DocflowAdministration;
 
 
 import com.codeborne.selenide.Condition;
@@ -10,7 +10,7 @@ import ru.st.selenium.logicinterface.DictionaryEditorLogic;
 import ru.st.selenium.model.AccessRights;
 import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditor;
 import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
-import ru.st.selenium.pagespda.Page;
+import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -284,7 +284,7 @@ public class DictionaryEditorPage extends Page implements DictionaryEditorLogic 
                 .saveDictionaryEditor() // Сохранить все изменения
                 .verifyDictionaryEditor(directoriesEditor.getDictionaryEditorName()); // Проверяем создание Словаря
 
-        gotoTopFrem(); // Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPageWeb)
+        gotoTopFrem(); // Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPage)
     }
 
     @Override

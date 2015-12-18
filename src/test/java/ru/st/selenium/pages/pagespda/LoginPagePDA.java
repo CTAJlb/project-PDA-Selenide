@@ -1,15 +1,16 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages.pagespda;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.model.Users.Employee;
+import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Selenide.page;
 
 /*
  * Страница авторизации - PDA
  */
-public class LoginPage extends Page {
+public class LoginPagePDA extends Page {
 
     /*
     Логин
@@ -49,7 +50,7 @@ public class LoginPage extends Page {
      * @param login input text login
      * @return
      */
-    public LoginPage setLoginField(String login) {
+    public LoginPagePDA setLoginField(String login) {
         inputLogin.sendKeys(login);
         return this;
     }
@@ -59,7 +60,7 @@ public class LoginPage extends Page {
      * @param password input text password
      * @return
      */
-    public LoginPage setPasswordField(String password) {
+    public LoginPagePDA setPasswordField(String password) {
         inputPassword.sendKeys(password);
         return this;
     }
@@ -68,7 +69,7 @@ public class LoginPage extends Page {
      * Авторизация под пользователем
      * @param user
      */
-    public LoginPage loginAsAdmin(Employee user) {
+    public LoginPagePDA loginAsAdmin(Employee user) {
         setLoginField(user.getLoginName());
         setPasswordField(user.getPassword());
         return this;
@@ -79,9 +80,16 @@ public class LoginPage extends Page {
      *
      * @return results internal page instance
      */
-    public InternalPage goToInternalMenu() {
+    public InternalPagePDA goToInternalMenu() {
         loginButton.click();
-        return page(InternalPage.class);
+        return page(InternalPagePDA.class);
+    }
+
+    /**
+     * Проверяем то, что мы разлогинены - ПДА-интерфейс
+     */
+    public boolean isNotLoggedInPDA() {
+        return page(LoginPagePDA.class).isPageLoaded();
     }
 
 

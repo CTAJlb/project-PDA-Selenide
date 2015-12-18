@@ -1,4 +1,4 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages.pagespda;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.model.Task.Task;
 import ru.st.selenium.model.Users.Employee;
+import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
@@ -13,7 +14,7 @@ import static com.codeborne.selenide.Selenide.page;
 /*
  Страница - Создать задачу
  */
-public class NewTaskPage extends Page {
+public class NewTaskPagePDA extends Page {
 
     /*
      Название задачи
@@ -93,7 +94,7 @@ public class NewTaskPage extends Page {
      * @param nameTasks name task for input
      * @return page NewTaskPag
      */
-    public NewTaskPage setTaskName(String nameTasks) {
+    public NewTaskPagePDA setTaskName(String nameTasks) {
         tasksName.clear();
         tasksName.setValue(nameTasks);
         return this;
@@ -105,7 +106,7 @@ public class NewTaskPage extends Page {
      * @param descriptionTasks description task for input
      * @return page NewTaskPag
      */
-    public NewTaskPage setTasksDescription(String descriptionTasks) {
+    public NewTaskPagePDA setTasksDescription(String descriptionTasks) {
         tasksDescription.clear();
         tasksDescription.setValue(descriptionTasks);
         return this;
@@ -118,7 +119,7 @@ public class NewTaskPage extends Page {
      *
      * @return
      */
-    public NewTaskPage setDateEnd(String end) {
+    public NewTaskPagePDA setDateEnd(String end) {
         dateEnd.clear();
         dateEnd.setValue(end);
         return this;
@@ -130,7 +131,7 @@ public class NewTaskPage extends Page {
      * @param authors
      * @return
      */
-    public NewTaskPage setAuthors(Employee authors[]) {
+    public NewTaskPagePDA setAuthors(Employee authors[]) {
         if (authors == null)
             return this;
         else
@@ -149,7 +150,7 @@ public class NewTaskPage extends Page {
      * @param taskSupervisors
      * @return
      */
-    public NewTaskPage setTaskSupervisors(Employee taskSupervisors[]) {
+    public NewTaskPagePDA setTaskSupervisors(Employee taskSupervisors[]) {
         if (taskSupervisors == null)
             return this;
         else
@@ -169,7 +170,7 @@ public class NewTaskPage extends Page {
      * @param exeManagers
      * @return
      */
-    public NewTaskPage setExecutiveManagers(Employee exeManagers[]) {
+    public NewTaskPagePDA setExecutiveManagers(Employee exeManagers[]) {
         if (exeManagers == null) {
             return this;
         } else
@@ -189,7 +190,7 @@ public class NewTaskPage extends Page {
      * @param performers
      * @return
      */
-    public NewTaskPage setPerformers(Employee performers[]) {
+    public NewTaskPagePDA setPerformers(Employee performers[]) {
         if (performers == null) {
             return this;
         } else
@@ -209,7 +210,7 @@ public class NewTaskPage extends Page {
      * @param privTask
      * @return
      */
-    public NewTaskPage setPrivateTask(boolean privTask) {
+    public NewTaskPagePDA setPrivateTask(boolean privTask) {
         if (privTask) {
             privateTask.click();
         }
@@ -222,7 +223,7 @@ public class NewTaskPage extends Page {
      * @param reportReq
      * @return
      */
-    public NewTaskPage setReportRequired(boolean reportReq) {
+    public NewTaskPagePDA setReportRequired(boolean reportReq) {
         if (reportReq) {
             reportRequired.click();
         }
@@ -235,7 +236,7 @@ public class NewTaskPage extends Page {
      * @param impTask
      * @return
      */
-    public NewTaskPage setImportantTask(boolean impTask) {
+    public NewTaskPagePDA setImportantTask(boolean impTask) {
         if (impTask) {
             importantTask.click();
         }
@@ -247,10 +248,10 @@ public class NewTaskPage extends Page {
      *
      * @return
      */
-    public EditTaskPage goToPreview() {
+    public EditTaskPagePDA goToPreview() {
         view.click();
         $(By.cssSelector("input[name='next3']")).waitUntil(Condition.appear, 4);
-        return page(EditTaskPage.class);
+        return page(EditTaskPagePDA.class);
     }
 
     /**

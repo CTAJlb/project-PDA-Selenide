@@ -1,4 +1,4 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages.pagespda;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -17,7 +17,7 @@ import static org.testng.AssertJUnit.assertTrue;
 /*
  * Страница - Форма задачи (Лента действий)
  */
-public class TaskPage extends TasksReportsPage {
+public class TaskPagePDA extends TasksReportsPagePDA {
 
     public static final String FILE = "src/test/java/../resources/files/hello_world.txt";
     public static final String FILE1 = "src/test/java/../resources/files/Договор аренды.doc";
@@ -66,7 +66,7 @@ public class TaskPage extends TasksReportsPage {
      * @param task return values of attributes of the task
      * @return
      */
-    public TaskPage openShapeCreatedTask(Task task) {
+    public TaskPagePDA openShapeCreatedTask(Task task) {
         $(By.cssSelector("div.save_button")).shouldBe(Condition.present);
         $(By.xpath("//a[contains(text(),'" + task.getTaskName() + "')][ancestor::ul[@class='ui-listview']]")).shouldHave(Condition.visible);
         return this;
@@ -88,11 +88,11 @@ public class TaskPage extends TasksReportsPage {
      * @param task return values of attributes of the task
      * @return
      */
-    public EditTaskPage openFormEditTask(Task task, Employee user) {
+    public EditTaskPagePDA openFormEditTask(Task task, Employee user) {
         $(By.xpath("//a[contains(text(),'" + task.getTaskName() + "')][ancestor::ul[@class='ui-listview']]")).click();
         save.shouldBe(Condition.visible);
         $(By.xpath("//span[@name='autor']//a[contains(text(),'" + user.getLastName() + "')]")).shouldBe(Condition.visible);
-        return page(EditTaskPage.class);
+        return page(EditTaskPagePDA.class);
     }
 
 
@@ -100,9 +100,9 @@ public class TaskPage extends TasksReportsPage {
      * Добавляем текст в ленту действий
      *
      * @param textAction input text for feed action tasks
-     * @return TaskPage
+     * @return TaskPagePDA
      */
-    public TaskPage saveActionsInTheTape(String textAction) {
+    public TaskPagePDA saveActionsInTheTape(String textAction) {
         $(By.xpath("(//div[@class='menu-line']//a/li)[2]")).click();
         int n = 5;
         while (n > 0) {
@@ -119,9 +119,9 @@ public class TaskPage extends TasksReportsPage {
      *
      * @param textAction input text for feed action tasks
      * @param task return values of attributes of the task
-     * @return TaskPage
+     * @return TaskPagePDA
      */
-    public TaskPage closeTask(Task task, String textAction) {
+    public TaskPagePDA closeTask(Task task, String textAction) {
         checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
         openTaskInGrid(task); // открываем форму задачи в гриде Задач
         action.setValue(textAction); // пишем действие
@@ -134,9 +134,9 @@ public class TaskPage extends TasksReportsPage {
      * Аттачминг файлов в форме задачи
      *
      * @param textAction input text for feed action tasks
-     * @return TaskPage
+     * @return TaskPagePDA
      */
-    public TaskPage addAttachFiles(String textAction) {
+    public TaskPagePDA addAttachFiles(String textAction) {
         for (int i = 0; i < 2; i++) {
             addFile.click();
             File file = $(By.cssSelector(SUBMIT_BUTTON_ADD_FILE))

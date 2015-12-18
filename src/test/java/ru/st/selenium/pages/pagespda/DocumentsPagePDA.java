@@ -1,15 +1,14 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages.pagespda;
 
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
-
-import static com.codeborne.selenide.Selenide.$;
+import ru.st.selenium.pages.Page;
 
 /*
  * Страница - Документы
  */
-public class DocumentsPage extends Page {
+public class DocumentsPagePDA extends Page {
 
     /*
      * На рассмотрении
@@ -35,7 +34,7 @@ public class DocumentsPage extends Page {
      *
      * @return results instance page grid documents
      */
-    public DocumentsPage checkMapGridsDocuments() {
+    public DocumentsPagePDA checkMapGridsDocuments() {
         onReview.click();
         toExecution.click();
         controlled.click();

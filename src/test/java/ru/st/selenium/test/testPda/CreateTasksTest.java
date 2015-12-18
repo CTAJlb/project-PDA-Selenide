@@ -4,7 +4,8 @@ import com.codeborne.selenide.Selenide;
 
 import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.model.Task.Task;
-import ru.st.selenium.pagespda.*;
+import ru.st.selenium.pages.Page;
+import ru.st.selenium.pages.pagespda.*;
 import ru.st.selenium.test.data.BaseObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
@@ -12,6 +13,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -29,40 +31,43 @@ public class CreateTasksTest extends BaseObjectTestCase {
      */
     @Test(priority = 1, dataProvider = "objectDataTask", retryAnalyzer = Retry.class)
     public void checkTaskCreation(Task task) throws Exception {
-        LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
+        LoginPagePDA loginPagePDA = open(Page.PDA_PAGE_URL, LoginPagePDA.class);
 
         // Авторизация
-        loginPage.loginAsAdmin(ADMIN);
+        loginPagePDA.loginAsAdmin(ADMIN);
 
-        InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
+        InternalPagePDA internalPagePDA = loginPagePDA.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        assertThat("Check that the displayed menu item 4 (Tasks; Create Task; Today; Document)",
+                internalPagePDA.hasMenuUserComplete());
 
         // Инициализируем стр. формы создание задачи и переходим на нее
-        NewTaskPage newTaskPage = internalPage.goToCreateTask();
+        NewTaskPagePDA newTaskPagePDA = internalPagePDA.goToCreateTask();
 
         //----------------------------------------------------------------ФОРМА - создания Задачи
 
-        newTaskPage.createTask(task);
+        newTaskPagePDA.createTask(task);
 
-        EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
+        EditTaskPagePDA editTaskPagePDA = newTaskPagePDA.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
 
-        editTaskPage.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
+        editTaskPagePDA.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
 
         //----------------------------------------------------------------ФОРМА - Задачи
 
-        TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
+        TaskPagePDA taskForm = editTaskPagePDA.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
 
         taskForm.openShapeCreatedTask(task); // Открываем созданную задачу
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
-        internalPage.goToHome();
+        internalPagePDA.goToHome();
 
-        TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
-        tasksReportsPage.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
+        TasksReportsPagePDA tasksReportsPagePDA = internalPagePDA.goToTaskReports(); // переходим в грид - Задачи/Задачи
+        tasksReportsPagePDA.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
 
-        internalPage.logout(); // Выход из системы
+        internalPagePDA.logout(); // Выход из системы
+
+        assertTrue(loginPagePDA.isNotLoggedInPDA());
 
     }
 
@@ -73,49 +78,51 @@ public class CreateTasksTest extends BaseObjectTestCase {
      */
     @Test(priority = 2, dataProvider = "objectDataTask", retryAnalyzer = Retry.class)
     public void checkEditingTasks(Task task) throws Exception {
-        LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
+        LoginPagePDA loginPagePDA = Selenide.open(Page.PDA_PAGE_URL, LoginPagePDA.class);
 
         // Авторизация
-        loginPage.loginAsAdmin(ADMIN);
+        loginPagePDA.loginAsAdmin(ADMIN);
 
-        InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
+        InternalPagePDA internalPagePDA = loginPagePDA.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        assertThat("Check that the displayed menu item 4 (Tasks; Create Task; Today; Document)",
+                internalPagePDA.hasMenuUserComplete());
 
         // Инициализируем стр. формы создание задачи и переходим на нее
-        NewTaskPage newTaskPage = internalPage.goToCreateTask();
+        NewTaskPagePDA newTaskPagePDA = internalPagePDA.goToCreateTask();
 
         //----------------------------------------------------------------ФОРМА - создания Задачи
 
-        newTaskPage.createTask(task);
+        newTaskPagePDA.createTask(task);
 
-        EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
+        EditTaskPagePDA editTaskPagePDA = newTaskPagePDA.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
         //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
 
-        editTaskPage.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
+        editTaskPagePDA.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
 
         //----------------------------------------------------------------ФОРМА - Задачи
 
-        TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
+        TaskPagePDA taskForm = editTaskPagePDA.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
 
         taskForm.openShapeCreatedTask(task); // Открываем созданную задачу
         assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
-        internalPage.goToHome(); // Домашняя стр-ца
+        internalPagePDA.goToHome(); // Домашняя стр-ца
 
-        TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
+        TasksReportsPagePDA tasksReportsPagePDA = internalPagePDA.goToTaskReports(); // переходим в грид - Задачи/Задачи
 
-        tasksReportsPage.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
-        tasksReportsPage.openTaskInGrid(task); // открываем форму в гриде задач
+        tasksReportsPagePDA.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
+        tasksReportsPagePDA.openTaskInGrid(task); // открываем форму в гриде задач
 
         //----------------------------------------------------------------ФОРМА - Задачи - Атрибуты
 
         taskForm.openFormEditTask(task, EMPLOYEE_ADMIN); // открываем форму редактирования атрибутов задачи
-        editTaskPage.editAttributesOfTasks(editTask); // редактируем атрибуты задачи
+        editTaskPagePDA.editAttributesOfTasks(editTask); // редактируем атрибуты задачи
         taskForm.saveActionsInTheTape(randomString(15)); // добавляем пользовательский текст в задачу и проверяем его сохранение
-        editTaskPage.editWorkingGroupInTask(EMPLOYEE_ADMIN); // редактируем РГ задачи (удаляем пользователей)
+        editTaskPagePDA.editWorkingGroupInTask(EMPLOYEE_ADMIN); // редактируем РГ задачи (удаляем пользователей)
 
-        internalPage.logout(); // Выход из системы
+        internalPagePDA.logout(); // Выход из системы
+        assertTrue(loginPagePDA.isNotLoggedInPDA());
 
     }
 
@@ -123,51 +130,53 @@ public class CreateTasksTest extends BaseObjectTestCase {
     /**
      * проверка - Закрытие задачи (Отправка в архив)
      */
-     @Test(priority = 3, dataProvider = "objectDataTask", retryAnalyzer = Retry.class)
-     public void verifyCompletionOfTheTask(Task task) throws Exception {
-     LoginPage loginPage = Selenide.open(Page.PDA_PAGE_URL, LoginPage.class);
+    @Test(priority = 3, dataProvider = "objectDataTask", retryAnalyzer = Retry.class)
+    public void verifyCompletionOfTheTask(Task task) throws Exception {
+        LoginPagePDA loginPagePDA = Selenide.open(Page.PDA_PAGE_URL, LoginPagePDA.class);
 
-     // Авторизация
-     loginPage.loginAsAdmin(ADMIN);
+        // Авторизация
+        loginPagePDA.loginAsAdmin(ADMIN);
 
-     InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-     assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
+        InternalPagePDA internalPagePDA = loginPagePDA.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        assertThat("Check that the displayed menu item 4 (Tasks; Create Task; Today; Document)",
+                internalPagePDA.hasMenuUserComplete());
 
-     // Инициализируем стр. формы создание задачи и переходим на нее
-     NewTaskPage newTaskPage = internalPage.goToCreateTask();
+        // Инициализируем стр. формы создание задачи и переходим на нее
+        NewTaskPagePDA newTaskPagePDA = internalPagePDA.goToCreateTask();
 
-     //----------------------------------------------------------------ФОРМА - создания Задачи
+        //----------------------------------------------------------------ФОРМА - создания Задачи
 
-     newTaskPage.createTask(task);
+        newTaskPagePDA.createTask(task);
 
-     EditTaskPage editTaskPage = newTaskPage.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
+        EditTaskPagePDA editTaskPagePDA = newTaskPagePDA.goToPreview(); // Инициализируем стр. формы предпросмотра задачи и переходим на нее
 
-     //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
+        //----------------------------------------------------------------ФОРМА - Предпросмотр создания задачи
 
-     editTaskPage.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
+        editTaskPagePDA.inputValidationFormTask(task); // Проверяем отображение значений в форме предпросмотра создания задачи
 
-     //----------------------------------------------------------------ФОРМА - Задачи
+        //----------------------------------------------------------------ФОРМА - Задачи
 
-     TaskPage taskForm = editTaskPage.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
+        TaskPagePDA taskForm = editTaskPagePDA.goToTask(); // Инициализируем стр. формы - Созданной задачи и переходим на нее
 
-     taskForm.openShapeCreatedTask(task); // Открываем форму созданной задачу
-     assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
+        taskForm.openShapeCreatedTask(task); // Открываем форму созданной задачу
+        assertTrue(taskForm.resultsDisplayButtons()); // Проверяем отображения кнопок в форме задачи
 
-     internalPage.goToHome();
+        internalPagePDA.goToHome();
 
-     TasksReportsPage tasksReportsPage = internalPage.goToTaskReports(); // переходим в грид - Задачи/Задачи
+        TasksReportsPagePDA tasksReportsPagePDA = internalPagePDA.goToTaskReports(); // переходим в грид - Задачи/Задачи
 
-     taskForm.closeTask(task, randomString(15)); // Закрываем задачу (отправляем в архив)
+        taskForm.closeTask(task, randomString(15)); // Закрываем задачу (отправляем в архив)
 
-     internalPage.goToHome(); // Возвращаемся домой (внутренняя страница)
-     internalPage.goToTaskReports(); // переходим в грид задач
+        internalPagePDA.goToHome(); // Возвращаемся домой (внутренняя страница)
+        internalPagePDA.goToTaskReports(); // переходим в грид задач
 
-     tasksReportsPage.checkDisappearTaskInGrid(task);
+        tasksReportsPagePDA.checkDisappearTaskInGrid(task);
 
-     internalPage.logout(); // Выход из системы
+        internalPagePDA.logout(); // Выход из системы
+        assertTrue(loginPagePDA.isNotLoggedInPDA());
 
 
-     }
+    }
 
 
 }

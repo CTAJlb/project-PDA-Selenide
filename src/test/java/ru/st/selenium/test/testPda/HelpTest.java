@@ -2,17 +2,18 @@ package ru.st.selenium.test.testPda;
 
 
 import com.codeborne.selenide.testng.TextReport;
-import ru.st.selenium.pagespda.HelpHtmlPage;
-import ru.st.selenium.pagespda.InternalPage;
-import ru.st.selenium.pagespda.LoginPage;
+import ru.st.selenium.pages.pagespda.HelpHtmlPagePDA;
+import ru.st.selenium.pages.pagespda.InternalPagePDA;
+import ru.st.selenium.pages.pagespda.LoginPagePDA;
 import ru.st.selenium.test.data.BaseObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ru.st.selenium.pagespda.Page;
+import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -28,16 +29,17 @@ public class HelpTest extends BaseObjectTestCase {
      */
     @Test(priority = 1, retryAnalyzer = Retry.class)
     public void verifyElementsHelp() throws Exception {
-        LoginPage loginPage = open(Page.PDA_PAGE_URL, LoginPage.class);
+        LoginPagePDA loginPagePDA = open(Page.PDA_PAGE_URL, LoginPagePDA.class);
 
         // Авторизация
-        loginPage.loginAsAdmin(ADMIN);
+        loginPagePDA.loginAsAdmin(ADMIN);
 
-        InternalPage internalPage = loginPage.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
-        assertTrue(internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
+        InternalPagePDA internalPagePDA = loginPagePDA.goToInternalMenu(); // Инициализируем внутренюю стр. системы и переходим на нее
+        assertThat("Check that the displayed menu item 4 (Tasks; Create Task; Today; Document)",
+                internalPagePDA.hasMenuUserComplete());
 
         // Инициализируем стр. формы создание задачи и переходим на нее
-        HelpHtmlPage helpPage = internalPage.goToHelpHtml();
+        HelpHtmlPagePDA helpPage = internalPagePDA.goToHelpHtml();
 
         helpPage.checkPresenceElementsOfAid(); // Проверяем общее количество элементов помощи
 
@@ -45,7 +47,8 @@ public class HelpTest extends BaseObjectTestCase {
 
         assertEquals(19, helpPage.results().size()); // проверяем кол-во элементов на стр-це ппомочи
 
-        internalPage.logout(); // Выход из системы
+        internalPagePDA.logout(); // Выход из системы
+        assertTrue(loginPagePDA.isNotLoggedInPDA());
 
     }
 

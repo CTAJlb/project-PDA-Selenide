@@ -1,17 +1,17 @@
-package ru.st.selenium.pagesweb;
+package ru.st.selenium.pages.pagesweb;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.model.Users.Employee;
-import ru.st.selenium.pagespda.Page;
-import ru.st.selenium.pagesweb.Internal.InternalPageWeb;
+import ru.st.selenium.pages.Page;
+import ru.st.selenium.pages.pagesweb.Internal.InternalPage;
 
 import static com.codeborne.selenide.Selenide.page;
 
 /**
  * Стараница авторизации - Web
  */
-public class LoginPageWeb extends Page {
+public class LoginPage extends Page {
 
     /**
      * Логин
@@ -37,7 +37,7 @@ public class LoginPageWeb extends Page {
      * @param text
      * @return
      */
-    public LoginPageWeb setLoginField(String text) {
+    public LoginPage setLoginField(String text) {
         loginField.clear();
         loginField.setValue(text);
         return this;
@@ -49,7 +49,7 @@ public class LoginPageWeb extends Page {
      * @param text
      * @return
      */
-    public LoginPageWeb setPasswordField(String text) {
+    public LoginPage setPasswordField(String text) {
         passwordField.clear();
         passwordField.setValue(text);
         return this;
@@ -59,7 +59,7 @@ public class LoginPageWeb extends Page {
      * Авторизация под указанным пользователем
      * @param user
      */
-    public LoginPageWeb loginAsAdmin(Employee user) {
+    public LoginPage loginAsAdmin(Employee user) {
         setLoginField(user.getLoginName());
         setPasswordField(user.getPassword());
         return this;
@@ -71,13 +71,18 @@ public class LoginPageWeb extends Page {
      *
      * @return results internal page instance
      */
-    public InternalPageWeb goToInternalMenu() {
+    public InternalPage goToInternalMenu() {
         submitButton.click();
-        return page(InternalPageWeb.class);
+        return page(InternalPage.class);
     }
 
 
-
+    /**
+     * Проверяем то, что мы разлогинены - Web-интерфейс
+     */
+    public boolean isNotLoggedIn() {
+        return page(LoginPage.class).isPageLoaded();
+    }
 
 
 

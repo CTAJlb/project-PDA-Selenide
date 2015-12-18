@@ -1,4 +1,4 @@
-package ru.st.selenium.pagespda;
+package ru.st.selenium.pages.pagespda;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
@@ -16,7 +16,7 @@ import static com.codeborne.selenide.Selenide.page;
 /*
  * Форма задачи (Атрибуты задачи)
  */
-public class EditTaskPage extends NewTaskPage {
+public class EditTaskPagePDA extends NewTaskPagePDA {
 
     /*
      * кнопка Создать задачу
@@ -47,9 +47,9 @@ public class EditTaskPage extends NewTaskPage {
      * Проверка введенных данный в предпросмотре формы создания задачи
      *
      * @param task return values of attributes of the task
-     * @return EditTaskPage page
+     * @return EditTaskPagePDA page
      */
-    public EditTaskPage inputValidationFormTask(Task task) {
+    public EditTaskPagePDA inputValidationFormTask(Task task) {
         $(By.xpath("//form[@id='data_value']//li[2]//span[@style][text()='" + task.getTaskName() + "']"))
                 .shouldBe(visible); // Название задачи
         $(By.xpath("//form[@id='data_value']//li[3]//span[@style][text()='" + task.getDescription() + "']"))
@@ -63,9 +63,9 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Создать (нажатие кнопки - Создать)
      *
-     * @return EditTaskPage
+     * @return EditTaskPagePDA
      */
-    public EditTaskPage saveNewTask() {
+    public EditTaskPagePDA saveNewTask() {
         createTask.click();
         $(By.xpath("//a[contains(@href, '/task/')]")).waitUntil(Condition.appear, 4);
         return this;
@@ -74,19 +74,19 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Перейти к форме задачи (Лента действий)
      *
-     * @return TaskPage
+     * @return TaskPagePDA
      */
-    public TaskPage goToTask() {
+    public TaskPagePDA goToTask() {
         goToTask.click();
-        return page(TaskPage.class);
+        return page(TaskPagePDA.class);
     }
 
     /**
      * Сохранить изменения по задаче
      *
-     * @return EditTaskPage
+     * @return EditTaskPagePDA
      */
-    public EditTaskPage saveChangesToTask() {
+    public EditTaskPagePDA saveChangesToTask() {
         save.click();
         return this;
     }
@@ -94,9 +94,9 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Редактирование атрибутов задачи
      *
-     * @return EditTaskPage
+     * @return EditTaskPagePDA
      */
-    public EditTaskPage editAttributesOfTasks(Task editTask) {
+    public EditTaskPagePDA editAttributesOfTasks(Task editTask) {
         setTaskName(editTask.getTaskName()) // Название задачи
                 .setTasksDescription(editTask.getDescription()) // Описание задачи
                 .setDateEnd(editTask.getDateEnd()) // Дата окончания задачи
@@ -113,9 +113,9 @@ public class EditTaskPage extends NewTaskPage {
     /**
      * Проверяем отображение новых значений в полях задачи
      *
-     * @return EditTaskPage
+     * @return EditTaskPagePDA
      */
-    public EditTaskPage verifyAttributesOfTask(Task editTask) {
+    public EditTaskPagePDA verifyAttributesOfTask(Task editTask) {
         goToTask.click();
         $(By.xpath("//input[@id='input_prj_t' and @name='task_name']"))
                 .waitUntil(hasValue(" " + editTask.getTaskName() + " "), 5000); // Название задачи
@@ -128,9 +128,9 @@ public class EditTaskPage extends NewTaskPage {
      * Редактирование РГ (рабочая группа) задачи
      *
      * @param employee return values user details
-     * @return EditTaskPage
+     * @return EditTaskPagePDA
      */
-    public EditTaskPage editWorkingGroupInTask(Employee employee) {
+    public EditTaskPagePDA editWorkingGroupInTask(Employee employee) {
         goToTask.click();
         // Удаляем - Контролеры задачи
         $(By.xpath("//input[@id='input_prj_t' and contains(@name,'cg_') and contains(@value,'" + employee.getLastName() + "')]/../..//a[not(contains(@onclick,'window.open'))]//span[2]")).click();
@@ -152,26 +152,26 @@ public class EditTaskPage extends NewTaskPage {
      * Проверяем сохраненные изменения в ленте действий задачи
      *
      * @param editTask
-     * @return TaskPage
+     * @return TaskPagePDA
      */
-    public TaskPage checkTheAttributesAreSaved(Task editTask) {
+    public TaskPagePDA checkTheAttributesAreSaved(Task editTask) {
         linkTaskReturnMainForm.click();
         $(By.xpath("//div[@id='mainblock']//ul[@class='ui-listview']//div//font[text()='" + editTask.getTaskName() + "']"))
                 .shouldHave(Condition.exactText(" " + editTask.getTaskName() + " "));
-        return page(TaskPage.class);
+        return page(TaskPagePDA.class);
     }
 
     /**
      * Проверяем сохраненные изменения в ленте действий задачи
      *
      * @param employee
-     * @return TaskPage
+     * @return TaskPagePDA
      */
-    public TaskPage checkWorkingGroupInTaskAreSaved(Employee employee) {
+    public TaskPagePDA checkWorkingGroupInTaskAreSaved(Employee employee) {
         linkTaskReturnMainForm.click();
         $$(By.xpath("//span[contains(text(),'Из задачи удален') and contains(text(),'" + employee.getLastName() + "')]"))
                 .shouldHave(CollectionCondition.size(3));
-        return page(TaskPage.class);
+        return page(TaskPagePDA.class);
     }
 
 

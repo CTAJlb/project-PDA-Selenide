@@ -1,4 +1,4 @@
-package ru.st.selenium.pagesweb.Administration;
+package ru.st.selenium.pages.pagesweb.Administration;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
@@ -779,7 +779,7 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
                 .clickSaveObject() // Сохранить объект
                 .verifyCreateObject(directories.getNameDirectoryName()); // Проверяем отображение сохраненного объекта в гриде
 
-                gotoTopFrem(); // Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPageWeb)
+                gotoTopFrem(); // Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPage)
     }
 
     @Override
