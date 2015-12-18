@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Regression Tests PDA Motiw" verbose="5" data-provider-thread-count="1">
+<suite name="Regression functional Test system Motiw" verbose="5" data-provider-thread-count="1">
 	<listeners>
 		<listener class-name="ru.st.selenium.test.listeners.RetryListener"/>
 		<listener class-name="ru.st.selenium.test.listeners.TestListener"/>
 		<listener class-name="com.codeborne.selenide.testng.TextReport" />
 	</listeners>
 
-	<test name="Test1">
+	<test name="Functional Test">
 		<parameter name="path" value="/"/>
 		<classes>
 		    <class name="ru.st.selenium.test.testPda.UsersAuthenticationTest"/>

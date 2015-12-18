@@ -62,6 +62,8 @@ public class CreateTasksTest extends BaseObjectTestCase {
 
         internalPagePDA.goToHome();
 
+        //----------------------------------------------------------------ГРИД - Задачи
+        // TODO дописать переход в папку если Задачи в папке а не в корне!!! частно из-за этого падают тесты
         TasksReportsPagePDA tasksReportsPagePDA = internalPagePDA.goToTaskReports(); // переходим в грид - Задачи/Задачи
         tasksReportsPagePDA.checkDisplayTaskGrid(task); // Проверяем отображение созданной задачи в гриде Задач
 

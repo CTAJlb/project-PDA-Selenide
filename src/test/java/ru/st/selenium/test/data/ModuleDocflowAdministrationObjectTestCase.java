@@ -331,9 +331,9 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
                 .setEditionOwnDocumentsInArchive(EditionOwnDocuments.NO) // - В архиве
 
                 // Доступ к разделам документа при просмотре/редактировании
-                .setAccessToSectionsDocumentRoute(true) // - Маршрут
+                .setAccessToSectionsDocumentRoute(false) // - Маршрут
                 .setAccessToSectionsDocumentFiles(false) // - Файлы
-                .setAccessToSectionsDocumentResolution(true) // - Резолюции
+                .setAccessToSectionsDocumentResolution(false) // - Резолюции
                 .setAccessToSectionsDocumentLog(false) // - Журнал
 
                 .setCreationOfLinkedDocuments(CreationOfLinkedDocuments.USERS_WITH_RIGHT) // Создание связанных документов
