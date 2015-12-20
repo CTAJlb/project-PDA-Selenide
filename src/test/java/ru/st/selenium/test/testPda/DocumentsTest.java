@@ -1,7 +1,7 @@
 package ru.st.selenium.test.testPda;
 
 import com.codeborne.selenide.testng.TextReport;
-import ru.st.selenium.model.Directories.Directories;
+import ru.st.selenium.model.Administration.Directories.Directories;
 import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditor;
 import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.*;
 import ru.st.selenium.pages.Page;
@@ -14,7 +14,7 @@ import ru.st.selenium.pages.pagesweb.DocflowAdministration.DictionaryEditorPage;
 import ru.st.selenium.pages.pagesweb.DocflowAdministration.FormDocRegisterCardsEditPage;
 import ru.st.selenium.pages.pagesweb.DocflowAdministration.GridDocRegisterCardsPage;
 import ru.st.selenium.pages.pagesweb.Internal.InternalPage;
-import ru.st.selenium.pages.pagesweb.LoginPage;
+import ru.st.selenium.pages.pagesweb.Login.LoginPage;
 import ru.st.selenium.test.data.ModuleDocflowAdministrationObjectTestCase;
 import ru.st.selenium.test.data.Retry;
 import ru.st.selenium.test.listeners.ScreenShotOnFailListener;

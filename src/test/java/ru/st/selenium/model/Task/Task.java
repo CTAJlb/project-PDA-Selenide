@@ -1,7 +1,7 @@
 package ru.st.selenium.model.Task;
 
 import ru.st.selenium.model.Record;
-import ru.st.selenium.model.TasksTypes.TasksTypes;
+import ru.st.selenium.model.Administration.TasksTypes.TasksTypes;
 import ru.st.selenium.model.Users.Department;
 import ru.st.selenium.model.Users.Employee;
 

@@ -2,14 +2,15 @@ package ru.st.selenium.test.data;
 
 import org.testng.annotations.DataProvider;
 import ru.st.selenium.model.AccessRights;
-import ru.st.selenium.model.Directories.Directories;
-import ru.st.selenium.model.Directories.DirectoryField;
+import ru.st.selenium.model.Administration.Directories.Directories;
+import ru.st.selenium.model.Administration.Directories.DirectoryField;
 import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditor;
 import ru.st.selenium.model.DocflowAdministration.DictionaryEditor.DictionaryEditorField;
 import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.*;
-import ru.st.selenium.model.FieldsObject.TypeListFieldsInt;
-import ru.st.selenium.model.FieldsObject.TypeListFieldsString;
-import ru.st.selenium.model.FieldsObject.TypeListFieldsText;
+import ru.st.selenium.model.Document.Document;
+import ru.st.selenium.model.Administration.FieldsObject.TypeListFieldsInt;
+import ru.st.selenium.model.Administration.FieldsObject.TypeListFieldsString;
+import ru.st.selenium.model.Administration.FieldsObject.TypeListFieldsText;
 import ru.st.selenium.model.OpenFilesForEdit;
 import ru.st.selenium.model.ShiftDirection;
 
@@ -21,7 +22,6 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
 
     //---Администрирование/Администрирование ДО----------------------------------------------------------
     //-----Редактор словарей----------------------------------------------------------
-
     /**
      * Метод создания полностью случайного объекта - "Редактор словарей"
      */
@@ -66,7 +66,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
                 .setFieldID("STRING" + randomIdentifier(5))
                 .setObligatory(true) // Обязательное поле
                 .setIsUniqueField(true) // Уникальное
-                .setTaskTypeField(new TypeListFieldsString()
+                .setFieldType(new TypeListFieldsString()
                         .setIsListChoice(true) // Выбор из списка
                         .setValuesList(randomString(10) + "\n" + randomString(10) + "\n" + randomString(10)));
         /*
@@ -75,7 +75,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
         DirectoryField fieldTextDirectory = new DirectoryField()
                 .setFieldName("Текст " + randomString(10))
                 .setFieldID("TEXT" + randomIdentifier(5))
-                .setTaskTypeField(new TypeListFieldsText());
+                .setFieldType(new TypeListFieldsText());
 
         // Будешь плохо кодить, придет Java и съест твою память
 
@@ -85,7 +85,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
         DirectoryField fieldIntDirectory = new DirectoryField()
                 .setFieldName("Целое " + randomString(10))
                 .setFieldID("INTEGER" + randomIdentifier(5))
-                .setTaskTypeField(new TypeListFieldsInt());
+                .setFieldType(new TypeListFieldsInt());
 
         /*
          ----------------------------------------------------------------------------------------------------Инициализация объекта - Справочник
@@ -370,5 +370,251 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
 
     }
 
+    //---Администрирование/Администрирование ДО----------------------------------------------------------
+    //-----Регистрационные карточки документов----------------------------------------------------------
+
+    /**
+     * Метод создания полностью случайного объекта - "Регистрационная карточка документа" со всеми, настройками и типами полей
+     */
+    public DocRegisterCards getRandomDocRegisterCards() {
+
+        DocRegisterCards registerCards = new DocRegisterCards(randomString(80) /* Название регистрационной карточки */)
+
+                // Статус документа
+                .setDocumentStatesOnReview(randomString(50)) // - На рассмотрении
+                .setDocumentStatesReviewed(randomString(50)) // - Рассмотрен
+                .setDocumentStatesOnApproval(randomString(50)) // - На подписании
+                .setDocumentStatesOnExecution(randomString(50)) // - На исполнении
+                .setDocumentStatesInArchive(randomString(50)) // - В архиве
+                // Шаблон отображения
+                .setDisplayNameTemplate("{" + randomIdentifier(5) + "}-" + " " + "{" + randomIdentifier(5) + "}" + " " + randomString(20))
+                .setDocRegisterCardsShiftDirection(randomEnum(ShiftDirection.class)) // Направление смещения при попадании на нерабочее время
+                // Настройки по умолчанию при отправке документа на доработку:
+                .setAtFirstRevisionScheme(randomBoolean()) // Возврат на доработку с начала текущей схемы
+                .setForCompletionInTighterPoint(randomBoolean()) // Возврат на доработку в ту же точку рассмотрения
+                .setOnCompletionTheNewScheme(randomBoolean()) // Возврат на доработку с новой схемой
+                .setOpenFilesForEditDoc(randomEnum(OpenFilesForEdit.class)) // Открывать файлы для редактирования
+                .setAutoСalculationNumeratorFields(randomEnum(OpenFilesForEdit.class)) // Автоматическое вычисление полей-нумераторов
+                .setAccessDoc(randomEnum(AccessRights.class)) // Доступ
+
+                // Изменение признака "Окончательная версия"
+                .setDocAuthorFinalVersionFiles(randomEnum(SettingsFinalVersion.class)) // Автор документа
+                .setUserWithEditRightFinalVersionFiles(randomEnum(SettingsFinalVersion.class)) // Пользователь с правами редактирования
+                .setDocTypeControllerFinalVersionFiles(randomEnum(SettingsFinalVersion.class)) // Контролер типа документа
+
+                // Редактирование своих документов
+                .setEditionOwnDocumentsOnReview(randomEnum(EditionOwnDocuments.class)) // - На рассмотрении
+                .setEditionOwnDocumentsOnExecution(randomEnum(EditionOwnDocuments.class)) // - На исполнении
+                .setEditionOwnDocumentsInArchive(randomEnum(EditionOwnDocuments.class)) // - В архиве
+
+                // Доступ к разделам документа при просмотре/редактировании
+                .setAccessToSectionsDocumentRoute(randomBoolean()) // - Маршрут
+                .setAccessToSectionsDocumentFiles(randomBoolean()) // - Файлы
+                .setAccessToSectionsDocumentResolution(randomBoolean()) // - Резолюции
+                .setAccessToSectionsDocumentLog(randomBoolean()) // - Журнал
+
+                // Создание связанных документов
+                .setCreationOfLinkedDocuments(randomEnum(CreationOfLinkedDocuments.class))
+
+                .setCheckBoxUseAllPossibleRoutes(randomBoolean()) // Использовать все возможные маршруты
+
+                .setDocRegisterCardsFields(new DocRegisterCardsField[]{
+
+                        // 1. Тип поля "ЧИСЛО"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10)) // Имя поля документа
+                                .setFieldIdentifierDoc(randomIdentifier(10)) // Идентификатор поля
+                                .setFieldTypeDoc(new FieldTypeNumberDoc())
+                                .setEditableField(randomBoolean())  // Редактирование поля документа
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))  // Обязательность поля
+                                .setUniqueField(randomBoolean()) // Уникальность поля
+                                .setHideForCreationField(randomBoolean()) // Скрывать при создании
+                                .setHideInTablesField(randomBoolean()) // Скрывать в таблицах
+                                .setHideForSearchField(randomBoolean()) // Скрывать при поиске
+                                .setHideInСardField(randomBoolean()) // Скрывать в карточке
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()), // Использовать при создании связанного документа
+
+                        // 2. Тип поля "ДАТА"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10))
+                                .setFieldIdentifierDoc(randomIdentifier(10))
+                                .setFieldTypeDoc(new FieldTypeDateDoc()
+                                        .setDefaultValue(randomBoolean()) // Значение по умолчанию
+                                        .setEditionAvailableWhileCreation(randomBoolean())) // Изменяемое при создании
+                                .setEditableField(randomBoolean())
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))
+                                .setUniqueField(randomBoolean())
+                                .setHideForCreationField(randomBoolean())
+                                .setHideInTablesField(randomBoolean())
+                                .setHideForSearchField(randomBoolean())
+                                .setHideInСardField(randomBoolean())
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()),
+
+                        // 3. Тип поля "СТРОКА"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10))
+                                .setFieldIdentifierDoc(randomIdentifier(10))
+                                .setFieldTypeDoc(new FieldTypeStringDoc()
+                                        .setDirectoryForFieldString(getRandomDirectory()) // Спр-к для поля типа Строка
+                                        .setDirectoryTemplate(randomString(15)) // Шаблон справочника
+                                        .setSelectOnlyFromDictionary(randomBoolean()) // Выбор только из справочника; true == Нет; false == Да
+                                        .setFieldLength(randomInt(999))) // Длина поля
+                                .setEditableField(randomBoolean())
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))
+                                .setUniqueField(randomBoolean())
+                                .setHideForCreationField(randomBoolean())
+                                .setHideInTablesField(randomBoolean())
+                                .setHideForSearchField(randomBoolean())
+                                .setHideInСardField(randomBoolean())
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()),
+
+                        // 4. Тип поля "ТЕКСТ"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10))
+                                .setFieldIdentifierDoc(randomIdentifier(10))
+                                .setFieldTypeDoc(new FieldTypeTextDoc()
+                                        .setDirectoryForFieldText(getRandomDirectory()) // Справочник
+                                        .setDirectoryTemplate(randomString(15)) // Шаблон справочника
+                                        .setSelectOnlyFromDictionary(randomBoolean())) // Выбор только из справочника - true == Да; false == Нет
+                                .setEditableField(randomBoolean())
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))
+                                .setUniqueField(randomBoolean())
+                                .setHideForCreationField(randomBoolean())
+                                .setHideInTablesField(randomBoolean())
+                                .setHideForSearchField(randomBoolean())
+                                .setHideInСardField(randomBoolean())
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()),
+
+                        // 5. Тип поля "СЛОВАРЬ"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10))
+                                .setFieldIdentifierDoc(randomIdentifier(10))
+                                .setFieldTypeDoc(new FieldTypeDictionaryDoc() // Тип поля "Словарь"
+                                        .setDictionaryEditor(getRandomDictionaryEditor()))
+                                .setEditableField(randomBoolean())
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))
+                                .setUniqueField(randomBoolean())
+                                .setHideForCreationField(randomBoolean())
+                                .setHideInTablesField(randomBoolean())
+                                .setHideForSearchField(randomBoolean())
+                                .setHideInСardField(randomBoolean())
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()),
+
+                        // 6. Тип поля "ПОДРАЗДЕЛЕНИЕ"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10))
+                                .setFieldIdentifierDoc(randomIdentifier(10))
+                                .setFieldTypeDoc(new FieldTypeDepartmentDoc()) // Тип поля "Подразделение"
+                                .setEditableField(randomBoolean())
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))
+                                .setUniqueField(randomBoolean())
+                                .setHideForCreationField(randomBoolean())
+                                .setHideInTablesField(randomBoolean())
+                                .setHideForSearchField(randomBoolean())
+                                .setHideInСardField(randomBoolean())
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()),
+
+                        // 7. Тип поля "СОТРУДНИК"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10))
+                                .setFieldIdentifierDoc(randomIdentifier(10))
+                                .setFieldTypeDoc(new FieldTypeEmployeeDoc() // Тип поля "Сотрудник"
+                                        .setDefaultValue(randomBoolean()) // Значение по умолчанию
+                                        .setEditionAvailableWhileCreation(randomBoolean()) // Изменяемое при создании
+                                        .setDocumentSuperviser(randomBoolean()) // Контролер документа
+                                        .setForInformation(randomBoolean())) // Для сведения
+                                .setEditableField(randomBoolean())
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))
+                                .setUniqueField(randomBoolean())
+                                .setHideForCreationField(randomBoolean())
+                                .setHideInTablesField(randomBoolean())
+                                .setHideForSearchField(randomBoolean())
+                                .setHideInСardField(randomBoolean())
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()),
+
+                        // 8. Тип поля "ДОКУМЕНТ"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10))
+                                .setFieldIdentifierDoc(randomIdentifier(10))
+                                .setFieldTypeDoc(new FieldTypeDocumentDoc() // Тип поля "Документ"
+                                        .setDisplayNameTemplate("{" + randomIdentifier(10) + "}; " + "{" + randomIdentifier(15) + "}; "
+                                                + randomString(10)) // Шаблон отображения
+                                        .setSearchSimiliarDocuments(randomBoolean())
+                                        .setSearchRules("{" + randomIdentifier(5) + "}" + "=" + "{" + randomIdentifier(5) + "};"))
+                                .setEditableField(randomBoolean())
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))
+                                .setUniqueField(randomBoolean())
+                                .setHideForCreationField(randomBoolean())
+                                .setHideInTablesField(randomBoolean())
+                                .setHideForSearchField(randomBoolean())
+                                .setHideInСardField(randomBoolean())
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()),
+
+                        // 9. Тип поля "НУМЕРАТОР"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10))
+                                .setFieldIdentifierDoc(randomIdentifier(10))
+                                .setFieldTypeDoc(new FieldTypeNumeratorDoc() // Тип поля "Нумератор"
+                                        .setNumeratorTemplateDoc("{counter}-" + "{DD}." + "{YYYY}" + " " + randomString(20)) // Шаблон нумератора
+                                        .setEditionAvailableWhileCreation(randomBoolean())) // Изменяемое при создании
+                                .setEditableField(randomBoolean())
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))
+                                .setUniqueField(randomBoolean())
+                                .setHideForCreationField(randomBoolean())
+                                .setHideInTablesField(randomBoolean())
+                                .setHideForSearchField(randomBoolean())
+                                .setHideInСardField(randomBoolean())
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()),
+
+                        // 10. Тип поля "СПРАВОЧНИК"
+                        new DocRegisterCardsField()
+                                .setFieldNameDoc(randomString(10))
+                                .setFieldIdentifierDoc(randomIdentifier(10))
+                                .setFieldTypeDoc(new FieldTypeDirectoryDoc() // Тип поля "Справочник"
+                                        .setDirectoryDoc(getRandomDirectory())
+                                        .setDirectoryEntriesSelection(randomBoolean())) // Определение мн. или ед. выбора записей спр-ка
+                                .setEditableField(randomBoolean())
+                                .setObligatoryFieldDoc(randomEnum(ObligatoryFieldDocument.class))
+                                .setUniqueField(randomBoolean())
+                                .setHideForCreationField(randomBoolean())
+                                .setHideInTablesField(randomBoolean())
+                                .setHideForSearchField(randomBoolean())
+                                .setHideInСardField(randomBoolean())
+                                .setUsedToCreateTheLinkedDocument(randomBoolean()),
+
+
+                })
+
+                .setCopyingFieldsWhenCreatingATask("" + randomIdentifier(5) + "=" + "" + randomIdentifier(5) + ";" +
+                        "" + randomIdentifier(5) + "=" + "" + randomIdentifier(5) + ";") // Копирование полей при создании задачи
+
+                // Поля документа, содержащие...:
+                .setAuthorsObjectives(randomIdentifier(10)) // авторов задач
+                .setControllersOfTasks(randomIdentifier(10)) // контролеров задач
+                .setDecisionMakersOfTasks(randomIdentifier(10)) // ответственных руководителей задач
+                .setExecutorsOfTasks(randomIdentifier(10)); // исполнителей задач
+
+
+        return registerCards;
+
+
+    }
+
+
+
+
+    //---Документы/Создать документ----------------------------------------------------------
+
+    /**
+     * Метод создания полностью случайного объекта - "Документ"
+     */
+    public Document getRandomDocument() {
+        Document document = new Document()
+                .setNameDocumentType("Внутренний документ")
+                .setProject(getRandomProject());
+
+        return document;
+
+    }
 
 }

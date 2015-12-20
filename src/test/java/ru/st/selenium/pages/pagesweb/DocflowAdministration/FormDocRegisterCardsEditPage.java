@@ -1757,7 +1757,7 @@ public class FormDocRegisterCardsEditPage extends GridDocRegisterCardsPage imple
                                 selMultipleRecords(fieldDirectory.getDirectoryEntriesSelection());
                                 selDirectoryTemplate(fieldDirectory.getDirectoryTemplate()); // Шаблон спр-ка
                             } else if (!fieldDirectory.getDirectoryEntriesSelection()) { // Выбор записей справочника == Несколько записей
-                                chooseDirectory(fieldDirectory.getDirectoryDoc().getNameDirectoryName()); // Выбор проинициализированного спр-ка
+                                chooseDirectory(fieldDirectory.getDirectoryDoc().getDirectoryName()); // Выбор проинициализированного спр-ка
                                 selMultipleRecords(fieldDirectory.getDirectoryEntriesSelection()); // Выбор настройки мульти выбора записей справочника
                                 selDirectoryTemplate(fieldDirectory.getDirectoryTemplate()); // Шаблон спр-ка
 

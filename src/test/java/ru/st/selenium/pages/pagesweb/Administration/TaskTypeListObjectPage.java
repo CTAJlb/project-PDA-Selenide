@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.DirectoriesLogic;
-import ru.st.selenium.model.Directories.Directories;
+import ru.st.selenium.model.Administration.Directories.Directories;
 import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -97,7 +97,7 @@ public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
     public void addDirectories(Directories directories) {
         ensurePageLoaded();
         addTaskTypesObject(); // Добавить объект (кнопка - Добавить)
-        valueNameObject(directories.getNameDirectoryName()); // Название Спр-ка
+        valueNameObject(directories.getDirectoryName()); // Название Спр-ка
         clickOkAndAddFieldTypesTable.click(); //
     }
 

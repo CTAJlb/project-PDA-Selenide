@@ -1,7 +1,7 @@
 package ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards;
 
 
-import ru.st.selenium.model.Directories.Directories;
+import ru.st.selenium.model.Administration.Directories.Directories;
 
 /**
  * Модель объекта системы - Тип поля документа "Строка"

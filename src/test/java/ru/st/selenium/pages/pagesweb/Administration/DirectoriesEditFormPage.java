@@ -6,9 +6,9 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.DirectoriesEditFormLogic;
-import ru.st.selenium.model.Directories.Directories;
-import ru.st.selenium.model.Directories.DirectoryField;
-import ru.st.selenium.model.FieldsObject.*;
+import ru.st.selenium.model.Administration.Directories.Directories;
+import ru.st.selenium.model.Administration.Directories.DirectoryField;
+import ru.st.selenium.model.Administration.FieldsObject.*;
 import ru.st.selenium.model.OpenFilesForEdit;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -661,9 +661,9 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
                         selTypeField(); // Выбор поля - Тип поля
 
                         // 1. СТРОКА
-                        if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsString) {
+                        if (fieldDirectory.getFieldType() instanceof TypeListFieldsString) {
                             selectTypeFieldString();
-                            TypeListFieldsString fieldString = (TypeListFieldsString) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsString fieldString = (TypeListFieldsString) fieldDirectory.getFieldType();
                             if (fieldString.getIsListChoice()) {
                                 selFromList(fieldString.getIsListChoice()); // Выбор из списка
                                 selListVal(fieldString.getValuesList()); // Список значений
@@ -671,68 +671,68 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
                                 selListVal(fieldString.getValuesList()); // Список значений
                             }
                             // 2. ТЕКСТ
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsText) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsText) {
                             selectTypeFieldText();
-                            TypeListFieldsText fieldText = (TypeListFieldsText) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsText fieldText = (TypeListFieldsText) fieldDirectory.getFieldType();
                             // 3. ЦЕЛОЕ
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsInt) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsInt) {
                             selectTypeFieldInteger();
-                            TypeListFieldsInt fieldInt = (TypeListFieldsInt) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsInt fieldInt = (TypeListFieldsInt) fieldDirectory.getFieldType();
                             // 4. ВЕЩЕСТВЕННОЕ
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsDouble) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsDouble) {
                             selectTypeFieldDouble();
-                            TypeListFieldsDouble fieldsDouble = (TypeListFieldsDouble) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsDouble fieldsDouble = (TypeListFieldsDouble) fieldDirectory.getFieldType();
                             // 5. ДАТА
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsDate) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsDate) {
                             selectTypeFieldDate();
-                            TypeListFieldsDate fieldsDate = (TypeListFieldsDate) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsDate fieldsDate = (TypeListFieldsDate) fieldDirectory.getFieldType();
                             // 6. ФАЙЛ
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsFile) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsFile) {
                             selectTypeFieldFile();
-                            TypeListFieldsFile fieldsFile = (TypeListFieldsFile) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsFile fieldsFile = (TypeListFieldsFile) fieldDirectory.getFieldType();
                             if (fieldsFile.getOpenFilesForEdit() == OpenFilesForEdit.YES || fieldsFile.getOpenFilesForEdit() == OpenFilesForEdit.NO) {
                                 selOpenFilesForEdit(fieldsFile.getOpenFilesForEdit());
                             }
                             // 7. СПРАВОЧНИК
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsDirectory) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsDirectory) {
                             selectTypeFieldDirectory();
-                            TypeListFieldsDirectory fieldsDir = (TypeListFieldsDirectory) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsDirectory fieldsDir = (TypeListFieldsDirectory) fieldDirectory.getFieldType();
                             selFieldDirectory(); // Выбор поля Спр-к
                             $(By.xpath("//*[text()='" + fieldsDir.getDirectoryName() + "']")).click(); // Выбор справочника
                             selectField();
                             $(By.xpath("//li[text()='" + fieldsDir.getNameDirectoryField() + "']")).click(); // Выбор поля справочника
                             // 8. МНОЖЕСТВЕННАЯ ССЫЛКА НА СПР-К
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsMultiDirectory) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsMultiDirectory) {
                             selectTypeFieldMultipleDictionary();
-                            TypeListFieldsMultiDirectory fieldsMultiDir = (TypeListFieldsMultiDirectory) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsMultiDirectory fieldsMultiDir = (TypeListFieldsMultiDirectory) fieldDirectory.getFieldType();
                             selFieldDirectory(); // Выбор поля Спр-к
                             $(By.xpath("//*[text()='" + fieldsMultiDir.getDirectoryName() + "']")).click();
                             selectField();
                             pressEnter();
                             // 8. ЛОГИЧЕСКОЕ
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsBoolean) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsBoolean) {
                             selectTypeFieldBoolean();
-                            TypeListFieldsBoolean fieldsDate = (TypeListFieldsBoolean) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsBoolean fieldsDate = (TypeListFieldsBoolean) fieldDirectory.getFieldType();
                             // 9. ТЕЛЕФОН
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsPhone) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsPhone) {
                             selectTypeFieldPhone();
-                            TypeListFieldsPhone fieldsPhone = (TypeListFieldsPhone) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsPhone fieldsPhone = (TypeListFieldsPhone) fieldDirectory.getFieldType();
                             // 10. EMAIL
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsEmail) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsEmail) {
                             selectTypeFieldEmail();
-                            TypeListFieldsEmail fieldsEmail = (TypeListFieldsEmail) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsEmail fieldsEmail = (TypeListFieldsEmail) fieldDirectory.getFieldType();
                             // 11. ИЗОБРАЖЕНИЕ
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsImage) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsImage) {
                             selectTypeFieldImage();
-                            TypeListFieldsImage fieldsImage = (TypeListFieldsImage) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsImage fieldsImage = (TypeListFieldsImage) fieldDirectory.getFieldType();
                             // 12. ЦВЕТ
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsColor) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsColor) {
                             selectTypeFieldColor();
-                            TypeListFieldsColor fieldsColor = (TypeListFieldsColor) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsColor fieldsColor = (TypeListFieldsColor) fieldDirectory.getFieldType();
                             // 14. ВЛОЖЕННЫЙ СПРАВОЧНИК
-                        } else if (fieldDirectory.getTaskTypeField() instanceof TypeListFieldsEnclosedDirectory) {
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsEnclosedDirectory) {
                             selectTypeFieldEnclosedDirectory();
-                            TypeListFieldsEnclosedDirectory fieldsEnclosedDirectory = (TypeListFieldsEnclosedDirectory) fieldDirectory.getTaskTypeField();
+                            TypeListFieldsEnclosedDirectory fieldsEnclosedDirectory = (TypeListFieldsEnclosedDirectory) fieldDirectory.getFieldType();
                             selFieldDirectory(); // Выбор поля Спр-к
                             $(By.xpath("//*[text()='" + fieldsEnclosedDirectory.getDirectoryName() + "']")).click();
                             waitMillisecond(0.2);
@@ -777,7 +777,7 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
                 .selMappingDevice(directories.getMappingDevice()) // Способ отображения
                 .selSearchSettings(directories.getSearchSettings()) // Настройка поиска
                 .clickSaveObject() // Сохранить объект
-                .verifyCreateObject(directories.getNameDirectoryName()); // Проверяем отображение сохраненного объекта в гриде
+                .verifyCreateObject(directories.getDirectoryName()); // Проверяем отображение сохраненного объекта в гриде
 
                 gotoTopFrem(); // Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPage)
     }

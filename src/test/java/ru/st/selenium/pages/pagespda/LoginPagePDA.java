@@ -1,6 +1,7 @@
 package ru.st.selenium.pages.pagespda;
 
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.model.Users.Employee;
 import ru.st.selenium.pages.Page;
@@ -39,9 +40,9 @@ public class LoginPagePDA extends Page {
      */
     public void loginAs(String login, String passw) {
         inputLogin.clear();
-        inputLogin.sendKeys(login);
+        inputLogin.setValue(login);
         inputPassword.clear();
-        inputPassword.sendKeys(passw);
+        inputPassword.setValue(passw);
         loginButton.click();
     }
 
@@ -51,7 +52,7 @@ public class LoginPagePDA extends Page {
      * @return
      */
     public LoginPagePDA setLoginField(String login) {
-        inputLogin.sendKeys(login);
+        inputLogin.setValue(login);
         return this;
     }
 
@@ -61,7 +62,7 @@ public class LoginPagePDA extends Page {
      * @return
      */
     public LoginPagePDA setPasswordField(String password) {
-        inputPassword.sendKeys(password);
+        inputPassword.setValue(password);
         return this;
     }
 

@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.BaseOperation;
@@ -17,6 +18,8 @@ import ru.st.selenium.pages.pagesweb.Documents.NewDocumentPage;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static org.junit.Assert.assertFalse;
+import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 /**
  * Внутренняя страница системы (ОМ - Основное меню)
@@ -30,6 +33,13 @@ public class InternalPage extends Page implements BaseOperation {
     private ElementsCollection menuElements;
 
     /*
+     * =====================================================================================================Задачи
+     */
+
+    @FindBy(id = "task")
+    private SelenideElement menuTask;
+
+     /*
      * =====================================================================================================Документы
      */
     @FindBy(css = "#doc")
@@ -129,12 +139,32 @@ public class InternalPage extends Page implements BaseOperation {
     private SelenideElement fremFlow;
 
     /*
+     * Строка поиска
+     */
+    @FindBy(css = "#searchQueryEdit")
+    private SelenideElement search;
+
+    /*
      * Уходим во фрейм объекта
      */
     public void goToFremFlow() {
         getWebDriver().switchTo().frame(fremFlow);
     }
 
+
+
+    /**
+     * Поиск
+     *
+     * @param serachstring
+     * @return CreateDepartmentPage
+     */
+    public InternalPage search(String serachstring) {
+        search.clear();
+        search.setValue(serachstring);
+        search.pressEnter();
+        return this;
+    }
 
     /**
      * Пользователяская API для эмуляции сложных пользовательских действий
@@ -239,5 +269,39 @@ public class InternalPage extends Page implements BaseOperation {
 
     }
 
+    /**
+     * Проверяем, что текущий пользователь Workflow. Отсутствует п.м. Документы
+     *
+     * @return InternalPage
+     */
+    public InternalPage checkDocSearchNotVisible() {
+        getWebDriver().switchTo().defaultContent();
+        assertFalse(isElementVisible(By.id("doc-search")));
+        return this;
+
+    }
+
+    /**
+     * Проверяем, что текущий пользователь Docflow. Отсутствует п.м. Создать задачу
+     *
+     * @return InternalPage
+     */
+    public InternalPage checkCreateTaskNotVisible() {
+        getWebDriver().switchTo().defaultContent();
+        menuTask.click();
+        assertFalse(isElementPresent(By.xpath("//*[@id='L_INFORMER_CREATETASK-menupoint']")));
+        return this;
+
+    }
+
+    /**
+     * Ожидания появления объектов ОМ - Сообщение; -Календарь; -Библиотека
+     */
+    public InternalPage ensurePageLoaded() {
+        $(By.id("mes")).shouldBe(Condition.present);
+        $(By.id("col")).shouldBe(Condition.present);
+        $(By.id("lib")).shouldBe(Condition.present);
+        return this;
+    }
 
 }

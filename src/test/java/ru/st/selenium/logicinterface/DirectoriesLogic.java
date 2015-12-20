@@ -1,6 +1,6 @@
 package ru.st.selenium.logicinterface;
 
-import ru.st.selenium.model.Directories.Directories;
+import ru.st.selenium.model.Administration.Directories.Directories;
 
 /**
  * Справочники

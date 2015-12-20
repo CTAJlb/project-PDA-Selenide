@@ -80,7 +80,7 @@ public class CreateTasksTest extends BaseObjectTestCase {
      */
     @Test(priority = 2, dataProvider = "objectDataTask", retryAnalyzer = Retry.class)
     public void checkEditingTasks(Task task) throws Exception {
-        LoginPagePDA loginPagePDA = Selenide.open(Page.PDA_PAGE_URL, LoginPagePDA.class);
+        LoginPagePDA loginPagePDA = open(Page.PDA_PAGE_URL, LoginPagePDA.class);
 
         // Авторизация
         loginPagePDA.loginAsAdmin(ADMIN);

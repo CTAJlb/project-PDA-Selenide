@@ -18,7 +18,6 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
  */
 public class GridDocRegisterCardsPage extends Page implements DocRegisterCardsLogic {
 
-
     /*
      * Добавить Регистрационную карточку документа
      */
