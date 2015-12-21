@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.logicinterface.BaseOperation;
@@ -14,12 +13,12 @@ import ru.st.selenium.pages.pagesweb.Administration.TaskTypeListObjectPage;
 import ru.st.selenium.pages.pagesweb.DocflowAdministration.DictionaryEditorPage;
 import ru.st.selenium.pages.pagesweb.DocflowAdministration.GridDocRegisterCardsPage;
 import ru.st.selenium.pages.pagesweb.Documents.NewDocumentPage;
+import ru.st.selenium.pages.pagesweb.Options.PwdPage;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.junit.Assert.assertFalse;
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 /**
  * Внутренняя страница системы (ОМ - Основное меню)
@@ -143,6 +142,23 @@ public class InternalPage extends Page implements BaseOperation {
      */
     @FindBy(css = "#searchQueryEdit")
     private SelenideElement search;
+
+    /*
+    ================================================================================================НАСТРОЙКИ
+     */
+
+    /*
+     * Настройки
+     */
+    @FindBy(id = "L_AU_MENU_SETTINGS-menupoint")
+    private SelenideElement menuSettings;
+
+    /*
+     * Мои реквизиты
+     */
+    @FindBy(id = "L_MENU_MYOPTIONS-menupoint")
+    private SelenideElement menuMyOptions;
+
 
     /*
      * Уходим во фрейм объекта
@@ -275,7 +291,7 @@ public class InternalPage extends Page implements BaseOperation {
      * @return InternalPage
      */
     public InternalPage checkDocSearchNotVisible() {
-        getWebDriver().switchTo().defaultContent();
+        gotoTopFrem();
         assertFalse(isElementVisible(By.id("doc-search")));
         return this;
 
@@ -287,11 +303,19 @@ public class InternalPage extends Page implements BaseOperation {
      * @return InternalPage
      */
     public InternalPage checkCreateTaskNotVisible() {
-        getWebDriver().switchTo().defaultContent();
+        gotoTopFrem();
         menuTask.click();
         assertFalse(isElementPresent(By.xpath("//*[@id='L_INFORMER_CREATETASK-menupoint']")));
         return this;
 
+    }
+
+    /**
+     * Переход в меню - Настройки/Мои реквизиты
+     */
+    public PwdPage gotoPwd() {
+        subMenuClicker(instrMenu, menuSettings, menuMyOptions);
+        return page(PwdPage.class);
     }
 
     /**
@@ -300,7 +324,7 @@ public class InternalPage extends Page implements BaseOperation {
     public InternalPage ensurePageLoaded() {
         $(By.id("mes")).shouldBe(Condition.present);
         $(By.id("col")).shouldBe(Condition.present);
-        $(By.id("lib")).shouldBe(Condition.present);
+        $(By.id("lib")).shouldBe(Condition.visible);
         return this;
     }
 

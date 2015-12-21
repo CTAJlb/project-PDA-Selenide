@@ -1,32 +1,22 @@
 package ru.st.selenium.test.testWeb;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.st.selenium.model.AccessRights;
-import ru.st.selenium.model.Administration.TypesOfTables.Directories.Directory;
 import ru.st.selenium.model.Administration.Directories.DirectoryField;
 import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.*;
-import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.DictionaryEditor.DictionaryEditor;
+
 import ru.st.selenium.model.OpenFilesForEdit;
 import ru.st.selenium.model.ShiftDirection;
-import ru.st.selenium.model.TaskTypeListFields.TypeListFieldsInt;
-import ru.st.selenium.model.TaskTypeListFields.TypeListFieldsString;
-import ru.st.selenium.model.TaskTypeListFields.TypeListFieldsText;
-import ru.st.selenium.pages.RandomlySystemObjects;
+import ru.st.selenium.test.data.BaseObjectTestCase;
+
 
 import static org.junit.Assert.assertTrue;
 
-public class DocumentRegistrationCards extends RandomlySystemObjects {
-
-    @BeforeMethod
-    public void MayBeLogout() {
-        if (app.getUsersHelper().isNotLoggedIn()) {
-            return;
-        }
-        app.getUsersHelper().logout();
-    }
+public class DocumentRegistrationCards extends BaseObjectTestCase {
 
 
+
+/*
     //---------------------------------------------------------------------------------------------------------Инициализация полей и объекта - СПРАВОЧНИКИ
 
     // 1. СТРОКА (Выбор из списка == Да; Уникальное; Обязательное)
@@ -68,9 +58,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
 
     //--------------------------------------------------------------------------------------------------------- Инициализация ПОЛЕЙ документа
 
-    /**
+    *//**
      * 1. ЧИСЛО
-     */
+     *//*
     DocRegisterCardsField fieldNumber = new DocRegisterCardsField()
             .setFieldNameDoc("Число " + randomString(5)) // Имя поля документа
             .setFieldIDDoc("NUMBER" + randomID(5)) // Идентификатор поля
@@ -78,9 +68,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
             .setEditableField(true) // Обязательное при редактировании (true == Да; false == Нет)
             .setObligatoryFieldDoc(ObligatoryFieldDocument.REQUIRED_WHEN_CREATION); // Обязательное поле == Обязательное при создании
 
-    /**
+    *//**
      * 2. ДАТА
-     */
+     *//*
     DocRegisterCardsField fieldDate = new DocRegisterCardsField()
             .setFieldNameDoc("Дата " + randomString(5)) // Имя поля документа
             .setFieldIDDoc("DATE" + randomID(5)) // Идентификатор поля
@@ -89,9 +79,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
                     .setEditionAvailableWhileCreation(true)) // Изменяемое при создании
             .setEditableField(true);
 
-    /**
+    *//**
      * 3. СТРОКА (Уникальное == Да)
-     */
+     *//*
     DocRegisterCardsField fieldString = new DocRegisterCardsField()
             .setFieldNameDoc("Строка (Уникальное) " + randomString(5)) // Имя поля документа
             .setFieldIDDoc("STRING" + randomID(5)) // Идентификатор поля
@@ -100,9 +90,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
             .setEditableField(true)
             .setUniqueField(true); // Уникальное поле
 
-    /**
+    *//**
      * 3.1 СТРОКА; Выбор только из спр-ка == Да
-     */
+     *//*
     DocRegisterCardsField fieldStringOnlyYesDirectory = new DocRegisterCardsField()
             .setFieldNameDoc("Строка (Выбор из спр-ка == Да) " + randomString(5)) // Имя поля документа
             .setFieldIDDoc("STONLYESDIR" + randomID(5)) // Идентификатор поля
@@ -113,9 +103,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
                     .setFieldLength(randomInt(999))) // Длина поля
             .setEditableField(true);
 
-    /**
+    *//**
      * 3.2 СТРОКА; Выбор только из спр-ка == Нет
-     */
+     *//*
     DocRegisterCardsField fieldStringOnlyNoDirectory = new DocRegisterCardsField()
             .setFieldNameDoc("Строка (Выбор из спр-ка == Нет) " + randomString(5)) // Имя поля документа
             .setFieldIDDoc("STONLNODIR" + randomID(5)) // Идентификатор поля
@@ -126,18 +116,18 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
                     .setFieldLength(randomInt(999))) // Длина поля
             .setEditableField(true);
 
-    /**
+    *//**
      * 4. ТЕКСТ
-     */
+     *//*
     DocRegisterCardsField fieldText = new DocRegisterCardsField()
             .setFieldNameDoc("Текст " + randomString(5))
             .setFieldIDDoc("TEXT" + randomID(5)) // Идентификатор поля
             .setFieldTypeDoc(new FieldTypeTextDoc())
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 4.1. ТЕКСТ; Выбор только из спр-ка == Да
-     */
+     *//*
     DocRegisterCardsField fieldTextOnlyYesDirectory = new DocRegisterCardsField()
             .setFieldNameDoc("Текст (Выбор из спр-ка == Да) " + randomString(5))
             .setFieldIDDoc("TEXONLYYESDIR" + randomID(5)) // Идентификатор поля
@@ -148,9 +138,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
             .setEditableField(true) // Обязательное при редактировании (true == Да; false == Нет)
             .setHideInTablesField(true); // Скрывать в таблицах
 
-    /**
+    *//**
      * 5. СЛОВАРЬ
-     */
+     *//*
     DocRegisterCardsField fieldDictionary = new DocRegisterCardsField()
             .setFieldNameDoc("Словарь " + randomString(5))
             .setFieldIDDoc("DICTIONARY" + randomID(5)) // Идентификатор поля
@@ -158,27 +148,27 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
                     .setDictionaryEditor(dictionaryEditor)) // Выбор проинициализированный объект - Словарь
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 6. ПОДРАЗДЕЛЕНИЕ
-     */
+     *//*
     DocRegisterCardsField fieldDepartment = new DocRegisterCardsField()
             .setFieldNameDoc("Подразделение " + randomString(5))
             .setFieldIDDoc("DEPARTMENT" + randomID(5)) // Идентификатор поля
             .setFieldTypeDoc(new FieldTypeDepartmentDoc())
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 7. СОТРУДНИК
-     */
+     *//*
     DocRegisterCardsField fieldEmployee = new DocRegisterCardsField()
             .setFieldNameDoc("Сотрудник " + randomString(5))
             .setFieldIDDoc("EMPLOYEE" + randomID(5)) // Идентификатор поля
             .setFieldTypeDoc(new FieldTypeEmployeeDoc())
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 7.1. СОТРУДНИК (Контролер типа == Да; Текущий пользователь == Да)
-     */
+     *//*
     DocRegisterCardsField fieldEmployeeSuperviserAndDefaultValue = new DocRegisterCardsField()
             .setFieldNameDoc("Сотрудник (Контролер типа; Текущий пользователь) " + randomString(5))
             .setFieldIDDoc("EMPDEFAULTVALUY" + randomID(5)) // Идентификатор поля
@@ -187,9 +177,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
                     .setDocumentSuperviser(true)) // Контролер документа == Да
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 7.2. СОТРУДНИК (Для сведения == Да)
-     */
+     *//*
     DocRegisterCardsField fieldEmployeeForInformation = new DocRegisterCardsField()
             .setFieldNameDoc("Сотрудник (Для сведения) " + randomString(5))
             .setFieldIDDoc("EMFORINFORMATION" + randomID(5)) // Идентификатор поля
@@ -197,9 +187,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
                     .setForInformation(true)) // Для сведения == Да
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 8. ДОКУМЕНТ
-     */
+     *//*
     DocRegisterCardsField fieldDocument = new DocRegisterCardsField()
             .setFieldNameDoc("Документ " + randomString(5))
             .setFieldIDDoc("DOCUMENT" + randomID(5)) // Идентификатор поля
@@ -207,9 +197,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
                     .setDisplayNameTemplate("{" + randomID(10) + "}; " + "{" + randomID(10) + "}; " + randomString(10)))
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 8.1. ДОКУМЕНТ (Правила поиска)
-     */
+     *//*
     DocRegisterCardsField fieldDocumentSearchRules = new DocRegisterCardsField()
             .setFieldNameDoc("Документ (Правила поиска) " + randomString(5))
             .setFieldIDDoc("DOCSEARCHRUL" + randomID(5)) // Идентификатор поля
@@ -219,9 +209,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
                     .setSearchRules("DOCUMENT_STATE" + "=" + "0;")) // Правила поиска
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 9. НУМЕРАТОР
-     */
+     *//*
     DocRegisterCardsField fieldNumerator = new DocRegisterCardsField()
             .setFieldNameDoc("Нумератор " + randomString(5))
             .setFieldIDDoc("NUMERATOR" + randomID(5)) // Идентификатор поля
@@ -231,9 +221,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
             .setObligatoryFieldDoc(ObligatoryFieldDocument.REQUIRED_WHEN_CREATION) // Обязательное поле == Обязательное при создании
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 10. СПРАВОЧНИК (Одна запись)
-     */
+     *//*
     DocRegisterCardsField fieldDirectory = new DocRegisterCardsField()
             .setFieldNameDoc("Справочник " + randomString(5))
             .setFieldIDDoc("DIRECTORY" + randomID(5)) // Идентификатор поля
@@ -243,9 +233,9 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
                     .setDirectoryEntriesSelection(true)) // Одна запись
             .setEditableField(true); // Обязательное при редактировании (true == Да; false == Нет)
 
-    /**
+    *//**
      * 11. МН. СПРАВОЧНИК (Несколько записей)
-     */
+     *//*
     DocRegisterCardsField fieldMultiDirectory = new DocRegisterCardsField()
             .setFieldNameDoc("Множественный справочник " + randomString(5))
             .setFieldIDDoc("DIRMULTI" + randomID(5)) // Идентификатор поля
@@ -357,4 +347,5 @@ public class DocumentRegistrationCards extends RandomlySystemObjects {
         assertTrue(app.getUsersHelper().isNotLoggedIn());
     }
 
+    */
 }

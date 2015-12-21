@@ -1,27 +1,17 @@
 package ru.st.selenium.test.testWeb;
 
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
-import ru.st.selenium.model.Tasks.Checkpoint;
-import ru.st.selenium.model.Tasks.IWG;
-import ru.st.selenium.model.Tasks.LinkedTo;
-import ru.st.selenium.model.Tasks.Task;
 import ru.st.selenium.model.Users.Department;
 import ru.st.selenium.model.Users.Employee;
-import ru.st.selenium.pages.RandomlySystemObjects;
+import ru.st.selenium.test.data.BaseObjectTestCase;
 
 import static org.junit.Assert.assertTrue;
 
 
-public class CreateTask extends RandomlySystemObjects {
+public class CreateTask extends BaseObjectTestCase {
 
-    @BeforeMethod
-    public void MayBeLogout() {
-        if (app.getUsersHelper().isNotLoggedIn()) {
-            return;
-        }
-        app.getUsersHelper().logout();
-    }
+   /*
 
     //--------------------------------------------------------------------------------------------------Инициализируем Подразделение пользователя
 
@@ -143,6 +133,6 @@ public class CreateTask extends RandomlySystemObjects {
         // Проверка - пользователь разлогинен
         assertTrue(app.getUsersHelper().isNotLoggedIn());
 
-    }
+    }*/
 
 }

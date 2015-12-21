@@ -1,37 +1,27 @@
 package ru.st.selenium.test.testWeb;
 
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
 import ru.st.selenium.model.CorrectionMethod;
-import ru.st.selenium.model.Administration.TypesOfTables.Directories.Directory;
+
 import ru.st.selenium.model.Administration.Directories.DirectoryField;
 import ru.st.selenium.model.OpenFilesForEdit;
 import ru.st.selenium.model.ShiftDirection;
-import ru.st.selenium.model.TaskTypeListFields.*;
+
 import ru.st.selenium.model.Administration.TasksTypes.ComputeModeNumerator;
 import ru.st.selenium.model.Administration.TasksTypes.ObligatoryFieldTypeTask;
 import ru.st.selenium.model.Administration.TasksTypes.TasksTypes;
 import ru.st.selenium.model.Administration.TasksTypes.TasksTypesField;
 import ru.st.selenium.model.Administration.TypesOfTables.TypesOfTables;
 import ru.st.selenium.model.Administration.TypesOfTables.TypesOfTablesField;
-import ru.st.selenium.pages.RandomlySystemObjects;
+
 
 import static org.junit.Assert.assertTrue;
 
-public class TasksType extends RandomlySystemObjects {
-
-    /**
-     * Метод выполняется каждый раз в начале запуска класса, осуществляет разлогирование, если предыдущий тест завис
-     */
-    @BeforeMethod
-    public void MayBeLogout() {
-        if (app.getUsersHelper().isNotLoggedIn()) {
-            return;
-        }
-        app.getUsersHelper().logout();
-    }
+public class TasksType  {
 
 
+/*
     //---------------------------------------------------------------------------------------------------------Инициализация полей и объекта - СПРАВОЧНИКИ
 
     // 1. СТРОКА (Выбор из списка == Да; Уникальное; Обязательное)
@@ -264,5 +254,5 @@ public class TasksType extends RandomlySystemObjects {
         app.getTaskTypeHelper().createTypesTask(tasksTypes);
         app.getUsersHelper().logout();
         assertTrue(app.getUsersHelper().isNotLoggedIn());
-    }
+    }*/
 }

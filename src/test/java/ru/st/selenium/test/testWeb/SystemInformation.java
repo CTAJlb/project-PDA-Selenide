@@ -1,24 +1,18 @@
 package ru.st.selenium.test.testWeb;
 
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
-import ru.st.selenium.pages.RandomlySystemObjects;
+import ru.st.selenium.test.data.BaseObjectTestCase;
+
 
 import static org.junit.Assert.assertTrue;
 
-public class SystemInformation extends RandomlySystemObjects {
+public class SystemInformation extends BaseObjectTestCase {
 
-    @BeforeMethod
-    public void MayBeLogout() {
-        if (app.getUsersHelper().isNotLoggedIn()) {
-            return;
-        }
-        app.getUsersHelper().logout();
-    }
-
-    /**
+/*
+    *//**
      * Проверка отсутствия незапущенных служб (красные элементы на странице) - Самоотестироввания системы
-     */
+     *//*
     @Test(priority = 1)
     public void verifyNotRedSistemInfo() throws Exception {
         app.getUsersHelper().loginAs(ADMIN);
@@ -29,10 +23,10 @@ public class SystemInformation extends RandomlySystemObjects {
         assertTrue(app.getUsersHelper().isNotLoggedIn());
     }
 
-    /**
+    *//**
      * Проверяем отсутствие ошибок в поисковой системе над конкретным объектом
      * @throws Exception
-     */
+     *//*
     @Test(priority = 2)
     public void verifyNotIndexingErrors() throws Exception {
         app.getUsersHelper().loginAs(ADMIN);
@@ -41,6 +35,6 @@ public class SystemInformation extends RandomlySystemObjects {
         app.getSearchAdminHelper().CheckNotIndexingErrors();
         app.getUsersHelper().logout();
         assertTrue(app.getUsersHelper().isNotLoggedIn());
-    }
+    }*/
 
 }

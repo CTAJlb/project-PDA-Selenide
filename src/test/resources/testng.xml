@@ -10,7 +10,7 @@
 	<test name="Functional UI Test PDA">
 		<parameter name="path" value="/"/>
 		<classes>
-		    <class name="ru.st.selenium.test.testPda.UsersAuthenticationTest"/>
+		    <class name="ru.st.selenium.test.testPda.UsersAuthorizationTest"/>
 		    <class name="ru.st.selenium.test.testPda.CreateTasksTest"/>
 		    <class name="ru.st.selenium.test.testPda.DocumentsTest"/>
 		    <class name="ru.st.selenium.test.testPda.SearchTest"/>
@@ -23,11 +23,11 @@
 	<test name="Functional UI Test Web">
 		<parameter name="path" value="/"/>
 		<classes>
-			<class name="ru.st.selenium.test.testWeb.Authorization"/>
+			<class name="ru.st.selenium.test.testWeb.AuthorizationTest"/>
 			<class name="ru.st.selenium.test.testWeb.SystemInformation"/>
 			<class name="ru.st.selenium.test.testWeb.Users"/>
 			<class name="ru.st.selenium.test.testWeb.TypesOfTable"/>
-			<class name="ru.st.selenium.test.testWeb.Directories"/>
+			<class name="ru.st.selenium.test.testWeb.DirectoriesTest"/>
 			<class name="ru.st.selenium.test.testWeb.TasksType"/>
 			<class name="ru.st.selenium.test.testWeb.DocumentRegistrationCards"/>
 			<class name="ru.st.selenium.test.testWeb.CreateTask"/>

@@ -107,9 +107,17 @@ public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
     }
 
 
+    /**
+     * Удаление объекта из системы
+     * @param directories
+     */
     @Override
     public void removeAnDirectories(Directories directories) {
-
+        ensurePageLoaded();
+        $(By.xpath("//*[contains(text(),'" + directories.getDirectoryName() + "')][ancestor::table]")).shouldBe(Condition.visible);
+        $(By.xpath("//*[contains(text(),'" + directories.getDirectoryName() + "')][ancestor::table]")).click();
+        clickDelTypesObject.click();
+        waitMillisecond(10);
     }
 
 }

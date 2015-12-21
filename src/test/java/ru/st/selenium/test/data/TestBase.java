@@ -17,6 +17,19 @@ public abstract class TestBase {
     public static Employee EMPLOYEE_ADMIN = new Employee().setName("admin")
             .setLastName("admin").setPatronymic("admin");
 
+    public static Employee FAIL_ADMIN = new Employee().setLoginName("fail")
+            .setPassword("admin");
+    public static Employee ADMIN_FAIL = new Employee().setLoginName("admin")
+            .setPassword("fail");
+    public static Employee FAIL_FAIL = new Employee().setLoginName("fail")
+            .setPassword("fail");
+    public static Employee ADMIN_NULL = new Employee().setLoginName("admin")
+            .setPassword("");
+    public static Employee NULL_ADMIN = new Employee().setLoginName("")
+            .setPassword("admin");
+    public static Employee NULL_NULL = new Employee().setLoginName("")
+            .setPassword("");
+
     //---------------------------------------------------------------------------------------------------General methods--------------------------------------------------------
 
     // -------------------------------Automation Randomizing Data-----------------------------

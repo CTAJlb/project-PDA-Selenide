@@ -463,8 +463,7 @@ public class UnionMessageNewPage extends Page {
      */
     public UnionMessageNewPage waitForLivesearchMask() {
         waitMillisecond(0.7);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-                .xpath("//*[contains (@class, 'loading-indicator')]")));
+        $(By.xpath("//*[contains (@class, 'loading-indicator')]")).shouldNotBe(Condition.visible);;
         return this;
     }
 
@@ -473,8 +472,7 @@ public class UnionMessageNewPage extends Page {
      */
     public UnionMessageNewPage waitForTaskMask() {
         waitMillisecond(0.5);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-                .xpath("//*[contains (@class, 'ext-el-mask')]")));
+        $(By.xpath("//*[contains (@class, 'ext-el-mask')]")).shouldNotBe(Condition.visible);
         return this;
     }
 
@@ -483,8 +481,7 @@ public class UnionMessageNewPage extends Page {
      */
     public UnionMessageNewPage waitForProjectMask() {
         waitMillisecond(0.3);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-                .xpath("//*[contains (@class, 'x-mask x-mask-fixed')]")));
+        $(By.xpath("//*[contains (@class, 'x-mask x-mask-fixed')]")).shouldNotBe(Condition.visible);
         return this;
     }
 
@@ -496,13 +493,11 @@ public class UnionMessageNewPage extends Page {
             return this;
         else
             for (Employee author : authors) {
-                wait.until(ExpectedConditions.elementToBeClickable(authorsField));
+               $(authorsField).shouldNotBe(Condition.disabled);
                 authorsField.click();
                 editorField.setValue(author.getLastName());
-                wait.until(ExpectedConditions
-                        .elementToBeClickable(By
-                                .xpath("//div[contains (@style, 'visible')]//*[contains (text(), '" + author
-                                        .getLastName() + "')]")));
+                $(By.xpath("//div[contains (@style, 'visible')]//*[contains (text(), '" + author
+                                        .getLastName() + "')]")).shouldBe(Condition.visible);
                 getWebDriver().findElement(By.xpath("//div[contains (@style, 'visible')]//*[contains (text(), '" + author.getLastName() + "')]")).click();
                 waitForTaskMask();
             }
@@ -517,9 +512,9 @@ public class UnionMessageNewPage extends Page {
             return this;
         else
             for (Employee controller : controllers) {
-                wait.until(ExpectedConditions.elementToBeClickable(сontrollersField));
+                $(сontrollersField).shouldBe(Condition.visible);
                 сontrollersField.click();
-                editorField.setValue(Keys.SPACE);
+                editorField.sendKeys(Keys.SPACE);
                 waitForLivesearchMask();
                 getWebDriver().findElement(By.xpath("//div[contains (@style, 'visible')]//*[contains (text(), '" + controller.getLastName() + "')]")).click();
                 waitForTaskMask();
@@ -535,9 +530,9 @@ public class UnionMessageNewPage extends Page {
             return this;
         else
             for (Employee worker : workers) {
-                wait.until(ExpectedConditions.elementToBeClickable(workersField));
+                $(workersField).shouldBe(Condition.visible);
                 workersField.click();
-                editorField.setValue(Keys.SPACE);
+                editorField.sendKeys(Keys.SPACE);
                 waitForLivesearchMask();
                 getWebDriver().findElement(By.xpath("//div[contains (@style, 'visible')]//*[contains (text(), '" + worker.getLastName() + "')]")).click();
                 waitForTaskMask();
@@ -553,9 +548,9 @@ public class UnionMessageNewPage extends Page {
             return this;
         else
             for (Employee respperson : resppersons) {
-                wait.until(ExpectedConditions.elementToBeClickable(resppersonsField));
+                $(resppersonsField).shouldHave(Condition.appear);
                 resppersonsField.click();
-                editorField.setValue(Keys.SPACE);
+                editorField.sendKeys(Keys.SPACE);
                 waitForLivesearchMask();
                 getWebDriver().findElement(By.xpath("//div[contains (@style, 'visible')]//*[contains (text(), '" + respperson.getLastName() + "')]")).click();
                 waitForTaskMask();
@@ -585,7 +580,7 @@ public class UnionMessageNewPage extends Page {
      * Проверка что появилось окно и ссылка на созданную задачу
      */
     public UnionMessageNewPage assertWindowTaskCreated() {
-        wait.until(ExpectedConditions.elementToBeClickable(buttonTaskSavedOK));
+        $(buttonTaskSavedOK).shouldBe(Condition.visible);
         assertTrue(isElementPresent(By.xpath("//a[contains (@href, '/user/unionmessage')]")));
         assertTrue(isElementPresent(By.xpath("//*[contains (@class, 'x-window-plain')]")));
         return this;
@@ -598,7 +593,7 @@ public class UnionMessageNewPage extends Page {
         if (tasktype == null) {
             return this;
         } else {
-            wait.until(ExpectedConditions.elementToBeClickable(fieldTaskType));
+            $(fieldTaskType).shouldBe(Condition.visible);
         }
         fieldTaskType.click();
         editorField.click();
@@ -619,7 +614,7 @@ public class UnionMessageNewPage extends Page {
         } else {
             newProject.click();
             getWebDriver().switchTo().frame(projectFrame);
-            wait.until(ExpectedConditions.elementToBeClickable(projectField));
+            $(projectField).shouldBe(Condition.present);
             projectField.click();
             editorFieldProject.setValue(project.getNameProject());
             projectDescription.click();
@@ -703,7 +698,7 @@ public class UnionMessageNewPage extends Page {
         } else
             getWebDriver().switchTo().defaultContent();
         getWebDriver().switchTo().frame(Frame);
-        wait.until(ExpectedConditions.elementToBeClickable(planningTab));
+        $(planningTab).shouldBe(Condition.visible);
         planningTab.click(); // Выбор вкладки - Планирование
         waitForTaskMask(); // Ожидание маски
         outer:
@@ -814,7 +809,7 @@ TODO Создание КТ с привязкой к Дате окончания/
             for (IWG anIwg : iwg) {
                 buttonAddIWG.click(); // Добавить ИРГ
                 gotoIWGFrame(); // переходим во Фрейм формы добавления - ИРГ
-                wait.until(ExpectedConditions.elementToBeClickable(buttonIwgSave));
+                $(buttonIwgSave).shouldBe(Condition.visible);
                 inputIwgName.setValue(anIwg.getNameIWG()); // Название ИРГ
                 inputIwgTaskType.click();
                 getWebDriver().findElement(By.xpath("//*[text()='" + anIwg.getTasksTypes().getTaskTypeName() + "']")).click();
@@ -829,10 +824,10 @@ TODO Создание КТ с привязкой к Дате окончания/
                         // Window PopUp
                         String parentWindowHandler = getWebDriver().getWindowHandle(); // Store your parent window
                         getWebDriver().switchTo().window(new WebDriverWait(getWebDriver(), 10).until(newWindowForm(By.cssSelector("#SearchEdit"))));
-                        wait.until(ExpectedConditions.elementToBeClickable(userSearchField));
+                        $(userSearchField).shouldBe(Condition.visible);
                         userSearchField.clear();
                         userSearchField.setValue(anIwg.getRespPersons()[riwg].getLastName());
-                        userSearchField.setValue(Keys.RETURN);
+                        userSearchField.sendKeys(Keys.RETURN);
                         waitForTaskMask();
                         userAddButton.click(); // Добавить пользователя
                         userSaveButton.click(); // Сохранить выбранных пользователей
@@ -853,7 +848,7 @@ TODO Создание КТ с привязкой к Дате окончания/
                         $(userSearchField).shouldBe(Condition.visible);
                         userSearchField.clear();
                         userSearchField.setValue(anIwg.getWorkers()[wiwg].getLastName());
-                        userSearchField.setValue(Keys.RETURN);
+                        userSearchField.pressEnter();
                         waitForTaskMask();
                         userAddButton.click();
                         userSaveButton.click();
@@ -871,10 +866,10 @@ TODO Создание КТ с привязкой к Дате окончания/
                         buttonIwgAddController.click(); // добавить Контролеров ИРГ
                         String parentWindowHandler = getWebDriver().getWindowHandle(); // Store your parent window
                         getWebDriver().switchTo().window(new WebDriverWait(getWebDriver(), 10).until(newWindowForm(By.cssSelector("#SearchEdit"))));
-                        wait.until(ExpectedConditions.elementToBeClickable(userSearchField));
+                        $(userSearchField).shouldBe(Condition.visible);
                         userSearchField.clear();
                         userSearchField.setValue(anIwg.getControllers()[сiwg].getLastName());
-                        userSearchField.setValue(Keys.RETURN);
+                        userSearchField.pressEnter();
                         waitForTaskMask();
                         userAddButton.click();
                         userSaveButton.click();
@@ -930,8 +925,7 @@ TODO Создание КТ с привязкой к Дате окончания/
      * Проверка Загрузки страницы - ожидание кнопки - Добавить новый проект
      */
     public UnionMessageNewPage ensurePageLoaded() {
-        super.ensurePageLoaded();
-        wait.until(presenceOfElementLocated(By.xpath("//a[contains (@href, 'newproject')]")));
+        $(By.xpath("//a[contains (@href, 'newproject')]")).shouldBe(Condition.visible);
         return this;
     }
 

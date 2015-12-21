@@ -26,6 +26,7 @@ import ru.st.selenium.model.Users.Status;
  */
 public abstract class BaseObjectTestCase extends TestBase {
 
+
     //----------------------------------------------------------------Авторизация
 
     /**
@@ -49,7 +50,23 @@ public abstract class BaseObjectTestCase extends TestBase {
         };
     }
 
+    /**
+     * Инициализация входных данных для Логин и Пароль
+     */
+    @DataProvider(name = "verifyFailAuthorizationWeb")
+    public static Object[][] notSuccessfulAuthorizationDataProvider() {
+        return new Object[][]{
+                {FAIL_ADMIN},
+                {ADMIN_FAIL},
+                {FAIL_FAIL},
+                {ADMIN_NULL},
+                {NULL_ADMIN},
+                {NULL_NULL}
+        };
+    }
+
     //----------------------------------------------------------------------Задачи
+
     /**
      * Метод создания полностью случайного объекта - "Задача" for PDA
      */
@@ -85,8 +102,9 @@ public abstract class BaseObjectTestCase extends TestBase {
         };
     }
 
-    
+
     //-----Задачи/Создать задачу/Проекты----------------------------------------------------------
+
     /**
      * Метод создания полностью случайного объекта - "Проект"
      */
@@ -323,17 +341,15 @@ public abstract class BaseObjectTestCase extends TestBase {
      */
     public Directories getRandomDirectory() {
 
-        Directories directory = new Directories()
+        Directories directory = new Directories(randomString(15)) /* Название справочника */
 
                 // Вкладка - Настройки
-                .setDirectoryName(randomString(30)) // Название справочника
-                .setShareRecords(randomBoolean()) // Общедоступность записей
-                .setSetAccessToRecords(randomBoolean()) // Настройка доступа к записям
-                .setMappingDevice(randomBoolean()) // Способ отображения - Линейный ли? true - да; false - иерархический
-                .setSearchSettings(randomBoolean()) // Поиск через БД? true - Да; false - через SOLR
-
-                // Вкладка - Поля
-                .setDirectoryFields(new DirectoryField[]{
+                .setShareRecords(true) // Общедоступность записей
+                .setAccessToRecords(true) // Настройка доступа к записям
+                .setMappingDevice(true) // Способ отображения - Линейный ли? true - да; false - иерархический
+                .setSearchSettings(true) // true - поиск записей через SOLR; false - поиск записей через БД
+                .setDirectoryFields( // Поиск через БД? true - Да; false - через SOLR
+                new DirectoryField[]{
 
                         // 1. Тип поля "СТРОКА"
                         new DirectoryField()
@@ -446,7 +462,6 @@ public abstract class BaseObjectTestCase extends TestBase {
 
 
                 });
-
 
         return directory;
 

@@ -1,7 +1,6 @@
 package ru.st.selenium.test.testPda;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.testng.TextReport;
 import ru.st.selenium.pages.pagespda.InternalPagePDA;
 import ru.st.selenium.pages.pagespda.LoginPagePDA;
@@ -16,6 +15,8 @@ import ru.st.selenium.pages.Page;
 import static com.codeborne.selenide.Selenide.$;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
+import static com.codeborne.selenide.Selenide.open;
+
 
 /**
  * Автоматически делать скриншот, после каждого упавшего теста
@@ -27,7 +28,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Раздел - Стр. авторизации
  */
-public class UsersAuthenticationTest extends BaseObjectTestCase {
+public class UsersAuthorizationTest extends BaseObjectTestCase {
 
 
     /**
@@ -35,7 +36,7 @@ public class UsersAuthenticationTest extends BaseObjectTestCase {
     */
     @Test(priority = 3, retryAnalyzer = Retry.class)
     public void verifyLoginSuccess() throws Exception {
-        LoginPagePDA loginPagePDA = Selenide.open(Page.PDA_PAGE_URL, LoginPagePDA.class);
+        LoginPagePDA loginPagePDA = open(Page.PDA_PAGE_URL, LoginPagePDA.class);
         loginPagePDA.loginAsAdmin(ADMIN);
         InternalPagePDA internalPagePDA = loginPagePDA.goToInternalMenu(); // Проверяем отображение п.м. системы
         assertThat("Check that the displayed menu item 4 (Tasks; Create Task; Today; Document)",
@@ -48,7 +49,7 @@ public class UsersAuthenticationTest extends BaseObjectTestCase {
      */
     @Test(priority = 1, dataProvider = "verifyFailAuthorization", retryAnalyzer = Retry.class)
     public void verifyFailAuthorization(String login, String pass) throws Exception {
-       LoginPagePDA loginPagePDA = Selenide.open(Page.PDA_PAGE_URL, LoginPagePDA.class);
+       LoginPagePDA loginPagePDA = open(Page.PDA_PAGE_URL, LoginPagePDA.class);
         loginPagePDA.loginAs(login, pass);
         assertTrue(loginPagePDA.isNotLoggedInPDA());
         $(By.cssSelector("#error")).shouldBe(Condition.exactText("Доступ запрещен"));
@@ -60,7 +61,7 @@ public class UsersAuthenticationTest extends BaseObjectTestCase {
      */
     @Test(priority = 2, dataProvider = "secondVerifyFailAuthorization", retryAnalyzer = Retry.class)
     public void secondVerifyFailAuthorization(String login, String pass) throws Exception {
-        LoginPagePDA loginPagePDA = Selenide.open(Page.PDA_PAGE_URL, LoginPagePDA.class);
+        LoginPagePDA loginPagePDA = open(Page.PDA_PAGE_URL, LoginPagePDA.class);
         loginPagePDA.loginAs(login, pass);
         assertTrue(loginPagePDA.isNotLoggedInPDA());
     }

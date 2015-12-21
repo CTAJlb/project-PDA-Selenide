@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import ru.st.selenium.pages.Page;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 /**
  * Стараница - Мои реквизиты
@@ -28,6 +29,18 @@ public class PwdPage extends Page {
     @FindBy(xpath = "//div[text()='Имя пользователя']/parent::td/following-sibling::td[1]/div")
     private SelenideElement clickLoginNameField;
 
+    /*
+    Фрейм раздела
+     */
+    @FindBy(id = "flow")
+    private SelenideElement Frem;
+
+
+    // Уходим во фрейм
+    public PwdPage gotoFremUserProfilePage() {
+        getWebDriver().switchTo().frame(Frem);
+        return this;
+    }
 
     public String getLastName() {
         return lastNameField.getAttribute("value");

@@ -1,27 +1,21 @@
 package ru.st.selenium.test.testWeb;
 
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
-import ru.st.selenium.model.Administration.TypesOfTables.Directories.Directory;
+
 import ru.st.selenium.model.Administration.Directories.DirectoryField;
 import ru.st.selenium.model.OpenFilesForEdit;
-import ru.st.selenium.model.TaskTypeListFields.*;
+
 import ru.st.selenium.model.Administration.TypesOfTables.TypesOfTables;
 import ru.st.selenium.model.Administration.TypesOfTables.TypesOfTablesField;
-import ru.st.selenium.pages.RandomlySystemObjects;
+import ru.st.selenium.test.data.BaseObjectTestCase;
+
 
 import static org.junit.Assert.assertTrue;
 
-public class TypesOfTable extends RandomlySystemObjects {
+public class TypesOfTable extends BaseObjectTestCase {
 
-    @BeforeMethod
-    public void MayBeLogout() {
-        if (app.getUsersHelper().isNotLoggedIn()) {
-            return;
-        }
-        app.getUsersHelper().logout();
-    }
-
+/*
     //---------------------------------------------------------------------------------------------------------Инициализация полей и объекта - СПРАВОЧНИКИ
 
     // 1. СТРОКА (Выбор из списка == Да; Уникальное; Обязательное)
@@ -206,7 +200,7 @@ public class TypesOfTable extends RandomlySystemObjects {
         assertTrue(app.getUsersHelper().isNotLoggedIn());
 
 
-    }
+    }*/
 
 
 }

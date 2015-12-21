@@ -15,20 +15,9 @@ public class Directories {
     /**
      * Конструктор класса - Справочники
      * @param nameDirectoryName
-     * @param shareRecords
-     * @param accessToRecords
-     * @param isMappingDevice
-     * @param searchSettings
-     * @param directoryFields
      */
-    public Directories(String nameDirectoryName, boolean shareRecords, boolean accessToRecords,
-                       boolean isMappingDevice, boolean searchSettings, DirectoryField[] directoryFields) {
+    public Directories(String nameDirectoryName) {
         this.nameDirectoryName = nameDirectoryName;
-        this.shareRecords = shareRecords;
-        this.accessToRecords = accessToRecords;
-        this.isMappingDevice = isMappingDevice;
-        this.searchSettings = searchSettings;
-        this.directoryFields = directoryFields;
     }
 
 

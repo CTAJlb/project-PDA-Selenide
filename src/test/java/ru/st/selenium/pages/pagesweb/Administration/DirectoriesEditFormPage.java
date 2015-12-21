@@ -253,6 +253,12 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
     @FindBy(xpath = "//li[text()='Вложенный справочник']")
     private SelenideElement typeFieldEnclosedDirectory;
 
+    /**
+     * Подразделение
+     */
+    @FindBy(xpath = "//li[text()='Подразделение']")
+    private SelenideElement typeFieldDepartment;
+
 
     //-------------------------------------------------------------------------------------вкладка - НАСТРОЙКИ-------------------------------------------------------
 
@@ -569,7 +575,8 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      * @return DirectoriesEditFormPage
      */
     public DirectoriesEditFormPage selectField() {
-        $(selectField).shouldBe(Condition.present).click();
+        waitMillisecond(0.3);
+        $(selectField).click();
         return this;
     }
 
@@ -642,6 +649,17 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
         typeFieldEnclosedDirectory.click();
         return this;
     }
+
+    /**
+     * ПОДРАЗДЕЛЕНИЕ
+     *
+     * @return DirectoriesEditFormPage
+     */
+    public DirectoriesEditFormPage selectTypeFieldDepartment() {
+        typeFieldDepartment.click();
+        return this;
+    }
+
 
     /**
      * ----------------------------------------------------------------------------Метод добавления всех типов полей------------------------------------
@@ -736,6 +754,10 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
                             selFieldDirectory(); // Выбор поля Спр-к
                             $(By.xpath("//*[text()='" + fieldsEnclosedDirectory.getDirectoryName() + "']")).click();
                             waitMillisecond(0.2);
+                            // 15. ПОДРАЗДЕЛЕНИЕ
+                        } else if (fieldDirectory.getFieldType() instanceof TypeListFieldsDepartment) {
+                            selectTypeFieldDepartment();
+                            TypeListFieldsDepartment fieldsDepartment = (TypeListFieldsDepartment) fieldDirectory.getFieldType();
                         }
 
                         selObligatoryField(fieldDirectory.getObligatory()); // Обязательное поле

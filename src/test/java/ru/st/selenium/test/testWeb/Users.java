@@ -5,23 +5,18 @@ import org.testng.annotations.Test;
 import ru.st.selenium.model.Users.Department;
 import ru.st.selenium.model.Users.Employee;
 import ru.st.selenium.model.Users.Module;
-import ru.st.selenium.pages.RandomlySystemObjects;
+import ru.st.selenium.test.data.BaseObjectTestCase;
+
 
 import static org.junit.Assert.assertTrue;
 
-public class Users extends RandomlySystemObjects {
+public class Users extends BaseObjectTestCase {
 
-    @BeforeMethod
-    public void MayBeLogout() {
-        if (app.getUsersHelper().isNotLoggedIn()) {
-            return;
-        }
-        app.getUsersHelper().logout();
-    }
+  /*
 
-    /**
+    *//**
      * Инициализация переменных - Подразделение
-     */
+     *//*
     Department department1 = getRandomDepartment();
     Department department2 = getRandomDepartment();
     Department department2_1 = getRandomDepartment();
@@ -30,9 +25,9 @@ public class Users extends RandomlySystemObjects {
     Department department3 = getRandomDepartment();
     Department department2_2 = getRandomDepartment();
 
-    /**
+    *//**
      * Инициализация переменных - Пользователь
-     */
+     *//*
     Employee user1 = getRandomEmployer();
     Employee user2 = getRandomEmployer();
     Employee changepass = getRandomEmployer();
@@ -40,11 +35,11 @@ public class Users extends RandomlySystemObjects {
     Employee docflow = getRandomEmployer();
     Employee editUser = getRandomEmployer();
 
-    /**
+    *//**
      * Создание Подразделений различной степени вложенности, с помощью
      * специальных методов, обращаясь к объектам инициализированным в начале
      * класса
-     */
+     *//*
     @Test(priority = 1)
     public void createDepartments() throws Exception {
         app.getUsersHelper().loginAs(ADMIN);
@@ -64,10 +59,10 @@ public class Users extends RandomlySystemObjects {
         assertTrue(app.getUsersHelper().isNotLoggedIn());
     }
 
-    /**
+    *//**
      * Создание Пользователей, с помощью специальных методов, обращаясь к
      * объектам инициализированным в начале класса
-     */
+     *//*
     @Test(priority = 2)
     public void createUsers() throws Exception {
         app.getUsersHelper().loginAs(ADMIN); // Авторизация пользователя
@@ -100,10 +95,10 @@ public class Users extends RandomlySystemObjects {
         assertTrue(app.getUsersHelper().isNotLoggedIn()); // Проверка того, что пользователь разлогинен
     }
 
-    /**
+    *//**
      * Авторизация под созданными пользователями
      * @throws Exception
-     */
+     *//*
     @Test(priority = 3)
     public void verifyUsers() throws Exception {
         app.getUsersHelper().loginAs(user1);
@@ -127,11 +122,11 @@ public class Users extends RandomlySystemObjects {
         assertTrue(app.getUsersHelper().isNotLoggedIn());
     }
 
-    /**
+    *//**
      * Удаление Пользователей и Подразделений
      *
      * @throws Exception
-     */
+     *//*
     @Test(dependsOnMethods = "verifyUsers", alwaysRun = true)
     // dependsOnMethods = "verifyUsers" - не "жесткая" зависимость
     // от тестового метода - verifyUsers, соответственно выполняется после verifyUsers()
@@ -153,6 +148,6 @@ public class Users extends RandomlySystemObjects {
 
         app.getUsersHelper().logout();
         assertTrue(app.getUsersHelper().isNotLoggedIn());
-    }
+    }*/
 
 }

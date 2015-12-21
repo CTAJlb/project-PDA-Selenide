@@ -1,35 +1,27 @@
 package ru.st.selenium.test.testWeb;
 
 
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
 import ru.st.selenium.model.AccessRights;
-import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.DictionaryEditor.DictionaryEditor;
-import ru.st.selenium.model.DocflowAdministration.DocumentRegistrationCards.DictionaryEditor.DictionaryEditorField;
-import ru.st.selenium.pages.RandomlySystemObjects;
+import ru.st.selenium.test.data.BaseObjectTestCase;
+
 
 import static org.junit.Assert.assertTrue;
 
 /**
  * Редактор словарей
  */
-public class EditorDictionariesCheck extends RandomlySystemObjects {
+public class EditorDictionariesCheck extends BaseObjectTestCase {
 
-    @BeforeMethod
-    public void MayBeLogout() {
-        if (app.getUsersHelper().isNotLoggedIn()) {
-            return;
-        }
-        app.getUsersHelper().logout();
-    }
-
+   /*
 
     @Test
     public void createDictionaryEditor() throws Exception {
 
-        /**
+        *//**
          * Инициализация элементов - Словарь
-         */
+         *//*
         DictionaryEditorField elementOne = new DictionaryEditorField()
                 .setNameDictionItem(randomString(10))
                 .setDescriptionDictionItem(randomString(15) + "\n" + randomString(30));
@@ -50,9 +42,9 @@ public class EditorDictionariesCheck extends RandomlySystemObjects {
                 .setNameDictionItem(randomString(10))
                 .setDescriptionDictionItem(randomString(30) + "\n" + randomString(30));
 
-        /**
+        *//**
          * Инициализация - Словарь
-         */
+         *//*
         DictionaryEditor dictionaryEditor = new DictionaryEditor()
                 .setDictionaryEditorName("S_Словарь " + randomString(10))
                 .setAccessDiction(AccessRights.AVAILABLETOALL)
@@ -70,6 +62,6 @@ public class EditorDictionariesCheck extends RandomlySystemObjects {
         app.getUsersHelper().logout();
         assertTrue(app.getUsersHelper().isNotLoggedIn());
 
-    }
+    }*/
 
 }

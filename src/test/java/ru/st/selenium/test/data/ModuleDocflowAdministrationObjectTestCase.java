@@ -22,6 +22,7 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
 
     //---Администрирование/Администрирование ДО----------------------------------------------------------
     //-----Редактор словарей----------------------------------------------------------
+
     /**
      * Метод создания полностью случайного объекта - "Редактор словарей"
      */
@@ -90,10 +91,13 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
         /*
          ----------------------------------------------------------------------------------------------------Инициализация объекта - Справочник
          */
-        Directories directories = new Directories("S_Справочник " + randomString(10) /* Название справочника*/, true /* Общедоступность записей */,
-                true /* Настройка доступа к записям*/, true /* Способ отображения - Линейный ли? true - да; false - иерархический*/,
-                true /*true - поиск записей через SOLR; false - поиск записей через БД*/,
-                new DirectoryField[]{fieldStringIsListChoiceDirectory, fieldTextDirectory, fieldIntDirectory});
+        Directories directories = new Directories("S_Справочник " + randomString(10)) /* Название справочника*/
+                // Вкладка - Настройки
+                .setShareRecords(true) // Общедоступность записей
+                .setAccessToRecords(true) // Настройка доступа к записям
+                .setMappingDevice(true) // Способ отображения - Линейный ли? true - да; false - иерархический
+                .setSearchSettings(true) // true - поиск записей через SOLR; false - поиск записей через БД
+                .setDirectoryFields(new DirectoryField[]{fieldStringIsListChoiceDirectory, fieldTextDirectory, fieldIntDirectory});
 
         /*
          ----------------------------------------------------------------------------------------------------Инициализация объекта - Словарь
@@ -599,8 +603,6 @@ public abstract class ModuleDocflowAdministrationObjectTestCase extends BaseObje
 
 
     }
-
-
 
 
     //---Документы/Создать документ----------------------------------------------------------
