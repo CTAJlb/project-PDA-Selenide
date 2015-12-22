@@ -35,8 +35,9 @@ public abstract class Page {
      * Проверяем отображения текста в диалоге (alert) и взаиможействуем с объектом, если Сообщение истенно - взаимодействуем
      * -подтверждаем удаление, отменяем удаление, подтверждаем сохранение
      *
-     * @param element
-     * @param webElementButton
+     * @param element на странице из к-го осуществляется getText()
+     * @param webElementButton подтверждение (взаимодействие над объектом)
+     * @param expectedMessageText проверяемое сообщение
      */
     public static String checkingMessagesConfirmationOfTheObject(SelenideElement element, String expectedMessageText, SelenideElement webElementButton) {
         String actualMessageText = element.shouldBe(Condition.exactText(expectedMessageText)).getText();
