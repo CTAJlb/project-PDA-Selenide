@@ -1,6 +1,7 @@
 package ru.st.selenium.pages;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Set;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.confirm;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
@@ -21,12 +23,6 @@ public abstract class Page {
     public static final String PDA_PAGE_URL = "http://pda.motiw/";
     public static final String WEB_PAGE_URL = "http://motiw/";
 
-    /*
-     * static XPATH base element
-     */
-    public static final String CHECKING_MESSAGES_SAVE_OBJECT = "//div[count(div)=3]/div[2]//div[contains(@id,'messagebox') and (@data-errorqtip)]";
-    public static final String CLICK_OK_MESSAGES = "//div[count(div)=3]/div[3]//div[count(a)=4]/a[1]//span[position()=2]";
-
     /**
      * Уходим в ТОП фрейм для дальнейшего взаимодействия с Внутренней страницей (InternalPage)
      */
@@ -35,16 +31,20 @@ public abstract class Page {
         return this;
     }
 
-
     /**
-     * Проверяем отображения текста в диалоге - Изменения сохранены
+     * Проверяем отображения текста в диалоге (alert) и взаиможействуем с объектом, если Сообщение истенно - взаимодействуем
+     * -подтверждаем удаление, отменяем удаление, подтверждаем сохранение
      *
-     * @param locator
-     * @param message
+     * @param element
+     * @param webElementButton
      */
-    public static void checkingMessagesSaveObjectAndClickOk(String locator, String message) {
-        $(By.xpath(locator)).shouldBe(Condition.exactText(message));
-        $(By.xpath(CLICK_OK_MESSAGES)).click();
+    public static String checkingMessagesConfirmationOfTheObject(SelenideElement element, String expectedMessageText, SelenideElement webElementButton) {
+        String actualMessageText = element.shouldBe(Condition.exactText(expectedMessageText)).getText();
+        if (expectedMessageText != null && expectedMessageText.equals(actualMessageText)) {
+            webElementButton.click();
+            return expectedMessageText;
+        }
+        return null;
     }
 
     /**

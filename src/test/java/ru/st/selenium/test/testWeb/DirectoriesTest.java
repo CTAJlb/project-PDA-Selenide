@@ -53,29 +53,20 @@ public class DirectoriesTest extends ModuleAdministrationObjectTestCase {
         // Проверка - пользователь разлогинен
         assertTrue(loginPage.isNotLoggedIn());
 
-    }
-
-    /**
-     * Удаление объекта из системы
-     * TODO - обязательно подчищаем за собой данные!!!
-     * @param directories
-     * @throws Exception
-     */
-    @AfterTest
-    public void removeAnDirectories (Directories directories) throws Exception {
-        // Авторизация
-        LoginPage loginPage = open(Page.WEB_PAGE_URL, LoginPage.class);
+        /**
+         * Проверяем удаление объекта - Справочник
+         */
         loginPage.loginAs(ADMIN);
-        InternalPage internalPage = loginPage.initializedInsidePage(); // Инициализируем внутренюю стр. системы и переходим на нее
         assertThat("Check that the displayed menu item 8 (Logo; Tasks; Documents; Messages; Calendar; Library; Tools; Details)",
                 internalPage.hasMenuUserComplete()); // Проверяем отображение п.м. на внутренней странице
 
         // Переход в раздел Администрирование/Справочники
-        TaskTypeListObjectPage directoriesPageWeb = internalPage.gotoDirectories();
+        internalPage.gotoDirectories();
 
         // Удаляем объект - Справочник
         directoriesPageWeb.removeAnDirectories(directories);
 
+        internalPage.logout();
 
     }
 

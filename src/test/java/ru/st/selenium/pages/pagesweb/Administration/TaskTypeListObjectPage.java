@@ -15,6 +15,17 @@ import static com.codeborne.selenide.Selenide.$;
  */
 public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
 
+    /*
+     * static XPATH base element
+     */
+    public final SelenideElement CHECKING_MESSAGES_SAVE_OBJECT = $(By.xpath("//div[count(div)=3]/div[2]//div[contains(@id,'messagebox') and (@data-errorqtip)]"));
+    public final SelenideElement CLICK_OK_ALERT_MESSAGES = $(By.xpath("//div[count(div)=3]/div[3]//div[count(a)=4]/a[1]//span[position()=2]"));
+    public final SelenideElement CHECKING_MESSAGES_DELETE_OBJECT = $(By.xpath("//div[contains(@id,'messagebox')]/ancestor::div[contains(@id,'container')]//div[text()]"));
+    public final SelenideElement CLICK_YES_ALERT_MESSAGES = $(By.xpath("//div[count(a)=4]/a[2]//span[position()=2]"));
+
+
+
+
     /**
      * ОК - Подтверждение добавления объекта
      */
@@ -106,7 +117,6 @@ public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
 
     }
 
-
     /**
      * Удаление объекта из системы
      * @param directories
@@ -115,9 +125,12 @@ public class TaskTypeListObjectPage extends Page implements DirectoriesLogic {
     public void removeAnDirectories(Directories directories) {
         ensurePageLoaded();
         $(By.xpath("//*[contains(text(),'" + directories.getDirectoryName() + "')][ancestor::table]")).shouldBe(Condition.visible);
-        $(By.xpath("//*[contains(text(),'" + directories.getDirectoryName() + "')][ancestor::table]")).click();
+        $(By.xpath("//*[contains(text(),'" + directories.getDirectoryName() + "')][ancestor::table]/../../img[1]")).click();
         clickDelTypesObject.click();
-        waitMillisecond(10);
+        checkingMessagesConfirmationOfTheObject($(By.xpath("//div[contains(@id,'messagebox')]/ancestor::div[contains(@id,'container')]//div[text()]")),
+                "Вы действительно хотите удалить справочник \""+directories.getDirectoryName()+"" + "\"?",
+                $(By.xpath("//div[count(a)=4]/a[2]//span[position()=2]")));
+        $(By.xpath("//*[contains(text(),'" + directories.getDirectoryName() + "')][ancestor::table]/..")).shouldNotBe(Condition.visible);
     }
 
 }

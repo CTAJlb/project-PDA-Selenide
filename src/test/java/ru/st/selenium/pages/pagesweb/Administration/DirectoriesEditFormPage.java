@@ -449,7 +449,9 @@ public class DirectoriesEditFormPage extends TaskTypeListObjectPage implements D
      */
     public DirectoriesEditFormPage clickSaveObject() {
         saveObject.click();
-        checkingMessagesSaveObjectAndClickOk(CHECKING_MESSAGES_SAVE_OBJECT, "Изменения сохранены");
+        checkingMessagesConfirmationOfTheObject($(By.xpath("//div[count(div)=3]/div[2]//div[contains(@id,'messagebox') and (@data-errorqtip)]")),
+                "Изменения сохранены",
+                $(By.xpath("//div[count(div)=3]/div[3]//div[count(a)=4]/a[1]//span[position()=2]")));
         return this;
     }
 

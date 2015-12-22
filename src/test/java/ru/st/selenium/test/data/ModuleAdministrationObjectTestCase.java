@@ -139,7 +139,6 @@ public class ModuleAdministrationObjectTestCase extends BaseObjectTestCase {
         Directories directories = new Directories("wD_Справочник " + randomString(10))
 
                 // Вкладка - Настройки
-                .setDirectoryName("S_Справочник " + randomString(10)) // Название справочника
                 .setShareRecords(true) // Общедоступность записей
                 .setAccessToRecords(true) // Настройка доступа к записям
                 .setMappingDevice(true) // Способ отображения - Линейный ли? true - да; false - иерархический
